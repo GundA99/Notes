@@ -1,0 +1,2 @@
+Command for connect DB
+Scaffold-DbContext "server=DESKTOP-HI1APHJ\SQLEXPRESS; database=Employees; trusted_connection=true; TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models

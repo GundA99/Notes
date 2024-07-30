@@ -1,0 +1,71 @@
+Create Portfolio Thhird Party APIs
+--------------------------------------------------------------------------------------------------------------
+    var customerData = await iHubIntegraton.CoreCustomer.FetchData.CustomerReadResult(new iHubIntegraton.BankSystem.Dto.iHubSoapRequestDto)
+      
+	var customerDetailsData = await iHubIntegraton.CoreCustomer.FetchData.CustomerDetailsRead(new iHubIntegraton.BankSystem.Dto.iHubSoapRequestDto);
+--------------------------------------------------------------------------------------------------------------
+	CreatePortfolio
+     RequestPath = proSolutionEndpoint + "PB/callRequest/absCustNew",
+--------------------------------------------------------------------------------------------------------------
+	Geting Zip code and validate Postal code with zip
+    var zipCodeList = await ProSolution.Customer.Customer.GetZipCodeList(session.State, _probrokerEndpoint, _probrokerAuthToken, Convert.ToBoolean(_isProxyEnabled), _probrokerProxyServerPath, Convert.ToInt32(_probrokerProxyServerPort));
+--------------------------------------------------------------------------------------------------------------
+    AddOrUpdateCustomer :
+    RequestPath = proSolutionEndpoint + "PB/callRequest/absCustCustIdsrcUpdate",
+--------------------------------------------------------------------------------------------------------------
+    GetCashAccountList :
+	RequestPath = proSolutionEndpoint + "PB/callRequest/absCustCashAccountList",
+--------------------------------------------------------------------------------------------------------------
+	UpdateCashAccount :
+	RequestPath = proSolutionEndpoint + "PB/callRequest/absCustCashAccountUpdate",
+--------------------------------------------------------------------------------------------------------------
+    Create Agreement :
+	var agreementId = await iHubIntegraton.Agreement.Agreement.Create(new iHubSoapRequestDto
+--------------------------------------------------------------------------------------------------------------
+	Insert Data into DB
+  var proBrokerResponse = _portfolioCatalogue.InsertAndGetId(new PortfolioCatalogue
+  {
+      CustomerSSN = createCustomer?.CustomerNo,
+      CashAccountId = selectedDefaultBban,
+      DividentAccountId = createCustomer?.DividendPaymentsBankAccount?.Bban,
+      ClientId = createCustResponse?.clientId.ToString(),
+      ClientNo = createCustResponse?.clientNo,
+      CustNoShort = createCustResponse?.custNoShort,
+      PortfolioType = createCustomer?.PortfolioType?.Name,
+      CreatedBy = session.UserId,
+      CreatedOn = DateTime.UtcNow,
+      IsActive = true,
+      AgreementSignId = createCustomer.AgreementId,
+      AgreementIntId = agreementIntId
+  });
+--------------------------------------------------------------------------------------------------------------
+
+
+	PortfolioCatalogue
+	
+     
+     public string CustomerSSN { get; set; }
+     public string? PortfolioType { get; set; }
+     public string? PortfolioName { get; set; }
+     public string CustNoShort { get; set; }
+
+     //assuming ClientId is ParentId
+     public string? ClientId { get; set; }
+     public string? ClientNo { get; set; }
+     public string? CashAccountId { get; set; }
+     public string? DividentAccountId { get; set; }
+     //public string UserId { get; set; }
+     public string? AgreementSignId { get; set; }
+     public long? AgreementIntId { get; set; }
+    
+	//Fingerprint fields
+     public bool IsActive { get; set; }
+     public string CreatedBy { get; set; }
+     public DateTime CreatedOn { get; set; }
+     public string? UpdatedBy { get; set; }
+     public DateTime? UpdatedOn { get; set; }
+     public bool IsDeleted { get; set; }
+     public string? DeletedBy { get; set; }
+     public DateTime? DeletedOn { get; set; }
+
+ }

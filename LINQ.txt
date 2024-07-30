@@ -1,0 +1,527 @@
+ int[] arr = { 1, 2, 3,4,5,6,7,8,9,10 };
+var a = from i in arr where i%2==0 select i;
+
+
+ int[] age= { 21, 23, 3,44,55,6,7,81,9,103 };
+var a = from i in age where i>30 select i;
+----------------------------------------------------
+
+OrderBy
+
+from i in arr where i> 20 orderby i select i; ---asending
+from i in arr where i>20 orderby i descending select i; ----Descending
+
+var result = from student in Student.GetAllStudents()
+	     orderby student.Name
+	     select student;
+
+
+var result = from student in Student.GetAllStudents()
+	     orderby student.Name descending
+	     select student;
+
+
+var result = from student in Student.GetAllStudents()
+	     OrderByDescending(s=>s.Name)
+	     select student;
+
+----------------------------------------------------
+
+ ThenBy
+
+var result = Student.GetAllStudent().OrderBy(s => s.TotalMarks).ThenBy(s => s.Name).ThenByDescending(s=>s.StudentId);
+
+
+var result = from s in Student.GetAllStudents()
+ 	     orderby s.TotalMarks, s.Name, s.StudentId descending
+	     select s;
+
+
+
+
+----------------------------------------------------
+
+Contais
+
+string[] name = {"akash","vaibhav","pranay","Divya","Anjali","Anil"}
+
+var a = from n in name where n.Contains("h") select n;
+
+---------------------------------------------------------
+Aggregate Function
+
+int [] number = {1,2,3,4,5,8,6,7,} 
+int result = number.where(x=>x%2=0).Min();
+
+int result = number.where(x=>x%2=0).Max();
+
+int result = number.Sum();
+
+int result = number.Count();
+int result = number.where(x=>x%2=0).Count();
+
+int result = number.Average();
+int result = number.where(x=>x%2=0).Average();
+
+string[] countries = {"India","USA","UK"};
+
+int minCount = countries.Min(x=>x.Length);
+int maxCount = countries.Max(x=>x.Length);
+
+Aggregate()
+
+1) Concatination
+string[] name = { "akash", "vaibhav", "pranayaa", "Divya", "Anjali", "Anil" };
+var result = name.Aggregate((a,b)=>a +", "+ b);
+
+2) Multiplication
+int[] Numbers = {1,2,3,4,5,6,7};
+var m = Numbers.Aggregate((a,b)=> a*b);   ------- (a=1, b=2)
+var p = Numbers.Aggregate(10,(a,b)=>a*b); ------- (a=10, b=1)
+
+--------------------------------------------------------------------------
+1)
+List<int> numbers = new List<int> {1,2,3,4,5,6,7,8,9};
+var result = numbers.Select((num, index) => new { Number = num, Index = index});
+-- it will create Object of annanomus class
+
+2)
+var result = Employee.GetAllEmployee().Select(emp => new {FirstName = emp.FirstName, Gender = emp.Gender});
+
+foreach(var v in result)
+{
+	Console.WriteLine(v.FirstName + "---" + v.Gender);
+}
+
+--------------------------------------------------------------------------
+ 
+
+IEnumerable<string> subject = from student in Student.GetAllStudents()
+			      from subject in student.subjects
+			      select subject;
+
+--------------------------------------------------------------------------
+
+string[] stringArray = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ","0123456789"};
+
+IEnumerable<char> result = stringArray.SelectMany(s=>s);
+
+-------or----------
+
+IEnumerable<char> result = from s in stringArray
+			   from c in s
+			   select c;
+
+
+foreach(char c in result)
+{
+	Console.WriteLine(c);
+}
+
+-----------it will display single char at a time 
+
+------------------------------------------------------------------------------------
+Distinct()
+
+by using Distinct we can remove duplicates from data
+
+
+IEnumerable<string> allSubjects = Student.GetAllStudents().SelectMany(s=> s.subjects).Distinct();
+----or-----
+
+IEnumerable<string> subjects = (from student in Student.GetAllStudents()
+			        from subject in student.Subjects
+				select subject).Distinct();
+
+
+-------------------------------------------------------------------------------------
+
+var result = from student n Student.GetAllStudents()
+	     from subject in student.subjects
+	     select new {StudentName = student.Name, SubjectName = subject};
+
+	    
+-------------------------------------------------------------------------------------
+Reverse() 
+
+var result = students.Reverse();
+reverse the collection
+
+-------------------------------------------------------------------------------------
+Take();
+
+string[] countries = {"Australia","Canada","Germany","US","India"};
+
+IEnumerable<string> result = countries.Take(3);
+
+---or---
+
+IEnumerable<string> result = (from country in countries
+				select country).Take(3);
+
+
+-------------------------------------------------------------------------------------
+Skip()
+
+
+string[] countries = {"Australia","Canada","Germany","US","India"};
+
+IEnumerable<string> result = countries.Skip(3);
+
+---or---
+
+IEnumerable<string> result = (from country in countries
+				select country).Skip(3);
+
+
+-------------------------------------------------------------------------------------
+TakeWhile()
+
+string[] countries = {"Australia","Canada","Germany","US","India"};
+
+IEnumerable<string> result = countries.TakeWhile(s=>s.Length > 2);
+
+== Australia, Canada, Germany 
+
+
+
+-------------------------------------------------------------------------------------
+SkipWhile()
+
+string[] countries = {"Australia","Canada","Germany","US","India"};
+
+IEnumerable<string> result = countries.SkipWhile(s=>s.Length > 2);
+
+== US, India
+
+*** By using Skip and take we can implement Paging ***
+
+-------------------------------------------------------------------------------------
+
+*****************************with Using Deferred operator*************************
+Select, Where, Take, Skip etc
+
+
+
+		List<Student> listStudent = new List<Student>
+			{
+				new Student {Id = 101, Name = "Tom", TotalMarks = 800},
+				new Student {Id = 102, Name = "Marry", TotalMarks = 900},
+				new Student {Id = 103, Name = "pom", TotalMarks = 800},
+			};
+
+
+IEnumerable<Student> result =   from student in listStudents
+				where student.TotalMarks ==800
+				select student;
+
+listStudent.Add(new Student(){Id = 104, Name = "Tim", TotalMarks = 800})
+
+
+foreach(listStudent)
+{
+	Tom 
+	Pom
+	tim
+}
+
+
+*******************************with Using immediate operator**************************
+Count, Average, Min, Max, ToList
+
+
+
+List<Student> listStudent = new List<Student>
+			{
+				new Student {Id = 101, Name = "Tom", TotalMarks = 800},
+				new Student {Id = 102, Name = "Marry", TotalMarks = 900},
+				new Student {Id = 103, Name = "pom", TotalMarks = 800},
+			};
+
+
+IEnumerable<Student> result =   (from student in listStudents
+				where student.TotalMarks ==800
+				select student).ToList();
+
+listStudent.Add(new Student(){Id = 104, Name = "Tim", TotalMarks = 800})
+
+
+foreach(listStudent)
+{
+	Tom 
+	Pom
+}
+
+-------------------------------------------------------------------------------------
+
+Convert List to Dictionary
+
+Dictionary<int,string> result = listStudents.ToDictionary(x=> x.StudId, x=> x.Name);
+
+
+foreach(KeyValuePair<int,string> kvp in result)
+{
+	C.W(kvp.Key + "/t" + kvp.Value);
+}
+
+-------------------------------------------------------------------------------------
+
+Dictionary<int, Student> result = listStudents.ToDictionary(x=> x.StudId); --- automaticall value will be object
+
+--or---
+
+Dictionary<int, Student> result = listStudents.ToDictionary(x=> x.StudId, x=> x); 
+
+
+-------------------------------------------------------------------------------------
+
+Lookup 
+
+used for grouping 
+
+var employeeByCity = listEmployees.ToLookup(x=>x.City);
+
+C.W("Employee Grouped By City ");
+
+foreach(var kvp in employeeByCity)
+{
+   C.W(kvp.Key);            // Pune
+  foreach(var employee in employeeByCity[kvp.Key])
+  {
+	C.W(employee.Name + employee.Jobtital)
+  }
+
+}
+
+-------------------------------------------------------------------------------------
+
+Difference between Cast and OfType
+list.Add(1)
+list.Add(2);
+list.Add(3);
+list.Add("4");
+list.Add("ABC")
+
+IEnumerable<int> result = list.Cast<int>();
+
+foreach(int i in result)
+{
+	CW(i);
+}
+
+Exception will throw after 1 2 3 print 
+
+----------------------------------------------------
+IEnumerable<int> result = list.OfType<int>();
+
+foreach(int i in result)
+{
+	CW(i);
+}
+
+it will print 1 2 3 not thorw exception
+
+
+----------------------------------------------------
+
+**********Joins***********
+
+1) Group Join
+var employeeByDepartment = from d in Department.GetAllDepartments()
+			   join e in Employee.GetAllEmployee()
+			   on d.Id equals e.DepartmentID into eGroup
+			   Select new 
+				{
+				   Department = d,
+				   Employees = eGroup
+				};
+
+	foreach(var department in employeesByDepartment)
+	{
+	    C.W(department.Department.Name);
+	    foreach(var employee in department.Employees)
+	    {
+		C.W(" "+ employee.Name);
+	    }
+	    C.W();
+	}
+
+----------------------------------------------------
+2) Inner join
+
+var result = Employee.GetAllEmployee().Join(Department.GetAllEmployee(),
+					e => e.DepartmentID,
+					d = d.ID,
+					(employee, department) = new 
+					{
+					    EmployeeName = employee.Name,
+					    DepartmentName = department.Name
+					});
+
+
+---or---
+
+var result = from e in Employee.GetAllEmployee()
+	     join d in Department.GetAllDepartment()
+	     on e.DepartmentID equals d.ID
+	     select new
+		{
+		    EmployeeName = e.Name
+	 	    DepartmentName = d.Name
+		};
+
+	foreach(var employee in result)
+	{
+		C.W(employee.EmployeeName + "\t" + employee.DepartmentName);
+	}
+
+----------------------------------------------------
+
+3) Left Outer Join
+
+var result = Employee.GetAllEmployees()
+		.GroupJoin(Department.GetAllDepartments(),
+			e = e.DepartmentID,
+			d = d.ID
+			(emp,depts)=> new
+			{
+			    emp,
+			    depts
+			})
+		.SelectMany(z=> z.depts.DefaultIfEmpty(),
+			    (a,b) = new
+			    {
+				EmployeeName = a.emp.Name,
+				DepratmentName = b==null ? "No Department" : n.Name)
+			    });
+
+----------------------------------------------------
+
+4) Cross join
+
+var result = from e in Employee.GetAllEmployees()
+	     from d in Department.GetAllDepartments()
+	     select new {e, d};
+
+
+----------------------------------------------------
+
+************************Set Operator*************************
+Distinct
+
+string countries = {"USA","usa","INDIA", "UK", "UK"};
+var result = contries.Distinct(StringComparer.OrdinalIgnoreCase);
+
+
+if there is any object list we need to override Equal and GetHashCode method
+eg. EmployeeList.
+	
+----------------------------------------------------
+
+Union : Combines two Collection into one collection while removing the duplicate elements.
+
+1)
+int[] number1 = {1,2,3,4,5};
+int[] number2 = {1,3,6,7,8};
+
+var result = number1.Union(number2);  // 1,2,3,4,5,6,7,8
+
+2)
+for object we need to override method
+or
+by annonomus type
+
+var result = list1.Select(x=> new {x.Id,x.Name}).Union(list2);
+
+----------------------------------------------------
+Intersect : return the common elements between 2 collections
+
+int[] number1 = {1,2,3,4,5};
+int[] number2 = {1,3,6,7,8};
+
+var result = number1.Intersect(number2);   // 1,3
+
+----------------------------------------------------
+Except : return the elements that are present inthe first Collection but notin second collection
+
+
+int[] number1 = {1,2,3,4,5};
+int[] number2 = {1,3,6,7,8};
+
+var result = number1.Except(number2);   // 2,4,5
+
+----------------------------------------------------
+*******************Generation Operators in Linq************************
+
+Range : Range oprator generates a sequence of integers within a specified range.
+
+var EvenNumbers = Enumerable
+			    . Range(1,10)
+			    . where(x=>x%2==0);
+
+----------------------------------------------------
+Repeat : used to generate a sequence that contains one repeated value
+
+var result  =Enumerable.Repeat("Hello",5);
+
+foreach(result) // 5 time Hello
+
+
+----------------------------------------------------
+Concat : Concatenates two sequences into sequence.
+
+
+int[] number1 = {1,2,3};
+int[] number2 = {1,4,5};
+
+var result = number1.Concat(number2);   // 1,2,3,1,4,5
+
+
+Difference between union and concate
+- Union remove duplicates element where concate not
+
+----------------------------------------------------
+SequenceEqual Operator : used to determine where two sequence are equal
+
+
+1)
+
+string countries1 = {"USA","usa","INDIA", "UK", "UK"};
+
+string countries2 = {"USA","usa","INDIA", "UK", "UK"};
+
+var result countries1.SequenceEqual(countries2);
+
+C.W("Are equal = "+result);  // true
+
+
+2)
+string countries1 = {"USA","usa","INDIA"};
+
+string countries2 = {"use","usa","INDIA"};
+
+var result countries1.SequenceEqual(countries2, StringComparer.OrdinalIgnoreCase);
+
+C.W("Are equal = "+result);  // true
+
+----------------------------------------------------
+Quanifiers : return true or false depending on whether if some or all of the element in a sequence satisfy a condition.
+
+All : return true if all the elements in a sequence satisfy a given condition.
+
+int[] numbers = {1,2,3,4,5};
+
+var result = numbers.All(x=>x<10);  //true
+
+
+
+Any : return true as the sequence contains at least one element
+
+
+Contains : return true if sequence contain at least one
+
+
+
+
+
+

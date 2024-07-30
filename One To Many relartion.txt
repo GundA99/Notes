@@ -1,0 +1,21 @@
+for getting all employee from Department
+
+
+        [HttpGet]
+        public IActionResult GetEmployeeByDepartment(int deptId)
+        {
+           //var Dept = Context.Employe.Where(a=> a.departmentId==deptId).ToList();
+            var department = Context.Department.Include(d => d.employees).FirstOrDefault(d => d.Id == deptId);
+
+            return Ok(department);
+        }
+
+above code return employeeList from department by using deptNo 
+but we need to add below code in program.cs
+
+
+builder.Services.AddControllersWithViews()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+            });

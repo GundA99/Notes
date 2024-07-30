@@ -1,0 +1,62 @@
+******************************Dependence injection ************************************************************
+
+A design pattern to reduce coupling between classes
+Dependency Injection (DI) in C# is a design pattern and technique used to achieve Inversion of Control (IoC) in software development. 
+It helps in implementing the Dependency Inversion Principle of SOLID principles. 
+
+--------------------------------------------------------------------------------------------------------------------------------
+# Key Concepts in Dependency Injection:
+ Interfaces and Classes:  In C#, dependencies are typically defined as interfaces or classes that the dependent class relies upon.
+
+#Types of Injection:
+
+Constructor Injection: Dependencies are provided through the class constructor. This is the most common type of dependency injection.
+Property Injection: Dependencies are provided through public properties of the class.
+Method Injection: Dependencies are provided through public methods of the class.
+
+# Benefits of Dependency Injection:
+
+Decoupling: Classes become less dependent on specific implementations of other classes or services, promoting loose coupling.
+
+Testing: Dependencies can be easily mocked or substituted during testing, allowing for easier unit testing and isolation of components.
+
+Flexibility: Different implementations of dependencies can be easily swapped at runtime, without requiring changes to the dependent class.
+
+
+Dependency Injection is a pattern that implements IoC
+
+
+
+****************************************SOLID Principle***********************************************************************
+
+
+The SOLID principles are a set of five principles in object-oriented programming and design intended to make software designs more understandable,
+flexible, and maintainable. Each letter in "SOLID" stands for a different principle:
+
+1) Single Responsibility Principle (SRP):
+
+A class should have only one reason to change, meaning that it should have only one job or responsibility. 
+This principle helps in keeping classes focused and easier to maintain.
+
+2) Open/Closed Principle (OCP):
+
+Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification. 
+This means that you should be able to extend the behavior of a module without altering its source code.
+
+3) Liskov Substitution Principle (LSP):
+
+Objects of a superclass should be replaceable with objects of its subclasses without affecting the correctness of the program. 
+This principle ensures that inheritance is used correctly.
+
+4) Interface Segregation Principle (ISP):
+
+This principle advocates for the creation of specific, smaller interfaces instead of one large interface, 
+which helps in keeping dependencies minimal and specific to the client's needs.
+
+5) Dependency Inversion Principle (DIP):
+
+High-level modules/classes should not depend on low-level modules/classes. Both should depend on abstractions (e.g., interfaces). 
+Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions. 
+This principle promotes loose coupling between software modules, making the system more maintainable and allowing for easier substitution of components.
+
+

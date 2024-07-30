@@ -1,0 +1,407 @@
+1.CREATE PORTFOLIO
+2.Update PORTFOLIO
+3.GET PORTFOLIO
+4.GET ALL PORTFOLIO LIST
+5.GET INSTRUMENT
+
+****************************** CREATE PORTFOLIO **************************
+1.CultureInfo - it is a .net feature in which we can convert currency for specific country/ region
+2.ESB Session creation
+3.BankServerPath initially it is empty
+4.check customer no is not null 
+
+5.Create Customer in Pro
+	CreateCustomerPro ---> PortfolioBL/Portfolio/PortfolioService
+	1. Check Age Minority 
+		a.GetCoreCustomerDetails 
+		b.Take date of birth from it
+		c.check if age is less than 18 (yes)---> Throw error
+		
+	2. Create Empty List of itemPortfolio
+	
+	3. Validations -->(Customer details, Agreement, portfolioType)
+	
+	4. Validations of Agreement eSign 
+		a. SignStatus --> it will return (SignOrderStatusResponseDto) ---> it has string ( Success , status)
+		
+	5. Check Provided Bank Account is Iban or Not --> return defaultIban from customerDetails object
+	
+	6. Fetching Customer Data from Database (CoreBankSystem and BankSystem)
+		a. CustomerData --> IHubIntegration.CoreCustomer.FetchData.CustomerReadResult
+			here CustomerReadResult is a class which gives details like (fName, lName, Address, Email, PhoneNo)
+		b. CustomerDetailsData -->	IHibIntegration.BankSystem.Dto.iHubSoapRequestDto
+			here CustomerReadResult is a class which gives details like (CountryCode, Iscorporate)
+		Note : In one Api Call we can't get whole details hence we will hit two diff api hence we have two diff
+			   as above mention CustomerData and CustomerDetailsData
+		c. return result = new customerDetails(fName, lName, Address, Email, PhoneNo, CountryCode, Iscorporate)
+		
+	7.Getting zipCode List --> ProSolution.Customer.Customer.GetZipCodeList	
+		it will hit probroker Api for get all zip Code
+		RQ_ABS_ZIP_GET
+		Description: 
+		This request get zip description.
+		Output --> This method will return ZipCodeList
+		Find out ZipCode of Customer by using Customer PostalCode from CustomerDetails object
+		
+	8.Customer Creation on Pro and Save it in Database
+		a.checking for previously added portfolio
+			portfolioData = PortfolioCatalogue.GetAll() --> using CustomerNo
+			check (portfolioData.count > 0) --> it means customer already have a portfolio
+			else Customer don't have portfolio
+				migratedData = _representativeDetails.GetAll(CustomerNo)
+				if MigratedData is not null 
+					var portfolioDetailsOnPro = portfolio.GetPortfolioDetails(MigratedData.portfolioId)
+					
+				portfolioType = fetchPortfolioTypefromConfig(createCustomer)
+					it will return portfolioType (Basic, Ask, Diccretionary)
+					
+		b.check if portfolioType is not Discretionary
+			Fetching BankAccounts from Bank System
+			iHubIntegration.BankSystem.GetBankDetailsOfCustomer-->
+				a.GetBankDetailsOfCustomer(iHubSoapRequestDto input, accountMainRoleV2 accountRole, int startIndex, int pageSize)
+				b.get engagementProxyObject using CCOSCCEngementService_V22_1port (BankSystem) class
+					Note : it will create environment path like a End point of api
+				c.get ip address Dns.GetHostEntry(Dns.GetHostName) --> Microsoft.netcore.app pakage
+Ask				d.CustomerReaderRequestHeader EDBHeaderType  --> it is a class 
+					Note : it is mainly used to create Headr of Api 
+				e.Create empty AccountList --> new List<AccountGroup>
+				f.checking if engagementResponseRead.pagingElement.NumberofElement > 0
+					accountList.add( new accountGroup)
+				g.return accountList
+				
+		c.Select bank account from account list using select default Iban
+			this method will give Bank Account of Customer
+			
+		d.check is customer is corporate 
+			Note : if customerNoPro length is 11 then it is retail cutomer else it is a corporate customer
+			if yes then remove starting "00" from cutomerNo
+				a.Common.Common.RemovStartingZeros(CustomerNo) --> it will retuen updated customerNo
+				
+		e.dynamic createCustomer = new ExpandoObject(); 
+			ceating cutomer object at runtime
+			
+		f.var askAccount = createCustomer?.LinkedBankAccount? --> 
+			Note : AskAccount is nothing but the customer linked bank account
+			
+		g.check if portfolioType is not Discretionary
+			Adding accNo for ASK accounts --> by Creating new Ask Bank Account
+			a.iHubIntegraton.BankSystem.CoreBanking.CreateBankAccount --> it will return askAccountNo created
+				Create bank account STEP 2 - Create new ASK bank account 
+				CreateBankAccount(iHubSoapRequestDto input, string accountNumber, string productId)
+					it will simply ceate a new Ask Account and return newly created AskBankAccount
+			return AskBankAccountNo
+			b.initiating SAGSUpdate request
+				1.var sagsUpdateRequest = new iHubSoapRequestDto --> create a dto object
+				2.iHubIntegraton.Agreement.Agreement.SAGSUpdate(sagsUpdateRequest, accountNumberCreated);
+					it will update the SAGS Agreement and  SAGSUpdate request completed
+					
+		h.Create a portfolio 
+			_portfolio.CreatePortfolio(createCust, session.State, _probrokerEndpoint, _probrokerAuthToken, Convert.ToBoolean(_isProxyEnabled), _probrokerProxyServerPath, Convert.ToInt32(_probrokerProxyServerPort));
+			if no errors then --> Portfolio created in Pro
+			
+		i.check if portfolioType is Discretionary 
+			if(EnumPortfolioType.Discretionary.ToString().ToLower() == createCustomer?.PortfolioType?.Name?.ToLower())			
+				a.ProSolution.Portfolio.Portfolio.ConnectAccountToModelPortfolio(new AbsPortAccountToModelPortfolioConnect
+				If portfolio is Discretionary in that case we Connect account to Model portfolio
+			RQ_ABS_PORT_ACCOUNT_TO_MODEL_PORTFOLIO_CONNECT
+			Description: 
+			The purpose of this request is to connect account to model portfolio
+				
+		j.Updating the Customer
+			a.check if portfolioType is not Discretionary 
+				1.var updateCustomer = _portfolio.AddOrUpdateCustomer --> create Dto object
+					RQ_ABS_CUST_CUST_IDSRC_UPDATE
+					Description: 
+					This request updates an existing customer identifier source id for a specific customer	
+					RequestPath = proSolutionEndpoint + "PB/callRequest/absCustCustIdsrcUpdate"
+
+				2.var accountList = _portfolio.GetCashAccountList --> create Dto object
+					RQ_ABS_CUST_CASH_ACCOUNT_LIST
+					Description: 
+					This request lists existing cash accounts
+					RequestPath = proSolutionEndpoint + "PB/callRequest/absCustCashAccountList",
+				
+				3.await Task.WhenAll(updateCustomer, accountList);
+				result - Portfolio name updated on customerIdentifierSourceId and accountList fetched for new portfolio
+				
+				4.Fetch firstorDefault AccountDetails from AccountList 
+					var accountDetails = accountList.Result.FirstOrDefault
+				
+				5.check if portfolioType is Discretionary 
+					Update the cash account 
+					var updatedAccountDetails = await _portfolio.UpdateCashAccount(
+						cashAccount = askAccount,
+						cashAccountName = "ASK",
+					RQ_ABS_CUST_CASH_ACCOUNT_UPDATE
+					Description: 
+					This request updates the description of an existing cash account.
+					RequestPath = proSolutionEndpoint + "PB/callRequest/absCustCashAccountUpdate",
+				
+				else check if portfolioType is not Discretionary
+					var updatedAccountDetails = await _portfolio.UpdateCashAccount
+						cashAccount = selectedBank.AccountNumber.Bban,
+						cashAccountName = selectedBank.Product.ProductName,
+					RQ_ABS_CUST_CASH_ACCOUNT_UPDATE
+					Description: 
+					This request updates the description of an existing cash account.
+					RequestPath = proSolutionEndpoint + "PB/callRequest/absCustCashAccountUpdate",	
+				
+				6.For ASK Portfolio - Adding Payment account as secondary	
+					check if portfolioType is Ask
+						dynamic createCashAccount = new ExpandoObject();
+						await _portfolio.CreateCashAccount(createCashAccount, session.State, _probrokerEndpoint, _probrokerAuthToken, Convert.ToBoolean(_isProxyEnabled), _probrokerProxyServerPath, Convert.ToInt32(_probrokerProxyServerPort));
+						Portfolio cash account created in Pro
+					RQ_ABS_CUST_CASH_ACCOUNT_NEW
+					Description: 
+					This request adds a new cash account
+					RequestPath = proSolutionEndpoint + "PB/callRequest/absCustCashAccountNew",
+				
+				7.Create the Agreement
+					await iHubIntegraton.Agreement.Agreement.Create(new iHubSoapRequestDto
+				
+				8.Inserting into portfolio catalogue and get a new id 
+					_portfolioCatalogue.InsertAndGetId(new PortfolioCatalogue
+					Portfolio details saved in DB
+			
+****************************** Update PORTFOLIO **************************			
+1._portfolioService.UpdatePortfolioDetails(request, portfolioId, session);
+ UpdatePortfolioDetails(UpdatePortfolioRequest updateCustomer, string portfolioId, EsbAuthPermissionDto session)
+
+2.Validations
+	Check updateCustomer, portfolioId, PortfolioName should not be null
+
+3.Data fetching
+	a.fetch portfolioDetails based on portfolioId
+		if portfolioDetails are null
+			fetch representativeDetails.GetAll and match with portfolioId -->(Yes)--> PortfolioDetailsonPro
+			portfolioDetailsOnPro = _portfolio.GetPortfolioDetails (Pro-Broker)
+			with the help of portfolioDetailsOnPro we can create new portfolioCatalogue is called migratedportfolio
+	b.check is it owner or representative			
+		portfolioDetails?.CustomerSSN == session.UserId --> is a owner
+		else is a representative
+			Find the representative based on portfolioId and UserId
+			if representative is null --> "Customer don't have required rights to update the portfolio"
+    c.Updating name in ProBroker
+		var updateCustomer = _portfolio.AddOrUpdateCustomer --> create Dto object (Pro-Broker)
+					RQ_ABS_CUST_CUST_IDSRC_UPDATE
+					Description: 
+					This request updates an existing customer identifier source id for a specific customer	
+					RequestPath = proSolutionEndpoint + "PB/callRequest/absCustCustIdsrcUpdate"
+	d.Updating default bank account in ProBroker
+		a.create empty list of bank account 
+			List<AccountGroup> bankAccounts = new List<AccountGroup>();
+		b.Fetching account list from Bank System
+			bankAccounts = await iHubIntegraton.BankSystem.BankSystem.GetBankDetailsOfCustomer
+		c.Find BankAccount of Customer with the help of Customer Iban  -->selectedBank
+			if selectedBank is null --> Bank account is not associated with customer
+		d.Get Cash account list 
+			accountListPro = await _portfolio.GetCashAccountList (Pro-Broker)
+		e.Find account of customer
+			find account on the basis of Customer Bban
+		f.if account is not null
+			Update that account in pro
+				AbsUpdateCashAccountRequestDto
+				if account type is Ask  -->(Yes)--> isDefault=false -->(No)-->isDefault=True
+				await _portfolio.UpdateCashAccount (Pro-Broker)
+		g.else Create a account
+			1.AbsCreateCashAccountRequestDto  --> create a dto object
+			2.if account type is Ask  -->(Yes)--> isDefault=false -->(No)-->isDefault=True
+			3.create a defaultaccount = await _portfolio.CreateCashAccount()  (Pro-Broker)
+		h.If it is not a migrated portfolio --- 1934
+			await _portfolioCatalogue.UpdateAsync(portfolioDetails); --> update portfolio (Pro-Broker)
+			
+4.return result
+		return new portfolioDetails(CustomerNo,PortfolioId,PortfolioType,Name,Owner)	
+
+****************************** GET PORTFOLIO **************************	
+1.GetPortfolios
+2.CultureInfo - it is a .net feature in which we can convert currency for specific country/ region
+3.ESB Session creation
+4.Get all portfolios of customer
+	GetPortfolios(string customerNo, bool listOnly, EsbAuthPermissionDto session)
+	a.check cutomerNo is not null
+	b.create empty list of ListofItemPortfolio
+	d.portfolioList = _portfolioCatalogue.GetAll() using customerNo
+	e.selected portfolio list
+		1.get current performence status
+			currentStats = _performance.PerformanceCurrent
+		2.portfolio cash account list
+			accountList = _portfolio.GetCashAccountList (Pro-Broker) method
+		3.get Customer Identifier List
+			customerIdentifierList = ProSolution.Customer.Customer.GetCustomerIdentifierList
+		4.await Task.WhenAll(currentStats, accountList, customerIdentifierList);
+			meaning of line is  program waits asynchronously for three separate tasks 
+		5.find accountNo by using CashAccountId
+		6.Find the portfolio Name
+ask			portfolioName = customerIdentifierList.Result.FirstOrDefault(x => x.customerIdentifierSourceId == 12)?.customerIdentifier;
+		7.add that item data into result
+			result.Items.Add(new ItemData{ContractStaus,PortfolioNumber,PortfolioId,Name})
+		8.return Result --> List of portfolio of that customer	
+5.return result -->	List of portfolio of that customer
+
+****************************** GET ALL PORTFOLIO LIST **************************	
+1.GetAllPortfolioList()
+	a.await _portfolioService.GetAllPortfolioList(); --> it will get all portfolio from portfolio Catalogue
+		1.await _portfolioCatalogue.GetAll().Where(x => !x.IsDeleted && x.IsActive).Select(x => x.ClientNo).Distinct().ToListAsync();
+			it will fetch all the portfolio from Pro-Broker and remove duplicate from it and send back as a result
+
+
+***************************** INSTRUMENT ***********************************
+Gets all the fund related instruments details
+1.Get list of all Instrument from InstrumentService class
+	_instrumentService.GetList(paginationDto, "19", "XXXX", _probrokerEndpoint, _probrokerAuthToken, Convert.ToBoolean(_isProxyEnabled), _probrokerProxyServerPath, Convert.ToInt32(_probrokerProxyServerPort), _morningStarServerPath, _morningStarAuthToken, _morningStarProxyServerPath, Convert.ToInt32(_morningStarProxyServerPort), acceptLanguage, state);
+	Note : It is basically Business Logic method
+	a.Get List With instrumentType attribute
+		1.Create empty object of WMFundResponseDto
+		2.Apply Defalt pagination setting
+		3.Validate pagination data
+		4.check portfolio Type and then set ConfiguredResources for _proInstrumentSetALL and _proInstrumentSetASK
+		5.if instrument type is invalid it will throw error --> Invalid Type
+		6.Remove instrument Handelsbanken Microcap Norden A4 from list
+			remove by using isin Id x => x.Isin == "SE0011670322"
+		7.check each instrument with globalSerachString and add it into WMFundResponseDto object
+		8.check paginationDto sortColumnName is not null
+			sort the instrument using sortString and switch case 
+			sorting on basis of name, riskrating, actualManagementFee, returnM60
+		9.Find out total Page Count	--> add it into WMFundResponseDto
+		10.Finally return WMFundResponseDto object which contain list of WMInstrument and FundPaginationDto
+		
+***************************** GET INSTRUMENT DETAILS***********************************		
+Gets all the fund related instruments details
+1.FundDetails --> It will return list of WMInstrumentDetailsDto
+	a._instrumentService.GetDetailsByIsinList(isin, newRange, _probrokerEndpoint, _probrokerAuthToken, Convert.ToBoolean(_isProxyEnabled), _probrokerProxyServerPath, Convert.ToInt32(_probrokerProxyServerPort), _morningStarServerPath, _morningStarAuthToken, _morningStarProxyServerPath, Convert.ToInt32(_morningStarProxyServerPort), acceptLanguage, state);
+		Get Details By Isin
+		1.check list of IsIn no comming as a input parameter of method is not less than 1
+			if is it less than 1 --> throw error Instrument number cannot be empty
+		2.create empty list of WMInstrumentDetailsDto 
+		3.use AuthenticateMorningStar method and genrate MsToken
+		4.find out Instrument with the help of IsIn number and add it into data variable list
+		5.finally return list which we get as per the isin number  
+
+
+***************************** ORDERS ***********************************
+1.Fund Order :
+	a.Fund(WMFundOrderRequestDto request, [SwaggerParameter("Set true if customer wants to sell all the quantity of the instrument from holdings")] bool bulk)
+		1.call method from _orderService.Fund(request, _probrokerEndpoint, _probrokerAuthToken, Convert.ToBoolean(_isProxyEnabled), _probrokerProxyServerPath, Convert.ToInt32(_probrokerProxyServerPort), bulk, session);
+		Create New Fund order with Portfolio :
+			a.check amount and qty using Common method Common.Common.AmountAndQuantityValidationCheck()
+			b.check if is not a Admin --> call await Common.Common.AgeMinorityCheck(session);
+			c.check Validation 
+				1.check portfolio access by calling --> Common.Common.CheckPortfolioAccess
+				2.check is a ask fund or not with the help of _proInstrumentSetASK
+			d.Check customer Authorization Access
+				1.get portfolio details by calling  _portfolio.GetPortfolioDetails()
+				2.using above portfolio details find out portfolio taxtionType is ask portfolio CustGrp != _proBrokerPortfolioTypeDiscretionary
+					(yes) --> set portfolioType is "Ask" , (No) --> set portfolioType is "Basic"
+				3.create empty object of preDataRequestDto{CustomerNo,PortfolioId,PortfolioType}
+				4. check authorization access using CheckAccessAuthorization() 
+					if access is Only Read then throw error "Customer don't have required rights to place order"
+					for access we have enum --> EnumAccessRights{R=1,W,A}
+			e.Order validation check
+				1.check order type is Buy("B") or sell ("S")
+				2.Find out holding and holdingsByFunds
+					a.holdings = await _portfolio.GetAssets
+					b.holdingByFund = holdings.Items.FirstOrDefault(x => x.Code == "19")
+					c.check the buy holdings are bulk or single
+						if not bulk then find out the market value
+						if fund amount id 90% of market value then can't sell fund sell all qty
+			f.if createOrderRequest.Portfolio != null then
+			(Yes)-->1.Creating order with new portfolio
+						a.portfolioData = await Common.Common.CreateNewPortfolio
+						b.with the help of above object find out portfolioId and defaultAccount
+						c.return newly created fund order
+			(No)-->	2.Creating order
+						a.check if proBrokerCust?.CustGrp == _proBrokerPortfolioTypeDiscretionary 
+							throw error --> Customer don't have required rights to place order
+						b.if taxtionType is ask && portfolioType is not Discretionary && Order Type is buy("b")
+						  Find out holding and holdingsByFunds
+							a.holdings = await _portfolio.GetAssets
+							b.holdingByFund = holdings.Items.FirstOrDefault(x => x.Code == "19")
+						c.Find out account details and Payment Account Bank 
+							1.accountDetails = await Common.Common.GetPreData
+							2.selectedBank = accountDetails.PaymentsAccount.FirstOrDefault(x => x.BBAN == createOrderRequest.Fund.PaymentAccount)
+							3.check bank is not null
+								a.check order type is buy
+									compare Account balance with Fund amount (from i1logic common class)
+									if less then throw --> Insufficient account balance
+						d.Get cash account list
+							alreadyMappedAccounts = await _portfolio.GetCashAccountList() using CustNoShort
+						e.Add Cash account if not exists in list
+						f. return CreateNewFundOrder()
+							after calling CreateNewFundOrder() --> it will return WMCreateOrderResponseDto
+							a.Check Validations (currency, exchid, Quantity)
+							b.Get pro payment configuration
+							c.Create object of ExpandoObject --> Dynamically at the Runtime 
+							d.if Orders are bulk and orderType is sell
+								make purchaseorsaleseprate = "A" and orderAmount = null;
+							e.Creating new fund order 
+								createNewOrderResponse = await _order.CreateFundNewOrder
+							f.Finally return CreateNewOrderResponse
+							
+2.Cancel Order :
+	a.Task<WMCancelOrderResponseDto> Cancel(WMCancelOrderRequestDto request)
+		1.call method _orderService.CancelOrder(request, _probrokerEndpoint, _probrokerAuthToken, Convert.ToBoolean(_isProxyEnabled), _probrokerProxyServerPath, Convert.ToInt32(_probrokerProxyServerPort), session);
+			Cancel order already created order 
+			a.check if is not a Admin --> call await Common.Common.AgeMinorityCheck(session);
+			b.check customer has Authorization access or not
+				1.Get list of selected orders
+					orderInfo = await ProSolution.Order.Order.GetSlctOrderList
+				2.find out portfolio from the list
+					portfolioId = orderInfo.FirstOrDefault()?.custNoShort;
+				3.if access rights is read only 
+					throw error Customer don't have required rights to place an order
+			c.call CancelOrder method 
+				response = await _order.CancelOrder()
+				Note: it is a i1Logic library --> Order class method 
+				1.Task<AbsCancelOrderResponseDto> CancelOrder()
+				2.call RestCaller
+					RequestPath = proBrokerEndpoint + "PB/callRequest/absOrdrCancel"
+					RQ_ABS_ORDR_CANCEL
+			d.retrun response as a WMCancelOrderResponseDto	object
+
+3.Add Saving Plan :
+	1.Task<WMCreateRecurringOrderResponseDto> AddSavingPlan()
+		a.check if is not a Admin --> call await Common.Common.AgeMinorityCheck(session);
+		b.check Validations
+			check portfolio Access
+		c.Amount Validations
+			1.Find portfolio details 
+				proBrokerCust = await _portfolio.GetPortfolioDetails()
+			2.using above portfolio details find out portfolio taxtionType is ask portfolio CustGrp != _proBrokerPortfolioTypeDiscretionary
+				(yes) --> set portfolioType is "Ask" , (No) --> set portfolioType is "Basic"
+			3.Find out account details
+				accountDetails = Common.Common.GetPreData() --> EventTypeCode = "b"
+			4.find selfaccountDetails
+				selfAccountDetails = Common.Common.GetPreData() -->  EventTypeCode = "c"
+			5.check account is already mapped or not 
+				alreadyMappedAccounts = _portfolio.GetCashAccountList()
+			6.Find bank account from accountDetails object	
+				var selectedBank = accountDetails.Result.PaymentsAccount.FirstOrDefault(x => x.BBAN == request?.Plan?.fromAccount);
+					
+		
+****************************************************************************************************************
+
+
+ask portfolio service 850 to 930
+
+dynamic createCust = new ExpandoObject();
+createCust.custNo = customerIdPro;
+createCust.cname = customerDetails?.FirstName;
+createCust.sname = customerDetails?.LastName;
+createCust.countryCode = "NOR";
+createCust.settlementCcy = !string.IsNullOrWhiteSpace(createCustomer?.Currency) ? createCustomer?.Currency : "NOK";
+createCust.custStatus = "A";
+createCust.externCustomerId = customerIdPro;
+createCust.adr1 = customerDetails?.AddressLine1;
+createCust.tel1No = customerDetails?.PhoneNo;
+createCust.emailAddress = customerDetails?.EmailAddress;
+createCust.clientNo = isFirstPortfolio ? null : previousProClientNo;
+createCust.custGrp = portfolioType;
+//createCust.cashAccount = selectedDefaultBban;
+createCust.paymentAgent = "EVRY";
+createCust.isDefault = true;
+createCust.centerId = customerDetails?.ProfitCenter;    //CenterId mapping in Pro
+createCust.zipNo = customerDetails?.PostalCode;    //Zip no mapping in pro			
+			
+				
+			

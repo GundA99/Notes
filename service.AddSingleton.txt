@@ -1,0 +1,64 @@
+public void ConfigureServices(IServiceCollection services)
+{
+    // Register the implementation as a singleton
+    services.AddSingleton<IOrder, Order>();
+}
+
+
+AddSingleton is an extension method provided by ASP.NET Core's DI container (IServiceCollection). 
+It registers a service with the DI container as a singleton.
+
+
+Meaning of services.AddSingleton<IOrder, Order>();
+Registration: This line of code registers Order as an implementation of the IOrder interface with the DI container as a singleton.
+
+Singleton Lifetime: When registered as a singleton:
+
+Instance Creation: The DI container will create a single instance of Order when it is first requested.
+Reuse: Subsequent requests for IOrder will return the same instance of Order throughout the application's lifetime.
+Dependency Injection: Elsewhere in the application, if a class or component depends on IOrder, the DI container will inject the singleton instance of Order automatically.
+
+Example Usage
+csharp
+Copy code
+// Define the interface
+public interface IOrder
+{
+    void ProcessOrder();
+}
+
+// Implement the interface
+---------------------------------------------------
+public class Order : IOrder
+{
+    public void ProcessOrder()
+    {
+        // Implementation details for processing an order
+    }
+}
+
+--------------------------------------------------------
+
+// In ConfigureServices method of Startup class
+public void ConfigureServices(IServiceCollection services)
+{
+    // Register the implementation as a singleton
+    services.AddSingleton<IOrder, Order>();
+}
+
+--------------------------------------------------------
+
+In this example: Order implements IOrder.
+
+services.AddSingleton<IOrder, Order>(); 
+ensures that whenever IOrder is requested by other parts of the application, they receive the same instance of Order.
+
+Meaning of services.AddSingleton<IOrder, Order>();
+
+Registration: This line of code registers Order as an implementation of the IOrder interface with the DI container as a singleton.
+
+Reuse: Subsequent requests for IOrder will return the same instance of Order throughout the application's lifetime.
+
+
+
+

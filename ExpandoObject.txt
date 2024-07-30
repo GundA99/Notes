@@ -1,0 +1,28 @@
+
+Syntax 
+
+dynamic createCust = new ExpandoObject();
+
+ExpandoObject:
+ExpandoObject is a class in C# that enables you to add and remove members (properties and methods) dynamically at runtime. 
+Unlike traditional C# objects where members are defined statically (at compile-time), an ExpandoObject allows you to add properties and methods on-the-fly.
+---------------------------------------------------------------------------------------------------
+dynamic Keyword:
+In C#, dynamic is a type that bypasses compile-time type checking. It tells the compiler to delay binding decisions until runtime. 
+This means that createCust can have properties and methods added to it dynamically, and those members can also be accessed dynamically without static type checking.
+---------------------------------------------------------------------------------------------------
+Creating an ExpandoObject:
+new ExpandoObject() creates a new instance of ExpandoObject. At this point, createCust is assigned a reference to this newly created ExpandoObject instance.
+----------------------------------------------------------------------------------------------------
+Once createCust is initialized with an ExpandoObject, you can dynamically add properties and methods to createCust as needed during runtime. For example:
+createCust.Name = "John";
+createCust.Age = 30;
+createCust.Introduce = new Action(() => Console.WriteLine($"Hello, my name is {createCust.Name}"));
+----------------------------------------------------------------------------------------------------
+Dynamic Access:
+Since createCust is declared as dynamic, properties and methods can be accessed without compile-time checking:
+string name = createCust.Name;
+int age = createCust.Age;
+createCust.Introduce();
+---------------------------------------------------------------------------------------------------
+

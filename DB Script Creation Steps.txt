@@ -1,0 +1,16 @@
+
+1] To Create Db Script-
+
+					-->Rigth Click On DB
+					--> task
+					-->	Generate Script
+					--> 1) Script entire Database and all database object
+					    2) Select specific databse object 
+							-->Select table 
+							--> Advance
+							--> type of data to script 
+							-->Save as script file 
+							--> Next-->Next
+							
+2] To extract Data from Script-
+					--> Open And Select file And execute

@@ -1,0 +1,24 @@
+https://wealthmapper.preprod.evry.com/wel-portfolio-shb-s2/Pro?requestUrl=PB/callRequest/
+
+
+The Abstra API is a transaction based interface to ProBroker. 
+
+The Abstra API is developed in order to give the ProBroker system the possibility to communicate with 3rd party clients. 
+The development kit is available in C, C++, Java, DLL  in Tcp/ip and XML in MQ. 
+
+Typical functionality is: 
+ Registration and update of customer data 
+ Get customer 
+ Get instrument  
+ Registration and update of orders  
+ Order overview  
+ Customer portifolio 
+ Customer transactions
+
+Error handling 
+ RC_OK 0 Every thing went well, result is a single record 
+ RC_LIST 1 Every thing went well, result is a list 
+ RC_XML_OK 2 XML ok 
+ RC_PARAM_ERROR 53 The request didn’t received correct input parameters or values. 
+ RC_NOT_AUTHORIZED 54 The user has no access to execute this request. 
+ RC_NOT_IMPLEMENTED 55 The request is not implemented

@@ -1,0 +1,58 @@
+# RQ_ABS_PORT_ASK_BALANCES 
+Description : This request gets the customers ASK BALANCE depended on the input paramters, if IN_DATE_FORM or IN_DATE_TO is not provided it will return all records.
+
+https://wealthmapper.preprod.evry.com/wel-portfolio-shb-s2/Pro?requestUrl=PB/callRequest/absPortAskBalances
+
+body - { "custNoShort": "789699"}
+
+response - 
+{
+    "taxYear": 2024,
+    "taxFreeAmount": "13080.00",
+    "taxAmount": "531.00",
+    "": {
+        "null": {
+            "taxBasisTransactionId": null,
+            "custNoShort": "789699",
+            "acctValDate": "2024-02-14",
+            "amount": "-20.00",
+            "dateCreated": "2024-02-29",
+            "userNo": "PROINVST",
+            "systemDate": "2024-02-29",
+            "internalComment": "Settled by electronic transfer",
+            "taxBasisCode": "PAOU",
+            "taxStatus": "A",
+            "transNo": null,
+            "refTaxBasisTransactionId": null,
+            "originatingSystem": "PI",
+            "taxBasisExternalSystem": null,
+            "vpNo": null,
+            "vpName": null,
+            "changedBy": null,
+            "lastUpdated": null
+        }
+    },
+    "_status": {
+        "errorCode": 1,
+        "errorMessage": ""
+    }
+}
+
+*****************************************************************************
+RQ_ABS_PORT_GET_ACCUMULATED_INTEREST_AMOUNT
+Description :  
+Gets accumulated interest.
+https://wealthmapper.preprod.evry.com/wel-portfolio-shb-s2/Pro?requestUrl=PB/callRequest/absPortGetAccumulatedInterestAmount
+
+body - { "custNoShort": "789699"}
+
+{
+    "accumulatedIntr": "0.00",
+    "interest": "0.00",
+    "amount": "0.00",
+    "minAmount": "0.00",
+    "_status": {
+        "errorCode": 0,
+        "errorMessage": ""
+    }
+}

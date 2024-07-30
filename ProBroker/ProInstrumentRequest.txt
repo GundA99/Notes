@@ -1,0 +1,81 @@
+
+************************************************************************************************************
+Instrument requests 
+************************************************************************************************************
+# RQ_ABS_VP_GET
+ 
+Description:  This request gets instrument. 
+
+https://wealthmapper.preprod.evry.com/wel-portfolio-shb-s2/Pro?requestUrl=PB/callRequest/absVpGet
+
+Body - {"vpType": "19"}
+
+response 
+{
+    "": {
+        "5793628": {
+            "instrumentId": "5793628",
+            "vpNo": "LU1783956961",
+            "tickerCode": "AKTIA EM LOCAL CURRENCY BOND+ IX",
+            "vpName": "AKTIA EM LOCAL CURRENCY BOND+ IX ",
+            "vpType": "19",
+            "vpGroup": "99",
+            "isoCurr": "SEK",
+            "exchTradeCount": 1,
+            "tsExchId": "XXXX",
+            "instrumentStatus": "A",
+            "closePrice": null,
+            "closeTimestamp": null,
+            "dueDate": null
+        },
+        "5793630": {
+            "instrumentId": "5793630",
+            "vpNo": "LU1917348580",
+            "tickerCode": "BLUEORCHARD EMERGING MARKETS SDG",
+            "vpName": "BLUEORCHARD EMERGING MARKETS SDG IMPACT BOND FUND ",
+            "vpType": "19",
+            "vpGroup": "99",
+            "isoCurr": "SEK",
+            "exchTradeCount": 1,
+            "tsExchId": "XXXX",
+            "instrumentStatus": "A",
+            "closePrice": null,
+            "closeTimestamp": null,
+            "dueDate": null
+        },
+        "5793602": {
+            "instrumentId": "5793602",
+            "vpNo": "NO0010337421",
+            "tickerCode": "DNB AKTIV 100",
+            "vpName": "DNB AKTIV 100",
+            "vpType": "19",
+            "vpGroup": "99",
+            "isoCurr": "NOK",
+            "exchTradeCount": 1,
+            "tsExchId": "XXXX",
+            "instrumentStatus": "A",
+            "closePrice": null,
+            "closeTimestamp": null,
+            "dueDate": null
+        },
+		 "5793626": {
+            "instrumentId": "5793626",
+            "vpNo": "LU1950510971",
+            "tickerCode": "UI AKTIA EM FRONTIER BOND+ ",
+            "vpName": "UI AKTIA EM FRONTIER BOND+ ",
+            "vpType": "19",
+            "vpGroup": "99",
+            "isoCurr": "SEK",
+            "exchTradeCount": 1,
+            "tsExchId": "XXXX",
+            "instrumentStatus": "A",
+            "closePrice": null,
+            "closeTimestamp": null,
+            "dueDate": null
+        }
+    },
+    "_status": {
+        "errorCode": 1,
+        "errorMessage": ""
+    }
+}

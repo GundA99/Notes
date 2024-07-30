@@ -1,0 +1,70 @@
+
+The ILogger interface is designed to provide a simple logging abstraction for .NET applications, 
+allowing developers to log messages from their code in a structured manner. It abstracts away the specific logging implementation, 
+which could be based on various logging providers such as Console, Debug, EventSource, or third-party logging frameworks like Serilog or NLog. 
+
+
+
+# Key Features and Usage
+
+Logging Levels: ILogger supports different logging levels such as Information, Warning, Error, Debug, etc. 
+This helps in categorizing the severity of the logged messages.
+
+Log Message Formatting: It provides methods like LogInformation, LogWarning, LogError, etc., 
+which accept a message string and optionally some parameters to be formatted into the message.
+
+
+--------------------------------------------------------------------------
+Syntax
+
+var logger = serviceProvider.GetRequiredService<ILoggerFactory>()
+		 	    .CreateLogger("DB Initializer");
+    logger.LogInformation(5,"The database is ready!");
+
+Above code result in console -
+
+info: DB Initializer[5]
+      The database is ready!
+
+
+-------------------------------------------------------------------------
+Logger Composition: In .NET Core applications, you typically inject ILogger<T> into your classes using dependency injection. 
+This strongly-typed logger (ILogger<T>) allows you to easily categorize logs by the type where logging occurs, making it easier to filter and understand logs.
+
+using Microsoft.Extensions.Logging;
+
+public class MyService
+{
+    private readonly ILogger<MyService> _logger;
+
+    public MyService(ILogger<MyService> logger)
+    {
+        _logger = logger;
+    }
+
+    public void DoWork()
+    {
+        _logger.LogInformation("Doing some work...");
+        try
+        {
+            // Some operation that might throw an exception
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while doing work.");
+        }
+    }
+}
+
+-------------------------------------------------------------------------
+for see logs in json formate in console
+add code in program.cs
+
+builder.Logging.AddJsonConsole(options => 
+{
+	options.JsonWriterOptions = new()
+	{
+	    Indented = true
+	};
+});
+

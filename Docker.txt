@@ -1,3 +1,13 @@
+Window application always Run on IIS(Internet information services)
+Internet Information Services is an extensible web server software for the Windows server, created by Microsoft to be used with the Windows NT family. It supports HTTPS, HTTP, HTTP/2, FTPS, FTP, NNTP, and SMTP.
+
+IIS Express : lightweight web server Provided by Visual Studio Similar to IIS
+
+IIS Express is a service Provided by visual Studio another services like 
+Visual Studio support Apache, TomCat, Wamp,Xamp, MySQL, Java, Php this are services 
+
+-------------------------------------------------------------------------------------------------------------------------------
+
 Docker
 
 Docker is a platform used to develop, ship, and run applications inside containers. 
@@ -20,6 +30,8 @@ Characteristics: Containers are isolated from each other and from the host syste
 				
 2. Images
 Definition: An image is a read-only template used to create containers. It contains the application code, libraries, and dependencies needed for the app to run.
+
+Docker Images Made Based on Linux Containers
 			
 Creation: Images are built from a Dockerfile, which contains instructions on how to assemble the image.
 			For example, it specifies the base image (like an OS or a runtime), how to install software, and how to configure the application.
@@ -61,6 +73,9 @@ Efficiency: Containers are lightweight and have lower overhead compared to tradi
 
 In summary, Docker simplifies the development and deployment process by allowing you to package applications and their dependencies into containers that can run uniformly across various environments.
 
+
+
+
 Docker Images are made based on Linux Container
 https://www.youtube.com/watch?v=5D6FxfrP0KA&list=PL8p2I9GklV47v6WZTjHAqdsHxpTIpjRwn&index=11
 
@@ -70,4 +85,37 @@ https://www.youtube.com/watch?v=5D6FxfrP0KA&list=PL8p2I9GklV47v6WZTjHAqdsHxpTIpj
 
 * Dockerhub and Docker Desktop are same it provides us ParentImages (Download, pull, manage)
 
+--Steps to Create Docker Image and Run on Docker Desktop--
+Rigth Click on Project -> Docker Support (It will Create Docker File)
+Rigth Click on Project -> Container Orchestrator Support (It wil Create Docker Compose File) -- Container
+
+
+-------------Docker File Contains---------------
+1. Base Image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base => This line specifies the base image for the final runtime environment of the container. It uses the official .NET 8.0 ASP.NET runtime image.
+USER app   => Runs the container as the app user, which is generally a non-privileged user.
+WORKDIR /app  => Sets the working directory to /app in the container.
+EXPOSE 8080 and EXPOSE 8081   => Indicates that the application will listen on ports 8080 and 8081. These ports are exposed for communication.
+
+2. Build Stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build  => Uses the .NET SDK image, which includes the tools needed to build the application. This stage is named build.
+ARG BUILD_CONFIGURATION=Release  => Defines a build argument that specifies the build configuration (e.g., Release or Debug). The default is Release.
+COPY ["DemoForDocker/DemoForDocker.csproj", "DemoForDocker/"]   => Copies the project file to the container.
+RUN dotnet restore "./DemoForDocker/DemoForDocker.csproj"   => Restores the project dependencies.
+COPY . .  => Copies the entire source code into the container.
+WORKDIR "/src/DemoForDocker"  => Changes the working directory to the project folder.
+RUN dotnet build "./DemoForDocker.csproj" -c $BUILD_CONFIGURATION -o /app/build   => Builds the project using the specified configuration and outputs the build artifacts to /app/build.
+
+3. Publish Stage
+FROM build AS publish  => Uses the previously defined build stage and names this stage publish.
+ARG BUILD_CONFIGURATION=Release   => Reuses the build argument from the previous stage.
+RUN dotnet publish "./DemoForDocker.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p=false  =>  Publishes the application to the /app/publish directory. The UseAppHost=false option prevents the creation of a native executable host, which is generally used for cross-platform compatibility.
+
+4. Final Stage
+
+ENTRYPOINT ["dotnet", "DemoForDocker.dll"]   => Defines the command to run when the container starts, which in this case is to execute the .NET application using dotnet.
+
+----------------------------------------------------
+
 other...in Notebook
+

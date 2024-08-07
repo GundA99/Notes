@@ -1,0 +1,71 @@
+One API Can Call Another API
+
+Application Run On:  https://localhost:7236
+
+
+        [HttpGet("/internalCall")]
+        public async Task<List<PokemonDto>> CallInternalApi()
+        {
+            var result = await WraperCaller(new WrapperCallDto
+            {
+                RequestType = WrapperCallType.GET,
+                RequestPath = "https://localhost:7236/GetPokamon"
+            });
+            return result != null ? JsonConvert.DeserializeObject<List<PokemonDto>>(result) : null;      //Need to Deserialize String into Objects
+        }
+--------------------------------------------------------------------------------------------------------------
+		
+		public static async Task<string> WraperCaller(WrapperCallDto input)
+	{
+		HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(input.RequestPath.ToString());      //Create Request
+
+		if (input.RequestType.Equals(WrapperCallType.GET))
+		{
+			httpWebRequest.Method = "GET";																	// Set HttpMethod
+		}
+		else if (input.RequestType.Equals(WrapperCallType.POST))
+		{
+        httpWebRequest.Method = "POST";
+        if (!string.IsNullOrEmpty(input.RequestBodyString))
+        {
+            using StreamWriter streamWriter = new StreamWriter(httpWebRequest.GetRequestStream());			// Add requestBody into request
+            streamWriter.Write(input.RequestBodyString);
+        }
+		}
+		else
+		{
+			throw new Exception("Invalid Http request");
+		}
+		httpWebRequest.ContentType = "application/json";													
+		httpWebRequest.Accept = "application/json";
+		WebResponse obj = await httpWebRequest.GetResponseAsync();											Excecute request
+		HttpWebResponse httpWebResponse = (HttpWebResponse)obj;												
+		string text = string.Empty;
+		using (StreamReader streamReader = new StreamReader(httpWebResponse.GetResponseStream(), Encoding.UTF8))   //Stream read Based on UTF8 formate
+		{
+			text = streamReader.ReadToEnd();
+		}
+		return text; 
+	}
+	
+	
+	#Important
+	GetResponseStream() : 
+	returns a Stream object that contains the response data from the server. This stream represents the raw response body.
+	Encoding:
+	Specifying Encoding.UTF8 ensures that the text is read using the correct character encoding, which is important for correctly interpreting the response data.
+	--------------------------------------------------------------------------------------------------------------
+	
+	// Above API hit this API 
+	
+	 [HttpGet("/GetPokamon")]
+		public async Task<List<PokemonDto>> GetPokamon()
+		{
+			var result = await WraperCaller(new WrapperCallDto
+			{
+			RequestType = WrapperCallType.GET,
+			RequestPath = "https://localhost:7266/api/Pokemon",          // this API hit another Microservic API Which is run on 7266 port
+			});
+
+     return result != null ? JsonConvert.DeserializeObject<List<PokemonDto>>(result) : null;
+		}

@@ -1,0 +1,39 @@
+Imemory Cache
+ ASP.NET, the IMemoryCache interface provides a way to store data in memory, which can be useful for improving the performance of your application by reducing the need to repeatedly retrieve data from slower storage options like databases.
+
+#Setting Up IMemoryCache
+
+1. Install the Required Package:
+	dotnet add package Microsoft.Extensions.Caching.Memory
+2. Configure Services:
+	In your Startup.cs or Program.cs file, configure the services to include memory caching:
+	public void ConfigureServices(IServiceCollection services)
+	{
+    services.AddMemoryCache();
+    // Other service configurations
+	}
+
+3. Inject Dependence in class
+	private readonly IMemoryCache _cache;
+	
+	public InstrumentService(IInstrument instrument, IMemoryCache cache)
+	{
+		_cache = cache;
+	}
+	
+4. Fetching Data from Catche
+	
+ if (_cache.TryGetValue("KeyValue", out string valueBasic))
+ {
+     result.Instrument = JsonConvert.DeserializeObject<List<WMInstrumentDto>>(valueBasic);
+ }
+ 
+5. Store Data into catche
+
+ els{
+     result.Instrument = await InstrumentListGenerator(requiredFundType, proEndpoint, authorizationToken, isProxyEnabled, proSolutionProxyServer, proSolutionProxyServerPort, morningStarServerPath, morningStarAuthToken, morningStarProxyServer, morningStarServerPort, acceptLanguage);
+     if (result.Instrument.Count > 0)
+     {
+         SetCache("KeyValue", JsonConvert.SerializeObject(result.Instrument));
+     }
+ }

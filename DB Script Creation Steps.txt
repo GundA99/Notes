@@ -1,3 +1,9 @@
+DataBase update Command 
+Update-Database -Project YourProjectName
+
+Database migration Command 
+Add-Migration YourMigrationName -Project YourProjectName
+
 
 1] To Create Db Script-
 

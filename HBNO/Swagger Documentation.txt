@@ -1,0 +1,40 @@
+Documentation of API in Swagger - Swashbuckle.Aspnet.Annotations(Nuget Package)
+ 
+API
+	[SwaggerOperation(
+		Summary = "",
+		Description = ")]
+ 
+	Resquest & Response
+	[SwaggerParameter(Description = "Policy Id")][Required] - only for single parameter
+ 
+	[SwaggerSchema(Description = "Sample Property Description")] - When request in JSON (DTO)
+
+	----------------For Referrence---------------------------------------------
+	[SwaggerOperation(
+    Summary = "Get the list of claims",
+    Description = "Returns the list of policies with the specified ID"
+)]        
+[SwaggerResponse(200, "OK")]
+[SwaggerResponse(204, "No Data Found")]
+[SwaggerResponse(400, "Bad Request")]
+[SwaggerResponse(401, "Unauthorized")]
+[SwaggerResponse(403, "Forbidden")]
+[SwaggerResponse(404, "Not Found")]
+[SwaggerResponse(500, "Internal Server Error")]
+[SwaggerResponse(504, "Gateway Timeout")]
+[Route("api/[controller]/ClaimListbyPolicyId")]
+ 
+[HttpGet]
+public async Task<List<ClaimDetailsGridDto>> ClaimList([SwaggerParameter(Description = "Policy Id")][Required] long policyId )
+{
+    try
+    {
+        return await _claim.ClaimList(policyId,AbpSession.UserId);
+    }
+    catch (Exception ex)
+    {
+        Logger.Info("Error while fetching List of Claims by policy Id" + ex.Message);
+        throw /*new UserFriendlyException()*/;
+    }
+}

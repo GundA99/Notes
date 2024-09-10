@@ -1,0 +1,632 @@
+GD topics
+Diff bew SQL Server vs MySql
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+#REST (Representational State Transfer): It mean Transfer of representational of state of the resource eg. Employee, order, Fund,student between the client and server.
+										it uses HTTP methods such as get, post, put, delete.
+										
+#REST API: is Software architecture style which define set of rule created for web services.
+
+#interface: 
+- it's a contract, its act like communication between two object. when we are defining i/f we are Defining contract what our class should do this.
+- Contain only abstract method, Support multiple inheritance, Bydefault i/f methods are public & abstract, By default i/f Variable Public static and final. 
+
+#abstract Class: 
+- Contain both abstract or concreate methods, It does not support multiple inheritance, Except Private we can have any access specifier for method and variable, Can Declare Constructor.
+
+#Session:
+- Session is a conventional state between client and server where both are aware about each other. 
+- A session start when user send request a page for first time, it indicates a period of time during which a user can visite a website.
+
+#Cookies:
+- is a small piece of data store on the client side which server use when communication with clients
+- this are used to identify a client when sending a subsequent request.  
+
+#lifecycle of states:
+- Transient:- an object we have not attached to any session is in transient state. transient entity exiest in heap as normal object. Ex. Employe e = new Employe();
+- Persistent:- an object that we have associated with session is in the persist state. ex. Session.save(e);
+- Detached:- when we close the session. all obj inside it become detached. ex. session.close().
+
+#OOPs Concepts
+There are 4 main Pillers of OOPs
+1. Abstraction: Showing Issential things and hiding unnessesory Data os called as abstraction.
+	ex. Light switch and Car
+2. encapsulates: Is a process of wrapping of Code and Behavior in a single unit is called as encapsulation, encapsulation expose only those part which is safe to expose and remaining part keep secured.
+	ex. Bag The Bag contain diff stuffs like pen, pencile, book within it.
+3. Inheritance: Inheritance is a process of acquiring the fetures of others. Ex Child class Acquires the fetures of their parent.
+				the advantage of Inheritance is code reusability, we can avoid duplicate code by using inheritance.
+				ex. we can create a Vehicle base class and can as derived class, the car class inherit properties and method of the vehicle class and also add its own properties and methods. 
+4. Polymorphism: -Is a concept by which we can perform single action by different ways. it derived from 2 greek world poly means many and morphism means form.
+				 - There are 2 type of polymorphism compile time polymorphism and runtime polymorphism.
+				 - we can achive runtime polymorphism through method overriding and complie time polymorphism through method overloading
+				 - Ex. Mobile: Sometime our mobile behave as a phone , sometime as a camera and sometime as a radio etc here the same mobile has different form so we can say the mobile object is polymophic in nature.
+
+Method Overloading: a class having two or more method with same name but different argument then we can say that those methods are Overloaded.
+					use- if we want same method with different behaviour in super and sub class then we go with overriding.
+Method Overriding: if we have methods with same name and signature in super class and subclass then we say subclass method is overriden by superclass.
+					use- when we want the method to perform similar tasks but with different input. then we go with Overloading.
+
+#Method Overloading VS Method Overriding
+1.Method overloading Occurs with in same class, but Method Overriding ouccurs between 2 class.
+2.In method overloading inheritance is not involved, but in Method Overriding inheritace is involved.
+3.In method overloading return type is not to be same, but in Method Overriding need to be same.
+4. Parameter must be Different, must be same.
+5.Static polymorphism can be achive , dyanamical polymophism can be achive.
+6. in overloading one method can't hide another, but in overriding sub class method hides superclass method.  
+
+
+					
+#Type of Inheritance
+1. single inheritance : it Use when we want to inherit class from one superclass 
+2. Multilevel inheritance : in that subclass inherit from another subclass.
+3. Multiple inheritance : in that subclass is inherit from multiple superclass.
+4. Hirarchical inheritance : in that multiple subclass inherit from single superclass.
+
+#Constructor: is a special method used to initialize object, and we use constructor to initialize all variable in the class when object is create.
+
+#Casting 					
+1. Upcasting : upcasting is the typecasting of a child object to parent object, it can be Done by implicitly.				
+2. DownCasting : it means typecasting of parent object into child object, it done by explicitly.
+
+#Association
+Association represents a relationship between two classes where object of one class are connected to object of another class.
+1.Composition: is a strong form of Association where one class is contain one or more instance of another class.
+ex. Class Car{
+				private Engine eng;
+				private Wheel w;
+				public Car(){}
+			}
+
+2. Aggregation: aggregation is a week form of association where one class has relationship with another class but the part can exist independently of the whole
+ex. student and libraries
+	
+#Exceptions
+1. Unchecked Exception: Unchecked Exception are the exception that are not check ar Compile-time.(ArrayIndexOutOfBound,IndexOutOfBound)
+2. Checked Exception: are exception that are checks at compile-time.(ClassNotFoundException,SqlException)
+
+#Synchronization :is used to control access ti critical section of code by allowing only one Thread at a time to execute them.
+
+#Why interface can not have The constructor?
+- The method inside interface bydefault Abstract, public which means the method inmplimentation is not provide by i/f itself , it has to be provided by implementing class Therefore no need of Constructor.
+- A constructor is used to initialize non-static Data members and as there is no non-static Data member in i/f there is no need.
+- if we try to create a constructor inside the i/f the compiler will give a compile-time error.
+
+#Why Abstract Class have a Constructor?
+-The main pourpose of the constructor is to initialize the newly create object. in abstract class we have instance variable, abstract menthod, and non abstract method therefore class have constructor.
+-if we dont provide constructor compiler will provide defauld constructor in an abstract class.
+**************************************************************DOTNET*************************************************************************
+# Common languge Runtime(CLR) :- The heart of the .NET framwork is CLR, Its runtime environment that execut MSIL code.
+# intermediate languge(IL) :- VB or C# Code you write is compiled into an intermediate languge Called Microsoft Internediate Languge. The compiled file with IL code is an assembly(.dll or exe file).
+# Common languge specification(CLS) :- it is resposible for converting the different .net programing languge syntactical rules and regulations into CLR understandable formate.
+# Common Type System(CTS) :- Every programming languge has its own data type system so CTS is responsible for understanding all the data type system of >NET programing languge and converting them into CLR understandable formate which will be common formate.
+	ex. VB.Net -> integer -> Int32 (CLR data type)
+		C#     -> int     -> Int32 (CLR data type)
+#Diff between .NET Framework and .NET Core 
+-Instad, developers prefer to use ASP.net MVC and ASP>NET web Api. Those two technologies have been refactored and combined into a new product that runs on .NET Core, named ASP.NET Core.
+- Core Work on Cross-platform (Windows,macOS, Linux).
+- .NET Framework used only on windows.
+- Xamarin is only for mobile apps (Android,Ios,macOS).
+
+# Delegates:
+-The Delegates is a reference type Data type, but instade of referencing object it reference methods.
+- A method That is added to the delegate must have same return type and same signature as delegate.
+-multicast Delegates: A delegate That points multiple methos is called a multicast delegate.
+
+Func: Func is a generic delegate included in System namespace, in that we can pass 0 to 16 parameter and one out parameter is requird.
+Action: Action Delegates can take upto 16 input parameter of different type but it return void type.
+Predicate : A predicate must take one input parameter and return boolean 
+All this are defined in system namespace. 
+
+#Event
+-Even are use Action such as ke press, clicks etc.
+- 2To declare an event inside a class, first of all you must declare a delegate type the event as
+		public delegate string MyDelegate(string s);
+	Then, Declare the even using the event keyword 
+		event MyDelegate Myevent;
+	then, invoke the event by using invoke
+		Myevent.invoke("AKASH");
+#LINQ:
+-LINQ is a Languge Integrated Query it provide the new way to manipulate the data.
+- we do not need to learn new query languge syntaxes for different sources of data because it provide the standard query syntax for the various data sources.		
+- LINQ return result as object.
+-Query = from item in datasource where item.contain(java) select item.
+
+DataBase update Command 
+Update-Database -Project YourProjectName
+
+Database migration Command 
+Add-Migration YourMigrationName -Project YourProjectName
+
+
+1] To Create Db Script-
+
+					-->Rigth Click On DB
+					--> task
+					-->	Generate Script
+					--> 1) Script entire Database and all database object
+					    2) Select specific databse object 
+							-->Select table 
+							--> Advance
+							--> type of data to script 
+							-->Save as script file 
+							--> Next-->Next
+							
+2] To extract Data from Script-
+					--> Open And Select file And execute
+					
+**************************************************Dependence injection ************************************************************
+
+it is A design pattern to reduce coupling between classes
+- Instad of dependant object manage their dependancy .net framwork will automatically create object and make it available to Dependant object directly at runtime.
+- This will lead to loose cupling approach.
+- Since dependant object no longer manageing the dependancy this approch is called as IOC.
+--------------------------------------------------------------------------------------------------------------------------------
+# Key Concepts in Dependency Injection:
+ Interfaces and Classes:  In C#, dependencies are typically defined as interfaces or classes that the dependent class relies upon.
+
+#Types of Injection:
+
+Constructor Injection: Dependencies are provided through the class constructor. This is the most common type of dependency injection.
+Property Injection: Dependencies are provided through public properties of the class.
+Method Injection: Dependencies are provided through public methods of the class.
+
+# Benefits of Dependency Injection:
+
+Decoupling: Classes become less dependent on specific implementations of other classes or services, promoting loose coupling.
+
+Testing: Dependencies can be easily mocked or substituted during testing, allowing for easier unit testing and isolation of components.
+
+Flexibility: Different implementations of dependencies can be easily swapped at runtime, without requiring changes to the dependent class.
+
+
+Dependency Injection is a pattern that implements IoC
+
+
+
+****************************************SOLID Principle***********************************************************************
+
+
+The SOLID principles are a set of five principles in object-oriented programming and design intended to make software designs more understandable,
+flexible, and maintainable. Each letter in "SOLID" stands for a different principle:
+
+1) Single Responsibility Principle (SRP):
+
+A class should have only one reason to change, meaning that it should have only one job or responsibility. 
+This principle helps in keeping classes focused and easier to maintain.
+
+2) Open/Closed Principle (OCP):
+
+Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification. 
+This means that you should be able to extend the behavior of a module without altering its source code.
+
+3) Liskov Substitution Principle (LSP):
+
+Objects of a superclass should be replaceable with objects of its subclasses without affecting the correctness of the program. 
+This principle ensures that inheritance is used correctly.
+
+4) Interface Segregation Principle (ISP):
+
+This principle advocates for the creation of specific, smaller interfaces instead of one large interface, 
+which helps in keeping dependencies minimal and specific to the client's needs.
+
+5) Dependency Inversion Principle (DIP):
+
+High-level modules/classes should not depend on low-level modules/classes. Both should depend on abstractions (e.g., interfaces). 
+Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions. 
+This principle promotes loose coupling between software modules, making the system more maintainable and allowing for easier substitution of components.
+
+****************************************************************Docker********************************************************
+
+Window application always Run on IIS(Internet information services)
+Internet Information Services is an extensible web server software for the Windows server, created by Microsoft to be used with the Windows NT family. It supports HTTPS, HTTP, HTTP/2, FTPS, FTP, NNTP, and SMTP.
+
+IIS Express : lightweight web server Provided by Visual Studio Similar to IIS
+
+IIS Express is a service Provided by visual Studio another services like 
+Visual Studio support Apache, TomCat, Wamp,Xamp, MySQL, Java, Php this are services 
+
+----------------------------------------------------------Docker---------------------------------------------------------------------
+
+Docker is a platform used to develop, ship, and run applications inside containers. 
+
+Containers are a lightweight form of virtualization that allows applications to be packaged with their dependencies and configurations, 
+ensuring they run consistently across different environments.
+
+1. Containers
+Definition: Containers are a standardized unit of software that encapsulates everything needed to run an application, 
+			including code, runtime, libraries, and system tools.
+		
+Characteristics: Containers are isolated from each other and from the host system, meaning they don't interfere with each other’s operations. 
+				 They share the same OS kernel but run in their own user space.
+					- allow Runnuning multiple apps in isolation
+					- are lightweight
+					- start quickly
+					- are Running instance of Image ( project_image >--RUN--> Container )
+					- The Container is a process that run applications with images
+					- Container is an isolated process
+					
+				
+2. Images
+Definition: An image is a read-only template used to create containers. It contains the application code, libraries, and dependencies needed for the app to run.
+
+Docker Images Made Based on Linux Containers
+			
+Creation: Images are built from a Dockerfile, which contains instructions on how to assemble the image.
+			For example, it specifies the base image (like an OS or a runtime), how to install software, and how to configure the application.
+			-Images are Templates of Project
+			- it is a kind of ready to use software read-only Template
+			- Image is made with source code, libraries, External Dependancies, & tools(CMD)
+			- Image Cannot be updated (Can update code changes on imgae)
+			- If you want to make changes in image you have to create new image
+			
+3. Dockerfile
+Definition: A Dockerfile is a text file with a series of instructions on how to build a Docker image.
+
+Instructions: Common instructions include FROM (specifying the base image), RUN (executing commands), COPY (copying files), and CMD (specifying the default command to run
+
+4. Docker Engine
+Definition: The Docker Engine is the runtime that builds and runs containers. It consists of a server (a long-running daemon process), a REST API for interacting with the server, and a command-line interface (CLI) for managing Docker.
+
+5. Docker Hub
+Definition: Docker Hub is a cloud-based registry service where Docker images are stored and shared. 
+			It allows you to upload your own images and download images created by others.
+			
+6. Docker Compose
+Definition: Docker Compose is a tool used to define and run multi-container Docker applications. 
+			It uses a YAML file (docker-compose.yml) to configure the application’s services, networks, and volumes.
+
+7. Volumes
+Definition: Volumes are used to persist data generated by and used by Docker containers. They allow data to be stored outside the container’s filesystem,
+			which is helpful for maintaining data between container restarts and for sharing data between containers.
+			
+How Docker Works:
+Build: You write a Dockerfile and use Docker to build an image from it.
+Run: You use the Docker CLI or API to run a container from the image.
+Manage: Docker provides commands to manage and orchestrate containers, networks, and volumes.
+
+Benefits of Docker:
+Portability: Containers can run on any machine that has Docker installed, regardless of the underlying OS.
+Consistency: Docker ensures that the application behaves the same in development, testing, and production environments.
+Efficiency: Containers are lightweight and have lower overhead compared to traditional virtual machines.
+
+In summary, Docker simplifies the development and deployment process by allowing you to package applications and their dependencies into containers that can run uniformly across various environments.
+
+
+
+
+Docker Images are made based on Linux Container
+https://www.youtube.com/watch?v=5D6FxfrP0KA&list=PL8p2I9GklV47v6WZTjHAqdsHxpTIpjRwn&index=11
+
+- Docker is virsion control tool
+
+* Parent Image => Node, mogoDB, Php(Official Images)
+
+* Dockerhub and Docker Desktop are same it provides us ParentImages (Download, pull, manage)
+
+--Steps to Create Docker Image and Run on Docker Desktop--
+Rigth Click on Project -> Docker Support (It will Create Docker File)
+Rigth Click on Project -> Container Orchestrator Support (It wil Create Docker Compose File) -- Container
+
+
+-------------Docker File Contains---------------
+1. Base Image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base => This line specifies the base image for the final runtime environment of the container. It uses the official .NET 8.0 ASP.NET runtime image.
+USER app   => Runs the container as the app user, which is generally a non-privileged user.
+WORKDIR /app  => Sets the working directory to /app in the container.
+EXPOSE 8080 and EXPOSE 8081   => Indicates that the application will listen on ports 8080 and 8081. These ports are exposed for communication.
+
+2. Build Stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build  => Uses the .NET SDK image, which includes the tools needed to build the application. This stage is named build.
+ARG BUILD_CONFIGURATION=Release  => Defines a build argument that specifies the build configuration (e.g., Release or Debug). The default is Release.
+COPY ["DemoForDocker/DemoForDocker.csproj", "DemoForDocker/"]   => Copies the project file to the container.
+RUN dotnet restore "./DemoForDocker/DemoForDocker.csproj"   => Restores the project dependencies.
+COPY . .  => Copies the entire source code into the container.
+WORKDIR "/src/DemoForDocker"  => Changes the working directory to the project folder.
+RUN dotnet build "./DemoForDocker.csproj" -c $BUILD_CONFIGURATION -o /app/build   => Builds the project using the specified configuration and outputs the build artifacts to /app/build.
+
+3. Publish Stage
+FROM build AS publish  => Uses the previously defined build stage and names this stage publish.
+ARG BUILD_CONFIGURATION=Release   => Reuses the build argument from the previous stage.
+RUN dotnet publish "./DemoForDocker.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p=false  =>  Publishes the application to the /app/publish directory. The UseAppHost=false option prevents the creation of a native executable host, which is generally used for cross-platform compatibility.
+
+4. Final Stage
+
+ENTRYPOINT ["dotnet", "DemoForDocker.dll"]   => Defines the command to run when the container starts, which in this case is to execute the .NET application using dotnet.
+
+----------------------------------------------------
+
+other...in Notebook
+*****************************************************************JWT*********************************************************************************
+
+JWT Stands for Json web Token which help in implemting token based security.
+
+A JWT (JSON Web Token) typically consists of three parts separated by dots (.).
+
+# Header: 
+This part typically consists of two parts: the type of token (which is JWT) and the signing algorithm being used (such as HMAC SHA256 or RSA). 
+For example, a header might look like this:
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+-----------------------------------------------------------
+# Payload: 
+This part contains the claims. Claims are statements about an entity (typically the user) and additional data.
+There are three types of claims: registered, public, and private claims. 
+For example:
+{
+  "sub": "1234567890",
+  "name": "John Doe",
+  "admin": true,                ----role
+  "Email": "abc"
+}
+
+-------------------------Extra Info-----------------------------------
+Registered Claims: 
+These are predefined claims which are not mandatory but recommended to provide a set of useful, interoperable claims. Some common registered claims include:
+
+iss (issuer): Identifies the principal that issued the JWT.
+sub (subject): Identifies the subject of the JWT.
+aud (audience): Identifies the recipients that the JWT is intended for.
+exp (expiration time): Specifies the expiration time after which the JWT should not be accepted.
+nbf (not before): Specifies the time before which the JWT must not be accepted for processing.
+iat (issued at): Specifies the time at which the JWT was issued.
+jti (JWT ID): Provides a unique identifier for the JWT.
+{
+  "iss": "issuer",
+  "sub": "subject",
+  "aud": "audience",
+  "exp": 1625939622,
+  "nbf": 1625938022,
+  "iat": 1625938022,
+  "jti": "id123456"
+}
+
+-----------------------------------------------
+Public Claims:
+These are custom claims that are defined by users and application developers. They should be defined in a way that they do not clash with registered claims.
+Example:
+{
+  "name": "John Doe",
+  "role": "admin"
+}
+-----------------------------------------------
+Private Claims: 
+These are custom claims that are agreed upon between parties that use JWTs. They are neither registered nor public claims. 
+Example:
+{
+  "custom_data": {
+    "key1": "value1",
+    "key2": "value2"
+  }
+}
+
+
+-----------------------------------------------
+what is Claims
+In the context of authentication and authorization using JWT (JSON Web Token), claims refer to the pieces of information asserted about a subject (typically a user) within the token. 
+Claims are statements about the subject that provide information such as identity, roles, permissions, and other attributes relevant to the application's security and functionality.
+
+----------------------------------------------------------------------
+# Signature: 
+To create the signature part you have to take the encoded header, the encoded payload, a secret, the algorithm specified in the header, and sign that.
+
+xxxxxxxxxx.yyyyyyyyyy.zzzzzzzzzz
+
+ xxxxxxxxxx is the base64url encoded header
+ yyyyyyyyyy is the base64url encoded payload
+ zzzzzzzzzz is the signature
+ 
+********************************************************************************************************************************************
+
+HR Portal
+this is small internal project
+this is real time problem facing by Hr 
+before this project hr need to see Excel file and create peyment slip manually then convert into pdf and the send to respective person
+I Crete this project where we can fatch data from excel line by line, create List and then put this data into Peyment slip Template and the convert into pdf and send to the respected person by mail for that i Concatinate fname.lname@ikione.com
+in that project i use Mail API
+Add Pakage For Read and write Excel file - dotnet add package EPPlus
+Add Pakage for Convert Excel to PDF - dotnet add package DinkToPdf\
+and we dont requird any package for mail we have some provison in .net framwork System.net.mail this package is inbuild in .net
+we only add 
+smtpsetting into appsettings.json file
+{
+  "SmtpSettings": {
+    "Host": "smtp.example.com",
+    "Port": 587,
+    "Username": "your-email@example.com",
+    "Password": "your-email-password"
+  }
+}
+
+i used react for frontend where mam need to upload Excel file and Peyment slip template 
+then click ok 
+
+now they want to send single peyment slip
+
+	
+
+HBNO
+*regarding HBNO 
+HBNO is a bank placed in finland, we handle his
+- Portfolio, Fund and Saving plans
+in that we have 
+	2 type of Fund
+		ASK and Basic
+- 3 type of Portfolio 
+- Basic, Discritionary, ASK
+portfolio means our Demate Account
+we can Create as much as can Portfolios and we can invest for buying fund or saving plan we requird
+regarding Portfolio we have only one Demate Account but not in Finland
+* We Use 3rd party integration
+- Morning star, ProBroker
+     Morningstar give us market Live Data by using this data we show Graphs (it give us NAV) we Showing 1day, week, monthly, Quaterly, yearly, and Owverall
+	 ProBroker Give us Instrument related Data it contains Fund, Equity, Saving plans(RD), Comodity
+	 we Geting Fund and saving plan related data from it
+* There are 3 Portals 
+	User, Advisor, Representative
+	- Advisor Portal is Usrd by Bank 
+		means Bank Employe Can Loging any User and perform opration
+	- User Portal any any normal use used
+	- Representative portal means any other person how can manage our Portfolios based on Rigths we have 2 rigths read-only, Write
+	    representative is requird in user in under 18 age
+
+During this project 
+I Create Package where we can perform Sorting, serching, Pagination dyanamically
+
+WMstandard
+*regarding Standard
+WM standard is our Product under welth domain
+its a tenent based project
+its one type of Template.
+we developing this project where we can keep same backend we change only UI based in Tennent
+why this 
+	bcz every application has comman Functionality like Creating Portfolio, Buy or sell Fund, Add Saving Plan, update Saving plans
+we use Probroker
+Diffrence-
+And we Add new Functionality in this project Called As Switch
+		1. Switch means 
+			we Can Splite fund into another Fund 
+			means if we have 100rs we can splite into another 2 or more funds  <- this is new 
+		2. in WMS we add equity also
+	
+	
+	
+	
+	
+**********************************************************************DB**********************************************************************
+SQL VS SQL server : SQL is Query languge, while SQL Server is a DataBase managment System.
+					SQL is Query languge for workingwith a relational DB while SQL server is software that perform SQL query.
+
+DataBase: A Db is a structured collection of Data that is organized and Stored in a way that allows for efficient retrival, manipulation 
+
+--------------------------------------------------SQL Command/ Type of DB languge--------------------------------------------------
+DB languge are used to read, update, and Store Data in DB. There are several languges can be used for this porpose
+1. Data defination languge(DDL) : Used to define DB Schema 
+								  Ex. Create,Drop,Truncate, Alter
+2. Data Manupulation languge(DML) : Used to Manupulat Data for ex. Insert,update, Delete
+3. Data Control languge(DCl) : DCl mainly Dels with rigths and permissions and other Controls Ex. Grant and revoke.
+4. Transaction Control languge(TCL): TCL Dels with transaction within DB, EX. Commit,Rollback, Savepoint
+
+----------------------------------------------------------ACID Property------------------------------------------------------------
+
+ACID is stands for Atomicity, Consistency, Isolation and Durability
+Atomicity:- Every Transaction Should be execute as a single unit means all the step should happen or none should happen there is no partial execution.
+Consistency:- Onec the transaction is executed It should move from one Consistent state to another.
+Isolation:- Transaction Should be Executed in isolation from other transaction. 
+			Ex. when a transaction is happing then the changes are visible to only person who performing the tradition till it getting executed				
+				The Changes will be visible to all user when transaction is Completed
+Durability:- After succesfully complete the trasaction changes in the DB is persist				
+
+--------------------------------------------------Store Procedure VS function -------------------------------------------------------
+1. SP Can return 0, single or multiple value, function Can return single value WHich is Mandatoy.
+2. SP Can have Input and Output parameter , function have only Input parameter.
+3. We can Call Function from SP, But not fuction call SP.
+4. we cant use SP in select, where or Having statment, but function use.
+
+#Type of Functions
+1.Single Row Function : sqrt(10),abs(10),round(12.34), Ceil(234.2), floor(2.133)
+2. Aggregate Function : sum, min, max,count,avg.
+
+
+
+----------------------------------------------------------Joins, View, Trigger------------------------------------------------------------------------
+#Inner Join : inner Join return only the row from both table where they are match based on join condition.
+#Outer join : Outer Join return all row from one table and matching row from other table Based on join condition.
+#Left Join : return All Row from left table and matching row from rigth table.
+
+#View: 	View in SQL are Consider as a virtual table. A view also Contain rows and Columns It is used to give Limited access to the table to hide Complex Query
+		It Provide Security for hiding Table Name.
+
+#Trigger: trigger are spacial procedure which gets executed automatically when user performs some action this is used for maintian the logs
+- Trigger timing = After : It will Execute use Action First then Execute Trigger 
+				   Before: it will Execute Trigger First then Action
+		
+- Query : Create trigger triggerName before insert on tableName for each row
+			begin
+				insert into tableLogs values(...);
+			end;
+				   
+-------------------------------------------------------------Normalization----------------------------------------------------------------------
+- Normalization is a process of Organizing the Data in Database to avoid data redundancy, insertion,updation,deletion anomly
+- Normalization Divide larger table into the smaller table and links Them using relationship
+#1st NF : The relation will be 1NF if it contain an atomic Value. means table Cannot hold multiple value.
+			Ex. EmpName | PhoneNo <- phoneNo Cannot be Multiple
+#2nd NF : a relation must be in 1stNF and relation should not any partial dependency.
+			Ex. TecherId | TecherAge | Subject => TecherId | TecherAge & TecherId | Subject
+
+#3rd NF : The relation will be in 3NF if is in 2NF and not contain any transitive partial dependency   
+			EX. EMPID | Name | ZIP | STATE | CITY =>  EMPID | Name | ZIP  &  ZIP | STATE | CITY 
+
+*********************************************************************DevOps, AWS, Git***********************************************************************
+#DevOps:
+	- Devops is a methodology in software development, it Industries used to set of practices and tools to improve Collabration and communication between software Software Development and It Opration team.
+	- The Primary Goal of Devops is to shorten the software lifecycle, Enables continus delivery of High Quality software.
+	- Overall Devops aims to bridge gap between Developer and Operations. And promote collabration and Accelerate Software Delivery.
+
+#AWS:
+	- it is a cloud computing platform provided by amezon where we can Quickly and securly host our application.
+	- AWS Offer services such as Virtual server, storage, networking, databases, security will help organization to scale and grow.
+	- Some of AWS services like EC2 (elastic Compute cloud) for Scalable virtual Server and allow user to run application.
+	- Amezon S3 (Simple storage service) it provide scalable Storage for various type of data including Files,  Documents, image 
+	- S3 is mainly Designed for storage and retriving data.
+
+#Waterfall Model: 
+	- it is sequencial software development process that follow step by step approach.
+	- it consist of Phases Such as requirment gathering, Design,codeing,testing, development and maintanance.
+	- In that each phase must complete before moving to the next step
+	- Used in small projects.
+
+#Git: 
+	- Git is a Version control System is a tool that help to track changes in code.
+#Git hub:
+	- is a website tat allows developers to store and manage their code using git. 	
+	
+	
+**********************************************************REACT***********************************************************************
+#What is React
+react is open-source front-end javascript library this is used for building use interface. it is used for handling view layer for web and mobile apps.
+
+#What are the major feature of react
+1. It uses Virtual Dom instade of real DOM 
+2. Follw unidirectional Data flow (parent send data to child only)
+3. it uses reusable UI Componants to develop The View.
+
+#DOM(Document Object Model)
+- it's a structural representation of HTML in webpage or Application, It represent entire UI of the web application as a tree data structure.
+
+#Virtual DOM 
+- For every DOM Object, There is a Corresponding Virtual DOM object(Copy), Which has the Same properties.
+-The Different between the real dom and virtual dom is that any changes in the virtual Dom object will not reflect on the screen directly, Consider
+	a virtual dom is blueprint of real dom object whenever a JSX element is rendered every virtual dom object is updated,
+- react uses two virtual dom to render the user interface one of then is used to store the current state of the object and other to store previous state of the objects,
+	whenever the virtual dom gets updated, react compare the two virtual dom and gets to know about which virtual object updated. and react render only those object inside real dom instaed of reandering complete real dom.
+	
+#LifeCycle methos in react
+Every Componant in react has lifecycle methods Each componant in react goes through Mounting, updating, and unmounting phases.
+
+#PROPS and STATE
+props: props are readonly Immutable Which are used for parent child communication.
+state: Every componant is react has a build in state object. which contains all the values that belong to that componant, state can be change by using setstate method in class.
+
+#Hooks
+Hooks is a special fuction that let you use state and other feature without writing class Ex usestate hook lets us define state for a component.
+
+#AJAX(Asynchronous Javascript and xml)
+It is a technique used in web application when we want to change the portion of the page without reloading the entire page.
+
+#Axios
+it used to connect fronted to backend , axios provide simple API for making HTTP request with method like axios.get,axios.post,axios.put... for Different HTTP methods.
+
+
+#What is JSX
+it stands for javascript xml, jsx is a XML-like syntax it allow us to write HTML inside Javascript.
+
+#Functional Componants
+-fuctional component are nothing but javascript functions and it can be Declare using arrow function or fuction keyword.
+-Before introduction hooks in react fuctional components were called as statless components after introduction of hook Functional components are equivalent to class component.
+
+-Fuctional componant use react hook to handle state it uses the usestate hook to set state of a variable inside the component.
+
+**********************************************************************************************************************************************

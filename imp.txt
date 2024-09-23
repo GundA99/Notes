@@ -1,15 +1,14 @@
-GD topics
-Diff bew SQL Server vs MySql
-
+annotations
+Thread states new->runnable->running->wait/sleep->Dead,
 ---------------------------------------------------------------------------------------------------------------------------------
 
-#REST (Representational State Transfer): It mean Transfer of representational of state of the resource eg. Employee, order, Fund,student between the client and server.
-										it uses HTTP methods such as get, post, put, delete.
+#REST (Representational State Transfer): It mean Transfer of representational state of the resource eg. Employee, order, Fund,student between the client and server.
+										 it uses HTTP methods such as get, post, put, delete.
 										
 #REST API: is Software architecture style which define set of rule created for web services.
 
 #interface: 
-- it's a contract, its act like communication between two object. when we are defining i/f we are Defining contract what our class should do this.
+- it's a contract, its act like communication between two object. when we are defining i/f we are Defining contract what our inheriting class should do but not how it does.
 - Contain only abstract method, Support multiple inheritance, Bydefault i/f methods are public & abstract, By default i/f Variable Public static and final. 
 
 #abstract Class: 
@@ -30,23 +29,23 @@ Diff bew SQL Server vs MySql
 
 #OOPs Concepts
 There are 4 main Pillers of OOPs
-1. Abstraction: Showing Issential things and hiding unnessesory Data os called as abstraction.
+1. Abstraction: Showing Issential things and hiding unnessesory Data is called as abstraction.
 	ex. Light switch and Car
 2. encapsulates: Is a process of wrapping of Code and Behavior in a single unit is called as encapsulation, encapsulation expose only those part which is safe to expose and remaining part keep secured.
 	ex. Bag The Bag contain diff stuffs like pen, pencile, book within it.
 3. Inheritance: Inheritance is a process of acquiring the fetures of others. Ex Child class Acquires the fetures of their parent.
 				the advantage of Inheritance is code reusability, we can avoid duplicate code by using inheritance.
-				ex. we can create a Vehicle base class and can as derived class, the car class inherit properties and method of the vehicle class and also add its own properties and methods. 
+				ex. we can create a Vehicle base class and car as derived class, the car class inherit properties and method of the vehicle class and also add its own properties and methods. 
 4. Polymorphism: -Is a concept by which we can perform single action by different ways. it derived from 2 greek world poly means many and morphism means form.
 				 - There are 2 type of polymorphism compile time polymorphism and runtime polymorphism.
 				 - we can achive runtime polymorphism through method overriding and complie time polymorphism through method overloading
 				 - Ex. Mobile: Sometime our mobile behave as a phone , sometime as a camera and sometime as a radio etc here the same mobile has different form so we can say the mobile object is polymophic in nature.
 
 Method Overloading: a class having two or more method with same name but different argument then we can say that those methods are Overloaded.
-					use- if we want same method with different behaviour in super and sub class then we go with overriding.
-Method Overriding: if we have methods with same name and signature in super class and subclass then we say subclass method is overriden by superclass.
 					use- when we want the method to perform similar tasks but with different input. then we go with Overloading.
-
+					
+Method Overriding: if we have methods with same name and signature in super class and subclass then we say subclass method is overriden by superclass.
+	                use- if we want same method with different behaviour in super and sub class then we go with overriding.
 #Method Overloading VS Method Overriding
 1.Method overloading Occurs with in same class, but Method Overriding ouccurs between 2 class.
 2.In method overloading inheritance is not involved, but in Method Overriding inheritace is involved.
@@ -82,28 +81,38 @@ ex. Class Car{
 ex. student and libraries
 	
 #Exceptions
-1. Unchecked Exception: Unchecked Exception are the exception that are not check ar Compile-time.(ArrayIndexOutOfBound,IndexOutOfBound)
+1. Unchecked Exception: Unchecked Exception are the exception that are not check at Compile-time.(ArrayIndexOutOfBound,IndexOutOfBound)
 2. Checked Exception: are exception that are checks at compile-time.(ClassNotFoundException,SqlException)
 
-#Synchronization :is used to control access ti critical section of code by allowing only one Thread at a time to execute them.
+#Synchronization :is used to control access to critical section of code by allowing only one Thread at a time to execute them.
 
 #Why interface can not have The constructor?
 - The method inside interface bydefault Abstract, public which means the method inmplimentation is not provide by i/f itself , it has to be provided by implementing class Therefore no need of Constructor.
 - A constructor is used to initialize non-static Data members and as there is no non-static Data member in i/f there is no need.
-- if we try to create a constructor inside the i/f the compiler will give a compile-time error.
+- if we try to create a constructor inside the i/f the compiler will give a compile-time error('interface' cannot have a constructor).
 
 #Why Abstract Class have a Constructor?
 -The main pourpose of the constructor is to initialize the newly create object. in abstract class we have instance variable, abstract menthod, and non abstract method therefore class have constructor.
 -if we dont provide constructor compiler will provide defauld constructor in an abstract class.
+
+#MVC flow:
+-request coming from client to the front controller.
+-front controller will delegate this request to the handler mapper.
+-handler mapper map the request and return the method name and class name to front controller.
+-then front controller invoke handler method.
+-handler method return the string which is logical view name to front controller.
+-then FC call view resolver. view resolver prepare the path of the file by concatinating prefix and suffix.
+-view resolver return the full path to the FC in case there is some data, FC set in the view and send the view back to the client.
+  
 **************************************************************DOTNET*************************************************************************
 # Common languge Runtime(CLR) :- The heart of the .NET framwork is CLR, Its runtime environment that execut MSIL code.
-# intermediate languge(IL) :- VB or C# Code you write is compiled into an intermediate languge Called Microsoft Internediate Languge. The compiled file with IL code is an assembly(.dll or exe file).
+# intermediate languge(IL) :- VB or C# Code you write is compiled into an intermediate languge Called Microsoft Intermediate Languge. The compiled file with IL code is an assembly(.dll or exe file).
 # Common languge specification(CLS) :- it is resposible for converting the different .net programing languge syntactical rules and regulations into CLR understandable formate.
-# Common Type System(CTS) :- Every programming languge has its own data type system so CTS is responsible for understanding all the data type system of >NET programing languge and converting them into CLR understandable formate which will be common formate.
+# Common Type System(CTS) :- Every programming languge has its own data type system so CTS is responsible for understanding all the data type system of .NET programing languge and converting them into CLR understandable formate which will be common formate.
 	ex. VB.Net -> integer -> Int32 (CLR data type)
 		C#     -> int     -> Int32 (CLR data type)
 #Diff between .NET Framework and .NET Core 
--Instad, developers prefer to use ASP.net MVC and ASP>NET web Api. Those two technologies have been refactored and combined into a new product that runs on .NET Core, named ASP.NET Core.
+-Instad, developers prefer to use ASP.net MVC and ASP.NET web Api. Those two technologies have been refactored and combined into a new product that runs on .NET Core, named ASP.NET Core.
 - Core Work on Cross-platform (Windows,macOS, Linux).
 - .NET Framework used only on windows.
 - Xamarin is only for mobile apps (Android,Ios,macOS).
@@ -119,7 +128,7 @@ Predicate : A predicate must take one input parameter and return boolean
 All this are defined in system namespace. 
 
 #Event
--Even are use Action such as ke press, clicks etc.
+-Even are use Action such as key press, clicks etc.
 - 2To declare an event inside a class, first of all you must declare a delegate type the event as
 		public delegate string MyDelegate(string s);
 	Then, Declare the even using the event keyword 
@@ -132,28 +141,60 @@ All this are defined in system namespace.
 - LINQ return result as object.
 -Query = from item in datasource where item.contain(java) select item.
 
-DataBase update Command 
-Update-Database -Project YourProjectName
+#Marker Interface :	an i/f that does not contain any methods, fields abstract methods, and any constants is called marker i/f, ex. serializable,Clonable 
 
-Database migration Command 
-Add-Migration YourMigrationName -Project YourProjectName
+#Functional Interface : FI is a interface that has only pure one abstract method, Ex. Comparable.
+
+#Rrflection: reflection object are used for obtaining type information at runtime.
+
+#Web.config: file contains application-level configuration.
+#appsetting.json :
+#Razor : razor is one of the view engines supported in ASP.NET MVC. razor allows you to write a mix of HTML and server-side code using C#.
+
+#ADO.NET: The .Net framwork includes its own data access technology, ADO.NET. ADO.NET Consists of Managed classes that allow .Net application to connect to Data sources, execute commands, and manage disconnected data.
+
+#Thread vs Process : 
+Process: A process is a program in execution.
+Thread: thread is separate path of execution in program.
+- process are heavy weight, thread are lightweight,
+- Contest switching from one thread to another is expensive.
+- Interprocess communication is expensive. in thread less expensive.
+ 
+#authentication and authorization.
+Authentication : is the mechanism to identify whether user can access the application or not 
+Authorization : After authentication it check the authenticated use has the requird permissions to access a perticular resource.
+
+#Async and Await
+Async and await are keywords in C# that enable asynchronous programming, allowing your code to run concurrently and improve responsiveness. 
+-An async method is a method that returns a Task
+-The await keyword is used to suspend the execution of an async method until the awaited task completes.
+Key Concepts:
+  Task: Represents an asynchronous operation that may complete in the future.
+  await Task.WhenAll() is a method in C# that allows you to wait for multiple asynchronous tasks to complete simultaneously.
+
+#AddSingleton<>();
+Meaning of services.AddSingleton<IOrder, Order>();
+Registration: This line of code registers Order as an implementation of the IOrder interface with the DI container as a singleton.
+
+****************************************************Key Features of the ABP Framework**********************************************
+
+ABP is a open source web application framework to create mobile and web application based on asp .net core it provide infrastructure for interprice level software
+Command for create solution-
+	     abp new <YourProjectName>
+	
+Modularity: ABP allows you to build applications in a modular way, making it easier to manage dependencies and share functionality across different parts of the application.
+
+User and Role Management: It includes a comprehensive user and role management system, simplifying authentication and authorization.
+
+Localization and Globalization: The framework supports multiple languages and cultures, making it easier to create applications that can cater to a global audience.
+
+API Development: ABP simplifies the creation of RESTful APIs, making it easier to expose application functionality to front-end applications or third-party services.
+
+UI Frameworks: ABP integrates well with various front-end frameworks, such as Angular and React, allowing for modern web application development.
+
+Dependency Injection: It uses built-in dependency injection, promoting a loosely coupled design.
 
 
-1] To Create Db Script-
-
-					-->Rigth Click On DB
-					--> task
-					-->	Generate Script
-					--> 1) Script entire Database and all database object
-					    2) Select specific databse object 
-							-->Select table 
-							--> Advance
-							--> type of data to script 
-							-->Save as script file 
-							--> Next-->Next
-							
-2] To extract Data from Script-
-					--> Open And Select file And execute
 					
 **************************************************Dependence injection ************************************************************
 
@@ -162,9 +203,6 @@ it is A design pattern to reduce coupling between classes
 - This will lead to loose cupling approach.
 - Since dependant object no longer manageing the dependancy this approch is called as IOC.
 --------------------------------------------------------------------------------------------------------------------------------
-# Key Concepts in Dependency Injection:
- Interfaces and Classes:  In C#, dependencies are typically defined as interfaces or classes that the dependent class relies upon.
-
 #Types of Injection:
 
 Constructor Injection: Dependencies are provided through the class constructor. This is the most common type of dependency injection.
@@ -180,14 +218,11 @@ Testing: Dependencies can be easily mocked or substituted during testing, allowi
 Flexibility: Different implementations of dependencies can be easily swapped at runtime, without requiring changes to the dependent class.
 
 
-Dependency Injection is a pattern that implements IoC
-
-
 
 ****************************************SOLID Principle***********************************************************************
 
 
-The SOLID principles are a set of five principles in object-oriented programming and design intended to make software designs more understandable,
+The SOLID principles are a set of five principles in object-oriented programming to make software designs more understandable,
 flexible, and maintainable. Each letter in "SOLID" stands for a different principle:
 
 1) Single Responsibility Principle (SRP):
@@ -195,7 +230,7 @@ flexible, and maintainable. Each letter in "SOLID" stands for a different princi
 A class should have only one reason to change, meaning that it should have only one job or responsibility. 
 This principle helps in keeping classes focused and easier to maintain.
 
-2) Open/Closed Principle (OCP):
+2) Open for extension Closed for modification Principle (OCP):
 
 Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification. 
 This means that you should be able to extend the behavior of a module without altering its source code.
@@ -215,6 +250,15 @@ which helps in keeping dependencies minimal and specific to the client's needs.
 High-level modules/classes should not depend on low-level modules/classes. Both should depend on abstractions (e.g., interfaces). 
 Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions. 
 This principle promotes loose coupling between software modules, making the system more maintainable and allowing for easier substitution of components.
+*********************************************************Agile methodology****************************************************
+Agile methodology is an iterative approach to project management and software development that emphasizes flexibility, collaboration, and customer feedback.
+Here are some key concepts:
+-Iterative Development: Projects are broken down into small, manageable sprints, typically lasting 1-4 weeks. Each iteration results in a working product increment.
+-Collaboration: Agile promotes strong communication among team members and stakeholders. Daily stand-up meetings help keep everyone aligned and address any blockers.
+-Customer Involvement: Continuous customer feedback is integral. Stakeholders review each increment to ensure the product meets their needs and can suggest changes.
+-Adaptive Planning: Plans can evolve based on feedback and changing requirements. This allows teams to be more responsive to new information.
+-Cross-Functional Teams: Agile teams are typically composed of members with various skills, enabling them to take ownership of different aspects of the project.
+-Focus on Deliverables: The aim is to deliver a usable product quickly, allowing teams to gather feedback sooner rather than later.
 
 ****************************************************************Docker********************************************************
 
@@ -235,7 +279,7 @@ ensuring they run consistently across different environments.
 
 1. Containers
 Definition: Containers are a standardized unit of software that encapsulates everything needed to run an application, 
-			including code, runtime, libraries, and system tools.
+			including code, runtime, libraries, and system tools. its a Running instance of Image.
 		
 Characteristics: Containers are isolated from each other and from the host system, meaning they don't interfere with each other’s operations. 
 				 They share the same OS kernel but run in their own user space.
@@ -276,10 +320,6 @@ Definition: Docker Hub is a cloud-based registry service where Docker images are
 Definition: Docker Compose is a tool used to define and run multi-container Docker applications. 
 			It uses a YAML file (docker-compose.yml) to configure the application’s services, networks, and volumes.
 
-7. Volumes
-Definition: Volumes are used to persist data generated by and used by Docker containers. They allow data to be stored outside the container’s filesystem,
-			which is helpful for maintaining data between container restarts and for sharing data between containers.
-			
 How Docker Works:
 Build: You write a Dockerfile and use Docker to build an image from it.
 Run: You use the Docker CLI or API to run a container from the image.
@@ -308,34 +348,6 @@ https://www.youtube.com/watch?v=5D6FxfrP0KA&list=PL8p2I9GklV47v6WZTjHAqdsHxpTIpj
 Rigth Click on Project -> Docker Support (It will Create Docker File)
 Rigth Click on Project -> Container Orchestrator Support (It wil Create Docker Compose File) -- Container
 
-
--------------Docker File Contains---------------
-1. Base Image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base => This line specifies the base image for the final runtime environment of the container. It uses the official .NET 8.0 ASP.NET runtime image.
-USER app   => Runs the container as the app user, which is generally a non-privileged user.
-WORKDIR /app  => Sets the working directory to /app in the container.
-EXPOSE 8080 and EXPOSE 8081   => Indicates that the application will listen on ports 8080 and 8081. These ports are exposed for communication.
-
-2. Build Stage
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build  => Uses the .NET SDK image, which includes the tools needed to build the application. This stage is named build.
-ARG BUILD_CONFIGURATION=Release  => Defines a build argument that specifies the build configuration (e.g., Release or Debug). The default is Release.
-COPY ["DemoForDocker/DemoForDocker.csproj", "DemoForDocker/"]   => Copies the project file to the container.
-RUN dotnet restore "./DemoForDocker/DemoForDocker.csproj"   => Restores the project dependencies.
-COPY . .  => Copies the entire source code into the container.
-WORKDIR "/src/DemoForDocker"  => Changes the working directory to the project folder.
-RUN dotnet build "./DemoForDocker.csproj" -c $BUILD_CONFIGURATION -o /app/build   => Builds the project using the specified configuration and outputs the build artifacts to /app/build.
-
-3. Publish Stage
-FROM build AS publish  => Uses the previously defined build stage and names this stage publish.
-ARG BUILD_CONFIGURATION=Release   => Reuses the build argument from the previous stage.
-RUN dotnet publish "./DemoForDocker.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p=false  =>  Publishes the application to the /app/publish directory. The UseAppHost=false option prevents the creation of a native executable host, which is generally used for cross-platform compatibility.
-
-4. Final Stage
-
-ENTRYPOINT ["dotnet", "DemoForDocker.dll"]   => Defines the command to run when the container starts, which in this case is to execute the .NET application using dotnet.
-
-----------------------------------------------------
-
 other...in Notebook
 *****************************************************************JWT*********************************************************************************
 
@@ -344,6 +356,7 @@ JWT Stands for Json web Token which help in implemting token based security.
 A JWT (JSON Web Token) typically consists of three parts separated by dots (.).
 
 # Header: 
+it provide matadata about the type of data. and the algorithm to be used to incript the data that is to be transferd
 This part typically consists of two parts: the type of token (which is JWT) and the signing algorithm being used (such as HMAC SHA256 or RSA). 
 For example, a header might look like this:
 {
@@ -351,7 +364,7 @@ For example, a header might look like this:
   "typ": "JWT"
 }
 -----------------------------------------------------------
-# Payload: 
+# Payload: the payload represents the actual information in json formate that is to be transmitted over wiew.
 This part contains the claims. Claims are statements about an entity (typically the user) and additional data.
 There are three types of claims: registered, public, and private claims. 
 For example:
@@ -419,85 +432,13 @@ xxxxxxxxxx.yyyyyyyyyy.zzzzzzzzzz
  zzzzzzzzzz is the signature
  
 ********************************************************************************************************************************************
-
-HR Portal
-this is small internal project
-this is real time problem facing by Hr 
-before this project hr need to see Excel file and create peyment slip manually then convert into pdf and the send to respective person
-I Crete this project where we can fatch data from excel line by line, create List and then put this data into Peyment slip Template and the convert into pdf and send to the respected person by mail for that i Concatinate fname.lname@ikione.com
-in that project i use Mail API
-Add Pakage For Read and write Excel file - dotnet add package EPPlus
-Add Pakage for Convert Excel to PDF - dotnet add package DinkToPdf\
-and we dont requird any package for mail we have some provison in .net framwork System.net.mail this package is inbuild in .net
-we only add 
-smtpsetting into appsettings.json file
-{
-  "SmtpSettings": {
-    "Host": "smtp.example.com",
-    "Port": 587,
-    "Username": "your-email@example.com",
-    "Password": "your-email-password"
-  }
-}
-
-i used react for frontend where mam need to upload Excel file and Peyment slip template 
-then click ok 
-
-now they want to send single peyment slip
-
-	
-
-HBNO
-*regarding HBNO 
-HBNO is a bank placed in finland, we handle his
-- Portfolio, Fund and Saving plans
-in that we have 
-	2 type of Fund
-		ASK and Basic
-- 3 type of Portfolio 
-- Basic, Discritionary, ASK
-portfolio means our Demate Account
-we can Create as much as can Portfolios and we can invest for buying fund or saving plan we requird
-regarding Portfolio we have only one Demate Account but not in Finland
-* We Use 3rd party integration
-- Morning star, ProBroker
-     Morningstar give us market Live Data by using this data we show Graphs (it give us NAV) we Showing 1day, week, monthly, Quaterly, yearly, and Owverall
-	 ProBroker Give us Instrument related Data it contains Fund, Equity, Saving plans(RD), Comodity
-	 we Geting Fund and saving plan related data from it
-* There are 3 Portals 
-	User, Advisor, Representative
-	- Advisor Portal is Usrd by Bank 
-		means Bank Employe Can Loging any User and perform opration
-	- User Portal any any normal use used
-	- Representative portal means any other person how can manage our Portfolios based on Rigths we have 2 rigths read-only, Write
-	    representative is requird in user in under 18 age
-
-During this project 
-I Create Package where we can perform Sorting, serching, Pagination dyanamically
-
-WMstandard
-*regarding Standard
-WM standard is our Product under welth domain
-its a tenent based project
-its one type of Template.
-we developing this project where we can keep same backend we change only UI based in Tennent
-why this 
-	bcz every application has comman Functionality like Creating Portfolio, Buy or sell Fund, Add Saving Plan, update Saving plans
-we use Probroker
-Diffrence-
-And we Add new Functionality in this project Called As Switch
-		1. Switch means 
-			we Can Splite fund into another Fund 
-			means if we have 100rs we can splite into another 2 or more funds  <- this is new 
-		2. in WMS we add equity also
-	
-	
-	
-	
+# Key Features of Kanban in Jira
+Visual Boards: Kanban uses a board layout where tasks are represented as cards. Columns represent different stages of the workflow (e.g., To Do, In Progress, Done).	
+Continuous Delivery: Unlike traditional methods with fixed-length sprints, Kanban promotes continuous delivery. Teams can prioritize and complete tasks as they are ready.	
 	
 **********************************************************************DB**********************************************************************
 SQL VS SQL server : SQL is Query languge, while SQL Server is a DataBase managment System.
-					SQL is Query languge for workingwith a relational DB while SQL server is software that perform SQL query.
+					SQL is Query languge for working with a relational DB while SQL server is software that perform SQL query.
 
 DataBase: A Db is a structured collection of Data that is organized and Stored in a way that allows for efficient retrival, manipulation 
 
@@ -505,7 +446,7 @@ DataBase: A Db is a structured collection of Data that is organized and Stored i
 DB languge are used to read, update, and Store Data in DB. There are several languges can be used for this porpose
 1. Data defination languge(DDL) : Used to define DB Schema 
 								  Ex. Create,Drop,Truncate, Alter
-2. Data Manupulation languge(DML) : Used to Manupulat Data for ex. Insert,update, Delete
+2. Data Manupulation languge(DML) : Used to Manupulat Data for ex. Insert,update, Delete, Select
 3. Data Control languge(DCl) : DCl mainly Dels with rigths and permissions and other Controls Ex. Grant and revoke.
 4. Transaction Control languge(TCL): TCL Dels with transaction within DB, EX. Commit,Rollback, Savepoint
 
@@ -559,7 +500,7 @@ Durability:- After succesfully complete the trasaction changes in the DB is pers
 #3rd NF : The relation will be in 3NF if is in 2NF and not contain any transitive partial dependency   
 			EX. EMPID | Name | ZIP | STATE | CITY =>  EMPID | Name | ZIP  &  ZIP | STATE | CITY 
 
-*********************************************************************DevOps, AWS, Git***********************************************************************
+*******************************************************DevOps, AWS, Git*****************************************************************
 #DevOps:
 	- Devops is a methodology in software development, it Industries used to set of practices and tools to improve Collabration and communication between software Software Development and It Opration team.
 	- The Primary Goal of Devops is to shorten the software lifecycle, Enables continus delivery of High Quality software.
@@ -612,6 +553,7 @@ state: Every componant is react has a build in state object. which contains all 
 
 #Hooks
 Hooks is a special fuction that let you use state and other feature without writing class Ex usestate hook lets us define state for a component.
+Hooks is a special function by using that we can set state of the components.ex usestate.
 
 #AJAX(Asynchronous Javascript and xml)
 It is a technique used in web application when we want to change the portion of the page without reloading the entire page.
@@ -629,4 +571,54 @@ it stands for javascript xml, jsx is a XML-like syntax it allow us to write HTML
 
 -Fuctional componant use react hook to handle state it uses the usestate hook to set state of a variable inside the component.
 
-**********************************************************************************************************************************************
+
+
+
+
+
+
+
+REST
+#REST API:
+interface
+abstract Class: 
+Casting
+Constructor
+Type of Inheritance
+Cookies
+Session
+OOPs Concepts Abstract,Encapsulation
+Association
+Exceptions
+SynchronizationWhy interface can not have The constructor?
+Why Abstract Class have a Constructor?
+MVC flow:
+Common languge Runtime(CLR)
+ intermediate languge(IL)
+ Common languge specification(CLS)
+ Common Type System(CTS)
+ #Diff between .NET Framework and .NET Core 
+ Delegates
+ Func
+ LINQ
+ Marker Interface 
+ Functional Interface
+ Rrflection
+ Thread vs Process
+ authentication and authorization.
+ Async and Await
+ ABP
+ Dependence injection 
+ ypes of Injection:
+ SOLID Principle
+ Agile methodology
+ Docker
+ JWT
+  Key Features of Kanban in Jira
+  SQL VS SQL server 
+  SQL Command/ Type of DB languge
+  ACID Property
+  Store Procedure VS function
+  Joins, View, Trigger
+  Normalization
+  DevOps, AWS, Git

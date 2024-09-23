@@ -80,3 +80,138 @@ xxxxxxxxxx.yyyyyyyyyy.zzzzzzzzzz
 
 
 
+********************************************************Implemtation****************************************************************
+
+JWT
+# Download Microsoft.AspNetCore.Authentication.JwtBearer package.
+	-Microsoft.AspNetCore.Authentication.JwtBearer: Provides the middleware that integrates JWT token authentication into ASP.NET Core applications, 
+													handling the authentication process automatically during the request lifecycle.
+# BCrypt.Net-Next -package for encrypt and deceypt password
+
+	            u.Password =  BCrypt.Net.BCrypt.HashPassword(user.Password);          abs->asdfghj
+                var pass = BCrypt.Net.BCrypt.Verify(user.Password, u.Password);        it check password compair and return boolean value.
+
+
+ public string CreateToken(User user)
+ {
+     List<Claim> claims = new List<Claim>
+	 {
+		 new Claim(ClaimTypes.Name, user.UserName),
+		 new Claim(JwtRegisteredClaimNames.Sub,iconfig["Jwt:Subject"]),
+         new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
+	 };
+
+     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(iconfig["Jwt:Key"]));   //1 
+     var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);          //2 
+     var token = new JwtSecurityToken(
+
+         iconfig["Jwt:Issuer"],                 
+         iconfig["Jwt:Audience"],
+         claims,
+         expires: DateTime.UtcNow.AddMinutes(60),
+         signingCredentials: signIn
+         );                   
+
+// token = {{"alg":"HS512","typ":"JWT"}.{"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name":"akash","sub":"JwtSubject","jti":"50058aea-7287-4695-b268-83397a720482","exp":1726913435,"iss":"JwtIssuer","aud":"JwtAudience"}}		 
+
+
+     string tokenValue = new JwtSecurityTokenHandler().WriteToken(token);   //3
+
+     return tokenValue;
+ }
+ 
+// tokenValue = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
+				.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWthc2giLCJzdWIiOiJKd3RTdWJqZWN0IiwianRpIjoiNTAwNThhZWEtNzI4Ny00Njk1LWIyNjgtODMzOTdhNzIwNDgyIiwiZXhwIjoxNzI2OTEzNDM1LCJpciLCJhdWQiOiJKd3RBdWRpZW5jZSJ9
+				.28gIsVUE2jPlxYshTW55a4_97So3Nwm5CPJYg9mKZczBlVK6yx28GTMmpbeDsl10eBPbHWDP2t8ZRUFcakbj8g"
+ 
+ 
+ 
+ 
+ 
+1.
+SymmetricSecurityKey: which will be used to sign and validate the JWT tokens. Symmetric keys mean the same key is used for both signing (creating the token) and verifying (validating the token).
+2.
+SigningCredentials: It encapsulates the information needed to sign the token, including the security key and the algorithm used for signing. 
+3.
+JwtSecurityTokenHandler:
+This is a class from the System.IdentityModel.Tokens.Jwt namespace. It provides methods for creating, validating, and handling JWT tokens.
+.WriteToken(token): This method takes a JwtSecurityToken object (referred to here as token) and converts it into a string format. This string representation is what you will send to the client as the actual JWT.
+
+
+
+# What is the Issuer?
+Issuer: The issuer is a claim that indicates who issued the JWT. It’s often used to help verify the authenticity of the token. When the token is created, the issuer value is included in the claims. When validating the token, you can check if the issuer matches the expected value.
+
+#What is the Audience?
+Audience: The audience claim (aud) specifies the intended recipient(s) of the token. It indicates who the token is meant for. This is useful for ensuring that the token is only processed by the intended consumer(s), adding an extra layer of security.
+--------------------------------Program.cs-----------------------------------------------------------------
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = true,
+            ValidateIssuer = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+
+        };
+    });
+	
+	
+// Add authorization
+builder.Services.AddAuthorization();
+
+// Use authentication
+app.UseAuthentication();
+
+app.UseAuthorization();
+
+
+	
+-----------------------------------appsetting.json----------------------------------------
+  "Jwt": {
+    "Key": "asdfghjhgfdsdfghjkjhgfdsghjhgfdsdfghjjhg1234567890sdfdsasdfghjhgfdsdfghjkjhgfdsghjhgfdsdfghjjhg1234567890sdfds",
+    "Issuer": "JwtIssuer",                      //who create token
+    "Audience": "JwtAudience",					// for whom Crete token
+    "Subject": "JwtSubject"
+  }	
+  -------------------------------------------to enable functionality where we pass token in swagger--------------------------------------------------------------
+  
+  
+  
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+    // Add JWT Bearer authentication to Swagger
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "bearer",
+        BearerFormat="Jwt"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});

@@ -1,0 +1,36 @@
+Annotations in ASP .Net core
+
+[Required] : Specifies that a data field must be filled out.
+
+[StringLength] : Sets the maximum length of a string field.
+
+     [StringLength(100)]
+     public string Name { get; set; }
+
+[Range] : Validates that a numeric field falls within a specified range.
+ 
+    [Range(1, 100)]
+    public int Quantity { get; set; }
+	
+[EmailAddress] : Validates that a field contains a valid email address
+	
+	[EmailAddress]
+    public string Email { get; set; }
+
+[Compare] : Compares two properties to ensure they match, often used for password confirmation.
+ 
+	[Required]
+    public string Password { get; set; }
+
+    [Compare("Password")]
+    public string ConfirmPassword { get; set; }
+	
+[RegularExpression] : Validates that a field matches a specified regular expression pattern.
+
+	 [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$")]
+    public string ProductName { get; set; }
+
+[DataType] : Specifies the type of data for a field, which can affect how it's rendered in UI
+
+	[DataType(DataType.Date)]
+    public DateTime BirthDate { get; set; }

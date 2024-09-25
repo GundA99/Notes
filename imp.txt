@@ -1,4 +1,4 @@
-annotations
+Aannotations
 Thread states new->runnable->running->wait/sleep->Dead,
 ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -522,12 +522,12 @@ Durability:- After succesfully complete the trasaction changes in the DB is pers
 #Git: 
 	- Git is a Version control System is a tool that help to track changes in code.
 #Git hub:
-	- is a website tat allows developers to store and manage their code using git. 	
+	- is a website that allows developers to store and manage their code using git. 	
 	
 	
 **********************************************************REACT***********************************************************************
 #What is React
-react is open-source front-end javascript library this is used for building use interface. it is used for handling view layer for web and mobile apps.
+react is open-source front-end javascript library this is used for building user interface. it is used for handling view layer for web and mobile apps.
 
 #What are the major feature of react
 1. It uses Virtual Dom instade of real DOM 
@@ -560,7 +560,6 @@ It is a technique used in web application when we want to change the portion of 
 
 #Axios
 it used to connect fronted to backend , axios provide simple API for making HTTP request with method like axios.get,axios.post,axios.put... for Different HTTP methods.
-
 
 #What is JSX
 it stands for javascript xml, jsx is a XML-like syntax it allow us to write HTML inside Javascript.

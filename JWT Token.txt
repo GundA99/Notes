@@ -187,20 +187,20 @@ app.UseAuthorization();
   
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });     //Show in swagger 
 
     // Add JWT Bearer authentication to Swagger
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        In = ParameterLocation.Header,
-        Description = "Please enter a valid token",
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "bearer",
-        BearerFormat="Jwt"
+        In = ParameterLocation.Header,                                            //Where the token should be provided (in the header).
+        Description = "Please enter a valid token",								  //Description: A brief guide on how to use the token.
+        Name = "Authorization",													  //Name: The name of the header to include (in this case, "Authorization")
+        Type = SecuritySchemeType.ApiKey,										  //Type: Specifies the scheme type (ApiKey for Bearer tokens).
+        Scheme = "bearer",														  //Scheme: Indicates that it's a bearer scheme.
+        BearerFormat="Jwt"														  //BearerFormat: Indicates the format of the token (JWT).
     });
 
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement                       //This section specifies that the defined Bearer token scheme is required for all API endpoints. 
     {
         {
             new OpenApiSecurityScheme

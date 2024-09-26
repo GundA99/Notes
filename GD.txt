@@ -351,7 +351,7 @@ we Creating one type of template or skeleton. where we can keep same backend we 
 bcz every application has comman Functionality if we see in india we use Grow, Upstocks, shearkhan they have same functionalities like Creating Portfolio, Buy or sell Fund, Add Saving Plan, update Saving plans 
 - in that we save all tenent related data 
 fro ex if our tenened is from india the we use Differcent 3rd party api's so we save all Configuration, Endpoints, in DB.
--we store some links for getting corporate action, News ex.
+-we store some links in DB for getting corporate action, News ex.
 we store links based on tenent  
 
 Probrocker
@@ -359,10 +359,23 @@ when buy it provide one Endpoint we use this endpoint to access probrocker API's
 
 #Pro getting Fund Data by -
    instrumentTsExchId : "XXXX",   Fund                       its a Keyword we need to provide.
-   vpType : "19",											 Intrument type  
-   
+   vpType : "19",											 Intrument type    
    instrumentTsExchId : "XOSL",     - Equity
 
+#Milistram 
+cmd=quote/history
+we have Endpoint + cmd + marketplace + fields(fields which is requird)
+
+Services-
+Portfolio - Create and Update POrtfolio, GetAllPOrtfolio,
+Instrument - GetInstrumentList, GetEquity, GetFund
+Transaction  - Getting Transaction of Portfolios
+Onbording    - Getting All Data related to Tenant, Party, Customer
+i1Core
+Configuration   - Saving and getting Configuration (backendConnectedSystem{Pro}, Market overview link, IndicesURL,CurrenciesURL, EquitesURL, NewsURL )
+Order    - Order, Cancel, all orders
+Tenancy
+Reporting
 -----------------------------------------------------------------------------------------------------------
 - Attend Daily sync of HBNO internal, 
 - 1'o clock Attend WM metting

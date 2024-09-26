@@ -182,9 +182,7 @@ app.UseAuthorization();
     "Subject": "JwtSubject"
   }	
   -------------------------------------------to enable functionality where we pass token in swagger--------------------------------------------------------------
-  
-  
-  
+    
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });     //Show in swagger 
@@ -215,3 +213,15 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+
+
+-----------------------------------------------------------Steps for add swagger in project-----------------------------------------------------------
+1. install package -> Swashbuckle.AspNetCore
+2. Add code -> program.cs -> 	builder.Services.AddEndpointsApiExplorer();
+								builder.Service.AddSwaggerGen();
+								App.UseSwaggerUI(options =>
+								{
+									options.SwaggerEndpoint(https://localhost:44301/) + _appConfiguration["App:SwaggerEndPoint"], "WealthMapper.Order V1");
+								}); //URL: /swagger
+								app.UseSwaggerUI();

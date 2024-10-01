@@ -1,5 +1,18 @@
 Aannotations
-Thread states new->runnable->running->wait/sleep->Dead,
+-Thread states new->runnable->running->wait/sleep->Dead,
+- Figma Project tool
+- Garbage collection
+
+value type & reference type
+Value Types: They contain the values that are stored on a stack or allocated inline within a structure. They are divided into :
+Built-in Value Types - It includes primitive data types such as Boolean, Byte, Char, Int32, etc.
+User-defined Value Types - These are defined by the user in the source code. It can be enumeration or structure.
+Enumerations - It is a set of enumerated values stored in the form of numeric type and are represented by labels.
+Structures - It defines both data(fields of the structure) and the methods(operations performed on that data) of the structure. In .NET, all primitive data types like Boolean, Byte, Char, DateTime, Decimal, etc., are defined as structures.
+Reference Types: It Stores a reference to the memory address of a value and is stored on the heap. They are divided into :
+Interface types - It is used to implement functionalities such as testing for equality, comparing and sorting, etc.
+Pointer types - It is a variable that holds the address of another variable.
+Self-describing types - It is a data type that gives information about themselves for the sake of garbage collectors. It includes arrays(collection of variables with the same datatype stored under a single name) and class types(they define the operations like methods, properties, or events that are performed by an object and the data that the object contains) like user-defined classes, boxed value types, and delegates(used for event handlers and callback functions).
 ---------------------------------------------------------------------------------------------------------------------------------
 
 #REST (Representational State Transfer): It mean Transfer of representational state of the resource eg. Employee, order, Fund,student between the client and server.
@@ -161,6 +174,8 @@ All this are defined in system namespace.
 
 #ADO.NET: The .Net framwork includes its own data access technology, ADO.NET. ADO.NET Consists of Managed classes that allow .Net application to connect to Data sources, execute commands, and manage disconnected data.
 
+#RestCaller : there is one type of middleware how get requast parameters and create request object and send request to another server which is proxyServer it means it By using one API we call Another api
+
 #Thread vs Process : 
 Process: A process is a program in execution.
 Thread: thread is separate path of execution in program.
@@ -225,10 +240,7 @@ Testing: Dependencies can be easily mocked or substituted during testing, allowi
 
 Flexibility: Different implementations of dependencies can be easily swapped at runtime, without requiring changes to the dependent class.
 
-
-
 ****************************************SOLID Principle***********************************************************************
-
 
 The SOLID principles are a set of five principles in object-oriented programming to make software designs more understandable,
 flexible, and maintainable. Each letter in "SOLID" stands for a different principle:
@@ -579,7 +591,10 @@ it stands for javascript xml, jsx is a XML-like syntax it allow us to write HTML
 -Fuctional componant use react hook to handle state it uses the usestate hook to set state of a variable inside the component.
 
 
-
+13. How can you differentiate ASP.NET Core from .NET Core?
+.NET Core is a runtime and is used for the execution of an application that is built for it. 
+Whereas ASP.NET Core is a collection of libraries that will form a framework for developing web applications. 
+ASP.NET Core libraries can be used on .NET Core as well as on the “Full .NET Framework”.
 
 
 

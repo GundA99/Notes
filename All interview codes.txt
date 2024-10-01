@@ -1,0 +1,1236 @@
+//1...even/odd number
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	        int n1;
+		System.out.println("Enter any number");
+		Scanner sc=new Scanner(System.in);
+		n1=sc.nextInt();
+		if(n1%2==0)
+		{
+		    System.out.println("Even Number");
+		}
+		else
+		{
+		    System.out.println("Odd Number");    
+		}
+	}
+}
+........................................................................................................................................................
+//2...Fibonacchhe series
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int a,b,n,c,i;
+        System.out.println("Enter Two numbers");
+        Scanner sc=new Scanner(System.in);
+        a=sc.nextInt();
+        b=sc.nextInt();
+        System.out.println("Enter size");
+        n=sc.nextInt();
+        System.out.println("Fibonachhee Series are");
+        System.out.println(a);
+        System.out.println(b);
+        for(i=2;i<n;i++) 
+        {
+            c=a+b;
+            System.out.println(c);
+            a=b;
+            b=c;
+        }
+    }
+}
+------------------------------
+import java.util.Scanner;
+
+class Main{
+	public static void main(String [] args){
+		int num1,num2,size;
+		System.out.println("enter two numbers");
+		Scanner sc = new Scanner(System.in);
+		num1=sc.nextInt();
+		num2=sc.nextInt();
+		System.out.println("enter size");
+		size=sc.nextInt();
+		System.out.println("fibbonachhi series");
+		System.out.println(num1);
+		System.out.println(num2);
+		for(int i=1; i<size-1;i++){
+			
+			int fibo=num1+num2; 
+			System.out.println(fibo);  //1,2,3
+			num1=num2; ///1
+			num2=fibo; //2
+		}
+	}
+}1 1 2 3 5 8 13 21 
+----------------------------
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+      int n1,n2,sum,size;
+      Scanner sc=new Scanner(System.in);
+      System.out.println("enter two numbers");
+      n1=sc.nextInt();
+      n2=sc.nextInt();
+      System.out.println("enter the size");
+      size=sc.nextInt();
+      System.out.print(n1+" ");
+      System.out.print(n2+" ");
+      for(int i=0;i<size;i++){
+          sum=n1+n2;
+          System.out.print(sum+" ");
+          n1=n2;
+          n2=sum;
+      }   
+    }
+}
+
+....................................................................................................................................................................
+//3...Armstrong number
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        int num,num1,rem,sum=0;
+    System.out.println("Enter any number");
+        Scanner sc=new Scanner(System.in);
+        num1=sc.nextInt();
+        num=num1;
+        while(num1!=0){
+            rem=num1%10;
+            sum+=(rem*rem*rem);
+            num1=num1/10;
+        }
+        if(sum==num){
+            System.out.println("Armstrong Number");
+        }else{
+            System.out.println("Not Armstrong Number");
+        }
+    }
+}
+(1*1*1)+(5*5*5)+(3*3*3)=153
+-----------------------------------
+num=153 
+ 
+rem=3
+num=15
+count=27;
+
+num=15
+
+rem=5
+num=1
+count=27+(125)
+
+num=1
+
+rem=1
+num=0
+count=(1)+27+125 =153
+              
+			
+-------------------------------------------
+
+........................................................................................................................................................................
+//4...Prime Number
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int num,i,count=0;
+        System.out.println("Enter any number");
+        Scanner sc=new Scanner(System.in);
+        num=sc.nextInt();    
+        for(i=1;i<=num;i++)      
+        {
+            if(num%i==0)      
+            {
+                count++;   
+            }
+        }
+        if(count==2)
+        {
+            System.out.println("Prime Number");
+        }
+        else
+        {
+            System.out.println("Not Prime Number");
+        }
+    }
+}
+divide by itself or divide by 1.
+....................................................................................................................................................
+//5...Prime numbers from any numbers ex(1 t0 50)
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int n,i,j,count=0;
+        System.out.println("Enter size");
+        Scanner sc=new Scanner(System.in);
+        n=sc.nextInt();
+        System.out.println("Prime numbers are");
+        for(i=1;i<=n;i++)     
+        {
+            for(j=1;j<=i;j++)   
+            {
+                if(i%j==0)   
+                {
+                    count++;   
+                }
+            }
+            if(count==2)
+            {
+                System.out.println(i);  
+            }
+            count=0;
+        }
+    }
+}
+------
+two for loop 
+1st for loop(i) till 50
+2st for loop(j) divide till i
+check if i%j ==0  then count++.
+if count==2 then print that num.
+-------------------------------------------
+prime numbers between two numbers
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        int num1,num2,count=0;
+    System.out.println("Enter any size between two numbers");
+        Scanner sc=new Scanner(System.in);
+        num1=sc.nextInt();
+        num2=sc.nextInt();
+    for(int i=num1;i<=num2;i++){
+      for(int j=1;j<=i;j++){
+          if(i%j==0)
+          count++;
+      }  
+      if(count==2){
+          System.out.println(i); 
+      }
+      count=0;
+    }
+     
+    }
+}
+
+.............................................................................................................................................................................
+//6...Palindrome Number
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int num,num1,count=0,rem;
+        System.out.println("Enter any Number");
+        Scanner sc=new Scanner(System.in);
+        num=sc.nextInt();
+        num1=num;
+        while(num!=0)
+        {
+            rem=num%10;
+            num=num/10;
+            count=(count*10)+rem;
+        }
+        if(count==num1)
+        {
+            System.out.println("Palindrome Number");
+        }
+        else
+        {
+            System.out.println("Not Palindrome Number");    
+        }
+    }
+}
+--------------------------
+151
+rem=151%10 = 1
+num=151/10 =15
+count=(count*10)+rem= 1
+
+15
+rem=5
+num=1
+count=15
+
+1
+rem=1
+num=0
+count=150+1=151
+-----------------------------------
+153
+rem=3
+num=15
+count=3
+
+15
+rem=5
+num=1
+count=35
+
+1
+rem1
+num=0
+count=350+1=351
+-------------------------------
+.........................................................................................................................................
+//7...reverse Number
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int num,num1,count=0,rem;
+        System.out.println("Enter any number");
+        Scanner sc=new Scanner(System.in);
+        num=sc.nextInt();
+        while(num!=0)
+        {
+            rem=num%10;
+            num=num/10;
+            count=(count*10)+rem;
+        }
+        System.out.print("reverse number is ");
+        System.out.println(count);
+    }
+}
+........................................................................................................................................................
+//8...Sorting using temp or using only two variable
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int n,i,j,temp;
+        int arr[]=new int[100];
+        System.out.println("Enter array size");
+        Scanner sc=new Scanner(System.in);
+        n=sc.nextInt();
+        System.out.println("Enter array Element");
+        for(i=0;i<n;i++)
+        {
+            arr[i]=sc.nextInt();
+        }
+        System.out.println("Array element after sort");     5,4,3,2,1
+        for(i=0;i<n-1;i++)                                                             4,5,3,2,1
+        {                                                                                           4,3,5,2,1
+            for(j=0;j<n-1;j++) j=1                                                 4,3,2,5,1
+            {                                                                                       4,3,2,1,5
+            if(arr[j]>arr[j+1])    5>3
+            {
+                temp=arr[j];          // arr[j]=arr[j+1];                       temp=5     temp=5
+                arr[j]=arr[j+1];      // arr[j+1]=arr[j]-arr[j+1];       arr 0 = 4    arr1 =3
+                arr[j+1]=temp;        // arr[j]=arr[j]-arr[j+1];          arr 1 = 5   arr2=5
+            }
+            }
+        }
+        for(i=0;i<n;i++)
+        {
+            System.out.println(arr[i]);
+        }
+    }
+}
+............................................................................................................................................................
+//9...reverse the string
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int n=0,i;
+        String str;
+        System.out.println("Enter any string");
+        Scanner sc =new Scanner(System.in);
+        str=sc.nextLine();
+        char ch[]=str.toCharArray();
+        n=ch.length;
+        for(i=n-1;i>=0;i--)
+        {
+            System.out.print(ch[i]);
+        }
+    }
+}
+....................................................................................................
+//10...reverse string
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        char temp;
+        int n,j,i;
+        String str;
+        System.out.println("Enter any string");
+        Scanner sc=new Scanner(System.in);
+        str=sc.nextLine();                                  
+        char ch[]=str.toCharArray();                 
+        n=ch.length;      6
+        i=0;
+        for(j=n-1;j>=0;j--,i++)     // j=5;4;3;2
+        {
+            if(i<j)    
+            {
+                temp=ch[i];   
+                ch[i]=ch[j];    
+                ch[j]=temp;
+            }
+        }
+        for(char c : ch)
+        {
+            System.out.print(c);
+        }
+    }
+}
+
+
+---------------------------------------------------------------
+
+	public static void main(String[] args) 
+{
+	char temp;
+        int n,j;
+        String str;
+        System.out.println("Enter any string");
+        Scanner sc =new Scanner(System.in);
+        str=sc.next();                                  
+        char ch[]=str.toCharArray();                 
+        n=ch.length;      
+        for(int i = 0; i<n/2; i++){
+             temp = ch[n-i-1];
+             ch[n-1-i] = ch[i];
+             ch[i] = temp;
+        }
+
+        for(char c : ch)
+        {
+            System.out.print(c);
+        }
+}
+------------------------------------------------------
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+    String name="eshwar lidhure";
+    String rev="";
+    int len=name.length()-1;
+    for(int i=len;i>=0;i--){
+       rev+=name.charAt(i);
+    }
+    System.out.print(rev);
+    }
+}
+
+.....................................................................................................................
+//11...palindrome string
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int n,i,j;
+        String str;
+        System.out.println("Enter any string");
+        Scanner sc=new Scanner(System.in);
+        str=sc.nextLine();
+        char ch[]=str.toCharArray();            //madam
+        n=ch.length;                                           //    5
+        i=0;
+        for(j=n-1;j>=0;j--,i++)    
+        {
+            if(i<j)   
+            {
+                if(ch[i]!=ch[j])
+                {
+                    System.out.println("String is not palindrome");
+                    break;
+                }
+            }
+            else
+            {
+                System.out.println("String is palindrome");
+                break;
+            }
+        }
+    }
+}
+------------------------
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        String str="madam";
+        int l=str.length();
+        char ch1[]=str.toCharArray();
+        char ch2[]=new char[l];
+        int inx=0;
+        for(int i=l-1;i>=0;i--){
+            ch2[inx]=ch1[i];
+            inx++;
+        }
+        if(Arrays.equals(ch1,ch2)){
+             System.out.println("palandrome");
+        }else{
+             System.out.println("not palandrome");
+        }
+    }
+}
+...........................................................................................................................
+//12...Leap year
+
+import java.util.*;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int year;
+        System.out.println("Enter any year");
+        Scanner sc=new Scanner(System.in);
+        year=sc.nextInt();
+        if(year%100!=0)
+        {
+            if(year%4==0)
+            {
+                System.out.println("Leap Year");
+            }
+            else
+            {
+                System.out.println("Not Leap Year");   
+            }
+        }
+        else if(year%400==0)
+        {
+            System.out.println("Leap year");
+        }
+        else
+        {
+            System.out.println("Not Leap Year");
+        }
+    }
+}
+.............................................................................................................................................
+//13...Leap year Using logical AND and Logical OR
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int year;
+        System.out.println("Enter any year");
+        Scanner sc=new Scanner(System.in);
+        year=sc.nextInt();
+        if((year%100!=0 && year%4==0) || year%400==0)
+        {
+            System.out.println("Leap Year");
+        }
+        else
+        {
+            System.out.println("Not Leap Year");
+        }
+    }
+}
+.....................................................................................................................
+//14....count repetation of words in string
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int n,i,j,count=1;
+        String str;
+        System.out.println("Enter any string");
+        Scanner sc=new Scanner(System.in);
+        str=sc.nextLine();
+        char ch[]=str.toCharArray();     //  madam
+        n=ch.length;
+        for(i=0;i<n;i++)
+        {
+            for(j=i+1;j<n;j++)
+            {
+                if(ch[i]==ch[j])
+                {
+                    count++;  
+                    ch[j]=0;
+                }
+            }
+            if(ch[i]!=0 && count>1)
+            {
+                System.out.println("count of "+ch[i]+" is : "+count);
+            }
+            count=1;
+        }
+    }
+}
+
+..................................................................................................................................................
+//15....count number of vowels in the string
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int n,i,count=0;;
+        String str;
+        System.out.println("Enter any string");
+        Scanner sc=new Scanner(System.in);
+        str=sc.nextLine();
+        char ch[]=str.toCharArray();    //madam
+        n=ch.length;
+        for(i=0;i<n;i++)
+        {
+            if(ch[i]=='a'||ch[i]=='e'||ch[i]=='i'||ch[i]=='o'||ch[i]=='u'||
+            ch[i]=='A'||ch[i]=='E'||ch[i]=='I'||ch[i]=='O'||ch[i]=='U')
+            {
+                System.out.println(ch[i]);
+                count++;
+            }
+        }
+        System.out.println("Number of vowels are : "+count);
+    }
+}
+
+.........................................................................................................................................
+//16...Repeted numbers in array
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        
+        int n,i,j,count=1;
+        System.out.println("Enter size");
+        Scanner scan=new Scanner(System.in);
+        n=scan.nextInt();
+        int arr[]=new int[n];
+        System.out.println("Enter array element");
+        for(i=0;i<n;i++)
+        {
+            arr[i]=scan.nextInt();
+        }
+        System.out.println("Repeted numbers are");      // 1551
+        for(i=0;i<n;i++)                                // 1550
+        {                                                                                           //   1500
+            for(j=i+1;j<n;j++)  
+            {
+                if(arr[i]==arr[j])    5
+                {
+                count++;
+                arr[j]=0;
+                }
+            }
+            if(arr[i]!=0 && count>1)
+            {
+                System.out.println(arr[i]);    
+                count=1;
+            }
+        }
+        
+    }
+}
+.....................................................................................................................................................
+//17...... Anagram
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args) throws Exception
+    {
+        try
+        {
+            String str1;
+            String str2;
+            Scanner scan=new Scanner(System.in);        
+            str1=scan.nextLine();                  //  madam
+            str2=scan.nextLine();                  //  adamm
+            //str1=str1.replace(" ","");
+            //str2=str2.replace(" ","");
+            str1=str1.toLowerCase();
+            str2=str2.toLowerCase();
+            char ch1[]=str1.toCharArray();
+            char ch2[]=str2.toCharArray();
+            Arrays.sort(ch1);    //aadmm
+            Arrays.sort(ch2);   // aadmm
+            Boolean b=Arrays.equals(ch1,ch2);
+            if(b==true)
+            {
+                System.out.println("Anagram");
+            }
+            else
+            {
+                System.out.println("Not Anagram");
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error");
+        }
+    }
+}
+...........................................................................................................................................
+//18.....anagram
+import java.util.*;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        int i,j,n;
+        String str1;
+        String str2;
+        char temp;
+        Scanner scan=new Scanner(System.in);
+        str1=scan.nextLine();
+        str2=scan.nextLine();
+        
+        char ch1[]=str1.toCharArray();
+        char ch2[]=str2.toCharArray();
+        n=ch1.length;
+        for(i=0;i<n-1;i++)
+        {
+            for(j=0;j<n-1;j++)
+            {
+                if(ch1[j]>ch1[j+1])
+                {
+                    temp=ch1[j];
+                    ch1[j]=ch1[j+1];
+                    ch1[j+1]=temp;
+                }
+            }
+        }
+        for(i=0;i<n-1;i++)
+        {
+            for(j=0;j<n-1;j++)
+            {
+                if(ch2[j]>ch2[j+1])
+                {
+                    temp=ch2[j];
+                    ch2[j]=ch2[j+1];
+                    ch2[j+1]=temp;
+                }
+            }
+        }
+        for(i=0;i<n;i++)
+        {
+            if(ch1[i]!=ch2[i])
+            {
+                System.out.println("Not Anagram");
+                System.exit(0);
+            }
+        }
+        System.out.println("Anagram");
+    }
+}
+.....................................................................................................................
+
+
+// collection basic
+import java.util.*;
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Collection c = new ArrayList();
+        c.add(22);
+        c.add("Gundaji");
+        c.add("Latur");
+        c.remove("Gundaji");
+        c.remove("Latur");
+        Iterator i=c.iterator();
+        while(i.hasNext())
+        {
+            System.out.println(i.next());
+        }
+        for(Object o : c)
+        {
+            System.out.println(o);
+        }
+    }
+}
+................................................................................................................................................
+// collections List
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        List li=new ArrayList();
+        li.add(22);
+        li.add(2);
+        li.add(10);
+        li.add(15);
+        li.add(1,66);
+        
+      /*  Iterator i=li.iterator();     // Method 1:for printing output
+        while(i.hasNext())
+        {
+            System.out.println(i.next());
+        }*/
+        
+      for(Object o : li)          //Method 2:for printing output 
+        {
+            System.out.println(o);
+        }
+        
+        //Collections.sort(li); 
+        //li.forEach(System.out::println);  // Methode 3:for printing output
+         
+    }
+}
+.............................................................................................................................
+//Hashmap
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Map<String,String> map=new HashMap<>();
+        map.put("Gundaji","9764681363");
+        map.put("Ajinkya","9876543210");
+        Set<String> set=map.keySet();
+        
+        for(String s : set)
+        {
+            System.out.println(map.get(s));
+        }
+    }
+}
+...................................................................................................................................
+
+Program to copy all elements of one array into another array
+
+public class CopyArray {    
+    public static void main(String[] args) {        
+             //Initialize array     
+        int [] arr1 = new int [] {1, 2, 3, 4, 5};     
+         //Create another array arr2 with size of arr1    
+        int arr2[] = new int[arr1.length];    
+        //Copying all elements of one array into another    
+        for (int i = 0; i < arr1.length; i++) {     
+            arr2[i] = arr1[i];     
+        }      
+         //Displaying elements of array arr1     
+        System.out.println("Elements of original array: ");    
+        for (int i = 0; i < arr1.length; i++) {     
+           System.out.print(arr1[i] + " ");    
+        }     
+            
+        System.out.println();    
+            
+        //Displaying elements of array arr2     
+        System.out.println("Elements of new array: ");    
+        for (int i = 0; i < arr2.length; i++) {     
+           System.out.print(arr2[i] + " ");    
+        }     
+    }    
+}  
+...................................................................................................................................
+
+Program to left rotate the elements of an array
+
+
+class RotateLeft {  
+    public static void main(String[] args) {  
+        //Initialize array  
+        int [] arr = new int [] {1, 2, 3, 4, 5};  
+
+        //n determine the number of times an array should be rotated  
+        int n = 3;  
+
+        //Displays original array  
+        System.out.println("Original array: ");  
+        for (int i = 0; i < arr.length; i++) {  
+            System.out.print(arr[i] + " ");  
+        }  
+
+        //Rotate the given array by n times toward left  
+        for(int i = 0; i < n; i++){  
+            int j, first;  
+            //Stores the first element of the array         //    12345   first=1
+            first = arr[0];  
+            for(j = 0; j < arr.length-1; j++){          
+                //Shift element of array by one  
+                arr[j] = arr[j+1];  
+
+            }  
+            //First element of array will be added to the end  
+            arr[j] = first;  
+        }  
+
+        System.out.println();  
+        //Displays resulting array after rotation  
+        System.out.println("Array after left rotation: ");  
+        for(int i = 0; i< arr.length; i++){  
+            System.out.print(arr[i] + " ");  
+        }  
+    }  
+}  
+
+...................................................................................................................................
+Java Program to right rotate the elements of an array
+
+
+class RotateRight {    
+ public static void main(String[] args) {    
+        //Initialize array     
+        int [] arr = new int [] {1, 2, 3, 4, 5};     
+        //n determine the number of times an array should be rotated.    
+        int n = 3;    
+           
+        //Displays original array    
+        System.out.println("Original array: ");    
+        for (int i = 0; i < arr.length; i++) {     
+            System.out.print(arr[i] + " ");     
+        }      
+            
+        //Rotate the given array by n times toward right    
+        for(int i = 0; i < n; i++){    
+            int j, last;    
+            //Stores the last element of array    
+            last = arr[arr.length-1];    
+            
+            for(j = arr.length-1; j > 0; j--){    
+                //Shift element of array by one    
+                arr[j] = arr[j-1];    
+            }    
+            //Last element of array will be added to the start of array.    
+            arr[0] = last;    
+        }    
+        
+        System.out.println();    
+            
+        //Displays resulting array after rotation    
+        System.out.println("Array after right rotation: ");    
+        for(int i = 0; i< arr.length; i++){    
+            System.out.print(arr[i] + " ");    
+        }    
+    }    
+}    
+
+...................................................................................................................................
+Program to print the elements of an array in reverse order
+
+public class ReverseArray {  
+    public static void main(String[] args) {  
+        //Initialize array  
+        int [] arr = new int [] {1, 2, 3, 4, 5};  
+        System.out.println("Original array: ");  
+        for (int i = 0; i < arr.length; i++) {  
+            System.out.print(arr[i] + " ");  
+        }  
+        System.out.println();  
+        System.out.println("Array in reverse order: ");  
+        //Loop through the array in reverse order  
+        for (int i = arr.length-1; i >= 0; i--) {  
+            System.out.print(arr[i] + " ");  
+        }  
+    }  
+}  
+...................................................................................................................................
+Program to print the elements of an array present on even position
+
+
+public class EvenPosition {  
+    public static void main(String[] args) {  
+  
+        //Initialize array  
+        int [] arr = new int [] {1, 2, 3, 4, 5};  
+  
+        System.out.println("Elements of given array present on even position: ");  
+        //Loop through the array by incrementing value of i by 2  
+        //Here, i will start from 1 as first even positioned element is present at position 1.  
+        for (int i = 1; i < arr.length; i = i+2) {  
+            System.out.println(arr[i]);  
+        }  
+    }  
+}  
+...................................................................................................................................
+for odd 
+
+public class OddPosition {  
+    public static void main(String[] args) {  
+        //Initialize array  
+       int [] arr = new int [] {1, 2, 3, 4, 5};  
+        System.out.println("Elements of given array present on odd position: ");  
+        //Loop through the array by incrementing value of i by 2  
+        for (int i = 0; i < arr.length; i = i+2) {  
+            System.out.println(arr[i]);  
+        }  
+    }  
+}  
+...................................................................................................................................
+Program to print the largest element in an array
+
+public class LargestElement_array {  
+    public static void main(String[] args) {  
+  
+        //Initialize array  
+        int [] arr = new int [] {25, 11, 7, 75, 56};  
+        //Initialize max with first element of array.  
+        int max = arr[0];  
+        //Loop through the array  
+        for (int i = 0; i < arr.length; i++) {  
+            //Compare elements of array with max  
+           if(arr[i] > max)  
+               max = arr[i];  
+        }  
+        System.out.println("Largest element present in given array: " + max);  
+    }  
+}  
+...................................................................................................................................
+Program to print the smallest element in an array
+
+public class SmallestElement_array {  
+    public static void main(String[] args) {  
+  
+        //Initialize array  
+        int [] arr = new int [] {25, 11, 7, 75, 56};  
+        //Initialize min with first element of array.  
+        int min = arr[0];  
+        //Loop through the array  
+        for (int i = 0; i < arr.length; i++) {  
+            //Compare elements of array with min  
+           if(arr[i] <min)  
+               min = arr[i];  
+        }  
+        System.out.println("Smallest element present in given array: " + min);  
+    }  
+}  
+...................................................................................................................................
+Java Program to find Second Largest Number in an Array
+
+public class SecondLargestInArrayExample{  
+public static int getSecondLargest(int[] a, int total){  
+int temp;  
+for (int i = 0; i < total; i++)   
+        {  
+            for (int j = i + 1; j < total; j++)   
+            {  
+                if (a[i] > a[j])    
+                {  
+                    temp = a[i];     
+                    a[i] = a[j];    
+                    a[j] = temp;      
+                }  
+            }  
+        }  
+       return a[total-2];        //for third largest return a[total-3];
+}  
+public static void main(String args[]){  
+int a[]={1,2,5,6,3,2};  
+//int b[]={44,66,99,77,33,22,55};  
+System.out.println("Second Largest: "+getSecondLargest(a,6));  
+//System.out.println("Second Largest: "+getSecondLargest(b,7));  
+}}  
+...................................................................................................................................
+Java Program to find Second Smallest Number in an Array
+
+public class SecondSmallestInArrayExample{  
+public static int getSecondSmallest(int[] a, int total){  
+int temp;  
+for (int i = 0; i < total; i++)   
+        {  
+            for (int j = i + 1; j < total; j++)   
+            {  
+                if (a[i] > a[j])   
+                {  
+                    temp = a[i];  
+                    a[i] = a[j];  
+                    a[j] = temp;  
+                }  
+            }  
+        }  
+       return a[1];//2nd element because index starts from 0  
+}  
+public static void main(String args[]){  
+int a[]={1,2,5,6,3,2};  
+int b[]={44,66,99,77,33,22,55};  
+System.out.println("Second smallest: "+getSecondSmallest(a,6));  
+System.out.println("Second smallest: "+getSecondSmallest(b,7));  
+}}  
+...................................................................................................................................
+Java Program to print the sum of all the items of the array
+
+public class SumOfArray {  
+    public static void main(String[] args) {  
+        //Initialize array  
+        int [] arr = new int [] {1, 2, 3, 4, 5};  
+        int sum = 0;  
+        //Loop through the array to calculate sum of elements  
+        for (int i = 0; i < arr.length; i++) {  
+           sum = sum + arr[i];  
+        }  
+        System.out.println("Sum of all the elements of an array: " + sum);  
+    }  
+}  
+...................................................................................................................................
+Java Program to sort the elements of an array in ascending order
+
+public class SortAsc {    
+    public static void main(String[] args) {        
+            
+        //Initialize array     
+        int [] arr = new int [] {5, 2, 8, 7, 1};     
+        int temp = 0;    
+            
+        //Displaying elements of original array    
+        System.out.println("Elements of original array: ");    
+        for (int i = 0; i < arr.length; i++) {     
+            System.out.print(arr[i] + " ");    
+        }    
+            
+        //Sort the array in ascending order    
+        for (int i = 0; i < arr.length; i++) {     
+            for (int j = i+1; j < arr.length; j++) {     
+               if(arr[i] > arr[j]) {  
+                   temp = arr[i];      
+                   arr[i] = arr[j];        
+                   arr[j] = temp;                     
+               }                                     
+            }     
+        }    
+          
+        System.out.println();    
+            
+        //Displaying elements of array after sorting    
+        System.out.println("Elements of array sorted in ascending order: ");    
+        for (int i = 0; i < arr.length; i++) {     
+            System.out.print(arr[i] + " ");    
+        }    
+    }    
+}    
+...................................................................................................................................
+for descending-
+
+public class SortDsc {    
+    public static void main(String[] args) {        
+        //Initialize array     
+        int [] arr = new int [] {5, 2, 8, 7, 1};     
+        int temp = 0;    
+            
+        //Displaying elements of original array    
+        System.out.println("Elements of original array: ");    
+        for (int i = 0; i < arr.length; i++) {     
+            System.out.print(arr[i] + " ");    
+        }    
+            
+        //Sort the array in descending order    
+        for (int i = 0; i < arr.length; i++) {     
+            for (int j = i+1; j < arr.length; j++) {     
+               if(arr[i] < arr[j]) {    
+                   temp = arr[i];    
+                   arr[i] = arr[j];    
+                   arr[j] = temp;    
+               }     
+            }     
+        }    
+            
+        System.out.println();    
+            
+        //Displaying elements of array after sorting    
+        System.out.println("Elements of array sorted in descending order: ");    
+        for (int i = 0; i < arr.length; i++) {     
+            System.out.print(arr[i] + " ");    
+        }    
+    }    
+}    
+...................................................................................................................................
+Remove Duplicate Element in Array using Temporary Array
+
+public class RemoveDuplicateInArrayExample{  
+public static int removeDuplicateElements(int arr[], int n){  
+        if (n==0 || n==1){  
+            return n;  
+        }  
+        int[] temp = new int[n];  
+        int j = 0;  
+        for (int i=0; i<n-1; i++){  
+            if (arr[i] != arr[i+1]){  
+                temp[j++] = arr[i];  
+            }  
+         }  
+        temp[j++] = arr[n-1];     
+        // Changing original array  
+        for (int i=0; i<j; i++){  
+            arr[i] = temp[i];  
+        }  
+        return j;  
+    }  
+       
+    public static void main (String[] args) {  
+        int arr[] = {10,20,20,30,30,40,50,50};  
+        int length = arr.length;  
+        length = removeDuplicateElements(arr, length);  
+        //printing array elements  
+        for (int i=0; i<length; i++)  
+           System.out.print(arr[i]+" ");  
+    }  
+}  
+...................................................................................................................................
+Remove Duplicate Elements in Unsorted Array
+
+import java.util.Arrays;  
+public class RemoveDuplicateInArrayExample3{  
+public static int removeDuplicateElements(int arr[], int n){  
+        if (n==0 || n==1){  
+            return n;  
+        }  
+        int[] temp = new int[n];  
+        int j = 0;  
+        for (int i=0; i<n-1; i++){  
+            if (arr[i] != arr[i+1]){  
+                temp[j++] = arr[i];  
+            }  
+         }  
+        temp[j++] = arr[n-1];     
+        // Changing original array  
+        for (int i=0; i<j; i++){  
+            arr[i] = temp[i];  
+        }  
+        return j;  
+    }  
+       
+    public static void main (String[] args) {  
+        int arr[] = {10,70,30,90,20,20,30,40,70,50};//unsorted array  
+        Arrays.sort(arr);//sorting array  
+        int length = arr.length;  
+        length = removeDuplicateElements(arr, length);  
+        //printing array elements  
+        for (int i=0; i<length; i++)  
+           System.out.print(arr[i]+" ");  
+    }  
+}  
+...................................................................................................................................
+
+
+
+
+
+

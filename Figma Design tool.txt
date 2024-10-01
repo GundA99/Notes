@@ -1,0 +1,14 @@
+
+Figma :
+Figma is a cloud-based design tool that is widely used in software development for creating user interfaces (UI) and user experiences (UX).
+#Collaborative Design:- 
+	Figma allows multiple users to work on a design simultaneously, similar to how Google Docs works for text documents. This real-time collaboration enables teams to provide instant feedback and make changes on the fly.
+
+#Prototyping:-
+	Designers can create interactive prototypes that simulate how a user would interact with an application. This helps stakeholders visualize the final product before development begins.
+
+#Hand-off to Developers:-
+	Figma provides features that help streamline the hand-off process to developers. Developers can inspect designs, extract assets, and get CSS code snippets directly from the design files.
+
+Conclusion
+Figma plays a crucial role in modern software development by bridging the gap between design and development. Its collaborative features, prototyping capabilities, and integration with other tools make it a valuable asset for teams looking to streamline their design processes and enhance user experiences.

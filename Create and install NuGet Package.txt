@@ -16,10 +16,10 @@ Step 3: Configure project properties
 - title
 - Authers "Akash"
 
-#README and licence is required
+#README and licence is required(optional)
 Go to project Folder 
 -Create Text file and set type as MD and save type is All file
-	ex. ReadMe.MD 
+	ex. ReadMe.MD (Markdown)
 -Create Text file for license 
 	ex. license.txt
 	

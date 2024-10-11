@@ -62,3 +62,7 @@ Reuse: Subsequent requests for IOrder will return the same instance of Order thr
 
 
 
+AddSington is used when we have Parameterless Constructor. 
+AddScoped is used when we have parameterized Constructor.
+
+

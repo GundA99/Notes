@@ -1,0 +1,28 @@
+To set Role and permission
+
+1. create keys in AppPermissions
+i1Core.Core.Shared
+	Authorization
+		AppPermissions.cs
+		
+// Admin Permissions
+ public const string Pages_WMAdmin = "Pages.WMAdmin";
+ public const string Pages_WMAdmin_Accounting = "Pages.WMAdmin.Accounting";
+ public const string Pages_WMAdmin_Dashboard = "Pages.WMAdmin.Dashboard";
+ 
+--------------------------------------------------------------------
+2. Set and Create child permissions
+i1Core.Core	
+	Authorization
+		AppAuthorizationProvider.cs
+		
+  var wmadmin = pages.CreateChildPermission(AppPermissions.Pages_WMAdmin, L("WMAdmin"), multiTenancySides: MultiTenancySides.Tenant);
+  wmadmin.CreateChildPermission(AppPermissions.Pages_WMAdmin_Accounting, L("Accounting"), multiTenancySides: MultiTenancySides.Tenant);
+  wmadmin.CreateChildPermission(AppPermissions.Pages_WMAdmin_Dashboard, L("Dashboard"), multiTenancySides: MultiTenancySides.Tenant);
+ we can add permisions heare
+--------------------------------------------------------------------
+3. Set in xml file
+i1Core.core
+	Localization
+		i1Core
+			i1Core.xml

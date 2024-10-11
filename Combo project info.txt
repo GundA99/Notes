@@ -1,0 +1,105 @@
+sql server db connection and Posgress Db,
+JWT auth,
+swagger,
+Create RestCaller Package and Install,
+NUnit testing,
+IMemory chahe,
+Logger  -  https://youtu.be/SkvGtIS9QvI?si=0EipxeIYY104wJeh
+API documentation
+Scopes,
+
+Practice Project
+#IConfiguration
+for using IConfiguration we need to install package - Microsoft.Extensions.Configuration
+
+DB Conection
+# For update and migrate db we requied - Microsoft.EntityFrameworkCore.tool package       <- requied for Communication with DB
+# and to running tool package we requied - Microsoft.EntityFrameworkCore.design package
+
+#query for update database and migration
+	-Add-Migration YourMigrationName -Project  wealthmapper.InstrumentEntityFrameworkCore        //Create Table in Project
+	-update-database -project wealthmapper.InstrumentEntityFrameworkCore						 // update into Database
+
+-----------------------------------------------------------------------------------
+#Add JWT setting in Program.cs
+
+we add Authentication of JwtBearerDefaults and set Token validation parameters 
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(option =>
+    {
+        option.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = true,
+            ValidateIssuer = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
+
+-----------------------------------------------------------------------------------
+#Add section in swagger for JWT token
+1. add swaggerDoc for showing virsion and microservice name,
+2. add Security defination like In,Description,Name,scheme and BearerFormat this things are add in securityschema,
+3. add security Requirmnet in that we set reference of securityScheme
+
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My Demo API", Version = "V1" });        //this is for Display in UI
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Scheme = "bearer",
+        BearerFormat = "Jwt"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+              new string[]{}
+        }
+        });
+});
+-----------------------------------------------------------------------------------
+#Database Connection
+1.Create DBContext Class
+2.Configure This class in program.cs file
+
+ public class MyDbContext:DbContext
+ {
+     public MyDbContext(DbContextOptions<MyDbContext> options):base(options) { }
+     public DbSet<User> Users { get; set; }                                          DBset should be Public so that we can access
+
+     protected override void OnModelCreating(ModelBuilder modelBuilder)
+     {
+         modelBuilder.Entity<User>()
+             .HasKey(u => u.Id); 													// Specify the primary key
+     }
+ }
+
+--------------Program.cs----------
+
+builder.Services.AddDbContext<MyDbContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+#query for update database and migration
+	-Add-Migration YourMigrationName -Project  wealthmapper.InstrumentEntityFrameworkCore        //Create Table in Project
+	-update-database -project wealthmapper.InstrumentEntityFrameworkCore						 // update into Database
+	
+-----------------------------------------------------------------------------------

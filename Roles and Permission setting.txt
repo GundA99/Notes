@@ -1,4 +1,4 @@
-ROle and Permission managemeth
+ROle and Permission Managment
 
 i1Core.Core.Sheard.Authorization.
 AppPermissions

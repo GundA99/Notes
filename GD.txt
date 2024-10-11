@@ -379,3 +379,50 @@ Reporting
 -----------------------------------------------------------------------------------------------------------
 - Attend Daily sync of HBNO internal, 
 - 1'o clock Attend WM metting
+
+
+-----------------------------------------------------------------------------------------------------------------------
+Project Experience
+Project Title: Customer Portfolio Management System
+Technologies Used: Figma, C#, NUnit, SQL Server
+
+Utilized Figma files to create the user interface, translating design concepts into functional elements for the application.
+Developed a comprehensive solution for managing customer portfolios, enabling efficient tracking and administration of investments.
+Implemented features for handling funds and recurring deposits, facilitating seamless financial transactions for users.
+Conducted unit testing using NUnit to ensure the reliability and functionality of application components.
+Leveraged SQL Server for robust data management and storage, ensuring data integrity and performance.
+
+
+
+Here’s a structured way to present your second project on your resume:
+
+Project Experience
+Project Title: Customer Fund and Equity Management System
+Technologies Used: SQL Server, Docker, Swagger
+
+Developed a robust application to manage customer funds, equities, and portfolios, streamlining investment tracking and administration.
+Implemented savings plans, providing users with tailored financial options for better asset management.
+Maintained comprehensive Swagger documentation to enhance API usability and facilitate seamless integration for developers.
+Utilized SQL Server for efficient data storage and management, ensuring data integrity and performance.
+Employed Docker to streamline the build and deployment processes, enhancing development efficiency and consistency across environments.
+
+
+Project Experience
+Project Title: Customer Fund and Equity Management System
+Technologies Used: SQL Server, Docker, Swagger, ProBroker API, Morningstar API
+
+Developed a robust application to manage customer funds, equities, and portfolios, streamlining investment tracking and administration.
+Utilized ProBroker API to retrieve instrument data, including fund saving plans, enhancing users' ability to manage their investments.
+Integrated Morningstar API to obtain live market data, providing real-time insights for informed decision-making.
+Implemented savings plans, offering users tailored financial options for better asset management.
+Maintained comprehensive Swagger documentation to improve API usability and facilitate seamless integration for developers.
+Leveraged SQL Server for efficient data storage and management, ensuring data integrity and performance.
+Employed Docker to streamline the build and deployment processes, enhancing development efficiency and consistency across environments.
+
+
+Major Difference Between Sql Server and PostGreSql
+SQL Server-----vs--------PostgreSQL
+
+1.Relational database management system ----   Object-relational database management system
+2.Commercial product from Microsoft  ------  Open source (completely free) 
+3.Primarily designed for Windows, but recent versions also support Linux. ------ can run on various operating systems including Windows, Linux, and macOS.

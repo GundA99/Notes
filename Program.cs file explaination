@@ -1,0 +1,61 @@
+#Create WebApplication Builder
+
+var builder = WebApplication.CreateBuilder();                         
+
+The WebApplication.CreateBuilder() : is used to set up the application builder for a web application. 
+									This method initializes a new instance of WebApplicationBuilder, 
+									allowing you to configure services, middleware, and other application settings in a fluent manner.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+// Add services to the container.
+
+builder.Services.AddControllers(); 
+	Registers the MVC controllers in the dependency injection container.
+	
+----------------------------------------------------------------------------------------------------------------------------------------------	
+builder.Services.AddEndpointsApiExplorer();
+	- is used in ASP.NET Core to enable API exploration features, particularly when working with minimal APIs. This feature is useful for generating documentation and providing introspection capabilities for your endpoints.
+	- Enables the API exploration feature.
+----------------------------------------------------------------------------------------------------------------------------------------------
+builder.Services.AddSwaggerGen();
+	-Registers Swagger services to generate
+----------------------------------------------------------------------------------------------------------------------------------------------
+builder.Services.AddSingleton<IOrder, Order>();
+	- This line of code registers Order as an implementation of the IOrder interface with the DI container as a singleton.
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+#JWT Configuration
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = true,
+            ValidateIssuer = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+
+        };
+    });
+builder.Services.AddAuthorization();
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();             //Enables the Swagger middleware.
+    app.UseSwaggerUI();           //Configures the Swagger UI, allowing you to visualize the API documentation at runtime. 
+}
+
+app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();             //Maps attribute-routed controllers. without that it will not find controller it will show 404 error 
+
+app.Run();                        //Starts the application.

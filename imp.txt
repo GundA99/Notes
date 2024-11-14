@@ -1,7 +1,7 @@
 Aannotations
 -Thread states new->runnable->running->wait/sleep->Dead,
-- Figma Project tool
 - Garbage collection
+- Jenkin's
 
 value type & reference type
 Value Types: They contain the values that are stored on a stack or allocated inline within a structure. They are divided into :

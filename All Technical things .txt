@@ -1,4 +1,5 @@
 Technical things all
+Difference jira taiga
 
 1.JWT -jwt & Swagger setting 
 2.Annotations
@@ -9,8 +10,16 @@ Technical things all
 7.Figma tool
 8.Program.cs file explaination
 9. NUnit Testing
-
-***************************************************************************************************************************************
+10. Environmentveriables
+11. Difference SQL vs PostgreSQL
+12. Logger
+13. Difference between .Net and Asp.Net
+14. IHttpContextAccessor
+15. New Features in .NET 8
+16. Web.config file in ASP .NET and Apache Guacamole
+17. How to Use Joins
+18. Rest Call
+***************************************************************************1************************************************************
 **************************************************************JWT Token Authentication*************************************************
 
 A JWT (JSON Web Token) typically consists of three parts separated by dots (.).
@@ -131,10 +140,7 @@ JWT
 // tokenValue = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9
 				.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWthc2giLCJzdWIiOiJKd3RTdWJqZWN0IiwianRpIjoiNTAwNThhZWEtNzI4Ny00Njk1LWIyNjgtODMzOTdhNzIwNDgyIiwiZXhwIjoxNzI2OTEzNDM1LCJpciLCJhdWQiOiJKd3RBdWRpZW5jZSJ9
 				.28gIsVUE2jPlxYshTW55a4_97So3Nwm5CPJYg9mKZczBlVK6yx28GTMmpbeDsl10eBPbHWDP2t8ZRUFcakbj8g"
- 
- 
- 
- 
+  
 1.
 SymmetricSecurityKey: which will be used to sign and validate the JWT tokens. Symmetric keys mean the same key is used for both signing (creating the token) and verifying (validating the token).
 2.
@@ -151,6 +157,10 @@ Issuer: The issuer is a claim that indicates who issued the JWT. It’s often us
 
 #What is the Audience?
 Audience: The audience claim (aud) specifies the intended recipient(s) of the token. It indicates who the token is meant for. This is useful for ensuring that the token is only processed by the intended consumer(s), adding an extra layer of security.
+
+- we use [Authorize] Key word to secure api 
+	if we not add token then it will give 401 unAuthorized
+Note: we need same Issuer, Audience, and Key to verify
 -------------------------------------------------------------Program.cs-----------------------------------------------------------------
 
 
@@ -232,7 +242,7 @@ builder.Services.AddSwaggerGen(c =>
 								app.UseSwaggerUI();
 								
 								
-************************************************************************************************************************************************								
+*******************************************************************2*****************************************************************************								
 *************************************************************Annotations************************************************************************
 
 Annotations in ASP .Net core
@@ -272,7 +282,7 @@ Annotations in ASP .Net core
 	[DataType(DataType.Date)]
     public DateTime BirthDate { get; set; }
 	
-************************************************************************************************************************************************
+**************************************************************3**********************************************************************************
 ****************************************************Role & Permission***************************************************************************
 
 Role and Permission Managment
@@ -318,7 +328,7 @@ AppAuthorizationProvider
   <text name="Roles">Roles</text>
   
   
-************************************************************************************************************************************************  
+**********************************************************************4**************************************************************************  
 ************************************************************Create NuGet Package****************************************************************
 
 To create NuGet Packge
@@ -372,12 +382,16 @@ get the path of the git repo
 -Browse and install the package
 
 
-************************************************************************************************************************************************
+*******************************************************************5*****************************************************************************
 **********************************************************DB Connection*************************************************************************
 
-
-Command for connect DB
+-Command for connect DB
 Scaffold-DbContext "server=DESKTOP-HI1APHJ\SQLEXPRESS; database=Employees; trusted_connection=true; TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+-Commands if we Using More Than one Db 
+Update-Database -Project wealthmapper.InstrumentEntityFrameworkCore -Context MyDbContext
+Add-Migration YourMigrationName -Project wealthmapper.InstrumentEntityFrameworkCore -Context MyDbContext
+
 
 steps
 -we add connection string in appsetting.json-
@@ -487,7 +501,7 @@ builder.Services.AddDbContext<DataContext>(option =>
  
  Add-Migration initialMigration -c MyDbContect -o Data/Migrations
  update-Database
-***********************************************************************************************************************************
+******************************************************************6*****************************************************************
 **********************************************************ABP Framework*********************************************************
 
 ABP Structure
@@ -529,8 +543,28 @@ Web.Host :  - This layer is the entry point for Api project.
 			- All the start configuration for Autofact, swagger and logging are configured here
 			- Its our starting point. 
 			
+ABP is a open source web application framework to create mobile and web application based on asp .net core it provide infrastructure for interprice level software
+Command for create solution-
+	     abp new <YourProjectName>
+Notes:	
+Modularity: ABP allows you to build applications in a modular way, making it easier to manage dependencies and share functionality across different parts of the application.
+
+User and Role Management: It includes a comprehensive user and role management system, simplifying authentication and authorization.
+
+Localization and Globalization: The framework supports multiple languages and cultures, making it easier to create applications that can cater to a global audience.
+
+API Development: ABP simplifies the creation of RESTful APIs, making it easier to expose application functionality to front-end applications or third-party services.
+
+UI Frameworks: ABP integrates well with various front-end frameworks, such as Angular and React, allowing for modern web application development.
+
+Dependency Injection: It uses built-in dependency injection, promoting a loosely coupled design.
+
+"AbpZeroLicenseCode": "00Rz+spUiUf//knTuf2oCR1Q==ab6750f9b8237b730391ebb3d1a96323" : in the appsettings.json file is related to licensing in applications built with the ABP Framework (Asp.Net Boilerplate). 
+Specifically, it serves the following purposes:
+ABP Zero is a commercial application framework built on top of ABP, which provides features like user and role management, multi-tenancy, and more.
+The "AbpZeroLicenseCode" key holds the license code required for the application to operate with ABP Zero's commercial features. Without a valid license, the application may be limited in functionality or not work as expected.
 			
-**********************************************************************************************************************************************
+*************************************************************************7*********************************************************************
 ****************************************************************Figma Design Tools************************************************************
 
 
@@ -549,7 +583,7 @@ Conclusion
 Figma plays a crucial role in modern software development by bridging the gap between design and development. Its collaborative features, prototyping capabilities, and integration with other tools make it a valuable asset for teams looking to streamline their design processes and enhance user experiences.
 
 
-*****************************************************************************************************************************************
+***************************************************************************8**************************************************************
 **************************************************************Program.cs file Explaination**********************************************
 
 #Create WebApplication Builder
@@ -614,7 +648,7 @@ app.MapControllers();             //Maps attribute-routed controllers. without t
 
 app.Run();                        //Starts the application.
 
-***********************************************************************************************************************************************************
+*****************************************************************9******************************************************************************************
 *********************************************************NUnit Testing*************************************************************************************
 #NUnit Testing
 NUnit is a popular testing framework for .NET applications that provides a range of features for creating and executing unit tests.
@@ -662,7 +696,7 @@ Assert.IsTrue(condition): Asserts that a condition is true.
 Assert.IsFalse(condition): Asserts that a condition is false.
 Assert.Throws<T>(action): Asserts that an action throws a specific exception.
 
-********************************************************************************************************************************************************
+************************************************************************10********************************************************************************
 **************************************************************Environment Variables*********************************************************************
 #Environment Variables
 
@@ -672,3 +706,286 @@ In a Web API, environment variables can be used to customize settings, secrets, 
 Why use environment variables?
 Separation of concerns: Keep sensitive data, such as database connections or API keys, separate from your code.
 Easy configuration: Update environment variables without modifying code.
+
+************************************************************************11********************************************************************************
+**************************************************************Sql vs PostGreSql*********************************************************************
+
+Major Difference Between Sql Server and PostGreSql
+SQL Server-----vs--------PostgreSQL
+
+1.Relational database management system ----   Object-relational database management system
+2.Commercial product from Microsoft  ------  Open source (completely free) 
+3.Primarily designed for Windows, but recent versions also support Linux. ------ can run on various operating systems including Windows, Linux, and macOS.
+
+#Sql --> PostgreSQL 
+nvarchar(max)  == Text
+datetime2(7) == TIMESTAMP(7)
+bit == BOOLEAN
+IDENTITY(1,1) == PRIMARY KEY
+uniqueidentifier == UUID 
+tinyint == SMALLINT 
+varbinary == BYTEA
+************************************************************************12**********************************************************************
+**********************************************************************Logger********************************************************************
+
+The ILogger interface is designed to provide a simple logging abstraction for .NET applications, 
+allowing developers to log messages from their code in a structured manner. It abstracts away the specific logging implementation, 
+which could be based on various logging providers such as Console, Debug, EventSource, or third-party logging frameworks like Serilog or NLog. 
+
+# Key Features and Usage
+-Logging Levels: ILogger supports different logging levels such as Information, Warning, Error, Debug, etc. 
+This helps in categorizing the severity of the logged messages.
+-Log Message Formatting: It provides methods like LogInformation, LogWarning, LogError, etc., 
+which accept a message string and optionally some parameters to be formatted into the message.
+--------------------------------------------------------------------------
+Syntax
+
+logger.LogInformation(5,"The database is ready!");
+Above code result in console -
+
+info: DB Initializer[5]
+      The database is ready!
+-------------------------------------------------------------------------
+Logger Composition: In .NET Core applications, you typically inject ILogger<T> into your classes using dependency injection. 
+This strongly-typed logger (ILogger<T>) allows you to easily categorize logs by the type where logging occurs, making it easier to filter and understand logs.
+
+using Microsoft.Extensions.Logging;
+
+public class MyService
+{
+    private readonly ILogger<MyService> _logger;    <-- Default logger provided by microsoft
+
+    public MyService(ILogger<MyService> logger)
+    {
+        _logger = logger;
+    }
+
+    public void DoWork()
+    {
+        _logger.LogInformation("Doing some work...");
+		_logger.LogWarning("if there are some warnings")
+        try
+        {
+            // Some operation that might throw an exception
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while doing work.");
+        }
+    }
+}
+
+-------------------------------------------------------------------------
+for see logs in json formate in console
+add code in program.cs
+
+builder.Logging.AddJsonConsole(options => 
+{
+	options.JsonWriterOptions = new()
+	{
+	    Indented = true
+	};
+});
+
+----------------------------------------------------------------------------------------
+There Are multiple logging providers 
+1.JSNLog, 
+2.Log4Net,
+3.NLog
+
+
+Log4Net
+Requred Package Install - Microsoft.Extensions.Logging.Log4Net.AspNetCore
+-----------------------------------------------------------
+program.cs
+Builder.Logging.AddLog4Net();
+-----------------------------------------------------------
+Add a log4net.config File(Rigth Click->add New Item-> select Web Configuration File-> add ) with the content
+	
+	<?xml version="1.0" encoding="utf-8"?>
+	<log4net>
+		<appender name="DebugAppender" type="log4net.Appender.DebugAppender">  
+			<layout type="log4net.Layout.PatternLayout>
+				<conversionPattern value="%data [%thread] %-5level %logger - %message%newline" />
+			</layout>
+		</appender>
+		<appender name="ConsoleAppender" type="log4net.Appender.ConsoleAppender">         <-- If we want to see log in console window then we use this appender
+			<layout type="log4net.Layout.PatternLayout>
+				<conversionPattern value="%data [%thread] %-5level %logger - %message%newline" />
+			</layout>
+		</appender>
+		<root>
+			<level value="All">
+			<appender-ref ref="DebugAppender" />
+			<appender-ref ref="ConsoleAppender" />           <--- Configure appender root
+		<root>
+	<log4net>	
+	
+Configure LogLevel in log4Net.config file	
+	- Log Levels for Log4Net =>	All, DEBUG,Trace, INFO, WARN,ERROR,FATAL  
+-----------------------------------------------------------
+add configure Development Level Configuration in appsettings.Development.json
+{
+	"Logging":
+	{
+		"LogLevel":{
+			"Default": "Trace",
+			}
+	}		
+}
+-----------------------------------------------------------
+*) when we want to use File Provider add below Configuration
+
+		<appender name="RollingFile" type="log4net.Appender.RollingFileAppender">         <-- If we want to see log in console window then we use this appender
+			<file value="{Projectpath}.Logs\log.txt"/>
+			<rollingStyle value="Once">      <-- Rolling Style
+			------------or--------------
+			<rollingStyle value="Size"/>      <-- If rolling Style size
+			<maximumFileSize value="1kb"/>    <-- Default size 10mb if not provide size
+			<maxSizeRollbackups value="5"/>   <-- it keep that much Backup files 
+			
+			<layout type="log4net.Layout.PatternLayout>
+				<conversionPattern value="%data [%thread] %-5level %logger - %message%newline" />
+			</layout>
+		</appender>
+		<root>
+			<level value="All">
+ 			<appender-ref ref="RollingFile" />           <--- Configure appender root
+		<root>
+		
+this will log the logs in the log file
+# Rolling style of Log4Net
+once = Roll Files once per program execution
+size = Roll file based only on the size of the file
+Date = Roll file based only on the date
+Composite = Roll file based on both the size and date of the file.
+
+- Console and Debug window are default logging windows
+builder.logging.AddDebug();  <- if we want only Debug window
+builder.logging.AddConsole(); <- if we want only Console window
+
+
+**************************************************************13**********************************************************************
+*************************************************Difference between .Net and Asp.Net************************************************************
+
+.Net: only work on window.
+
+ASP .Net Core : 
+-support cross platform like windows,linux.
+-Support microservices architecture
+-performance is faster.
+-open source 
+-Container support,we can build application and run on docker 	
+-SP.NET is a part of the .NET framework specifically designed for building web applications and services.
+In summary, .NET is the overall framework for various types of applications, while ASP.NET is specifically focused on web application development.
+
+Why ASP.Net Core?
+Open source - anyone can use until it will Enterprise level
+Cross Platform
+CLI Support 
+- .Net Core allow development on Windows, MacOs and linux
+- We can use various IDE's, Including Visual Studio Code.
+
+
+********************************************************************14*****************************************************************
+**************************************************************IHttpContextAccessor*********************************************************
+Program.cs
+
+builder.Services.AddHttpContextAccessor(); // Ensure HttpContextAccessor is available in IInstrumentServices
+builder.Services.AddScoped<IInstrumentServices, InstrumentService>();
+
+InstrumentService.cs
+private readonly IHttpContextAccessor _httpContextAccessor;
+public instrumentController(IHttpContextAccessor httpContextAccessor)
+{
+    _httpContextAccessor = httpContextAccessor;
+}
+string result = _httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+********************************************************************15*****************************************************************
+*********************************************************New Features in .NET 8******************************************************
+Minimal API Improvements:
+Results Enhancements: New methods for returning responses (Results.Ok(), Results.NotFound(), etc.) have been optimized for better performance and flexibility.
+
+Improved Performance
+- Faster Startups & Lower Memory Usage: .NET 8 introduces even better performance improvements, including lower startup times and better memory usage for both large and small applications.
+- JIT Optimizations: Just-In-Time (JIT) compiler improvements help to optimize runtime performance, making applications faster, especially in high-load scenarios.
+- Garbage Collection Improvements: The garbage collector has been optimized to minimize latency and improve throughput in high-performance applications.
+
+Authorization and Authentication Enhancements
+-IdentityServer Integration: ASP.NET Core 8 has better out-of-the-box integration with IdentityServer for OAuth2 and OpenID Connect flows, which makes handling user authentication and authorization in distributed systems easier.
+
+OpenAPI and Swagger Enhancements
+-ASP.NET Core 8 comes with an updated version of Swagger UI for automatic API documentation. The SwaggerGen and SwaggerUI packages are more tightly integrated into the framework.
+-API Versioning: Support for API versioning is better than ever. You can specify versions in routes and produce versioned documentation automatically with the help of Swashbuckle or other similar tools.
+
+.NET 8 introduces several features that make it easier to build cloud-native applications, including:
+-Docker support: Enhanced integration with containerized applications, offering improvements in performance, ease of use, and support for the latest Docker features.
+
+********************************************************************16*****************************************************************
+*********************************************************Web.config file in ASP .NET******************************************************
+
+#Apache Guacamole
+Apache Guacamole is a remote desktop gateway that allows users to access remote systems and desktops over the web.
+its a FTP(File transfer protocol) Which is used to get file from one server to remote server and vise versa
+------------------------------------
+#Web.config file in ASP .NET
+-In ASP.NET 8 (or any version of ASP.NET Core), the web.config file is generally not required in most cases, especially when you're building modern web applications using ASP.NET Core. 
+-This file was traditionally used in ASP.NET Framework (the older version of ASP.NET), but its role in ASP.NET Core has shifted somewhat.
+-However, the web.config file is still relevant in certain scenarios, particularly for hosting ASP.NET Core applications on IIS (Internet Information Services), which is commonly used for Windows-based deployments.
+
+-------------------------------------
+
+
+********************************************************************17*****************************************************************
+*******************************************************************Join******************************************************
+ 
+ var allProductData = await _productGroupTestVersions.GetAll().Where(y => !y.IsDeleted).OrderByDescending(x => x.UpdatedOn) //.OrderBy(x => x.UpdatedOn)
+      .Join(_productGroupTestMaster.GetAll(),
+        versions => versions.ProductGroupCode,
+        master => master.ProductGroupCode,
+        (versions, master) => new { Versions = versions, Master = master })
+      .Select(x => new ProductGroupDataList
+      {
+          Id = x.Versions.Id,
+          QuestionType = x.Master.QuestionType,
+          ProductGroupCode = x.Versions.ProductGroupCode,
+          ProductGroupReferenceId = x.Master.ProductGroupReferenceId,
+          ProductGroupTestName = x.Master.ProductGroupTestName,
+          Description = x.Master.Description,
+          VersionNo = x.Versions.VersionNo,
+          Type = x.Versions.Type,
+          TotalQuestionNo = x.Versions.TotalQuestionNo,
+          Link = x.Master.Link,
+          TestCreated = x.Versions.CreatedOn,
+          Status = string.Empty,
+          FreezeTime = x.Versions.FreezeTime,
+          MaxAttempts = x.Versions.MaxAttempts,
+          ExpireyInMonths = x.Versions.ExpiryInMonths,
+          TestedBy = 0
+      })
+      .ToListAsync();
+
+********************************************************************18**********************************************************
+******************************************************************RestCall******************************************************
+Approch 1:
+	-Install RestShar Package
+	-implementation
+		string _identityServerPath = "https://localhost:44301";
+		var client = new RestClient(_identityServerPath);           // Creating new Client
+		
+		string url = "api/TokenAuth/Authenticate";                   //Create request
+		var request = new RestRequest(url,Method.Post);
+		
+		request.AddHeader("Content-Type", "application/json");
+		request.AddHeader("abp.tenantid", "1004");                    // Not pass it will taken from Token
+		request.AddHeader("Authorization", _accessToken);
+
+		
+		var body = JsonConvert.SerializeObject(loginModel);
+		equest.AddParameter("application/json",body,ParameterType.RequestBody);
+		var response = client.Execute(request);
+		
+		
+		jsonObj = JObject.Parse(response.Content)["result"];
+		AuthenticateResultModel data = JsonConvert.DeserializeObject<AuthenticateResultModel>(JsonConvert.SerializeObject(jsonObj));
+		return data.AccessToken;

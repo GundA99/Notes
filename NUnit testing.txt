@@ -1,5 +1,3 @@
-pareller loop 
-
 #NUnit Testing
 NUnit is a popular testing framework for .NET applications that provides a range of features for creating and executing unit tests.
 Basically we use NUnit testing for test class library becouse class library cannot run directly bcz it don't have starting point.

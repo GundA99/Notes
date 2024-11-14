@@ -1,0 +1,73 @@
+
+************HTML*****************
+
+index.html <- starting point for web side
+we start building a website by creating a file named index.html. is a special filename which is present when the website root address is typed.
+
+lorem30 <- it will create random 30 words(Dumy data)
+-Head and Body tags are childrenz of HTML tag.
+
+HTML Element : Start Tag + Element + End Tag (<h1> Hello world </h1>).
+Comment : <!-- This is Comment -->  (Shortcut ctrl + /)
+
+#Anchor tag : is used to add links to an existing content inside an HTML page
+	<a href="https://google.com"><clickMe</a>
+
+# <pre> tag:	
+<pre>Data</pre> : Pre tag used when we want to print data as it is (it will take all spaces from data).
+
+# Span is an example of inline element it will take nessasory spaces
+# Div is an example of Block level element it will take complete space
+
+**********CSS*********************
+3 type of CSS we use 
+inline, embeded, and External
+
+#inline:
+<h1 style="Background-color:red ">Akash Gund<h1> 
+----------------------------------------------------
+#Embeded:
+<head>
+	<style>
+		h1{
+		Background-color = red;
+		}
+	</style>
+</head>
+<body>
+	<h1>Akash</h1>
+</body>
+----------------------------------------------------
+External: Create External Css file and import this file into html file 
+
+<head>
+	<link ref="stylesheet" href="style.css"><link>
+<head>
+<body>
+	<h1>Akash</h1>
+<body>
+
+
+CSS Properties:
+margin-top 10px  --- margin from Top
+margin-left 10px  --- margin from left
+margin : 10%    --- Outside space
+padding : 10%   --- inside space
+height : 100px      
+width : 100px      
+display : flex  --- Showing contain in horizontal
+background-color --- inside color of tag
+color             --- Text Color
+
+BORDERS
+border-style: solid, dotted;
+border-width: 3px;          -- size
+border-redius: 30px;        -- Cornner will be rounded
+
+Text
+text-align: center;         --- Showing text at center
+font-family: 'Lucida Sans'   --- Font style
+font-weight : 600;           --- Thickneess if Font
+
+
+

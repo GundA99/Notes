@@ -1,8 +1,8 @@
-sql server db connection and Posgress Db,
-JWT auth,
-swagger,
-Create RestCaller Package and Install,
-NUnit testing,
+sql server db connection and Posgress Db,     ---- Done
+JWT auth,                                     ---- Done
+swagger,							          ---- Done
+Create RestCaller Package and Install,        ---- Done
+NUnit testing, 								  ---- Done
 IMemory chahe,
 Logger  -  https://youtu.be/SkvGtIS9QvI?si=0EipxeIYY104wJeh
 API documentation

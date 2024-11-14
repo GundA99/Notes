@@ -1,6 +1,11 @@
 Command for connect DB
 Scaffold-DbContext "server=DESKTOP-HI1APHJ\SQLEXPRESS; database=Employees; trusted_connection=true; TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 
+dotnet tool install --global dotnet-ef
+
+Update-Database -Project wealthmapper.InstrumentEntityFrameworkCore -Context MyDbContext
+Add-Migration YourMigrationName -Project wealthmapper.InstrumentEntityFrameworkCore -Context MyDbContext
+
 
 ************************************************************************SQL Server***************************************************************************
 steps

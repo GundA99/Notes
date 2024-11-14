@@ -1,0 +1,31 @@
+MVC
+ johnAdvisor
+ 
+-> Default server In ASP .net Core - Kestral(in process server), Normally we use IIS Server(Out Process server) 
+wwwroot -> can contain html, doc, or images  
+
+MVC - Initial web development framework
+ASP.Net MVC is a web application framework developed by Microsoft that implements the Model-view-Controller architectural pattern.
+
+Model - Represents the applications data and business logic.
+View - Display the use interface and receives use input.
+Controller - Handles user input, update the model and manipulates the view.
+ 
+MVC Life Cycle
+1. user Request To the Controller
+2. Controller Delegete this request to The model.
+3. model perform operation and return respose to controller.
+4. Controller send the data to the view Then use can see the view.
+ 
+Routing in ASP.Net MVC is the process of mapping URLs to their corresponding controllers and action.
+
+- Passing Data to views
+	Data is passed from controllers to views useing mechanisms such as view models, ViewBag or ViewData.
+	
+- Entity Framework
+	EE Framework is an ORM that enables .NET developer to work with relational data using domain-specific object.
+	
+	- Key Components
+		DbContext: The primary class responsible for interacting with the database using models.
+		DbSet: Represents collections of a given entity within the context, corresponding to tables in the databse.
+	- Migrations: A way to update the database schema over time in a consistent and controlled manner.

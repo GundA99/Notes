@@ -1,0 +1,151 @@
+#Store Procedure
+
+It a set of sql statement those can be save as single Unit at Database side
+
+#Why we use Store Procedure
+-less Network traffic it will run on DB level
+-Code reusability
+-secure
+-Easy to Maintain (change in DB is better then Change in Code and Deployee);
+
+#Normal Query 
+  select b.firstName, b.MiddleName, a.JobTitle, a.BirthDate from [HR].[Employee] a inner join [Person].[Person] b
+  on a.Id = b.Id;
+  
+****************************Store Procedure******************************
+ - Create SP 
+	create proc sp_GetEmployeeData
+	as
+	begin
+	select b.firstName, b.MiddleName, a.JobTitle, a.BirthDate from [HR].[Employee] a inner join [Person].[Person] b
+	on a.Id = b.Id;
+	end
+ 
+ - Execute Sp
+	exec [dbo][sp_GetEmployeeData]
+  
+ - Drop store Procedure
+	drop proc [dbo][sp_GetEmployeeData]
+---------------------------------------------------------------
+# Input output parameter
+ - Create SP (Input)
+	create proc sp_GetJobTitleData(@JobTitle varchar(100))
+	as
+	begin
+	select b.FirstName, b.MiddleName, b.JobTitle from [Hr].[Employee] a inner join [Person].[Person] b
+	on b.Id = a.Id where JobTitle = @JobTitle
+	end
+ - Execute Sp
+    - we can execute SP by GUI also -> RC->Execute SP and pass value
+	- exec [dbo].[sp_GetJobTitleData] 'Senior Tool Designer'	
+-------------------------------------------------------------------
+ - Create SP (Input and Output Parameter)
+	create proc sp_GetNationalId(@BusinessEntityId int, @NationalIdnumber int output)
+	as
+	begin
+	select @NationalIdnumber = NationalIdnumber from [HR].[Employee] where BusinessEntityId = @BusinessEntityId 
+	end
+  
+ -Execute SP(Declare Variable and execute)
+	declare @NationalIdnumber int
+	exec [dto].[sp_GetNationalId] 1, NationalIdnumber output
+	select @NationalIdnumber
+----------------------------------------------------------------------------------------------------------------------
+CREATE TABLE Products(
+	ProductID INT Identity PRIMARY KEY,
+	ProductName VARCHAR(255) NOT NULL,
+	Price money NOT NULL,
+	Manufacturer VARCHAR(100),
+	DataCreated datetime
+	);
+	----------------------------------------------	
+	Parameterless SP
+ -	create procedure dbo.sp_InsertProduct
+	as
+	begin
+	declare @ProductName VARCHAR(255),
+			@Proce money,
+			@Manufacturer VARCHAR(100),
+			@DateCreated datetime
+			
+	select  @ProductName = 'Laptop',
+			@Price = 100,
+			@Manufacturer = 'DELL',
+			@DateCreated = '2024-01-02'
+			
+	insert into [dto].[Product]([ProductName],[Price],[Manufacturer],[DateCreated])
+	values( @ProductName, @Price, @Manufacturer, @DateCreated )
+	end
+	
+ -  exec dbo.sp_InsertProduct
+   -----------------------------------------------
+   parameterized SP
+   
+   create procedure dbo.sp_InsertProduct
+	(	@ProductName VARCHAR(255) output,                 <----- Output Parameter
+		@Proce money,
+		@Manufacturer VARCHAR(100),
+		@DateCreated datetime = null                      <----- To make it optional
+	)
+	as
+	begin
+	insert into [dto].[Product]([ProductName],[Price],[Manufacturer],[DateCreated])
+	values( @ProductName, @Price, @Manufacturer, @DateCreated )
+	
+	set @ProductId = SCOPE_IDENTITY()                      <---- Current PRIMARY value
+	
+	select [ProductID],[ProductName][Price][Manufacturer],[DateCreated] from [Products] where ProductID = @ProductId
+	end
+   
+   exec dbo.sp_InsertProduct 'Laptop',100,'DELL','2024-01-01'
+   
+--------------------------------------------------------------------------------------------------------------------------
+-Add If not Exist
+-Check If Exist
+-Update Price
+
+
+	create procedure dbo.sp_InsertProduct
+	(	@ProductName VARCHAR(255),                 
+		@Proce money,
+		@Manufacturer VARCHAR(100),
+		@DateCreated datetime = null                     
+	)
+	as
+	begin	
+	if not exists(select 1 from [Products] where [ProductName]=@ProductName and [Manufacturer] = @Manufacturer)
+	begin
+	insert into [dto].[Product]([ProductName],[Price],[Manufacturer],[DateCreated])
+	values( @ProductName, @Price, @Manufacturer, @DateCreated )
+	end
+	
+	ELSE
+	if exists (select 1 from [Products] where [ProductName]=@ProductName and [Manufacturer]=@Manufacturer and [Price] = @Price)
+	begin
+	print 'Product already exists'
+	end
+	
+	ELSE
+	if exists (select 1 from [Products] where [ProductName]=@ProductName and [Manufacturer]=@Manufacturer and [Price] != @Price)
+	begin
+	update [Products]
+	set Price = @Price where [ProductName] = @ProductName and [Manufacturer] = @Manufacturer
+	end
+	
+	
+	declare @ProductId int
+	set @ProductId = (select top 1 ProductId from [Products] where [ProductName]=@ProductName and [Manufacturer]=@Manufacturer [Price] = @Price)	
+	select [ProductID],[ProductName],[Price],[Manufacturer],[DateCreated] from [Products] where ProductId = @ProductID
+	end
+--------------------------------------------------------------------Debug store Procedure------------------------------------------------------
+- Debuging is Done by IDE
+		View -> SQL server Object Explorer-> Add SQL server -> Provide SQL server instance name -> Connect		
+		select DB -> store Procedure -> SP -> Rigth click -> Debug Procedure 
+		
+		
+-----------------------------------------------------------------------------------------------------------------------------------------------		 
+Book Managment Project 
+https://youtu.be/heXYdyXZV-Q?si=y18T5EwvANoM-dBe
+-----------------------------------------------------------------------------------------------------------------------------------------------
+avoid to see 1 no affected msg we can add line
+SET NOCOUNT ON;

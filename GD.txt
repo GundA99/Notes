@@ -419,6 +419,13 @@ Maintained comprehensive Swagger documentation to improve API usability and faci
 Leveraged SQL Server for efficient data storage and management, ensuring data integrity and performance.
 Employed Docker to streamline the build and deployment processes, enhancing development efficiency and consistency across environments.
 
+Project Experience
+Project Title: Automated Payment Slip Generation and Distribution System
+Personal Project | [Date Started – Date Finished]
+
+Developed a web-based solution using ASP.NET Core 8 to automate the generation and distribution of personalized payment slips. 
+The system dynamically pulls employee payment data from an Excel file, generates customized payment slips in PDF format, 
+and emails them to the respective employees.
 
 Major Difference Between Sql Server and PostGreSql
 SQL Server-----vs--------PostgreSQL

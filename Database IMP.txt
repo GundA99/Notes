@@ -1,4 +1,6 @@
 #Store Procedure
+#Call Store Procedure From Code
+#Write SP where join 2 Table and return
 
 It a set of sql statement those can be save as single Unit at Database side
 
@@ -132,20 +134,227 @@ CREATE TABLE Products(
 	set Price = @Price where [ProductName] = @ProductName and [Manufacturer] = @Manufacturer
 	end
 	
-	
 	declare @ProductId int
 	set @ProductId = (select top 1 ProductId from [Products] where [ProductName]=@ProductName and [Manufacturer]=@Manufacturer [Price] = @Price)	
 	select [ProductID],[ProductName],[Price],[Manufacturer],[DateCreated] from [Products] where ProductId = @ProductID
 	end
---------------------------------------------------------------------Debug store Procedure------------------------------------------------------
+-------------------------------------------------Debug store Procedure------------------------------------------
 - Debuging is Done by IDE
 		View -> SQL server Object Explorer-> Add SQL server -> Provide SQL server instance name -> Connect		
 		select DB -> store Procedure -> SP -> Rigth click -> Debug Procedure 
-		
-		
------------------------------------------------------------------------------------------------------------------------------------------------		 
-Book Managment Project 
+				
+----------------------------------------------------Book Managment----------------------------------------------------------
 https://youtu.be/heXYdyXZV-Q?si=y18T5EwvANoM-dBe
------------------------------------------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------E-Commers----------------------------------------------------------------
+CREATE TABLE Products(
+	ProductID INT PRIMARY KEY,
+	ProductName NVARCHAR(100),
+	UnitPrice DECIMAL(10,2),
+	StockQuantity INT
+	);
+	
+CREATE TABLE OrderHistory(
+	OrderID INT identity PRIMARY KEY,
+	ProductID INT,
+	Quantity INT,
+	OrderDate Date,
+	CustomerID int,
+	TotalPrice DECIMAL(10,2)
+	);
+	
+CREATE TABLE Customers(
+	CustomerID INT PRIMARY KEY,
+	FirstName NVARCHAR(50),
+	LastName NVARCHAR(50),
+	Email NVARCHAR(100),
+	PhoneNumber NVARCHAR(10),
+	Address NVARCHAR(255)
+	);
+	
+INSERT INTO Products(ProductID, ProductName, unitPrice, StockQuantity)
+VALUES
+		(1,'Laptop',100.00,50),
+		(2,'SmartPhone',650.00, 100),
+		(3, 'Table', 350.50,75) 
+
+INSERT INTO Custmers (CustomerID,FirstName,LastName,Email,PhoneNumber,Address)
+VALUES	
+		(1,'John','Doe','john.doe@example.com','123-456-7890','solapur'),
+		(2,'Jane','Smith','jane.smith@example.com','111-456-7890','pandharpur'),
+		(3,'Alice','Johnson','alica.johnson@example.com','222-456-7890','pune'),
+		
+select * from Products
+select * from OrderHistory
+select * from Customers
+
+
+CREATE PROCEDURE ProcessOrder
+@ProductId int,
+@Quantity int,
+@CustomerID int
+as
+begin
+
+--Start the transaction
+BEGIN TRANSACTION    
+
+DECLARE @CurrentStockQuantity int
+DECLARE @NewStockQuantity int
+
+--get the current stock quantity for a product
+SELECT @CurrentStockQuantity = StockQuantity FROM Products where ProductID = @ProductID
+
+--Check if there is enough stock quantity available to fulfill the order
+
+IF @Quantity <= @CurrentStockQuantity
+BEGIN
+--get the new stock quantity after the order
+SET @NewStockQuantity = @CurrentStockQuantity - @Quantity
+
+DECLARE @TotalPrice decimal(10,2)
+set @TotalPrice = (SELECT UnitPrice *@Quantity from Products where ProductID = @Productid)
+
+UPDATE Products
+SET StockQuantity = @NewStockQuantity
+WHERE ProductID = @ProductID
+
+INSERT INTO OrderHistory([ProductID],[Quantity],[OrderDate],[CustomerID],[TotalPrice])
+VALUE(@ProductId,@Quantity, GETDATE(),@CustomerId,@TotalPrice)
+
+--commit transaction
+
+COMMIT TRANSACTION
+END
+
+ELSE
+BEGIN
+PRINT 'Error: Insufficient StockQuantity to fulfill the Order'
+
+rollback transaction
+END
+end
+ 
+---------------------------------------------------------------------------------------------------------
 avoid to see 1 no affected msg we can add line
 SET NOCOUNT ON;
+
+***********************************************Function***************************************************
+#User Defined Function
+1. Scalar Function : Alway return a single value
+				ex. length(), substring()
+				
+syntext:	
+	CREATE FUNCTION FUNCTION_NAME
+	(@Parameter1 DATATYPE, 
+	@Parameter2 DATATYPE,...)
+	RETURNS Return_Datatype
+	AS
+	BEGIN
+	--Function Body--
+		RETURN Return_Datatype
+	END
+
+2. Table Value Function: TVF always return a Single value
+	
+syntext:
+	CREATE FUNCTION [schema_name].functionName
+	([@parameter name] [data_type])
+	RETURNS TABLE
+	AS
+	RETURN
+	(
+		SELECT column1, column2
+		FROM table_name
+		WHERE condition
+	)
+---------------------------------------------------------------
+DEMO
+  Create Function:	
+	CREATE FUNCTION fn_GetFullName(@Id int)
+	RETURNS VARCHAR(100)
+	AS
+	BEGIN
+	DECLARE @FullName varchar(100)
+	
+	SELECT @FullName = first_name +' '+last_name from Email
+	where id = @Id
+	return @fullName	
+	END	
+	
+ Execute Function:
+	SELECT DBO.fn_GetFullName(1)                <--- return single value
+	SELECT DBO.fn_GetFullName(1) as FullName from [dbo].[Email]        <--- return complete table with additional column FullName
+	
+	
+******************************************************View********************************************************
+Create :
+	CREATE VIEW vw_Person
+	as
+	select BusinessEntityId, FirstName, MiddleName, LastName from [Person].Person
+	where MiddleName is not null
+	
+Execute : select * from vw_Employee_Person
+
+
+********************************************************Call SP From Code*****************************
+
+ public class Repository : IRepository
+ {
+     public MyDbContext Context { get; set; }    
+     public Repository(MyDbContext myDbContext)
+     {
+         Context = myDbContext;
+     }
+
+
+     public async Task<List<Party>> GetParties() 
+     {
+        return await Context.Set<Party>().FromSqlRaw("EXEC test_pro").ToListAsync();
+     }
+ }
+ 
+  public async Task<List<User>> CallStoreProcedure()
+ {
+    return await _context.Users.FromSqlRaw("EXEC getUserSP").ToListAsync();
+ }
+ 
+---------------------------------------------------------------------------------------------------
+await Context.Database.ExecuteSqlAsync("EXEC test_pro");
+will execute the stored procedure and return the number of rows affected (for a query like UPDATE, INSERT, etc.).
+
+
+*******************************************************3*****************************************
+1. Create a Stored Procedure that Joins Two Tables
+
+CREATE PROCEDURE GetPartyAndEventDetails
+AS
+BEGIN
+    SELECT p.Id AS PartyId, p.Name AS PartyName, e.Id AS EventId, e.Name AS EventName
+    FROM Party p
+    INNER JOIN Event e ON p.Id = e.PartyId
+END
+
+2. Define a DTO 
+
+public class PartyEventDetailsDto
+{
+    public int PartyId { get; set; }
+    public string PartyName { get; set; }
+    public int EventId { get; set; }
+    public string EventName { get; set; }
+}
+
+3. Call the Stored Procedure from Entity Framework
+
+// Calling the stored procedure and returning the result as a list of PartyEventDetailsDto
+public async Task<List<PartyEventDetailsDto>> GetPartyAndEventDetails()
+{
+	// Execute the stored procedure and map the result to PartyEventDetailsDto
+	var result = await _context.Set<PartyEventDetailsDto>()
+		.FromSqlRaw("EXEC GetPartyAndEventDetails") // Execute the stored procedure
+		.ToListAsync(); // Convert the result to a list
+
+	return result;
+}		
+******************************************************************************************************

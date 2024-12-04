@@ -1,6 +1,10 @@
+DB Store Procedure ---  done
+Joins, SP, Trigger ---  done
 Stream API's
-how can store and retrive Image in DB
+How can store and retrive Image in DB
 how to read and write Excel file 
-DB
-Joins, SP, Trigger
-ABP session
+CICD Pipeline
+Azure cloud
+Sprint
+Jira
+Error handling

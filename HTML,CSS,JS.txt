@@ -68,6 +68,6 @@ Text
 text-align: center;         --- Showing text at center
 font-family: 'Lucida Sans'   --- Font style
 font-weight : 600;           --- Thickneess if Font
-
+justify-contain : center     --- Show Contaon in center
 
 

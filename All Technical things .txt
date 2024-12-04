@@ -1,14 +1,14 @@
 Technical things all
 Difference jira taiga
 
-1.JWT -jwt & Swagger setting 
-2.Annotations
-3.Role and Permission settings
-4.Create NuGet Package and install
-5.Db Connection 
-6.ABP Framwork
-7.Figma tool
-8.Program.cs file explaination
+1. JWT -jwt & Swagger setting 
+2. Annotations
+3. Role and Permission settings
+4. Create NuGet Package and install
+5. Db Connection 
+6. ABP Framwork
+7. Figma tool
+8. Program.cs file explaination
 9. NUnit Testing
 10. Environmentveriables
 11. Difference SQL vs PostgreSQL
@@ -19,6 +19,7 @@ Difference jira taiga
 16. Web.config file in ASP .NET and Apache Guacamole
 17. How to Use Joins
 18. Rest Call
+19. Swagger Documentation
 ***************************************************************************1************************************************************
 **************************************************************JWT Token Authentication*************************************************
 
@@ -971,9 +972,9 @@ Approch 1:
 	-Install RestShar Package
 	-implementation
 		string _identityServerPath = "https://localhost:44301";
-		var client = new RestClient(_identityServerPath);           // Creating new Client
+		var client = new RestClient(_identityServerPath);            // Creating new Client
 		
-		string url = "api/TokenAuth/Authenticate";                   //Create request
+		string url = "api/TokenAuth/Authenticate";                   // Create request
 		var request = new RestRequest(url,Method.Post);
 		
 		request.AddHeader("Content-Type", "application/json");
@@ -989,3 +990,53 @@ Approch 1:
 		jsonObj = JObject.Parse(response.Content)["result"];
 		AuthenticateResultModel data = JsonConvert.DeserializeObject<AuthenticateResultModel>(JsonConvert.SerializeObject(jsonObj));
 		return data.AccessToken;
+
+********************************************************************19**********************************************************
+************************************************************Swagger Documentation******************************************************
+#Swagger Documentation
+
+use Swashbuckle.AspNetCore package
+
+Swagger (via Swashbuckle) can auto-generate API documentation by using attributes like SwaggerOperation, SwaggerResponse, SwaggerParameter, and others in the code.
+These annotations provide descriptive information for each endpoint, such as:
+- A summary of what the endpoint does.
+- A description of how it works.
+- Information about request/response types.
+- Possible response codes.
+
+---------------------------------------Implementation-------------------------------
+[HttpGet("{agreementId}")]
+[SwaggerOperation(
+    Summary = "Details of agreement done by customer.",
+    Description = "Complete details of agreement signed by customer and remain to sign."
+)]
+[SwaggerResponse(200, "Agreement details retrieved successfully", typeof(AgreementDetails))]
+[SwaggerResponse(404, "Agreement not found")]
+public IActionResult GetAgreementDetails(long agreementId)
+{...}
+
+--------------------------------program.cs-----------------------------
+builder.Services.AddSwaggerGen(options =>
+{
+    // To enable annotations (SwaggerOperation, etc.)
+    options.EnableAnnotations();
+
+    // Optional: Add custom info to the Swagger UI
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Your API Title",
+        Version = "v1",
+        Description = "API for managing agreements."
+    });
+});
+-------------------------------------------------------------------------
+SwaggerResponse:
+Used to specify the expected HTTP response codes and the types of data returned by the endpoint.
+
+SwaggerParameter:
+Describes a parameter for an endpoint (used when the parameter doesn’t have a good name or description by default).
+
+SwaggerTag:
+Used to categorize or group operations in the Swagger UI.
+
+****************************************************************************************************************************************

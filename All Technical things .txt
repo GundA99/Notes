@@ -1,27 +1,32 @@
 Technical things all
 Difference jira taiga
 
-1. JWT -jwt & Swagger setting 
-2. Annotations
-3. Role and Permission settings
-4. Create NuGet Package and install
-5. Db Connection 
-6. ABP Framwork
-7. Figma tool
-8. Program.cs file explaination
-9. NUnit Testing
+1.  JWT -jwt & Swagger setting 
+2.  Annotations
+3.  Role and Permission settings
+4.  Create NuGet Package and install
+5.  Db Connection 
+6.  ABP Framwork , appsettings vs launchSetting
+7.  Figma tool
+8.  Program.cs file explaination
+9.  NUnit Testing
 10. Environmentveriables
 11. Difference SQL vs PostgreSQL
 12. Logger
 13. Difference between .Net and Asp.Net
 14. IHttpContextAccessor
 15. New Features in .NET 8
-16. Web.config file in ASP .NET and Apache Guacamole
+16. Web.config file in ASP .NET and Apache Guacamole, Windows IIS Deployment 
 17. How to Use Joins
 18. Rest Call
 19. Swagger Documentation
-***************************************************************************1************************************************************
-**************************************************************JWT Token Authentication*************************************************
+20. Store Procedure
+21. IConfiguration
+22. Cors Policy
+23. Send Mail Functionality 
+24. Azure
+**********************************************************************1************************************************************
+**********************************************************JWT Token Authentication*************************************************
 
 A JWT (JSON Web Token) typically consists of three parts separated by dots (.).
 # Header: 
@@ -34,7 +39,7 @@ For example, a header might look like this:
 -----------------------------------------------------------
 # Payload: 
 This part contains the claims. Claims are statements about an entity (typically the user) and additional data.
-There are three types of claims: registered, public, and private claims. 
+There are three types of claims: registered, public, and private claims.
 For example:
 {
   "sub": "1234567890",
@@ -63,8 +68,7 @@ jti (JWT ID): Provides a unique identifier for the JWT.
   "iat": 1625938022,
   "jti": "id123456"
 }
-
------------------------------------------------
+----------------------------------------------
 Public Claims:
 These are custom claims that are defined by users and application developers. They should be defined in a way that they do not clash with registered claims.
 Example:
@@ -82,8 +86,6 @@ Example:
     "key2": "value2"
   }
 }
-
-
 -----------------------------------------------
 what is Claims
 In the context of authentication and authorization using JWT (JSON Web Token), claims refer to the pieces of information asserted about a subject (typically a user) within the token. 
@@ -98,7 +100,9 @@ xxxxxxxxxx.yyyyyyyyyy.zzzzzzzzzz
  xxxxxxxxxx is the base64url encoded header
  yyyyyyyyyy is the base64url encoded payload
  zzzzzzzzzz is the signature
-
+#Note:
+	for token Creation we need SymmetricSecurityKey its used when we verify token, for that we use random string then Sign this key in signingCredentials with algorithm This algorithm we can see in Header part.
+	then we add claims. claim basically key value pairs.  
 ********************************************************Implemtation****************************************************************
 JWT
 # Download Microsoft.AspNetCore.Authentication.JwtBearer package.
@@ -506,6 +510,11 @@ builder.Services.AddDbContext<DataContext>(option =>
 **********************************************************ABP Framework*********************************************************
 
 ABP Structure
+abp net zero framework - paid framework
+-Advance level features
+
+abp free
+-Basic feature
 
 ABP Template(New Version)
 
@@ -564,7 +573,34 @@ Dependency Injection: It uses built-in dependency injection, promoting a loosely
 Specifically, it serves the following purposes:
 ABP Zero is a commercial application framework built on top of ABP, which provides features like user and role management, multi-tenancy, and more.
 The "AbpZeroLicenseCode" key holds the license code required for the application to operate with ABP Zero's commercial features. Without a valid license, the application may be limited in functionality or not work as expected.
-			
+-----------------------------------------------------------
+#appsettings.json		
+Used for application-level configuration settings.
+Contain Environment veriables,DB ConnectionStrings, AbpZeroLicenseCode, JwtBearer issuer, Audience, server related configuration 
+
+#launchSetting.json
+Used for development and debugging environment configuration.
+
+In ASP.NET Core, the launchSettings.json file is used to configure how the application runs during development. It contains settings like:
+-Profiles: Defines different ways to launch the app, such as using IIS Express or Kestrel, Http, Https.
+-Environment Variables: Sets environment variables like ASPNETCORE_ENVIRONMENT (e.g., "Development").
+-Application URL: Specifies the URLs (e.g., http://localhost:5000) the app should listen on.
+-Authentication Settings: Configures authentication methods (e.g., anonymous or Windows authentication).
+		Windows Authentication allows users to authenticate using their Windows credentials
+		allows users to access the application without providing any credentials.
+		"windowsAuthentication": false,
+		"anonymousAuthentication": true,
+-AppsettingsFilePath: If we using centralized AppSetting the we add path here
+
+#If we want to Access Base Schemes table 
+
+Abp.Domain.Repositories.IRepository<TEntity, TPrimaryKey>
+ex
+using Abp.Domain.Repositories;
+
+   private readonly IRepository<User, long> _userRepository;  <- inject dependacy
+
+
 *************************************************************************7*********************************************************************
 ****************************************************************Figma Design Tools************************************************************
 
@@ -935,8 +971,16 @@ its a FTP(File transfer protocol) Which is used to get file from one server to r
 -However, the web.config file is still relevant in certain scenarios, particularly for hosting ASP.NET Core applications on IIS (Internet Information Services), which is commonly used for Windows-based deployments.
 
 -------------------------------------
-
-
+Windows IIS Deployement
+1.Connect server VPN (getting code on mobile)
+2.access server by server link 
+3.There are Remote Access option by using VM var we can virtually access the server
+4.then we use Apache Guacamole tool for upload new build.
+5.new build copy into D:/Install folder
+6.open D:/SDB/serviceName/ take backup and past into D:/Backup folder. bcz if we want to revet that time it requird.
+7.Stop service from application pool.
+8.replace build. 
+9.Then start service. 
 ********************************************************************17*****************************************************************
 *******************************************************************Join******************************************************
  
@@ -969,7 +1013,7 @@ its a FTP(File transfer protocol) Which is used to get file from one server to r
 ********************************************************************18**********************************************************
 ******************************************************************RestCall******************************************************
 Approch 1:
-	-Install RestShar Package
+	-Install RestSharp Package
 	-implementation
 		string _identityServerPath = "https://localhost:44301";
 		var client = new RestClient(_identityServerPath);            // Creating new Client
@@ -1039,4 +1083,443 @@ Describes a parameter for an endpoint (used when the parameter doesn’t have a 
 SwaggerTag:
 Used to categorize or group operations in the Swagger UI.
 
-****************************************************************************************************************************************
+********************************************************************20********************************************************************
+**************************************************************Store Procedure*************************************************************
+#Store Procedure
+#Call Store Procedure From Code
+#Write SP where join 2 Table and return
+
+It a set of sql statement those can be save as single Unit at Database side
+
+#Why we use Store Procedure
+-less Network traffic it will run on DB level
+-Code reusability
+-secure
+-Easy to Maintain (change in DB is better then Change in Code and Deployee);
+
+#Normal Query 
+  select b.firstName, b.MiddleName, a.JobTitle, a.BirthDate from [HR].[Employee] a inner join [Person].[Person] b
+  on a.Id = b.Id;
+  
+------------------------------Store Procedure-----------------------------
+ - Create SP 
+	create proc sp_GetEmployeeData
+	as
+	begin
+	select b.firstName, b.MiddleName, a.JobTitle, a.BirthDate from [HR].[Employee] a inner join [Person].[Person] b
+	on a.Id = b.Id;
+	end
+ 
+ - Execute Sp
+	exec [dbo][sp_GetEmployeeData]
+  
+ - Drop store Procedure
+	drop proc [dbo][sp_GetEmployeeData]
+---------------------------------------------------------------
+# Input output parameter
+ - Create SP (Input)
+	create proc sp_GetJobTitleData(@JobTitle varchar(100))
+	as
+	begin
+	select b.FirstName, b.MiddleName, b.JobTitle from [Hr].[Employee] a inner join [Person].[Person] b
+	on b.Id = a.Id where JobTitle = @JobTitle
+	end
+ - Execute Sp
+    - we can execute SP by GUI also -> RC->Execute SP and pass value
+	- exec [dbo].[sp_GetJobTitleData] 'Senior Tool Designer'	
+-------------------------------------------------------------------
+ - Create SP (Input and Output Parameter)
+	create proc sp_GetNationalId(@BusinessEntityId int, @NationalIdnumber int output)
+	as
+	begin
+	select @NationalIdnumber = NationalIdnumber from [HR].[Employee] where BusinessEntityId = @BusinessEntityId 
+	end
+  
+ -Execute SP(Declare Variable and execute)
+	declare @NationalIdnumber int
+	exec [dto].[sp_GetNationalId] 1, NationalIdnumber output
+	select @NationalIdnumber
+----------------------------------------------------------------------------------------------------------------------
+CREATE TABLE Products(
+	ProductID INT Identity PRIMARY KEY,
+	ProductName VARCHAR(255) NOT NULL,
+	Price money NOT NULL,
+	Manufacturer VARCHAR(100),
+	DataCreated datetime
+	);
+	----------------------------------------------	
+	Parameterless SP
+ -	create procedure dbo.sp_InsertProduct
+	as
+	begin
+	declare @ProductName VARCHAR(255),
+			@Proce money,
+			@Manufacturer VARCHAR(100),
+			@DateCreated datetime
+			
+	select  @ProductName = 'Laptop',
+			@Price = 100,
+			@Manufacturer = 'DELL',
+			@DateCreated = '2024-01-02'
+			
+	insert into [dto].[Product]([ProductName],[Price],[Manufacturer],[DateCreated])
+	values( @ProductName, @Price, @Manufacturer, @DateCreated )
+	end
+	
+ -  exec dbo.sp_InsertProduct
+   -----------------------------------------------
+   parameterized SP
+   
+   create procedure dbo.sp_InsertProduct
+	(	@ProductName VARCHAR(255) output,                 <----- Output Parameter
+		@Proce money,
+		@Manufacturer VARCHAR(100),
+		@DateCreated datetime = null                      <----- To make it optional
+	)
+	as
+	begin
+	insert into [dto].[Product]([ProductName],[Price],[Manufacturer],[DateCreated])
+	values( @ProductName, @Price, @Manufacturer, @DateCreated )
+	
+	set @ProductId = SCOPE_IDENTITY()                      <---- Current PRIMARY value
+	
+	select [ProductID],[ProductName][Price][Manufacturer],[DateCreated] from [Products] where ProductID = @ProductId
+	end
+   
+   exec dbo.sp_InsertProduct 'Laptop',100,'DELL','2024-01-01'
+   
+--------------------------------------------------------------------------------------------------------------------------
+-Add If not Exist
+-Check If Exist
+-Update Price
+
+
+	create procedure dbo.sp_InsertProduct
+	(	@ProductName VARCHAR(255),                 
+		@Proce money,
+		@Manufacturer VARCHAR(100),
+		@DateCreated datetime = null                     
+	)
+	as
+	begin	
+	if not exists(select 1 from [Products] where [ProductName]=@ProductName and [Manufacturer] = @Manufacturer)
+	begin
+	insert into [dto].[Product]([ProductName],[Price],[Manufacturer],[DateCreated])
+	values( @ProductName, @Price, @Manufacturer, @DateCreated )
+	end
+	
+	ELSE
+	if exists (select 1 from [Products] where [ProductName]=@ProductName and [Manufacturer]=@Manufacturer and [Price] = @Price)
+	begin
+	print 'Product already exists'
+	end
+	
+	ELSE
+	if exists (select 1 from [Products] where [ProductName]=@ProductName and [Manufacturer]=@Manufacturer and [Price] != @Price)
+	begin
+	update [Products]
+	set Price = @Price where [ProductName] = @ProductName and [Manufacturer] = @Manufacturer
+	end
+	
+	declare @ProductId int
+	set @ProductId = (select top 1 ProductId from [Products] where [ProductName]=@ProductName and [Manufacturer]=@Manufacturer [Price] = @Price)	
+	select [ProductID],[ProductName],[Price],[Manufacturer],[DateCreated] from [Products] where ProductId = @ProductID
+	end
+-------------------------------------------------Debug store Procedure------------------------------------------
+- Debuging is Done by IDE
+		View -> SQL server Object Explorer-> Add SQL server -> Provide SQL server instance name -> Connect		
+		select DB -> store Procedure -> SP -> Rigth click -> Debug Procedure 
+				
+----------------------------------------------------Book Managment----------------------------------------------------------
+https://youtu.be/heXYdyXZV-Q?si=y18T5EwvANoM-dBe
+
+----------------------------------------------------E-Commers----------------------------------------------------------------
+CREATE TABLE Products(
+	ProductID INT PRIMARY KEY,
+	ProductName NVARCHAR(100),
+	UnitPrice DECIMAL(10,2),
+	StockQuantity INT
+	);
+	
+CREATE TABLE OrderHistory(
+	OrderID INT identity PRIMARY KEY,
+	ProductID INT,
+	Quantity INT,
+	OrderDate Date,
+	CustomerID int,
+	TotalPrice DECIMAL(10,2)
+	);
+	
+CREATE TABLE Customers(
+	CustomerID INT PRIMARY KEY,
+	FirstName NVARCHAR(50),
+	LastName NVARCHAR(50),
+	Email NVARCHAR(100),
+	PhoneNumber NVARCHAR(10),
+	Address NVARCHAR(255)
+	);
+	
+INSERT INTO Products(ProductID, ProductName, unitPrice, StockQuantity)
+VALUES
+		(1,'Laptop',100.00,50),
+		(2,'SmartPhone',650.00, 100),
+		(3, 'Table', 350.50,75) 
+
+INSERT INTO Custmers (CustomerID,FirstName,LastName,Email,PhoneNumber,Address)
+VALUES	
+		(1,'John','Doe','john.doe@example.com','123-456-7890','solapur'),
+		(2,'Jane','Smith','jane.smith@example.com','111-456-7890','pandharpur'),
+		(3,'Alice','Johnson','alica.johnson@example.com','222-456-7890','pune'),
+		
+select * from Products
+select * from OrderHistory
+select * from Customers
+
+
+CREATE PROCEDURE ProcessOrder
+@ProductId int,
+@Quantity int,
+@CustomerID int
+as
+begin
+
+--Start the transaction
+BEGIN TRANSACTION    
+
+DECLARE @CurrentStockQuantity int
+DECLARE @NewStockQuantity int
+
+--get the current stock quantity for a product
+SELECT @CurrentStockQuantity = StockQuantity FROM Products where ProductID = @ProductID
+
+--Check if there is enough stock quantity available to fulfill the order
+
+IF @Quantity <= @CurrentStockQuantity
+BEGIN
+--get the new stock quantity after the order
+SET @NewStockQuantity = @CurrentStockQuantity - @Quantity
+
+DECLARE @TotalPrice decimal(10,2)
+set @TotalPrice = (SELECT UnitPrice *@Quantity from Products where ProductID = @Productid)
+
+UPDATE Products
+SET StockQuantity = @NewStockQuantity
+WHERE ProductID = @ProductID
+
+INSERT INTO OrderHistory([ProductID],[Quantity],[OrderDate],[CustomerID],[TotalPrice])
+VALUE(@ProductId,@Quantity, GETDATE(),@CustomerId,@TotalPrice)
+
+--commit transaction
+
+COMMIT TRANSACTION
+END
+
+ELSE
+BEGIN
+PRINT 'Error: Insufficient StockQuantity to fulfill the Order'
+
+rollback transaction
+END
+end
+ 
+---------------------------------------------------------------------------------------------------------
+avoid to see 1 no affected msg we can add line
+SET NOCOUNT ON;
+
+-----------------------------------------Function-------------------------------------
+#User Defined Function
+1. Scalar Function : Alway return a single value
+				ex. length(), substring()
+				
+syntext:	
+	CREATE FUNCTION FUNCTION_NAME
+	(@Parameter1 DATATYPE, 
+	@Parameter2 DATATYPE,...)
+	RETURNS Return_Datatype
+	AS
+	BEGIN
+	--Function Body--
+		RETURN Return_Datatype
+	END
+
+2. Table Value Function: TVF always return a Single value
+	
+syntext:
+	CREATE FUNCTION [schema_name].functionName
+	([@parameter name] [data_type])
+	RETURNS TABLE
+	AS
+	RETURN
+	(
+		SELECT column1, column2
+		FROM table_name
+		WHERE condition
+	)
+---------------------------------------------------------------
+DEMO
+  Create Function:	
+	CREATE FUNCTION fn_GetFullName(@Id int)
+	RETURNS VARCHAR(100)
+	AS
+	BEGIN
+	DECLARE @FullName varchar(100)
+	
+	SELECT @FullName = first_name +' '+last_name from Email
+	where id = @Id
+	return @fullName	
+	END	
+	
+ Execute Function:
+	SELECT DBO.fn_GetFullName(1)                <--- return single value
+	SELECT DBO.fn_GetFullName(1) as FullName from [dbo].[Email]        <--- return complete table with additional column FullName
+	
+	
+------------------------------------------------------------View-----------------------------------------------------
+Create :
+	CREATE VIEW vw_Person
+	as
+	select BusinessEntityId, FirstName, MiddleName, LastName from [Person].Person
+	where MiddleName is not null
+	
+Execute : select * from vw_Employee_Person
+
+
+------------------------------------------------------Call SP From Code------------------------------------------------
+
+ public class Repository : IRepository
+ {
+     public MyDbContext Context { get; set; }    
+     public Repository(MyDbContext myDbContext)
+     {
+         Context = myDbContext;
+     }
+
+
+     public async Task<List<Party>> GetParties() 
+     {
+        return await Context.Set<Party>().FromSqlRaw("EXEC test_pro").ToListAsync();
+     }
+ }
+ 
+  public async Task<List<User>> CallStoreProcedure()
+ {
+    return await _context.Users.FromSqlRaw("EXEC getUserSP").ToListAsync();
+ }
+ 
+-------------------------------------------------------------------------------------------------
+await Context.Database.ExecuteSqlAsync("EXEC test_pro");
+will execute the stored procedure and return the number of rows affected (for a query like UPDATE, INSERT, etc.).
+
+
+*******************************************************3*****************************************
+1. Create a Stored Procedure that Joins Two Tables
+
+CREATE PROCEDURE GetPartyAndEventDetails
+AS
+BEGIN
+    SELECT p.Id AS PartyId, p.Name AS PartyName, e.Id AS EventId, e.Name AS EventName
+    FROM Party p
+    INNER JOIN Event e ON p.Id = e.PartyId
+END
+
+2. Define a DTO 
+
+public class PartyEventDetailsDto
+{
+    public int PartyId { get; set; }
+    public string PartyName { get; set; }
+    public int EventId { get; set; }
+    public string EventName { get; set; }
+}
+
+3. Call the Stored Procedure from Entity Framework
+
+// Calling the stored procedure and returning the result as a list of PartyEventDetailsDto
+public async Task<List<PartyEventDetailsDto>> GetPartyAndEventDetails()
+{
+	// Execute the stored procedure and map the result to PartyEventDetailsDto
+	var result = await _context.Set<PartyEventDetailsDto>()
+		.FromSqlRaw("EXEC GetPartyAndEventDetails") // Execute the stored procedure
+		.ToListAsync(); // Convert the result to a list
+
+	return result;
+}		
+************************************************************21********************************************************************
+******************************************************* IConfiguration ***********************************************************
+If we want to get Environment variables defined in appsetting.
+
+        private readonly IConfiguration _appConfiguration;
+		public ReportHistoryService(IConfiguration _config,IWebHostEnvironment env) 
+		 {
+			 _appConfiguration = i1Core.CommonLibrary.Configuration.EnvironmentExtensions.GetAppConfiguration(env);     <--- for getting global appsettings.json
+			 test = env.GetAppConfiguration();  <---- for getting current appsetting.json
+		 }
+		 
+		----------------------------------------CommonLibrary--------------------------------------
+namespace i1Core.CommonLibrary.Configuration;
+
+public static class EnvironmentExtensions
+{
+    public static IConfigurationRoot GetAppConfiguration(this IWebHostEnvironment env)
+    {
+        string environmentVariable = Environment.GetEnvironmentVariable("AppsettingsFilePath");
+        return AppConfigurations.Get((environmentVariable != "" && environmentVariable != null) ? environmentVariable : env.ContentRootPath, env.EnvironmentName, env.IsDevelopment());
+    }
+}
+
+********************************************************************22********************************************************************
+************************************************************** Cors policy *************************************************************
+#add configuration in program.cs file to allow only specific url
+
+builder.Services.AddCors(o =>
+{
+    o.AddPolicy("myCorsPolicy", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
+app.UseCors("myCorsPolicy");
+
+
+********************************************************************23********************************************************************
+************************************************************** Mail Functionality *************************************************************
+  
+  public void SendEmail(string toEmail, string subject, string body)
+  {
+      var fromEmail = Configuration.GetSection("Constants:FromEmail").Value ?? string.Empty;
+      var fromEmailPassword = Configuration.GetSection("Constants:EmailAccountPassword").Value ?? string.Empty;
+
+      var message = new MailMessage()
+      {
+          From = new MailAddress(fromEmail),
+          Subject = subject,
+          Body = body,
+          IsBodyHtml = true
+      };
+
+      message.To.Add(toEmail);
+
+      var smtpClient = new SmtpClient("smtp.gmail.com")
+      {
+          Port = 587,
+          Credentials = new NetworkCredential(fromEmail, fromEmailPassword),
+          EnableSsl = true,
+      };
+
+      smtpClient.Send(message);
+  }
+
+#To create Password
+	Go to google account -> security -> 2 step-verification -> password -> Name -> Create
+
+*********************************************************24.Azure**********************************************************************************
+ 
+Azure is Microsoft's cloud computing platform and service that provides a wide range of cloud-based solutions for building, deploying, and managing applications and services. 
+Azure offers both Infrastructure as a Service (IaaS) and Platform as a Service (PaaS), as well as software solutions for developers, businesses, and organizations
+	- Infrastructure as a Service (IaaS): Provides virtual machines (VMs) and storage resources that can be used to build custom infrastructure on demand.
+	- Platform as a Service (PaaS): Allows developers to build applications without having to manage the underlying infrastructure. Services like Azure App Service fall under PaaS, enabling developers to focus on code rather than managing servers.
+	 
+Key Azure Services and Components:
+	- Virtual Machines (VMs): Allow users to run custom applications or services in the cloud without needing physical hardware.
+	- Azure Storage: Offers scalable and durable storage options like Blob Storage, File Storage, Disk Storage, and Queue Storage  

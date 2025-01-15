@@ -86,7 +86,7 @@ JWT
 # Download Microsoft.AspNetCore.Authentication.JwtBearer package.
 	-Microsoft.AspNetCore.Authentication.JwtBearer: Provides the middleware that integrates JWT token authentication into ASP.NET Core applications, 
 													handling the authentication process automatically during the request lifecycle.
-# BCrypt.Net-Next -package for encrypt and deceypt password
+# BCrypt.Net-Next - package for encrypt and deceypt password
 
 	            u.Password =  BCrypt.Net.BCrypt.HashPassword(user.Password);          abs->asdfghj
                 var pass = BCrypt.Net.BCrypt.Verify(user.Password, u.Password);        it check password compair and return boolean value.
@@ -216,7 +216,7 @@ builder.Services.AddSwaggerGen(c =>
 
 
 
------------------------------------------------------------Steps for add swagger in project-----------------------------------------------------------
+---------------------------------------------Steps for add swagger in project-----------------------------------------------------------
 1. install package -> Swashbuckle.AspNetCore
 2. Add code -> program.cs -> 	builder.Services.AddEndpointsApiExplorer();
 								builder.Service.AddSwaggerGen();

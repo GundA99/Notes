@@ -30,7 +30,7 @@ Imemory Cache
  
 5. Store Data into catche
 
- els{
+ else{
      result.Instrument = await InstrumentListGenerator(requiredFundType, proEndpoint, authorizationToken, isProxyEnabled, proSolutionProxyServer, proSolutionProxyServerPort, morningStarServerPath, morningStarAuthToken, morningStarProxyServer, morningStarServerPort, acceptLanguage);
      if (result.Instrument.Count > 0)
      {

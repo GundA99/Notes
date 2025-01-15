@@ -2,7 +2,7 @@
 Figma :
 Figma is a cloud-based design tool that is widely used in software development for creating user interfaces (UI) and user experiences (UX).
 #Collaborative Design:- 
-	Figma allows multiple users to work on a design simultaneously, similar to how Google Docs works for text documents. This real-time collaboration enables teams to provide instant feedback and make changes on the fly.
+	Figma allows multiple users to work on a design simultaneously, This real-time collaboration enables teams to provide instant feedback and make changes on the fly.
 
 #Prototyping:-
 	Designers can create interactive prototypes that simulate how a user would interact with an application. This helps stakeholders visualize the final product before development begins.

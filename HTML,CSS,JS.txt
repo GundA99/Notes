@@ -65,9 +65,22 @@ border-width: 3px;          -- size
 border-redius: 30px;        -- Cornner will be rounded
 
 Text
-text-align: center;         --- Showing text at center
+text-align: center;         --- Showing text at center (vertically center)
 font-family: 'Lucida Sans'   --- Font style
 font-weight : 600;           --- Thickneess if Font
-justify-contain : center     --- Show Contaon in center
+justify-contain : center     --- Show Contaon in center (horizontally center)
 
+Card
+Position : absolute   --- Does not Depend of parent
+top:50%;
+left:50%;
+transform: translate(-50,-50);
+height:300px;
+width:230px;
+border: 1px solid salmon
+rotate: -8deg;
+object-fit: cover;     -- it will fit object 
+overflow: hidden   --- Fit image in Card
 
+# Z-Index
+when we have multiple card and want to arrange one upone another we use Z-Index

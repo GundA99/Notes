@@ -1,0 +1,11 @@
+Angular
+	PrimeNG
+	ag-grid-angular
+	Highcharts
+	CharJs
+HTML 
+CSS 
+Responsive site
+--------------------
+Azure DevOps.(Wikis, Board, Repos,Pipline(Build&relese), Artifacts)
+Azure cloud. App service,ACR, Blob, key vauit,Redis cache, virtual machine,sql

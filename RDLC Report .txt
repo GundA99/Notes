@@ -1,0 +1,78 @@
+RDLC Report
+refer video : https://youtu.be/So-BzxAA7Tw?si=HyGWGgcT6PIp0Bbl
+Required Extention : Microsoft RDLC Report Designer
+Required Nuget : ReportViewerCore.NETCore / Microsoft.ReportViewer.WebForm/Microsoft.ReportingServices.ReportViewerControl.Winforms
+
+1.Create Dataset
+	NewFolder(Datasets)->New Item->Data->DataSet 
+		Add Datasets()
+2.Create repot
+	NewFolder(repot) ->New Item-> Report
+	Create repot structure
+--------------------------------------------------------
+public IActionResult PrintReport()
+{
+	
+    var dt = new DataTable();
+	dt = GetEmployeeList();
+	
+	using var report = new LocalReport();
+	report.DataSources.Add(new ReportDataSource("dsEmployee",dt));
+	var parameter = new[] { new ReportParameter("param1", "RDLC Sub-Report Example") };
+    report.ReportPath = $"{this._webHostEnvironment.WebRootPath}\\Reports\\rptEmployee.rdlc";   <----- report path
+	report.SetParameters(parameter);
+	report.SubreportProcessing += new SubreportProcessingEventHandler(SubReportProcessing);
+	var pdf = report.Render(renderFormate);
+	return File(pdf,"application/pdf","Report.pdt");
+
+}
+
+ void SubReportProcessing(object sender, SubreportProcessingEventArgs e )
+ {
+     int empId = int.Parse(e.Parameters["EmpId"].Values[0].ToString());
+     var dt2 = new DataTable();
+     dt2 = GetEmployeeDetailsList().Select("EmpId="+empId).CopyToDataTable();
+     ReportDataSource ds = new ReportDataSource("dsEmployeeDetails",dt2);
+     e.DataSources.Add(ds);
+ }
+ 
+ public DataTable GetEmployeeList()
+ {
+     var dt = new DataTable();
+     dt.Columns.Add("EmpId");
+     dt.Columns.Add("EmpName");
+     dt.Columns.Add("Department");
+     dt.Columns.Add("Designation");
+
+     DataRow row;
+     for (int i = 0; i <= 120; i++) 
+     {
+         row = dt.NewRow();
+         row["EmpId"] = i;
+         row["EmpName"] = "Akash"+i;
+         row["Department"] ="Information technology";
+         row["Designation"] = "Software Engineer";
+         dt.Rows.Add(row);
+     }
+     return dt;
+ }
+
+ public DataTable GetEmployeeDetailsList()
+ {
+     var dt = new DataTable();
+     dt.Columns.Add("EmpId");
+     dt.Columns.Add("Details");
+    DataRow row;
+     for (int i = 101; i <= 120; i++)
+     {
+         for(int j = 1;j<=3;j++)
+         {
+             row = dt.NewRow();
+             row["EmpId"] = i;
+             row["Details"] = "Gund-" + j;
+             dt.Rows.Add (row);
+         }
+     }
+     return dt;
+ }
+----------------------------------------------------------------------------------------

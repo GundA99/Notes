@@ -103,3 +103,5 @@ builder.Services.AddDbContext<MyDbContext>(option =>
 	-update-database -project wealthmapper.InstrumentEntityFrameworkCore						 // update into Database
 	
 -----------------------------------------------------------------------------------
+************************************************************************************************************************************************
+PortfolioService

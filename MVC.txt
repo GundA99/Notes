@@ -20,7 +20,7 @@ MVC Life Cycle
 Routing in ASP.Net MVC is the process of mapping URLs to their corresponding controllers and action.
 
 - Passing Data to views
-	Data is passed from controllers to views useing mechanisms such as view models, ViewBag or ViewData.
+	Data is passed from controllers to views using mechanisms such as view models, ViewBag or ViewData.
 	
 - Entity Framework
 	EE Framework is an ORM that enables .NET developer to work with relational data using domain-specific object.

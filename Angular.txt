@@ -1,0 +1,506 @@
+PrimeNG 
+Basic
+1.IMP Links
+2.IMP Commands
+3.TypeScript Config
+4.NgModules vs Standalone Components
+5.Bootstrap
+6.TypeScript
+7.@angular/Material
+8.Shawdow
+===============================================================================================
+https://youtu.be/kY1oa8YSs-Q?si=SaEPIbw3kyxCRuRw   : Angular tutorial
+https://jsonplaceholder.typicode.com/ : For Dumy Apis
+******************************************************IMP Commands*******************************************************
+Download
+Node js, Angular CLI
+Command for check Node version 		: Node -v
+Command for install Angular CLI 	: npm install -g @angular/cli
+Command for cache clan				: npm cache clean or npm cache verify(if npm > 5)
+command for uninstall 				: npm uninstall -g angular-cli
+Command for check angular version 	: ng version
+Command for Install all Packages 	: npm i --legacy-peer-deps
+Command for uninstall Angular version : npm uninstall -g @angular/cli
+Command for install Angular 17 version : npm install -g @angular/cli@17
+Command for Create Server 			: ng g service services/course/course
+Command for create Interface 		: ng g interface interfaces/course
+Command for create Enum 			: ng g enum enum/strings
+Command foe Add service 			: ng g s shared/services/api
+Command for create new component : ng g c home
+Command for check jwt token 		: npm install @auth0/angular-jwt
+for Remove Heap memory full problem = node --max-old-space-size=8192 node_modules/@angular/cli/bin/ng serve
+ 
+#Extenstions:
+Angular Language Service - Provide intellisense
+
+#To Create angular Project 
+-ng new my-app
+
+- npm install to create node_modules folder in project
+________________________________________________________________________________________________
+#HttpClient
+	-use for api calling 
+	-It comming from HttpClientModule 
+	-need to add -> provideHttpClient(withInterceptorsFromDi()) in app.config file <- it allow us to use httpclient in our application
+#Server-Side rendering
+Server side rendering is a process that involves rendering pages on the server, resulting in initial HTML content with contains initial page state.
+Once the HTML content is delivered to a browser, Angular initializes the application and utilizes the data contained within the HTML.
+--------------------------------------------------------------------------------------------------
+Why SSR?
+- Improved performance 
+Prerendering(SSG)
+- Prerendering, commonly referred to as static site generation(SSG), represent the method by which pages are rendered to static HTML files during the build process. 
+-------------------------------------------------------------------------------------------------------
+- npm install to create node_modules folder
+
+TypeScript : javaScript ki superScript hai
+
+var a : number = 5;  ok
+a = 'akash'  NOK
+*****************************************************3.TypeScript Config************************************************
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "strict": true,                     ------------------------- strictly type checking 
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "bundler",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
+*******************************************4.NgModules vs Standalone Components*************************************************
+
+1 Dependency Management, 
+2 Flexibility
+3 Performance
+
+NgModules: 
+1.Used to organize and manage dependencies. Can group together related components, directives and pipes and provide a way to inject dependencies into them.
+2.Can only used in the application they are declared in.
+3.Can be larger and slower to load becouse they need to include all the dependencies for the components that they are declaring.
+
+Standalone Components:
+1.Do not require an NgModule to be used. Can be used independently of any other component or NgModule.
+2.Mode flexible, usable anywhere without an NgModule making them more reusable and easier to share. 
+3.More lighweight. they do not require an NgModule to be used, making them smaller and faster to load.
+
+Overall, standalone components offer a flexible and lighweight way to build Angular apps. They can be used anywhere without an NgModule and are smaller and faster to load.
+******************************************************************************************************************************
+#Decoretor
+-Decorator that marks a class as an Angular component and provides configuration metadata that determines how the component should be processed, instantiated, and used at runtime.
+	@Component({
+	  selector: 'app-root',
+	  imports: [RouterOutlet],
+	  templateUrl: './app.component.html',               <--- HTML file linking 
+	  template :'<div>Hello World<div>'                  <--- we can add HTML hear also 
+	  styleUrl: './app.component.css'					 <--- CSS File linking 
+	})
+
+******************************************************************************************************************************
+#Create New Component
+Why use export Keyword?
+- publically allow to use any other componant
+
+******************************************************************************************************************************
+#RouterLink
+HTML	
+	<a routerLink="/about">Go to About</a>
+Ts
+	  imports: [RouterLink],   <--- need to import 
+app.router 	
+	export const routes: Routes = [
+		{path:'',component:HomeComponent},
+		{path:'about', component:AboutComponent}                   <--- map link
+
+	];
+******************************************************************************************************************************
+#Geting value from url
+example: about/1
+
+in about component
+ const id =  this.route.snapshot.paramMap.get('id');
+    console.log('id is = '+id);   // 1
+	
+	or 
+	
+	this.route.params.subscribe({
+		next: (data) => {
+			console.log(data['id']);
+		},
+		error: (e) => {
+			console.log(e);
+		}
+************************************************************5.Bootstrap*****************************************************************
+Bootstrap
+1.by using CDN 
+	simply add link and script in index.html file
+	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+2.by command	
+	npm i bootstrap@5.3.3
+	need to add configuration
+		angular.json
+			 "styles": [
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": [
+              "node_module/bootstrap/dist/js/bootstrap.min.js"
+            ]
+**************************************************Pass Image***********************************************************************
+			
+			 <div>
+                    <label for="image">Choose an image</label>
+                    <input type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                    (change)="onFileSelected($event)"    <---------$ is requird for pass Image
+                    npModel
+                    required>
+                </div>
+***********************************************************************************************************************************
+  
+  <a class="nav-link active" aria-current="page" routerLink="/" >Home</a>    <-------- routerLink used to redirect
+
+***********************************************************************************************************************************
+Some feature not allow in normal HTML file such as if, else statment, switch, looping but angular provide this feature.
+*ngIf, *ngFor
+Ex:
+-----before----
+<div *ngIf="loggedIn; else anonymousUser">
+	this User is loggedIn
+</div>
+<ng-template #anonymousUser>
+	this user is not logged in
+</ng-template>
+------Latest angular version-----
+@if(loggedIn){
+	The User is logged in
+}@else{
+	The user is not logged in
+}
+---------------------------------------------------------------------
+@for(user of users; track user.id){
+	{{user.name}}
+	}@empty{
+		Empty list of users
+	}
+---------------------------------------------------------------------
+Before
+<ul>
+	<li *ngFor="let user of users; let i = index">
+		{{ i+1}}:{{user.name}}
+	</li>
+</ul>
+after
+<ul>
+	@for(user of users; track user.id){
+		<li>{{ $index+1}}; {{user.name}}</li>
+		}
+</ul>
+
+----------------------------------Switch case-----------------------------------
+Before
+<ng-container [ngSwitch]="accessLevel">
+	<p *ngSwitchCase="'admin'">adminbaba</p>
+	<p *ngSwitchCase="'customer'">customerbaba</p>
+	<p *ngSwitchDefault>DefaultBaba</p>
+<ng-container>
+
+after
+@Switch(accessLevel){
+	@Case('admin'){<p>adminkaka</p>}
+	@Case('customer'){<p>customerData</p>}
+	@Default{<p>kyNahiAta</p>}
+	}
+	 
+@let we can use in HTML also
+------------------------------------------------------------------------------------
+Input Decorator: The Input Decorator is used to pass data from a parent component to a child component. This makes the child component receive data from the parent, allowing it to be dynamically updated.
+ 
+ @Component({
+	selector: 'app-parent',
+	template:'<app-child [childData]="parantData"></app-child>'})
+	
+	export class ParentComponent{
+		parentData = 'Hello from Parent';
+		}
+	
+		
+	
+Output Decorator: Decorator is used to emit events from a child component to a parent component.
+				  This allows the child component to send data back to the parent.
+				  
+	@Component({
+		selector: 'app-parent',
+		template:
+			'<app-child (childEvent)="handleChildEvent ($event)"></app-child>'
+			
+		})
+		export class ParentComponent {
+		handleChildEvent(data:string){
+		 console.log('Received from child:', data);
+		 }
+	   }
+------------------------------------------------------------------------------------
+Local Storage:
+ web storage feature allow us to store data in key value paire
+ 
+	limitation :1. we can store 5 to 10 mb data.
+				2. Store data in Key value formate and data type should be string and it should be Unique bcz it couse data Override issue.
+				3. it store in browser If we store data in port 4200 this data can be access only in that port we can't get this data in 4100
+				
+	localStorage.setItem('username','Akash');              <--- set data
+	const userName = localStorage.getItem('username');     <--- get data 
+------------------------------------------------------------------------------------
+# Enum :
+	It help to define set of constants
+
+# Spread Operator:
+	The spread operator('...') allows you to "spread" the elements of an array or the properties of an object into another array or object. it's commonly used for copying or merging objects and arrays.
+	
+	* Use :
+	1. Updating State in a component
+		Suppose you have a component with a state representated by an object. to update a part of that state without mutating the orignal object, you can use the spread operator.
+		
+		export class ExampleComponent {
+		state = {
+			name:'Akash',
+			age: 25
+		 };
+	updateName(){
+		this.state ={
+		 ...this.state, //Spread the existing properties
+		 name: 'Gund'  //Update the name property
+		 };
+	  }
+	}
+	
+	2. Merging Arrays
+		You can use the spread operator to merge arrays, which can be useful when dealing with lists of items in Angular.
+	
+	export class ExampleComponent {
+	  items = ['item1', 'item2'];
+	  
+	  addItems()
+		const newItems = ['item3','item4'];
+		this.items =[
+			...this.items,
+			...newItems
+			];
+		}
+	3. Combine Object
+		
+		const = obj1 = {a:1, b:2};
+		const = obj2 ={b:3, c:4};
+		
+		const combinedObj = {...obj1, ...obj2 };
+		console.log(combinedObj)     // a:1, b:3, c:4
+		
+---------------------------------------------------------------------------
+npOnDestroy()
+	call when page will destroy
+
+#Build 
+Command for build : ng build
+
+HttpClient: is providednusing the provideHttpClient helper function, which most apps include in the application providers in app.config.ts
+*******************************************************6.TypeScript*********************************************************
+TypeScript
+	- typeScript is better version of javaScript, ts has more feature then js
+	- ts give us type sefty
+	- Node js is responsible for converting ts code into js becouse browser can run only Javascript Code not typeScript code.
+	
+	ex js 
+	var a = 10;
+	var a = "akash"    valid
+	
+	ex in ts 
+	var a = 10;
+	a = "akash"        not valid
+-----------------------------------------install typeScript-------------------------------------
+use command : sudo npm i typescript -g (it will install typeScript compiler)
+---------------------------------------------------array and Tuple---------------------------------------------
+let arr = [1,2,3,4,5,6, "Akash"];  <--- array
+let arr:[string, number] = ["Akash",1234]   <----Tuple      (Accept only fixed type)
+
+------------------------------------------------------------------------------------------
+Any 
+let a; <---- By default Type is any
+
+let a:number;      <----- Allow only number
+
+------------------------------------------------------------------------------------------
+Type inference means ts automatically check type for ex :-
+let a = 12; 		<----- Type Inference
+let a: number;      <----- annotation
+let a: number | boolean | string;  <-- it can contain any of the type
+-----------------------------------------------Interface-------------------------------------------
+interface User{
+	name: string,
+	email: string,
+	password: string
+	}
+	
+	function getDataOfUser(obj: User)       <----- obj is type of User
+	{}
+	
+	
+	interface Admin extends User            <------ Extend interface
+	{
+		admin:boolean
+	}
+-----------------------------------------------Alias-------------------------------------------
+type value = string | number | null;
+
+let a : value = 10;      (value == string | number | null;)
+
+--------------------------------------------Classes and Object--------------------------------------------------
+Classes and Object
+
+class Device{
+	name ='lg';
+	price = 12000;
+	category = ''digital;
+	} 
+	
+#Constructor:
+
+	class BottleMaker
+	{
+	public brand;
+	public price;
+	public color;
+	public material;
+		constructor(brand: string, price: number, color:string, material:string)
+		{
+			this.brand = brand;
+			this.price = price;
+			this.color = color;
+			this.material = material;
+		}
+	}
+	
+	--------------------------in TypeScript --------------------
+	class BottleMaker{
+		constructor(public brand: string, public price: number,public color:string, public material:string)
+	}
+	
+	-object Creation
+	let b1 = new BottleMaker("Milton",1200,"yellow","metal");
+	
+--------------------------------------------Readonly and nullable--------------------------------------------------------------------------------------	
+		class BottleMaker{
+		constructor(public readonly brand?: string, public price: number,public color:string, public material:string)
+		
+	}
+----------------------------------------getter setter----------------------------------------------
+	class user{
+		constructor(public Myname: string){}
+		
+		get name(){
+			return this.Myname;
+		}
+		set name(value:string){
+			this.Myname = value;
+		}
+----------------------------------------------Static----------------------------------------------
+	class test{
+		static version = 1.0;
+		static function(){
+		 return Math.random();
+		 }
+	}
+---------------------------------------------Function-----------------------------------------------
+function abcd: returnType{
+	return value;
+}
+---------------------------------------------Rest/spread oprater---------------------------------------------
+function sum(...arr : number[]){
+	console.log(arr);
+}
+sum(1,2,3,5,4,7,8);
+----------------------------------
+function sum(...arr : string[]){
+	console.log(arr[0]);                //Akash
+}
+sum("Akash","Pranay","Vaibhav","anil");
+----------------------------------
+var arr = [1,2,34,5,6,];
+var arr2 = [...arr];   //copy of arr;
+---------------------------------------------type guards(typeof)--------------------------------
+function abcd(arg:string | number){
+	if(typeof arg ==="number"){
+		return "number";
+	}
+	else if(typeof arg ==="string"){
+		return "string";
+	}
+}
+********************************************************7.angular/Material*************************************************
+Command for add angular Material : ng add @angular/material
+
+Form in Angular Material
+
+<mat-card>                                                  <------Card
+    <mat-card-header>										<------Header
+        <mat-card-title>Login Form</mat-card-title>			<------title
+    </mat-card-header>
+    <mat-card-content [formGroup]="loginForm">				<------Content
+        <mat-form-field color="accent">                     <------form-field
+            <mat-label>Email</mat-label>					<------mat-label
+            <input matInput formControlName="email">		<------matInput 
+            <mat-error>Filed required</mat-error>			<------materror
+        </mat-form-field>
+        <mat-form-field color="accent">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hidePassword?'password':'text'" 
+            formControlName="password" >
+            <button mat-icon-button matSuffix (click)="hidePassword=!hidePassword" >    <-----mat-icon
+                <mat-icon>
+                    {{hidePassword?"visibility_off":"visibility_on"}}					<----- Icon operation
+                </mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-card-actions>																<----- mat-card-actions
+            <button mat-raised-button color="accent" (click)="login()">Login</button>
+        </mat-card-actions>
+        <mat-card-actions>
+            <h4>Don't have an account?</h4>
+            <a routerLink="/register" mat-stroked-button color="accent">register</a>
+        </mat-card-actions>
+    </mat-card-content>
+</mat-card>
+---------------------------------------------1.mat-expansion-panel-------------------------------------------
+<mat-accordion multi="true">      						<---accordion 
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Category</mat-panel-title>
+            <mat-panel-description>SubCategory</mat-panel-description>
+        </mat-expansion-panel-header>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+	.
+	.
+	.
+    </mat-expansion-panel>
+</mat-accordion>
+-------------------------------------------
+********************************************************Shadow********************************************************
+class="mat-elevation-z8" <- add this angular material call into Table/card

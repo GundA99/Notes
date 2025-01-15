@@ -294,10 +294,10 @@ Create :
 	select BusinessEntityId, FirstName, MiddleName, LastName from [Person].Person
 	where MiddleName is not null
 	
-Execute : select * from vw_Employee_Person
+Execute : select * from vw_Employee_Person	
 
 
-********************************************************Call SP From Code*****************************
+*************************************************Call SP From Code*************************************
 
  public class Repository : IRepository
  {
@@ -358,3 +358,80 @@ public async Task<List<PartyEventDetailsDto>> GetPartyAndEventDetails()
 	return result;
 }		
 ******************************************************************************************************
+----------------------------Create Table --------------------------
+Create Table emp(
+EMPNO int NOT NULL primary key,
+ENAME varchar(10) ,
+JOB varchar(10),
+MGR int ,
+HIREDATE date,
+SAL decimal(7,2),
+COMM decimal(7,2),
+DEPTNO int,
+);
+-----------------------------insert----------------------------------
+INSERT INTO emp VALUES 
+(7369,'SMITH','CLERK',7902,'1980-12-17',800.00,NULL,20),
+(7499,'ALLEN','SALESMAN',7698,'1981-02-20',1600.00,300.00,30),
+(7521,'WARD','SALESMAN',7698,'1981-02-22',1250.00,500.00,30),
+(7566,'JONES','MANAGER',7839,'1981-04-02',2975.00,NULL,20),
+(7654,'MARTIN','SALESMAN',7698,'1981-09-28',1250.00,1400.00,30),
+(7698,'BLAKE','MANAGER',7839,'1981-05-01',2850.00,NULL,30),
+(7782,'CLARK','MANAGER',7839,'1981-06-09',2450.00,NULL,10),
+(7788,'SCOTT','ANALYST',7566,'1982-12-09',3000.00,NULL,20),
+(7839,'KING','PRESIDENT',NULL,'1981-11-17',5000.00,NULL,10),
+(7844,'TURNER','SALESMAN',7698,'1981-09-08',1500.00,0.00,30),
+(7876,'ADAMS','CLERK',7788,'1983-01-12',1100.00,NULL,20),
+(7900,'JAMES','CLERK',7698,'1981-12-03',950.00,NULL,30),
+(7902,'FORD','ANALYST',7566,'1981-12-03',3000.00,NULL,20),
+(7934,'MILLER','CLERK',7782,'1982-01-23',1300.00,NULL,10);
+
+CREATE TABLE dept(
+DEPTNO int primary key,
+DNAME varchar (14),
+Loc varchar(13));
+
+INSERT INTO dept VALUES (10,'ACCOUNTING','NEW YORK'),(20,'RESEARCH','DALLAS'),(30,'SALES','CHICAGO'),(40,'OPERATIONS','BOSTON'),(80,'hr','pune');
+
+create table salgrade(
+GRADE int,
+LOSAL int,
+HISAL int);
+
+INSERT INTO salgrade VALUES (1,700,1200),(2,1201,1400),(3,1401,2000),(4,2001,3000),(5,3001,9999),(1,700,1200),(2,1201,1400),(3,1401,2000),(4,2001,3000),(5,3001,9999);
+----------------------------------------------------------------------------------------------------
+select * from salgrade;
+
+select * from emp where ename like '__o%';
+
+select * from emp where  sal = 1250;
+
+select * from  emp where sal not between 1250 and 2850;
+
+select * from emp where comm is null;
+
+select * from emp where deptno in (10,30) order by ename desc;
+
+select ename, CONCAT(SUBSTRING(ENAME,2,4), SUBSTRING(job,2,4)) from emp; 
+
+select floor(datediff(getdate, '1999-05-21')/365) age;
+
+create procedure GetEmpData
+as 
+begin
+	declare @dept int;
+	set @dept=20;
+	select * from emp where DEPTNO = @dept;
+
+end;
+
+exec GetEmpData;
+
+create procedure GetdataWithPar(@dept int)
+as 
+begin
+	select *from emp where DEPTNO = @dept;
+end;
+
+declare @d int = 10;
+exec GetdataWithPar @d;

@@ -47,7 +47,7 @@ builder.Services.AddDbContext<DataContext>(option =>
      public DbSet<Country> Country { get; set; }
      public DbSet<Owner> Owner { get; set; } 
 	 
-	 //Req for set Promary Key
+	 //Req for set Primary Key
 	  protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
      modelBuilder.Entity<User>()

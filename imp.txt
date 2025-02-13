@@ -78,9 +78,24 @@ Method Overriding: if we have methods with same name and signature in super clas
 
 #Constructor: is a special method used to initialize object, and we use constructor to initialize all variable in the class when object is create.
 
-#Casting 					
-1. Upcasting : upcasting is the typecasting of a child object to parent object, it can be Done by implicitly.				
-2. DownCasting : it means typecasting of parent object into child object, it done by explicitly.
+#Casting 				
+->casting means convert one data type to another datatype. 	
+1. Upcasting : upcasting is the typecasting of a child object to parent object, it can be Done by implicitly.	
+				-whenever we moving from lower datatype to higher datatype you will normaly has implicit casting.
+				ex:- int i = 10;
+				double d = i; //casting (implicit casting)	
+2. DownCasting : it means typecasting of parent object into child object, it done by explicitly. 
+				-Moving from higher datatype to lower datatype we have explicit casting 
+				ex:- double d= 100.23;
+				int y = (int)d;
+	 
+#Boxing and unboxing
+when value type is moved to a reference type it's called as boxing. the vice versa is termed as unboxing.
+int i = 10;
+object y = i;   // boxing
+
+int z = (int)y;  //unboxing
+drowback of Boxing and unboxing is performace reduce due to shift data from heap to stack and stack to heap.
 
 #Association
 Association represents a relationship between two classes where object of one class are connected to object of another class.
@@ -88,12 +103,27 @@ Association represents a relationship between two classes where object of one cl
 ex. Class Car{
 				private Engine eng;
 				private Wheel w;
-				public Car(){}
+				public Car(Engine e, Wheel w)
+				{
+					this.eng = e;
+					this.w = w;
+				}
 			}
 
 2. Aggregation: aggregation is a week form of association where one class has relationship with another class but the part can exist independently of the whole
 ex. student and libraries
-	
+	class School
+	{
+			private list<Teacher> Teachers;
+			public School()
+			{
+				
+			}
+			public void AddTeacher(Teacher t)
+			{
+				this.Teachers.add(t)
+			}
+	}
 #Exceptions
 1. Unchecked Exception: Unchecked Exception are the exception that are not check at Compile-time.(ArrayIndexOutOfBound,IndexOutOfBound)
 2. Checked Exception: are exception that are checks at compile-time.(ClassNotFoundException,SqlException)
@@ -108,7 +138,46 @@ ex. student and libraries
 #Why Abstract Class have a Constructor?
 -The main pourpose of the constructor is to initialize the newly create object. in abstract class we have instance variable, abstract menthod, and non abstract method therefore class have constructor.
 -if we dont provide constructor compiler will provide defauld constructor in an abstract class.
+		public abstract class Animal
+		{
+			public string Name { get; set; }
 
+			// Constructor in abstract class
+			public Animal(string name)
+			{
+				Name = name;
+				Console.WriteLine($"{Name} is being created.");
+			}
+
+			// Abstract method (must be implemented by derived classes)
+			public abstract void Speak();
+		}
+
+		// Derived class
+		public class Dog : Animal
+		{
+			// Constructor in derived class calls base constructor
+			public Dog(string name) : base(name)
+			{
+				// Additional initialization logic for Dog
+				Console.WriteLine("Dog is initialized.");
+			}
+
+			public override void Speak()
+			{
+				Console.WriteLine($"{Name} says Woof!");
+			}
+		}
+
+		public class Program
+		{
+			public static void Main(string[] args)
+			{
+				// Creating an instance of Dog, which calls the abstract class constructor
+				Dog dog = new Dog("Buddy");
+				dog.Speak();  // Output: Buddy says Woof!
+			}
+		}
 #MVC flow:
 -request coming from client to the front controller.
 -front controller will delegate this request to the handler mapper.
@@ -119,21 +188,58 @@ ex. student and libraries
 -view resolver return the full path to the FC in case there is some data, FC set in the view and send the view back to the client.
 
 *********************************************************DOTNET***************************************************************
+#C# vs .Net
+C# is a microsoft programing language where .Net is a Framwork
+C# it has those syntaxes,loops, conditions, swithches, 
+.Net framwork has 2 things 
+	collection of libraries and It has runtime
+		Collection of libraries like list, stack, we can use directly from system.collection class
+	.Net framwork has runtime called CLR where we can run application in that we have Garbage collector, CTS,
+
 # Common languge Runtime(CLR) :- The heart of the .NET framwork is CLR, Its runtime environment that execut MSIL code.
+								- provide runtime envirnment for our application.
+								its responsible for convert code into IL code then jit will convert this IL code into os understandable
+								GC: its a part of CLR used for remove unused object.
+								CLR is responsible for run GC.
 # intermediate languge(IL) :- VB or C# Code you write is compiled into an intermediate languge Called Microsoft Intermediate Languge. The compiled file with IL code is an assembly(.dll or exe file).
+	
 # Common languge specification(CLS) :- it is resposible for converting the different .net programing languge syntactical rules and regulations into CLR understandable formate.
 # Common Type System(CTS) :- Every programming languge has its own data type system so CTS is responsible for understanding all the data type system of .NET programing languge and converting them into CLR understandable formate which will be common formate.
 	ex. VB.Net -> integer -> Int32 (CLR data type)
 		C#     -> int     -> Int32 (CLR data type)
+		
+#IL code and Jit workflow of program
+Code --------> 		IL(intermediat laguage) ------Jit-----> Machin language
+(High level)--->Compiler compile--->
+
+when code compile by compiler it partially converted into IL code when Jit will convert into machin understandable language
+JIT(Just in time):- Actually convert IL code into Machin understandable language.
+
+#we can view IL code?
+->yes, by using dick assembler we can view
+
 #Diff between .NET Framework and .NET Core 
 -Instad, developers prefer to use ASP.net MVC and ASP.NET web Api. Those two technologies have been refactored and combined into a new product that runs on .NET Core, named ASP.NET Core.
-- Core Work on Cross-platform (Windows,macOS, Linux).
+- Core Work on Cross-platform (Windows,macOS, Linux). Perfomance is better than .net framwork
 - .NET Framework used only on windows.
 - Xamarin is only for mobile apps (Android,Ios,macOS).
 
 #Explain Microsoft Intermediate Language
 MSIL is the Microsoft Intermediate Language, which provides instructions for calling methods, memory handling, storing and initializing values, exception handling, and so on.
 The instructions provided by MSIL are platform-independent and are generated by the language-specific compiler from the source code. JIT compiler compiles the MSIL into machine code based on the requirement.
+
+Why GC important?
+Garbage collector is a back ground process which cleans unused Managed resources.
+
+#Managed code vs unmanaged code?
+The code that run under the envirnment of CLR is called as managed code.
+All code which is compiled and conver into IL code is called as managed code.
+the code which does not run under the CLR called as Unmanaged code.
+
+#Value Type and reference Type
+Value types contain actual data while reference types contain pointers. and pointer point to the actual data.
+value Type are stored on stack while reference types are stored on heap.
+value types are your normal data type like int, bool, double and reference types are all objects.
 
 
 # Delegates:

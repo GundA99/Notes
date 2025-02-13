@@ -1,0 +1,216 @@
+- Merge Conflict
+- TFVC repository
+AZURE 
+#Software develpment life cycle
+Plan->Code->testing->Build->Deploye->Monitor->Oprate
+
+BA and Customer comunication
+	-plan (starting of every thing we have a plan) 
+	
+Developmemt & testing Team
+	- Code (once plan is ready we write a code.)
+	- Build (Once code ready we send a build to tester)
+	- Testing (once tester Done testing Deploye build on server)
+Opration Team
+	- Deploye (Once Deploye is done we have some opration to perform )
+	- Oprate	(Some on has from a team how monitor what exact is happing on server ex: we need to incress capacity, scale storage etc)
+	- Monitor
+	
+
+DevOps Team its combination of Developmemt team and testing team.
+is something where development and Opration work together.
+basically devOps fills the gap between Devlopment and the oprations Team.
+
+lots of tools are available to automate this process.
+#Benefits
+1.fast delivery- Deploye code from Dev m/c to server is very fast.
+2.Reduce time- lots of things(like testing,deployment,rollback) are happening automatically.
+3. Rollback - any release which you think should not go to end customer(becouse of any reason), you can roll it back easily.
+ ------------------------------------------AZURE DevOps-------------------------------
+ Basically its a development lifecyle of any product.
+ asure DevOps is developed and managed by microsoft.
+ 
+ ------------------------------AZURE and Azure DevOps----------------------------
+-AZURE is cloud solution which provides lots of services and features to helps your organization in almost all ways during development of
+any product by providing multiple tools and technology.
+
+-Azure DevOps is a feature or service of Azure.
+
+------------------------------AZURE DevOps Services----------------------------------
+mainly there are 5 services.
+1.Boards
+2.Repos
+3.Pipeline
+4.Test Plans
+5.Artifacts
+
+*******************************************************1.Boards*******************************************************
+Are used to manage our work
+	in Boards we can write our story, Task, Bugs, Epics and can manage your progress.
+	we can see Bords, Backlog, Sprint, Queries, Delivery Plans 
+
+Azure Boards is one of the main service of Azure DevOps Which is used in a project to 
+- Track the work with Kanban board, 
+- Work with backlog
+inside AZURE board we can manage Kanban board.
+
+#What is Kanban Board?
+Kanban Board is something which contain the detail of all the work Item that we can deliver on perticular project
+
+#Use Of Azure Boards
+-Managing and tracking work 
+	-if you are working in the team on the same location or Distributed team then managing a task is tedious. so that we use Azure Board for managing Task.
+	-Becouse It provide a clear picture of work Done/ Progress/ by team member so we can tract the work of each team member.
+	-We can give access of board to our stakholdre allow him to see the progress of your development.
+	-you can manage scrum, sprint with azure boards.
+	-manage your product backlog
+	-Get different type of reports.
+	
+#Types of Boards 
+-There are four Type of work item process while a new project.
+-Type of the board is depends on these work item process(when we are creating a project in Advaced setting we select Work item process as basic, Agile, scrum, CMMI)
+-Each type provide different types of work item and work flow.
+// in Work item we can see dropdown as Epic, Issue, Tasks
+Epic :- in that we add module ex. suitability module and in that Epic we add sub Tasks.
+
+
+*******************************************************2.Repos*******************************************************
+-Repo is something related to our code. in this repos you can use TFS repository, or we can use git repository using that we can manage our code we can create branches, we can create multiple repositories.
+-Here we actully provide the path of repository where we store the code in order to enable the version control.
+-in that we can see options like Commits, pushes, Branches, tags, Pull request
+
+Its a set of version control tool that you can we to manage your code.
+in that we can see the option like 
+1.clone to your computer. 
+	-in that we add path of the repository where our code we push. 
+	-or there are one option in that we can get code from IDE so we select visual Studio.
+2. We can push code from CMD
+3. Import(OPtion)
+	add Git clone URL
+// We can create README and gitignore during set path and this files we can see in File Option inside repos.
+
+we can create multiple repositories.
+
+------------------------Different Between README and gitignore file-----------------------------
+1.README :- Readme file contain information about you produc project or what is going to be inside the files of the project.
+2.GitIgnore :- in gitIgnore file contain information about what to ignore for certain file formate for certain IDEs
+	
+
+*******************************************************3.Pipeline*******************************************************
+Pipeline is Something related to the Deployment of the code. CICD will be available in 
+- in that we have options like Environment, Library
+------------------------------------------------------Building Pipeline------------------------------------------------------------
+A pipeline lets you set rules for building and compiling an application. Once the application is built, it's called an artifact. This artifact (the compiled version) can then be deployed. You can also set rules for how and when the deployment happens.
+in short the purpose of Pipeline is to automatically build and test whole project  
+
+steps
+1.in repos we have option as Set up build when click on it we redirect on pipeline page
+2.on that we have to set configuration of pipeline, Set Technology as Asp.Net .
+	there are 4 stepers Connet(connection of repositori), select, Configure(configure technology), Review
+3.when we redirect on this page we can see Connect and select stepper is complete.
+4.when we select technology yml file will create which contain Trigger and steps of you can build Pipline.
+5.then we click on Save and run(we have to add commite massage and Discription for pipeline) pipeline will create 
+6. in review stapper we can see yml file containt 
+7.Then we can see Jobs after this jobs(all steps Execution) completed we can see success of creation pipline
+so any time we change code in the branch then this pipline will be trigger.
+
+-----------------------------------------------Release Pipline in Azure DevOps---------------------------------- 
+Click on Release pipline option
+The release pipeline will actually hook into the build pipeline and allow the application to be deployed to the environment.
+1.Click on new release Pipline 
+	we can see bunch on templates we can choese or select empty jobs
+2.next step is to add an articat(Compiled code of our application), 
+	before that we need to Publish Artifact
+		Go into yamal file and add Task for Publish Artifact , Then save file and rerun pipeline.
+3.then we can see the Schedule set option in that we can set day , time for trigger release pipeline.
+4.then we need to add stages
+	in that we select Template Ex. Azure App Service deployment.
+		in that set the name of the website, Then application pool name and all other things that you required
+for IIS deployement we need to add Deployment group 
+	for that go to Deployement groups option and create group and add 
+5.Click on Save
+then go on releses tab there we see Release pipline
+6.When we click on Artifact we can see trigger settings we will Enable Continuous Deployment trigger	
+7. click on Deploye(Then deploment started)
+8.we can see URL of our deployed application.	
+
+*******************************************************4.Test Plans*******************************************************
+Testing is one of the main feature in Development. All the automation/manual testing is taken care by test plan
+- in that we have options like Test Plans, Progress report, Runs
+
+
+
+*******************************************************5.Artifacts**************************************************
+is a collection of packages which you getting from the private or public repositories which you can share with your team members.
+and all this articat required for deployment also. Basically in the Artifacts you can store your packages.
+
+
+----------------------------------------Project setting---------------------------------------------------
+-in Project setting we can select the services by allow disallow button. 
+-then we can delete the project  
+-we can see the team and the members.
+-we can see the permition for member.
+-------------------------------------------------Waterfall Methodology------------------------------------------
+waterfall module is traditional method for delivering product/software.
+in waterfall module everything is pre planed
+STRENGTHS
+-Reserch is done in detail before the project starts.
+-Timelines and cost estimates are predicate beforehand  
+Example of Waterfall module represent :- Gantt chart
+-------------------------------------------------Agile Methodology ------------------------------------------
+if we talk about very flexible methodology is a agile methodology.
+in that multiple teams working on small piece of product.
+-Intead of try to realese everything on once agile methodology release product on chunks. so product owner will using those chunk of product.
+-in Agile business and developed team work side by side. 
+-initial working product Deliver quickly.
+
+---------------------------------------------------Create Azure DevOps Account--------------------------------------------
+1.Browser-> dev.azure.com 
+2.Start free/start free with Github (Start free)
+3.Sign in Microsoft account
+4. Project name -> private -> India -> continue (redirect to your Azure Account)
+
+--------------------------------------------------What Azure DevOpe Project-------------------------------------
+
+#We Can Create multiple Orgnization
+
+#What is a project:- a project is a place where actual complete product development is done by team.
+Types
+	Privta Project 
+	Public Project
+
+Public Project:- Public project are visible to everyone.
+No login is required to get access of public project
+Each public project has a unique URL
+Public project are mostly used for open source project development.
+we can create unlimited number of public project under one or more organization.
+
+private project:-
+Private project are visible for limited user
+user must login into azure devops to get access of project.
+Each private project has a unique URL
+----------------------------------Create and manage project in Azure DevOps----------------------------
+Select Orgnization first in that Create project.
+Name(School Management School)
+-> Discription(Management system for xyz School) 
+->Select public Project.
+-> Security policies (Allow public project on)
+-> Version control (Git) 
+-> Work item process(Basic).
+-> Create Project
+
+----------------------------seeting up team for project----------------------------
+in Project setting 
+-> Teams(Option) 
+	- we can create team 
+	- we can add member in team by invite button in that we provide the emailId of the member that we want to add.and press add button
+------------------------------Deployement to a Deployement Group--------------------------
+Deployement Group:- basically represent a phyasical machine that will be deploying too.
+Deployement group define a logical group of target machin for parallal deploment
+to Create Deployement group-
+1.go to Deployement group in Pipline section
+2.Provide name of group
+3.Select type of target m/c(window/linux)
+4.then script will be created this script we need to hit by pawer shell of other m/c 
+	simple open powershell by administration mode and hit script.
+		

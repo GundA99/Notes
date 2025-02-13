@@ -84,3 +84,23 @@ overflow: hidden   --- Fit image in Card
 
 # Z-Index
 when we have multiple card and want to arrange one upone another we use Z-Index
+------------------------------------------------CSS--------------------------------------------------------------
+PX == fix unit
+1em == 16px   (its depends on parent if in parent div if we define font size : 10px then in child 1em == 10px);
+
+Q. default font size?
+-> 16px
+
+#Layout
+width: 1000px;
+hight: 540px;
+background-color : red;
+float: left;
+
+#Text
+color : red
+font-size:;
+
+text-align
+	center/right/left
+	justify   ---- when we want paregraph in center(start and end of each line position same)

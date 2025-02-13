@@ -1,0 +1,56 @@
+1)  go to nswag folder
+    -add file service.config.nswag (onboardservice.config.nswag)
+
+2) "fromDocument": {
+        "url": "https://wealthmapper.iwm.world/tazett/OnBoard/swagger/msob/swagger.json",
+        "output": null
+    }
+
+    change url accourding to your swagger
+
+
+3) "baseUrlTokenName": "ONBOARD_API_BASE_URL",
+
+    declare variable 
+
+4) "output": "../src/shared/onboard-service-proxies/onboard-service-proxies.ts"
+
+    change path according your folder structure
+
+5)  Do the nswag 
+	- go to cmd and go to nwag folder and run refresh.bat
+	- it will genarate floder onboard-service-proxies in that it will create service file onboard-service-proxies.ts
+
+6) add module file to that service 
+	- create .ts file name as onboard-service-proxy.module.ts
+	- change the name of the module e.g: OnboardServiceModule
+	- add services in provider and copy code from exiting module and change code accordingly 
+
+7) add static variable in AppConsts.ts
+ 
+  ex. static onBoardBaseUrl: string;
+
+	go to app assets/AppConfing.json declare same variable having path of swagger url 
+
+       "onBoardBaseUrl": "https://wealthmapper.iwm.world/tazett/onboard", 
+
+8) go to app AppPreBootstrap.ts file in method getApplicationConfig() add line AppConsts.onBoardBaseUrl = result.onBoardBaseUrl;
+
+9) go to root.module.ts file 
+  write this method 
+	
+	export function getRemoteonBoardServiceBaseUrl(): string {
+ 	 	return AppConsts.onBoardBaseUrl;
+    	}
+
+	- in providers add this line { provide: ONBOARD_API_BASE_URL, useFactory: getRemoteonBoardServiceBaseUrl },
+
+
+   -import service module OnBoardServiceProxyModule 
+
+ 
+
+
+
+
+

@@ -328,7 +328,7 @@ HBNO is for HandlesBanken bank It's one of the toppest bank in finland.
 	-ProBroker Give us Instrument related Data it contains Fund, Equity, Saving plans(RD), Comodity, we Geting Fund and saving plan related data from it 
 #In project we have 3 Portals 
 	User, Advisor, Representative
-	- Advisor Portal is Usrd by Bank 
+	- Advisor Portal is Used by Bank 
 		means Bank Employe Can Loging any User and perform opration
 	- User Portal any normal use used
 	- Representative portal means any other person how can manage our Portfolios based on Rigths we have 2 rigths read-only, Write
@@ -379,7 +379,6 @@ Reporting
 -----------------------------------------------------------------------------------------------------------
 - Attend Daily sync of HBNO internal, 
 - 1'o clock Attend WM metting
-
 
 -----------------------------------------------------------------------------------------------------------------------
 Project Experience

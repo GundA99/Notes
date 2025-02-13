@@ -1,4 +1,3 @@
-PrimeNG 
 Basic
 1.IMP Links
 2.IMP Commands
@@ -8,6 +7,9 @@ Basic
 6.TypeScript
 7.@angular/Material
 8.Shawdow
+9.Progress Bar
+10. PrimeNG 
+
 ===============================================================================================
 https://youtu.be/kY1oa8YSs-Q?si=SaEPIbw3kyxCRuRw   : Angular tutorial
 https://jsonplaceholder.typicode.com/ : For Dumy Apis
@@ -28,6 +30,7 @@ Command for create Enum 			: ng g enum enum/strings
 Command foe Add service 			: ng g s shared/services/api
 Command for create new component : ng g c home
 Command for check jwt token 		: npm install @auth0/angular-jwt
+Command for guards 					: ng g g guards/auth
 for Remove Heap memory full problem = node --max-old-space-size=8192 node_modules/@angular/cli/bin/ng serve
  
 #Extenstions:
@@ -504,3 +507,108 @@ Form in Angular Material
 -------------------------------------------
 ********************************************************Shadow********************************************************
 class="mat-elevation-z8" <- add this angular material call into Table/card
+
+********************************************************Progress - bar********************************************************
+<mat-progress-bar mode="indeterminate" color="accent">
+
+=============================================================PrimeNG================================================================
+latest version : 19
+
+- npm i primeng@17
+- npm install primeng primeicons, primeflex   <--Bydefault primeflex privide lots of css,
+
+Steps
+1. Add styles in angular.json file
+2. then import primeng in styles.css file : @import "primeicons/primeicons.css";
+
+1.Form
+-----------------------------ts. file-----------------------------	
+- insert FormBuilder dependencies and Create formGroup for form
+	
+	loginForm: formGroup;
+	constructor(fb:FormBuilder)
+	{
+		this.loginFor = fb.Group({
+			Email: ['initial value', validator.requird],
+			Password:['',Validators.required]
+		})
+	}
+---------------------------------------------------------------------
+-HTML page
+	<form [formGroup]="loginForm" (ngSubmit)="login()">
+    <p-card header="login" [style]="{width: '360px'}">
+           <div class="field">                    
+                        <label for="email">Email</label>
+                  <input type="text" 
+						pInputText 
+						formControlName="email"                              <----- value will assign to email parameter in form
+						name="email"
+                        placeholder="enter email" />
+                    <small *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">Email invalid</small>
+          </div>
+          <div class="field">
+                        <label for="password">Password</label>
+				<input type="password" pInputText 
+						formControlName="password" 							<----- value will assign to Password parameter in form
+						name="password"
+                        placeholder="enter password" />
+                    <small *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">invalid password</small>
+                </div>
+                    
+				<p-button 
+					label="SIGN IN" 							<----------Label will set automatically
+					styleClass="w-full">
+					type="submit"
+				</p-button>             
+      
+            <p>Not a member? <a routerLink="/register">Register</a></p>
+    </p-card>
+</form>
+-----------------------------------------------Tost----------------------------------------------
+*Tost
+	import ToastModule and BrowserAnimationModule and MessageService : MessageService will add in providers
+	
+	ts file
+	inject dependencies of MassageService
+	
+	login(){
+		this.authService.registerUser(postData as User).subscribe(
+			responce=>{
+				this.massageService.add({severity:'success',summary:'Success',details:'Register successfully'});
+				router.navigate(['login'])
+		},
+		error=> {
+				this.massageService.add({severity:'error',summary:'Success',details:'somethings went wrong'});
+		}
+			
+	}
+----------------------------------------------------------Gaurd-----------------------------------------
+to avoid user to access any page without login use Gaurd.
+1.Crete guard file (ng g g authGuard)
+2.add code
+	export const authGuard: CanActivateFn = (route, state) =>{
+		if(sessionStorage.getItem('email'))
+		{
+			return true;
+		}
+		else
+		{
+			const router = inject(Router);
+			return router.navigate(['login']);
+		}
+	};
+
+3.Add authGuard in routing file
+	const routes : Router = [
+	{
+		path:'login',
+		component:LoginComponent
+	},
+	{
+		path:'home',
+		component:HomeComponent,
+		canActivate:[authGuard]          <-------------this function will check 
+	}
+];
+
+------------------------------------------------------------------------------------------------

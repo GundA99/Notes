@@ -611,4 +611,10 @@ to avoid user to access any page without login use Gaurd.
 	}
 ];
 
-------------------------------------------------------------------------------------------------
+----------------------------------------------------json server--------------------------------------------
+1.npm install -g json-server
+2.create db.json file in project
+3.json-server db.json --watch
+
+then mock data will available on 3000 port
+

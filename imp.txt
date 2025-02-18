@@ -1,19 +1,4 @@
-Aannotations
--Thread states new->runnable->running->wait/sleep->Dead,
-- Garbage collection
-- Jenkin's
 
-value type & reference type
-Value Types: They contain the values that are stored on a stack or allocated inline within a structure. They are divided into :
-Built-in Value Types - It includes primitive data types such as Boolean, Byte, Char, Int32, etc.
-User-defined Value Types - These are defined by the user in the source code. It can be enumeration or structure.
-Enumerations - It is a set of enumerated values stored in the form of numeric type and are represented by labels.
-Structures - It defines both data(fields of the structure) and the methods(operations performed on that data) of the structure. In .NET, all primitive data types like Boolean, Byte, Char, DateTime, Decimal, etc., are defined as structures.
-
-Reference Types: It Stores a reference to the memory address of a value and is stored on the heap. They are divided into :
-Interface types - It is used to implement functionalities such as testing for equality, comparing and sorting, etc.
-Pointer types - It is a variable that holds the address of another variable.
-Self-describing types - It is a data type that gives information about themselves for the sake of garbage collectors. It includes arrays(collection of variables with the same datatype stored under a single name) and class types(they define the operations like methods, properties, or events that are performed by an object and the data that the object contains) like user-defined classes, boxed value types, and delegates(used for event handlers and callback functions).
 ---------------------------------------------------------------------------------------------------------------------------------
 
 #REST (Representational State Transfer): It mean Transfer of representational state of the resource eg. Employee, order, Fund,student between the client and server.
@@ -128,6 +113,56 @@ ex. student and libraries
 1. Unchecked Exception: Unchecked Exception are the exception that are not check at Compile-time.(ArrayIndexOutOfBound,IndexOutOfBound)
 2. Checked Exception: are exception that are checks at compile-time.(ClassNotFoundException,SqlException)
 
+#Class
+a class is a logical Unit or blueprint. it contains fields, methods and properties.
+
+public class Employee
+{
+	private int experience;			//field :- is a variable of any type
+	public Employee()				//Constructor
+	{
+		//code
+	}
+	public int Experience			//property (only getter and setter)
+	{
+		get{rerturn experience;}
+		set{experience = value}
+	}
+	
+	public void display()			//method
+	{
+		
+	}
+	
+}
+
+object:- object is a instance of class.
+
+
+----------------------------------------------------------------------------------------------------------------
+Using Statment:- The using statement ensure that DISPOSE() method of the class object is called even if an exception occurs.
+Ex:-
+	static void main()
+	{
+		using(var connection = new SqlConnection("ConnectionString))
+		{
+			var query = "select * from table";
+			var command = new SqlCommand(query, connection);
+			connection.open();
+			command.ExecuteNonQuery();
+			
+			//connection.DISPOSE();
+		}
+	}
+	
+without Using statement we have to Disconnect the db connection. and during if any error occure before DISPOSE method exception it will create proble.
+so if we use Using Statment the it will called dispose method even if exception occure.
+----------------------------------------------------------------------------------------------------------------
+
+#Difference betweeen ToBase64String and FromBase64String
+Convert.ToBase64String(byte[]): Encodes binary data (byte array) into a Base64 string.
+Convert.FromBase64String(string): Decodes a Base64 string back into its original byte array (binary data).
+
 #Synchronization :is used to control access to critical section of code by allowing only one Thread at a time to execute them.
 
 #Why interface can not have The constructor?
@@ -241,7 +276,21 @@ Value types contain actual data while reference types contain pointers. and poin
 value Type are stored on stack while reference types are stored on heap.
 value types are your normal data type like int, bool, double and reference types are all objects.
 
+#Array vs ArrayList
+array size is fixed and its strongly typed.
+where ArrayList is Flexible where we can add any type of data.
+i can add integer, string, object.
+ArrayList myList = new ArrayList()
+myList.add(1);
+myList.add("Akash")
+Array Performace is better than ArrayList bcz strongly typed 
+----------------------------------------------------------------------------------------------------------------
+#Generic collection
+generic collection is type safed and flexible
 
+List<int> myList = new List<int>();
+myList.add(1);
+myList.add("akash")  // compiler error
 # Delegates:
 -The Delegates is a reference type Data type, but instade of referencing object it reference methods.
 - A method That is added to the delegate must have same return type and same signature as delegate.
@@ -276,6 +325,31 @@ All this are defined in system namespace.
 
 #appsetting.json : is commonly used to manage application configuration settings.,file contains application-level configuration.
 				   It provides a single location to store various settings related to your application, such as connection strings, API keys, and feature flags.
+#Startup.cs
+The Startup.cs file is used to configure the application's services and request pipeline.
+ It contains methods like ConfigureServices and Configure 
+ 
+ConfigureServices:- method configure the SERVICES which are required by the application
+such as enable MemoryCache() configuration,
+Set dependance injection by using AddSingleton<>
+Configure connection string.
+
+Configure :-
+Used to configure middlewares, services, and other essential app-level configurations like routing, authentication, cors etc. 
+In newer versions of ASP.NET Core (6 and above), the Startup.cs file is often replaced by configuration inside Program.cs.
+--------------------------------------------------------------
+#Program.cs
+This file is the entry point for the application. It sets up the web server and starts the app.
+In newer versions of ASP.NET Core, this file is responsible for configuring and launching the app, which used to be handled by Startup.cs in older versions.
+--------------------------------------------------------------
+#LunchSetting.json:-
+-This file is mainly used for storing configuration related to how the application is launched during development. It is generally found in the Properties folder of a project.
+-Environment Variables: You can define environment variables that are used when running the application.
+-Application URL: You can set the URL (e.g., http://localhost:5000) where the app will run.
+--------------------------------------------------------------
+#Appsetting.json:
+this file is used for storing application level setting like database connections, logging settings, API keys, SMTP setting etc.
+--------------------------------------------------------------
 
 #Razor : razor is one of the view engines supported in ASP.NET MVC. razor allows you to write a mix of HTML and server-side code using C#.
 
@@ -285,6 +359,8 @@ All this are defined in system namespace.
 
 #Thread vs Process : 
 Process: A process is a program in execution.
+if we want to run code parallely then we use threads.
+
 Thread: thread is separate path of execution in program.
 - process are heavy weight, thread are lightweight,
 - Contest switching from one Process to another is expensive.
@@ -305,6 +381,11 @@ Key Concepts:
 #AddSingleton<>();
 Meaning of services.AddSingleton<IOrder, Order>();
 Registration: This line of code registers Order as an implementation of the IOrder interface with the DI container as a singleton.
+-------------------------------------------------------------------------
+Service lifetimes 
+-AddSingleton:- create only one instance when the service is requested for first time. and then the same instance will be shared by all different http requests.
+-AddScoped:- create single instance for each request. for a different http request there will be a different instance.
+-AddTransient:- this instance is not shared at all. every time a new instance will be created.
 
 ****************************************************Key Features of the ABP Framework**********************************************
 
@@ -323,8 +404,6 @@ API Development: ABP simplifies the creation of RESTful APIs, making it easier t
 UI Frameworks: ABP integrates well with various front-end frameworks, such as Angular and React, allowing for modern web application development.
 
 Dependency Injection: It uses built-in dependency injection, promoting a loosely coupled design.
-
-
 					
 **************************************************Dependence injection ************************************************************
 
@@ -476,88 +555,6 @@ Rigth Click on Project -> Docker Support (It will Create Docker File)
 Rigth Click on Project -> Container Orchestrator Support (It wil Create Docker Compose File) -- Container
 
 other...in Notebook
-*****************************************************************JWT*********************************************************************************
-
-JWT Stands for Json web Token which help in implemting token based security.
-
-A JWT (JSON Web Token) typically consists of three parts separated by dots (.).
-
-# Header: 
-it provide matadata about the type of data. and the algorithm to be used to incript the data that is to be transferd
-This part typically consists of two parts: the type of token (which is JWT) and the signing algorithm being used (such as HMAC SHA256 or RSA). 
-For example, a header might look like this:
-{
-  "alg": "HS256",
-  "typ": "JWT"
-}
------------------------------------------------------------
-# Payload: the payload represents the actual information in json formate that is to be transmitted over view.
-This part contains the claims. Claims are statements about an entity (typically the user) and additional data.
-There are three types of claims: registered, public, and private claims. 
-For example:
-{
-  "sub": "1234567890",
-  "name": "John Doe",
-  "admin": true,                ----role
-  "Email": "abc"
-}
-
--------------------------Extra Info-----------------------------------
-Registered Claims: 
-These are predefined claims which are not mandatory but recommended to provide a set of useful, interoperable claims. Some common registered claims include:
-
-iss (issuer): Identifies the principal that issued the JWT.
-sub (subject): Identifies the subject of the JWT.
-aud (audience): Identifies the recipients that the JWT is intended for.
-exp (expiration time): Specifies the expiration time after which the JWT should not be accepted.
-nbf (not before): Specifies the time before which the JWT must not be accepted for processing.
-iat (issued at): Specifies the time at which the JWT was issued.
-jti (JWT ID): Provides a unique identifier for the JWT.
-{
-  "iss": "issuer",
-  "sub": "subject",
-  "aud": "audience",
-  "exp": 1625939622,
-  "nbf": 1625938022,
-  "iat": 1625938022,
-  "jti": "id123456"
-}
-
------------------------------------------------
-Public Claims:
-These are custom claims that are defined by users and application developers. They should be defined in a way that they do not clash with registered claims.
-Example:
-{
-  "name": "John Doe",
-  "role": "admin"
-}
------------------------------------------------
-Private Claims: 
-These are custom claims that are agreed upon between parties that use JWTs. They are neither registered nor public claims. 
-Example:
-{
-  "custom_data": {
-    "key1": "value1",
-    "key2": "value2"
-  }
-}
-
-
------------------------------------------------
-what is Claims
-In the context of authentication and authorization using JWT (JSON Web Token), claims refer to the pieces of information asserted about a subject (typically a user) within the token. 
-Claims are statements about the subject that provide information such as identity, roles, permissions, and other attributes relevant to the application's security and functionality.
-
-----------------------------------------------------------------------
-# Signature: 
-To create the signature part you have to take the encoded header, the encoded payload, a secret, the algorithm specified in the header, and sign that.
-
-xxxxxxxxxx.yyyyyyyyyy.zzzzzzzzzz
-
- xxxxxxxxxx is the base64url encoded header
- yyyyyyyyyy is the base64url encoded payload
- zzzzzzzzzz is the signature
- 
 ********************************************************************************************************************************************
 # Key Features of Kanban in Jira
 Visual Boards: Kanban uses a board layout where tasks are represented as cards. Columns represent different stages of the workflow (e.g., To Do, In Progress, Done).	

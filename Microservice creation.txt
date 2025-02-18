@@ -1,0 +1,176 @@
+#Create new Microservice
+
+-Create Web api Project, BusinessLogic, entityFrameworkCore library
+
+Add Packages in EntityFrameworkCore
+	Abp.ZeroCore.IdentityServer4.EntityFrameworkCore -- Requird for Enable KeyWords like Entity while create table
+but we use
+	i1Core.CommonLibrary - all the required packages combine into this packages.
+---------------------------------------------------------------------------------------------
+#Create DBCotext Class
+-Inherit AbpDbContext class from Abp.EntityFrameworkCore
+-add Cunstructor	
+    public WMPlayAndLearnDbContext(DbContextOptions<WMPlayAndLearnDbContext> options) : base(options)
+    {
+
+    }
+	
+- Create DbSet 
+        public DbSet<PlayAndLearnDetails> PlayAndLearnDetails { get; set; } 
+		
+- Add Schemas
+	 protected override void OnModelCreating(ModelBuilder modelBuilder)
+	 {
+		 modelBuilder.HasDefaultSchema("PlayAndLearn");
+		 base.OnModelCreating(modelBuilder);
+	 }
+--------------------------------------Program.cs File-------------------------------------------------------
+  public class Program
+  {
+      public static void Main(string[] args)
+      {
+          AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+          
+      }
+
+      public static IWebHostBuilder CreateWebHostBuilder(string[] args) 
+      { 
+          return new WebHostBuilder().UseKestrel(opt=>
+          {
+              opt.AddServerHeader = false;
+              opt.Limits.MaxRequestLineSize = 16 * 1024;
+          })
+          .UseContentRoot(Directory.GetCurrentDirectory())
+          .ConfigureLogging((context, logging) =>
+          {
+              logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
+          })
+          .UseIIS()
+          .UseIISIntegration()
+          .UseStartup<Startup>();
+      }
+  }
+--------------------------------------------------------------------------------------------------------------
+- Create repository 
+#Interface
+namespace wealthmapper.PlayAndLearnEntityFrameworkCore.Repository
+{
+    public interface IPlayAndLearnServiceRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>, IRepository, ITransientDependency
+        where TEntity : class, IEntity<TPrimaryKey>
+    {
+
+    }
+
+    public interface IPlayAndLearnServiceRepositoryBase<TEntity> : IPlayAndLearnServiceRepositoryBase<TEntity, int>, ITransientDependency
+    where TEntity : class, IEntity<int>
+    {
+
+    }
+}
+------------------------------------------------------------------------------
+#Implimentation
+namespace wealthmapper.PlayAndLearnEntityFrameworkCore.Repository
+{
+    public class PlayAndLearnServiceRepositoryBase<TEntity, TPrimaryKey> : EfCoreRepositoryBase<WMPlayAndLearnDbContext, TEntity, TPrimaryKey>, IPlayAndLearnServiceRepositoryBase<TEntity, TPrimaryKey>, ITransientDependency
+        where TEntity : class, IEntity<TPrimaryKey>
+    {
+        public PlayAndLearnServiceRepositoryBase(IDbContextProvider<WMPlayAndLearnDbContext> dbContextProvider)
+            : base(dbContextProvider)
+        {
+
+        }
+    }
+
+    public class PlayAndLearnServiceRepositoryBase<TEntity> : PlayAndLearnServiceRepositoryBase<TEntity, int>, IPlayAndLearnServiceRepositoryBase<TEntity>, ITransientDependency
+    where TEntity : class, IEntity<int>
+    {
+        public PlayAndLearnServiceRepositoryBase(IDbContextProvider<WMPlayAndLearnDbContext> dbContextProvider)
+            : base(dbContextProvider)
+        {
+
+        }
+    }
+}
+--------------------------------------------------------------------------------------------------------------
+#Create modules (AbpModules)
+
+namespace wealthmapper.PlayAndLearnEntityFrameworkCore.Module
+{
+    [DependsOn(
+        typeof(AbpZeroCoreEntityFrameworkCoreModule),
+        typeof(AbpZeroCoreIdentityServervNextEntityFrameworkCoreModule))]
+    public class PlayAndLearnEntityFrameworkCoreModule :AbpModule							<--- this module set in startup file
+    {
+        public bool SkipDbContextRegistration { get; set; }
+
+        public PlayAndLearnEntityFrameworkCoreModule()
+        {
+
+        }
+        public override void PreInitialize()
+        {
+            if (!SkipDbContextRegistration)
+            {
+                Configuration.Modules.AbpEfCore().AddDbContext<WMPlayAndLearnDbContext>(options =>
+                {
+                    if (options.ExistingConnection != null)
+                    {
+                        WMPlayAndLearnDbContextConfigurer.Configure(options.DbContextOptions, options.ExistingConnection);
+                    }
+                    else
+                    {
+                        WMPlayAndLearnDbContextConfigurer.Configure(options.DbContextOptions, options.ConnectionString);
+                    }
+                });
+            }
+        }
+        public override void Initialize()
+        {
+            IocManager.RegisterAssemblyByConvention(typeof(PlayAndLearnEntityFrameworkCoreModule).GetAssembly());
+        }
+    }
+}
+------------------------------------------------------------------------------
+namespace wealthmapper.PlayAndLearnBusinessLogic.Module
+{
+    [DependsOn(
+        typeof(PlayAndLearnEntityFrameworkCoreModule)
+        )]
+    public class PlayAndLearnBusinessLogicModule : AbpModule
+    {
+        public override void PreInitialize()
+        {
+        }
+
+        public override void Initialize()
+        {
+            IocManager.RegisterAssemblyByConvention(typeof(PlayAndLearnBusinessLogicModule).GetAssembly());
+        }
+    }
+}
+------------------------------------------------------------------------------
+
+namespace wealthmapper.PlayAndLearn.Module
+{
+    [DependsOn(
+   typeof(PlayAndLearnBusinessLogicModule),
+   typeof(i1WealthCommonLibraryModule)
+   )]
+    public class wealthmapperPlayAndLearnCoreModule: AbpModule
+    {
+        public override void PreInitialize()
+        {
+            Configuration.Modules.AbpAspNetCore()
+                .CreateControllersForAppServices(
+                    typeof(wealthmapperPlayAndLearnCoreModule).GetAssembly()
+                );
+        }
+        public override void Initialize()
+        {
+            IocManager.RegisterAssemblyByConvention(typeof(wealthmapperPlayAndLearnCoreModule).GetAssembly());
+        }
+    }
+}
+--------------------------------------------------------------------------------------------------------------
+- For Access ABP session inherite i1WealthCommonLibraryAppServiceBase library
+--------------------------------------------------------------------------------------------------------------

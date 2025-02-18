@@ -1,7 +1,11 @@
 
 PrimeNG
 https://youtu.be/96CSYHPKzzg?si=I3nS8XiF8yk4JxYd
-
+============================================================
+# ng new projectName --routing ?
+#--legacy-peer-deps 
+#packege.json vs packege-lock.json files
+============================================================
 1.What is Angular:
 Angular is a javaScript Binding framework which binds the HTML UI and JavaScript Model. this helps you to reduce your effort on writing those lengthy lines of code for binding.
 ilso it helps you to build single page application by using the concept of routing. it also has lot of other features like HTTP, DI,Input, output becouse of which you do not need other framework.

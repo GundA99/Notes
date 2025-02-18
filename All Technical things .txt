@@ -470,8 +470,7 @@ Migration Management: It simplifies the process of adding, removing, and applyin
 # We use Microsoft.EntityFrameworkCore.design for several important reasons:
 Migration Generation: This package enables the creation of migrations from your entity model, allowing you to update your database schema easily as your data model evolves.
 
-
-************************************************************************PostGreSQL***************************************************************************
+********************************************PostGreSQL***************************************************************************
 Packages:  Npgsql.EntityFrameworkCore.PostgreSQL
 		   Microsoft.EntityFrameworkCore.Design
 	       Microsoft.EntityFrameworkCore.Tools

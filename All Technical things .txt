@@ -389,7 +389,7 @@ get the path of the git repo
 
 
 *******************************************************************5*****************************************************************************
-**********************************************************DB Connection*************************************************************************
+***********************************************************DB Connection*************************************************************************
 
 -Command for connect DB
 Scaffold-DbContext "server=DESKTOP-HI1APHJ\SQLEXPRESS; database=Employees; trusted_connection=true; TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models

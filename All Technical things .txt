@@ -1481,9 +1481,8 @@ builder.Services.AddCors(o =>
 
 app.UseCors("myCorsPolicy");
 
-
-********************************************************************23********************************************************************
-************************************************************** Mail Functionality *************************************************************
+*************************************************************23********************************************************************
+****************************************************** Mail Functionality *************************************************************
   
   public void SendEmail(string toEmail, string subject, string body)
   {
@@ -1523,6 +1522,7 @@ Azure offers both Infrastructure as a Service (IaaS) and Platform as a Service (
 Key Azure Services and Components:
 	- Virtual Machines (VMs): Allow users to run custom applications or services in the cloud without needing physical hardware.
 	- Azure Storage: Offers scalable and durable storage options like Blob Storage, File Storage, Disk Storage, and Queue Storage  
+
 *********************************************************25.RDLC Report**********************************************************************************
 RDLC Report
 refer video : https://youtu.be/So-BzxAA7Tw?si=HyGWGgcT6PIp0Bbl

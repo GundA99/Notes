@@ -26,6 +26,10 @@ Difference jira taiga
 23. Send Mail Functionality 
 24. Azure
 25. RDLC Report
+26. Difference between .Net 6,8,9 and CountBy and AggregateBy Method cache library
+27. IQueryable vs IEnumerable
+28. New Microservice creation
+29. ExpandoObject
 **********************************************************************1************************************************************
 **********************************************************JWT Token Authentication*************************************************
 
@@ -383,7 +387,7 @@ That’s it! Your NuGet package is now created and published.
 You can install it in other projects using NuGet Package Manager in Visual Studio or the dotnet CLI.
 
 --------------------------------for install-----------------------------------------------
-get the path of the git repo 
+get the path of the git repo
 -Add git path in tool-> package Manager-> package source
 -Browse and install the package
 
@@ -685,6 +689,99 @@ app.MapControllers();             //Maps attribute-routed controllers. without t
 
 app.Run();                        //Starts the application.
 
+---------------------------------------------------------------------v2-------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+#File structure
+Program.cs file:-
+- is the entry point of application via main() method.
+- it also register Startup.cs class
+- it also register IISintegration and create a host using an instance of IWebHostBuilder
+
+Startup.cs file:-
+	Program.cs file
+	{
+		Startup.cs()
+		{
+			ConfigureServices()
+			{ 
+			}
+		}
+	}
+	
+	- it configure the services which are required by the app by using ConfigureServices method.
+--------------------------------------Program.cs File-------------------------------------------------------
+  public class Program
+  {
+      public static void Main(string[] args)
+      {
+          AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+      }
+
+      public static IWebHostBuilder CreateWebHostBuilder(string[] args) 
+      { 
+          return new WebHostBuilder().UseKestrel(opt=>
+          {
+              opt.AddServerHeader = false;
+              opt.Limits.MaxRequestLineSize = 16 * 1024;
+          })
+          .UseContentRoot(Directory.GetCurrentDirectory())
+          .ConfigureLogging((context, logging) =>
+          {
+              logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
+          })
+          .UseIIS()
+          .UseIISIntegration()
+          .UseStartup<Startup>();
+      }
+  }
+  
+#Explaination of above code
+  
+	1.return new WebHostBuilder()
+		-A new WebHostBuilder is instantiated. The WebHostBuilder is used to configure the web host, which will host the web application.
+---------------------------------------
+	2. Configure Kestrel Server:
+		.UseKestrel(opt =>
+		{
+			opt.AddServerHeader = false;
+			opt.Limits.MaxRequestLineSize = 16 * 1024;
+		})
+		
+	- .UseKestrel(opt => ...): This configures the Kestrel web server for the application. Kestrel is the default web server used by ASP.NET Core.
+	opt.AddServerHeader = false;: This option disables the Server header that is normally sent in HTTP responses. This is often done for security reasons to prevent revealing the specific web server (e.g., Kestrel) being used.
+	opt.Limits.MaxRequestLineSize = 16 * 1024;: This sets the maximum size of the request line (the part of the HTTP request that contains the HTTP method, the URI, and the HTTP version) to 16 KB (16 * 1024 bytes). If a request exceeds this size, Kestrel will reject it.
+---------------------------------------
+	3. Configure Logging:
+		.ConfigureLogging((context, logging) =>
+		{
+			logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
+		})
+		
+	-.ConfigureLogging((context, logging) => ...): This configures logging for the application. The logging system captures application logs and writes them to various output sources (e.g., console, files, etc.).
+	logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);: This sets up a filter for logging. It filters logs for Microsoft.EntityFrameworkCore.Database.Command, which is the namespace used for logging Entity Framework (EF) Core database commands.
+	It restricts the logs to only include warnings and higher levels (i.e., Warning, Error, Critical). This means informational logs (like SQL queries) from EF Core will not be logged, which can be helpful for reducing verbosity in production.
+---------------------------------------
+	4. Configure IIS Integration:
+		.UseIIS()
+		.UseIISIntegration()
+	
+	-.UseIIS(): This enables the use of Internet Information Services (IIS) for hosting the application in a production environment. IIS can act as a reverse proxy server for the application.
+	.UseIISIntegration(): This integrates the app with IIS by using the IIS In-Process Hosting model. This ensures that the app runs within the IIS worker process when hosted on IIS.
+---------------------------------------
+	5.Configure Startup Class:
+		.UseStartup<Startup>();
+		
+	-.UseStartup<Startup>(): This specifies the Startup class for the application. The Startup class is where the app’s request handling pipeline (middleware) and services (dependency injection, configuration) are configured. By specifying <Startup>, the builder knows to use that class to initialize the application.
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Create Statup.cs files
+	-ConfigureServices 
+		AddMemoryCache
+		AddCors
+		AddSwaggerConfiguration
+	-Configure
+		HTTP Pipline related
+		
+AKASH
 *****************************************************************9******************************************************************************************
 *********************************************************NUnit Testing*************************************************************************************
 #NUnit Testing
@@ -1027,7 +1124,7 @@ Approch 1:
 
 		
 		var body = JsonConvert.SerializeObject(loginModel);
-		equest.AddParameter("application/json",body,ParameterType.RequestBody);
+		request.AddParameter("application/json",body,ParameterType.RequestBody);
 		var response = client.Execute(request);
 		
 		
@@ -1284,7 +1381,7 @@ as
 begin
 
 --Start the transaction
-BEGIN TRANSACTION    
+BEGIN TRANSACTION
 
 DECLARE @CurrentStockQuantity int
 DECLARE @NewStockQuantity int
@@ -1527,7 +1624,7 @@ Key Azure Services and Components:
 RDLC Report
 refer video : https://youtu.be/So-BzxAA7Tw?si=HyGWGgcT6PIp0Bbl
 Required Extention : Microsoft RDLC Report Designer
-Required Nuget : ReportViewerCore.NETCore / Microsoft.ReportViewer.WebForm/Microsoft.ReportingServices.ReportViewerControl.Winforms
+Required Nuget : ReportViewerCore.NETCore
 
 1.Create Dataset
 	NewFolder(Datasets)->New Item->Data->DataSet 
@@ -1601,4 +1698,390 @@ public IActionResult PrintReport()
      }
      return dt;
  }
-----------------------------------------------------------------------------------------
+****************************************26.Difference between .Net 6,8,9****************************************
+
+.Net 6 
+-performance Enhancements: Introduced significant performance improvements, Include enhanced Just-In-Time(JIT) compilation and optimized garbage collection, leading to fasster application execution and reduced memory usage. 
+-Hot reload: Introduced Hot reload, Enabling developers to modify source code while the application is running and see the changes instantly, enhancing the development workflow.
+ 
+.Net 8 
+- Improved performance : Focused on runtime optimization for specific workloads, ensuring application utilize resources more effectively
+- Blazor Advancements: introduced advancements to blazor, enhancing its capabilities for building interactive web applications.
+
+.Net 9
+- Cloud-Native optimization:- Offering tools and feature that simplify cloud-native application, offering tools and feature that simplify cloud deployment and managment
+- Performance Enhancements: Introduced further performance improvements, making applications more efficient and responsive.
+- AI and Machine Learning Integration:- Integrated ML.NET, enabling developers to incorporate cutom machin lerning module into their application.
+- New LINQ Methods :- Integrated new LINQ methods, such as CountBy and AggregateBy, to simplify data manipulation tasks.
+- Enhanced JSON serialization: Provide more options for json serialization, offering grater flexibility in data handling.
+- New Caching Library: Introduced a new caching library to improve data retrival times and application performace.
+
+************************Countby AggregateBy Method********************
+#Countby mehtod:
+- The CountBy method allows you to group data based on a certain key and then count the occurrences of each key. 
+ It simplifies the process of performing grouping and counting in one step, which was previously a two-step process using GroupBy followed by Count.
+---------------------
+Example:-
+var data = new List<string> { "apple", "banana", "apple", "orange", "banana", "banana" };
+
+var result = data.CountBy(item => item); 
+
+foreach (var group in result)
+{'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Console.WriteLine($"{group.Key}: {group.Count}");
+}
+---------------------
+Output:-
+apple: 2
+banana: 3
+orange: 1
+
+#AggregateBy Method
+- The AggregateBy method performs an aggregation (like Aggregate) but also allows you to group elements based on a key. 
+	This makes it easier to perform operations like summing, averaging, or combining values for each group.
+---------------------	
+Example:-
+var data = new List<string> { "apple", "banana", "apple", "orange", "banana", "banana" };
+
+var result = data.AggregateBy(item => item, (agg, item) => agg + item); 
+
+foreach (var group in result)
+{
+    Console.WriteLine($"{group.Key}: {group.AggregateValue}");
+}
+---------------------
+apple: appleapple
+banana: bananabananabanana
+orange: orange
+---------------------
+
+**********************New cache library in .Net 9******************************
+public class ProductService
+{
+    private readonly ICache _cache;
+
+    public ProductService(ICache cache)
+    {
+        _cache = cache;
+    }
+
+    public async Task<Product> GetProductByIdAsync(int productId)
+    {
+        // Try to get the product from the cache
+        var cachedProduct = await _cache.GetAsync<Product>($"product-{productId}");
+
+        if (cachedProduct != null)
+        {
+            // Return the cached product if it exists
+            return cachedProduct;
+        }
+
+        // If not cached, fetch from the database (or some expensive operation)
+        var product = await GetProductFromDatabaseAsync(productId);
+
+        // Cache the result for future requests with an expiration time of 10 minutes
+        await _cache.SetAsync($"product-{productId}", product, TimeSpan.FromMinutes(10));
+
+        return product;
+    }
+
+    private async Task<Product> GetProductFromDatabaseAsync(int productId)
+    {
+        // Simulate a database fetch operation
+        await Task.Delay(1000);  // Simulate a delay
+        return new Product { Id = productId, Name = "Sample Product", Price = 29.99m };
+    }
+}
+************************************************************************************************************************************
+*****************************************************27. IQueryable vs IEnumerable***************************************************
+what is the difference between and why to use IQueryable for sql queries?
+
+IQueryable is inherited from IEnumerable interface only so anything you can do with IEnumerable you can also do for IQueryable also 
+A. IEnumerable is used with in-memory collection like array, arraylist where as
+B. IQueryable is better in getting result from database.
+
+A. in IEnumerable case request will go to the database and bring the whole data from database without the where condition / without filter and it filter the result at server side which is not good for performance and network load will be more.
+
+B. in IQueryable case request will go to the database and filter the data in database and bring the filtered data that is good for performance
+------------------------------------------------------------------------------------------------
+1. Purpose & Usage:
+	#IEnumerable<T>:
+	- Works with data that is already loaded in memory (e.g., collections like List<T> or arrays).
+	- The query is executed in-memory after all data is loaded into memory. This means that all the data is brought into memory and then filtered, transformed, etc.
+	- Less efficient when working with large data sets because it loads all the data into memory first. Then, it processes the data, which can result in high memory usage.
+	- The query is not translated. If you write LINQ queries using IEnumerable, the operations (e.g., Where, Select) are performed in memory.
+	
+	List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
+	var result = numbers.Where(n => n > 3);  // This operates in memory
+	foreach (var number in result)
+	{
+		Console.WriteLine(number);  // Output: 4, 5
+	}
+--------------------------------------------------------------------------------------------------
+	#IQueryable<T>:
+	- Used primarily for querying external data sources, such as databases, web services, etc.
+	- It is designed for remote data querying where the query can be translated into a query language like SQL (if using LINQ to SQL, for example) and executed on the server.
+	- The query is executed on the server or external data source. This means that IQueryable translates LINQ queries into the appropriate query language (like SQL for Entity Framework or LINQ to SQL).
+	- More efficient for large data sets because it sends the query to the database or remote source, which minimizes memory usage and data transfer. Only the necessary records are fetched.
+	- The filtering happens on the server-side (database or other external data source), which makes it much more scalable and efficient.
+	
+	var dbContext = new YourDbContext();
+	var result = dbContext.Orders.Where(order => order.Amount > 100);  // SQL query is sent to the database
+	foreach (var order in result)
+	{
+		Console.WriteLine(order.OrderId);
+	}
+
+	Use IEnumerable<T> when:
+	You're working with small, in-memory collections.
+	You're not interacting with a database or external data source.
+	You don't need to optimize for performance (e.g., with large data sets).
+	Use IQueryable<T> when:
+
+	You're querying large external data sources like databases (via Entity Framework or LINQ to SQL).
+	You want to benefit from server-side query execution for scalability and performance.
+	You need the query to be translated into a specific query language (like SQL).
+	
+	
+	
+******************************************************IEnumerable vs List******************************************************	
+when to use which
+
+use IEnumerable, If you're just going to loop through the data
+use List, If you're going to add, sort, or index
+
+IEnumerable:
+	- cann't use .Add();
+	- Can not use indexing[0];
+	- purpose for reading/looping through data
+	- Use IEnumerable<T> if you're just reading or looping through items.
+
+List:
+	- can use .Add();
+	- can use indexing[2];
+	- purpose for modifying/building the list.
+	- Use List<T> if you need to modify, sort, or access by index.
+
+****************************************************************************************************************************
+******************************************************28.New Microservice creation*********************************************
+#Create new Microservice
+
+-Create Web api Project, BusinessLogic, entityFrameworkCore library
+
+Add Packages in EntityFrameworkCore
+	Abp.ZeroCore.IdentityServer4.EntityFrameworkCore -- Requird for Enable KeyWords like Entity while create table
+but we use
+	i1Core.CommonLibrary - all the required packages combine into this packages.
+---------------------------------------------------------------------------------------------
+#Create DBCotext Class
+-Inherit AbpDbContext class from Abp.EntityFrameworkCore
+-add Cunstructor	
+    public WMPlayAndLearnDbContext(DbContextOptions<WMPlayAndLearnDbContext> options) : base(options)
+    {
+
+    }
+	
+- Create DbSet 
+        public DbSet<PlayAndLearnDetails> PlayAndLearnDetails { get; set; } 
+		
+- Add Schemas
+	 protected override void OnModelCreating(ModelBuilder modelBuilder)
+	 {
+		 modelBuilder.HasDefaultSchema("PlayAndLearn");
+		 base.OnModelCreating(modelBuilder);
+	 }
+--------------------------------------Program.cs File-------------------------------------------------------
+  public class Program
+  {
+      public static void Main(string[] args)
+      {
+          AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+          
+      }
+
+      public static IWebHostBuilder CreateWebHostBuilder(string[] args) 
+      { 
+          return new WebHostBuilder().UseKestrel(opt=>
+          {
+              opt.AddServerHeader = false;
+              opt.Limits.MaxRequestLineSize = 16 * 1024;
+          })
+          .UseContentRoot(Directory.GetCurrentDirectory())
+          .ConfigureLogging((context, logging) =>
+          {
+              logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
+          })
+          .UseIIS()
+          .UseIISIntegration()
+          .UseStartup<Startup>();
+      }
+  }
+--------------------------------------------------------------------------------------------------------------
+- Create repository 
+#Interface
+namespace wealthmapper.PlayAndLearnEntityFrameworkCore.Repository
+{
+    public interface IPlayAndLearnServiceRepositoryBase<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>, IRepository, ITransientDependency
+        where TEntity : class, IEntity<TPrimaryKey>
+    {
+
+    }
+
+    public interface IPlayAndLearnServiceRepositoryBase<TEntity> : IPlayAndLearnServiceRepositoryBase<TEntity, int>, ITransientDependency
+    where TEntity : class, IEntity<int>
+    {
+
+    }
+}
+------------------------------------------------------------------------------
+#Implimentation
+namespace wealthmapper.PlayAndLearnEntityFrameworkCore.Repository
+{
+    public class PlayAndLearnServiceRepositoryBase<TEntity, TPrimaryKey> : EfCoreRepositoryBase<WMPlayAndLearnDbContext, TEntity, TPrimaryKey>, IPlayAndLearnServiceRepositoryBase<TEntity, TPrimaryKey>, ITransientDependency
+        where TEntity : class, IEntity<TPrimaryKey>
+    {
+        public PlayAndLearnServiceRepositoryBase(IDbContextProvider<WMPlayAndLearnDbContext> dbContextProvider)
+            : base(dbContextProvider)
+        {
+
+        }
+    }
+
+    public class PlayAndLearnServiceRepositoryBase<TEntity> : PlayAndLearnServiceRepositoryBase<TEntity, int>, IPlayAndLearnServiceRepositoryBase<TEntity>, ITransientDependency
+    where TEntity : class, IEntity<int>
+    {
+        public PlayAndLearnServiceRepositoryBase(IDbContextProvider<WMPlayAndLearnDbContext> dbContextProvider)
+            : base(dbContextProvider)
+        {
+
+        }
+    }
+}
+--------------------------------------------------------------------------------------------------------------
+#Create modules (AbpModules)
+
+namespace wealthmapper.PlayAndLearnEntityFrameworkCore.Module
+{
+    [DependsOn(
+        typeof(AbpZeroCoreEntityFrameworkCoreModule),
+        typeof(AbpZeroCoreIdentityServervNextEntityFrameworkCoreModule))]
+    public class PlayAndLearnEntityFrameworkCoreModule :AbpModule							<--- this module set in startup file
+    {
+        public bool SkipDbContextRegistration { get; set; }
+
+        public PlayAndLearnEntityFrameworkCoreModule()
+        {
+
+        }
+        public override void PreInitialize()
+        {
+            if (!SkipDbContextRegistration)
+            {
+                Configuration.Modules.AbpEfCore().AddDbContext<WMPlayAndLearnDbContext>(options =>
+                {
+                    if (options.ExistingConnection != null)
+                    {
+                        WMPlayAndLearnDbContextConfigurer.Configure(options.DbContextOptions, options.ExistingConnection);
+                    }
+                    else
+                    {
+                        WMPlayAndLearnDbContextConfigurer.Configure(options.DbContextOptions, options.ConnectionString);
+                    }
+                });
+            }
+        }
+        public override void Initialize()
+        {
+            IocManager.RegisterAssemblyByConvention(typeof(PlayAndLearnEntityFrameworkCoreModule).GetAssembly());
+        }
+    }
+}
+------------------------------------------------------------------------------
+namespace wealthmapper.PlayAndLearnBusinessLogic.Module
+{
+    [DependsOn(
+        typeof(PlayAndLearnEntityFrameworkCoreModule)
+        )]
+    public class PlayAndLearnBusinessLogicModule : AbpModule
+    {
+        public override void PreInitialize()
+        {
+        }
+
+        public override void Initialize()
+        {
+            IocManager.RegisterAssemblyByConvention(typeof(PlayAndLearnBusinessLogicModule).GetAssembly());
+        }
+    }
+}
+------------------------------------------------------------------------------
+
+namespace wealthmapper.PlayAndLearn.Module
+{
+    [DependsOn(
+   typeof(PlayAndLearnBusinessLogicModule),
+   typeof(i1WealthCommonLibraryModule)
+   )]
+    public class wealthmapperPlayAndLearnCoreModule: AbpModule
+    {
+        public override void PreInitialize()
+        {
+            Configuration.Modules.AbpAspNetCore()
+                .CreateControllersForAppServices(
+                    typeof(wealthmapperPlayAndLearnCoreModule).GetAssembly()
+                );
+        }
+        public override void Initialize()
+        {
+            IocManager.RegisterAssemblyByConvention(typeof(wealthmapperPlayAndLearnCoreModule).GetAssembly());
+        }
+    }
+}
+--------------------------------------------------------------------------------------------------------------
+- For Access ABP session inherite i1WealthCommonLibraryAppServiceBase library
+--------------------------------------------------------------------------------------------------------------
+
+****************************************************************************************************************************
+******************************************************29.ExpandoObject*********************************************
+ExpandoObject is a class in C# that enables you to add and remove members (properties and methods) dynamically at runtime. 
+
+#Syntax 
+dynamic createCust = new ExpandoObject();
+
+dynamic Keyword:
+In C#, dynamic is a type that bypasses compile-time type checking. It tells the compiler to delay binding decisions until runtime. 
+This means that createCust can have properties and methods added to it dynamically, and those members can also be accessed dynamically without static type checking.
+---------------------------------------------------------------------------------------------------
+Once createCust is initialized with an ExpandoObject, you can dynamically add properties and methods to createCust as needed during runtime. For example:
+createCust.Name = "John";
+createCust.Age = 30;
+createCust.Introduce = new Action(() => Console.WriteLine($"Hello, my name is {createCust.Name}"));
+---------------------------------------------------------------------------------------------------
+Dynamic Access:
+Since createCust is declared as dynamic, properties and methods can be accessed without compile-time checking:
+string name = createCust.Name;
+int age = createCust.Age;
+createCust.Introduce();
+---------------------------------------------------------------------------------------------------
+
+Another one example
+
+dyanamic locationObj = new ExpandoObject();
+locationObj.MainLocation = new ExpandoObject();     <--------- nested object creation
+locationObj.MainLocation.Name = "Pune";             <--------- set propertie and value
+locationObj.MainLocation.Name = 21;                 <--------- we can change data type
+
+locationObj.MainLocation.number = 50;
+locationObj.Increment = (Action)(() => {locationObj.number++});  <----- Action is a deligate which can take parameter but not return value
+
+we can use func deligate also
+
+locationObj.Increment = (Func<int>)(() =>
+{
+    locationObj.MainLocation.number++;
+    return locationObj.MainLocation.number;
+});
+
+
+var myname = locationObj.Name;      <------ get value
+locationObj.Increment();            <------ call method

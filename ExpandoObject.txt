@@ -1,4 +1,3 @@
-
 Syntax 
 
 dynamic createCust = new ExpandoObject();
@@ -13,16 +12,15 @@ This means that createCust can have properties and methods added to it dynamical
 ---------------------------------------------------------------------------------------------------
 Creating an ExpandoObject:
 new ExpandoObject() creates a new instance of ExpandoObject. At this point, createCust is assigned a reference to this newly created ExpandoObject instance.
-----------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 Once createCust is initialized with an ExpandoObject, you can dynamically add properties and methods to createCust as needed during runtime. For example:
 createCust.Name = "John";
 createCust.Age = 30;
 createCust.Introduce = new Action(() => Console.WriteLine($"Hello, my name is {createCust.Name}"));
-----------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 Dynamic Access:
 Since createCust is declared as dynamic, properties and methods can be accessed without compile-time checking:
 string name = createCust.Name;
 int age = createCust.Age;
 createCust.Introduce();
 ---------------------------------------------------------------------------------------------------
-

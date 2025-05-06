@@ -1,0 +1,147 @@
+#Hangfire
+https://youtu.be/lsP5ZjcFtMM?si=pfF4l3wR4c89z46_
+Hangfire is an open-source framework that allows you to run background jobs in .NET applications—without needing a separate Windows service or cron job.
+is an open-source and well-documented task scheduler for ASP.NET Core.
+its multi-threaded, easily scalable, and offers a variety of job types.
+
+ Steps
+ 1. Install hangfire package 
+	in that package we have Hangfire.AspNetCore and Hangfire.SqlServer
+ 
+ 2. Install System.Data.SqlClient
+	to enable hangfire to access the database
+	
+ 3.Update appsetting.json file
+	add ConnectionStrings
+	"ConnectionStrings":{
+	  "sqlCon":"Server=localhost;Database=hangfireApplication;Trusted_Connection=true"
+	},
+	
+ 4. Configuer Program.cs file
+	builder.Services.AddHangfire(config=>
+	{
+		Config.UseSimpleAssemblyNameTypeSerializer()
+		.UseRecommendedSerializerSettings()
+		.UseSqlServerStorage(builder.Configuration.GetConnectionString(SqlCon));
+	});
+	builder.Services.AddHangfireServer();
+	
+	app.useHangfireDashboard();               				<---- to enable hangfire Dashboard
+	-----------Customize Dashboard------------
+	app.useHangfireDashboard("/test/job-dashboard", new DashboardOptions
+	{
+		DashboardTitle = "Hangfire Job Demo Application",
+		DarkMdeEnable = false,
+		DisplayStorageConnectionString = false
+		Authentication = new[]								<----Hangfire.Dashboard.Basic.Authentication packge required
+		{
+			new HangfireCustomBasicAuthenticationFilter
+			{
+				User = "admin",
+				Pass = "admin123"
+			}
+		}
+	});
+ 5. Start the project and visit hangfire dashboard by using localhost:5001/hangfire/servers
+	there we can see Servers which are running.
+
+---------------------Create services folder------------------------
+-create new interface IJobService
+
+public interface IJobTestService
+{
+	void FireAndForgetjob();
+	void ReccuringJob();
+	void DelayedJob();
+	void Continuationjob();
+}
+
+-Create New class and inherite interface
+
+public JobTestService : IJobTestService
+{
+	private readonly ILogger _logger;
+	
+	public JobTestService(ILogger<JobTestService> logger)
+	{
+		_logger = logger;
+	}
+	
+	public void ContinuationJob()
+	{
+		_logger.LogInformation("hello from a continuation job!");
+	}
+	
+	public void DelayedJob()
+	{
+		_logger.LogInformation("hello from a Delayed job!");
+	}
+	
+	public void FireAndForgetjob()
+	{
+		_logger.LogInformation("hello from a Fire And Forget job!");
+	}
+	
+	public void ReccuringJob()
+	{
+		_logger.LogInformation("hello from a Fire And Forget job!");
+	}
+}
+---------------------------------------------------------------
+-Add Dependancy
+builder.Services.AddScoped<IJobTestService, JobTestService>();
+---------------------------------------------------------------
+1. Fire and Forget job
+	This type of jobs server Exicute as soon as can.
+
+public class JobTestController: ControllerBase
+{	
+	private readonly IJobTestService _jobTestService;
+	private readonly IBackgroundJobClien _backgroundJobClient; <--- this service will provides methods to create background jobs with hangfire
+	private readonly IRecurringJobManager _recurringJobManager; <--- this service privide helpfull methods for recurring jobs.
+	
+	public JobTestController(IJobTestService jobTestService, IBackgroundJobClien backgroundJobClient, IRecurringJobManager recurringJobManager)
+	{
+		_jobTestService = jobTestService;
+		_backgroundJobClient = backgroundJobClient;
+		_recurringJobManager = recurringJobManager
+	}
+	[HttpGet("/FireAndForgetjob")]
+	public ActionResult CreateFireAndForgetJob()
+	{
+		backgroundJobClient.Enqueue(()=> _jobTestService.FireAndForgetjob());
+		return Ok();
+	}
+	
+	----run and hit api and check on hangfire dashboard 
+	
+	[HttpGet("/DelayedJob")]
+	public ActionResult CreateDelayedJob()
+	{
+		backgroundJobClient.Schedule(()=> _jobTestService.DelayedJob(), TimeSpan.FromSeconds(60));    	<--- we set to do this job after 60 second so initially we can see this job in Schedule section after 60sec it will move into Succeeded tab. we can forcefully complete this scheduled job also.
+		return Ok();
+	}
+	
+	[HttpGet("/ReccuringJob")]
+	public ActionResult CreateReccuringJob()
+	{
+	  _recurringJobManager.AddorUpdate("jobId", ()=> _jobTestService.ReccuringJob(),Cron.Minutely); 	<-- hangfire method will create job for specified Id for update to Existing one
+		return Ok();
+	}
+	
+	[HttpGet("/ContinuationJob")]
+	public ActionResult CreateReccuringJob()
+	{
+		var parentJobId = _backgroundJobClient.Enqueue(()=>_jobTestService.FireAndForgetjob());
+		_backgroundJobClient.Continuationjobwith(parentJobId, ()=> _jobTestService.ContinuationJob());  <--- It run one by one
+		return Ok();
+	}
+	
+}
+#########################################################################################################################
+Job types 
+Fire And Forget job
+Delayed jobs
+Recurring jobs
+Continuation job
+

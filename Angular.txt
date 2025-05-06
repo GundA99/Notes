@@ -15,6 +15,7 @@ https://youtu.be/kY1oa8YSs-Q?si=SaEPIbw3kyxCRuRw   : Angular tutorial
 https://jsonplaceholder.typicode.com/ : For Dumy Apis
 ******************************************************IMP Commands*******************************************************
 Download
+Command for create new angular project : ng new my-angular-app
 Node js, Angular CLI
 Command for check Node version 		: Node -v
 Command for install Angular CLI 	: npm install -g @angular/cli
@@ -32,7 +33,17 @@ Command for create new component : ng g c home
 Command for check jwt token 		: npm install @auth0/angular-jwt
 Command for guards 					: ng g g guards/auth
 for Remove Heap memory full problem = node --max-old-space-size=8192 node_modules/@angular/cli/bin/ng serve
- 
+
+Command for Nswag
+For globally install nswag 
+- npm i -g nswag
+- cd nswag
+- nswag run
+
+UI build 
+package.json
+	publish command copy(like gulf build && ng build --configuration production...)
+	
 #Extenstions:
 Angular Language Service - Provide intellisense
 
@@ -60,6 +71,20 @@ TypeScript : javaScript ki superScript hai
 
 var a : number = 5;  ok
 a = 'akash'  NOK
+*****************************************************3.Let's Start new project  ************************************************
+Command for create new project : ng new my-angular-app
+
+Install Bootstrap : npm install bootstrap
+Install Fontawesome : npm install @fortawesome/fontawesome-free ,  
+add respective min.css file path in angular.json-> styles
+
+for use ngif functionality import commonModule package
+
+
+
+
+
+
 *****************************************************3.TypeScript Config************************************************
 {
   "compileOnSave": false,
@@ -457,6 +482,7 @@ function abcd(arg:string | number){
 	}
 }
 ********************************************************7.angular/Material*************************************************
+https://youtu.be/kCaeIpvzEiM?si=6ze98FeAtfyokkbz --- Project
 Command for add angular Material : ng add @angular/material
 
 Form in Angular Material
@@ -617,4 +643,7 @@ to avoid user to access any page without login use Gaurd.
 3.json-server db.json --watch
 
 then mock data will available on 3000 port
-
+--------------------------------------------------------------------------------------------------------
+Package -> install-> 
+Package.json : Defination will be in it
+Node module : Actual Package will  be in Node module

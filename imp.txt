@@ -1,7 +1,7 @@
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
-#REST (Representational State Transfer): It mean Transfer of representational state of the resource eg. Employee, order, Fund,student between the client and server.
+#REST (Representational State Transfer): It mean Transfer of representational state of the resource eg. Employee, order, Fund, student between the client and server.
 										 it uses HTTP methods such as get, post, put, delete.
 										
 #REST API: is Software architecture style which define set of rule created for web services.
@@ -10,7 +10,7 @@
 - it's a contract, its act like communication between two object. when we are defining i/f we are Defining contract what our inheriting class should do but not how it does.
 - Contain only abstract method, Support multiple inheritance, Bydefault i/f methods are public & abstract, By default i/f Variable Public static and final. 
 
-#abstract Class: 
+#abstract Class:
 - Contain both abstract or concreate methods, It does not support multiple inheritance, Except Private we can have any access specifier for method and variable, Can Declare Constructor.
 
 #Session:
@@ -252,6 +252,7 @@ JIT(Just in time):- Actually convert IL code into Machin understandable language
 
 #we can view IL code?
 ->yes, by using dick assembler we can view
+
 
 #Diff between .NET Framework and .NET Core 
 -Instad, developers prefer to use ASP.net MVC and ASP.NET web Api. Those two technologies have been refactored and combined into a new product that runs on .NET Core, named ASP.NET Core.
@@ -566,13 +567,14 @@ SQL VS SQL server : SQL is Query languge, while SQL Server is a DataBase managme
 
 DataBase: A Db is a structured collection of Data that is organized and Stored in a way that allows for efficient retrival, manipulation 
 
+
 --------------------------------------------------SQL Command/ Type of DB languge--------------------------------------------------
 DB languge are used to read, update, and Store Data in DB. There are several languges can be used for this porpose
 1. Data defination languge(DDL) : Used to define DB Schema 
 								  Ex. Create,Drop,Truncate, Alter
-2. Data Manupulation languge(DML) : Used to Manupulat Data for ex. Insert,update, Delete, Select
+2. Data Manupulation languge(DML) : Used to Manupulat Data for ex. Insert, update, Delete, Select
 3. Data Control languge(DCl) : DCl mainly Dels with rigths and permissions and other Controls Ex. Grant and revoke.
-4. Transaction Control languge(TCL): TCL Dels with transaction within DB, EX. Commit,Rollback, Savepoint
+4. Transaction Control languge(TCL): TCL Dels with transaction within DB, EX. Commit, Rollback, Savepoint
 
 ----------------------------------------------------------ACID Property------------------------------------------------------------
 
@@ -595,7 +597,7 @@ Durability:- After succesfully complete the trasaction changes in the DB is pers
 2. Aggregate Function : sum, min, max,count,avg.
 
 
-
+AKASH
 -----------------------------------------------------Joins, View, Trigger------------------------------------------------------------------------
 #Inner Join : inner Join return only the row from both table where they are match based on join condition.
 #Outer join : Outer Join return all row from one table and matching row from other table Based on join condition.

@@ -1,4 +1,14 @@
-
+A] HTML
+B] CSS
+https://youtu.be/B9FvD1L2hAQ?si=GFe9jj00GZjkXH-x
+	1.type of CSS we use
+	2. basic property
+	3. Text property
+	4. Box property 
+	5. background-image
+	6. shadow
+	7. Universal selector
+	8. Flexbox property
 ************HTML*****************
 
 index.html <- starting point for web side
@@ -20,7 +30,7 @@ Comment : <!-- This is Comment -->  (Shortcut ctrl + /)
 # Div is an example of Block level element it will take complete space
 
 **********CSS*********************
-3 type of CSS we use 
+1.type of CSS we use 
 inline, embeded, and External
 
 #inline:
@@ -46,9 +56,7 @@ External: Create External Css file and import this file into html file
 <body>
 	<h1>Akash</h1>
 <body>
-
-
-CSS Properties:
+------------------------------2.CSS Properties----------------------
 margin-top 10px  --- margin from Top
 margin-left 10px  --- margin from left
 margin : 10%    --- Outside space
@@ -58,12 +66,13 @@ width : 100px
 display : flex  --- Showing contain in horizontal
 background-color --- inside color of tag
 color             --- Text Color
-
+background : transparent  <----- remove botton border
+ 
 BORDERS
 border-style: solid, dotted;
 border-width: 3px;          -- size
 border-redius: 30px;        -- Cornner will be rounded
-
+border : none           --- remove border
 Text
 text-align: center;         --- Showing text at center (vertically center)
 font-family: 'Lucida Sans'   --- Font style
@@ -84,7 +93,7 @@ overflow: hidden   --- Fit image in Card
 
 # Z-Index
 when we have multiple card and want to arrange one upone another we use Z-Index
-------------------------------------------------CSS--------------------------------------------------------------
+----------------------------------CSS-------------------------------
 PX == fix unit
 1em == 16px   (its depends on parent if in parent div if we define font size : 10px then in child 1em == 10px);
 
@@ -97,10 +106,236 @@ hight: 540px;
 background-color : red;
 float: left;
 
-#Text
+-----------------------3.Text property---------------------
 color : red
-font-size:;
+font-size:italic;
 
-text-align
-	center/right/left
+#text-align: center/right/left/justify
 	justify   ---- when we want paregraph in center(start and end of each line position same)
+#text-decoration : underline/line-through
+		line-through ----- cut text/line on text 
+* line line css override the property of class
+#text-transform : uppercase/lowercase/ capitalize;
+			capitalize ---- every word 1st letter capital
+#word-spacing: 25px    ----- space between words
+#letter-spacing : 5px   ----- letter space
+----------------------Fornt family--------------
+#font-family: arial    ---- font style
+
+-----------------------4. Box property ---------------------
+
+border requrd 3 parameter : size, type, color
+size : 5px
+type : solid/dotted/dashed
+---------------------Margin--------------
+it will impact on size
+outside space
+margin-left/right/top/bottom : 20px
+---------------------padding--------------
+inside spaces
+used for move containt
+-padding : 20px  ---- all side impact
+-padding : 20px 30px 40px 30px  (Top R B L)
+-padding : 20px 30px (top&Bottom,  left&right)
+-padding-left/right/top/bottom
+
+--------------------------5.background-image -----------------
+
+we can do with background also
+background-image: url('path.....')  <---- url in inbuild function
+background-repeat : no-repeat/repeat-x/repeat-y/repeat(default)
+	no-repeat --- 1 time only
+	repeat-x  --- repeat from left to right
+	repeat-y  --- repeat from top to bottom
+background-position: top center/right center/ bottom center
+background-size: cover   <---- it will cover complete background  **this property work when we use it next to the background-image property**
+background-size: 80% 20%  <---- width 80% hight 20%
+we can use background also
+background :url('....') fixed;   <---- background Image will be fix
+---or---
+background-attachment: fixed;   <---- background Image will be fix
+
+-------------------------------------- 6.Shadow -------------------
+
+Text shadow and Box shadow
+#text-shadow: x-offset y-offset blur color
+	blur --- how much area will spred
+1  - right & bottom (positive)
+-1 - left & top
+text-shadow : 10px 5px 5px blue; ---- shadow to right and bottom
+
+text-shadow : 10px 0px 5px blue, 0px 0px 5px red   <----- multiple shadow
+
+text-shadow : 10px -5px 5px blue; ---- shadow to left and top
+
+#Box-shadow
+box-shadow : x-offset y-offset blue alldirection color
+ 
+box-shadow : 0px 0px 10px 2px #ccc  <--- all redection showdow
+	2px --- from 2px to 10px shadow will spred 
+
+box-shadow : inset 0px 0px 10px 2px red  <------ inside shadow
+
+---------------------------------7.Universal selector-----------------
+*{} its universal selector used whent we want to apply css to all tags
+
+*{
+	margin : 0px;
+	padding : 0px;
+	font-family : sans-serif;
+}
+---------------------------------8.Flexbox property-----------------
+there are two type of flexbox 
+	child and parent
+	
+1.
+display : flex  <--- all the child will be in row 
+it does't matter what is the parent width it will compress child width acording to the parent but it will not allow to shift down all child will be in same line.
+ex:
+	.flexExample{
+		width: 1320px; 		<--------
+		margin:auto;
+		display : flex;
+		}
+		
+	.flexItems{
+		background : purple;
+		color : white;
+		text-align: center;
+		margin:10px
+		width : 500px;        <---- 
+		}
+
+<div class="flexExample">
+	<div class="flexItems">Item1</div>
+	<div class="flexItems">Item2</div>
+	<div class="flexItems">Item3</div>
+	<div class="flexItems">Item4</div>
+	<div class="flexItems">Item5</div>
+</div>
+
+output  
+	Item1 Item2 Item3 Item4 Item5
+---------------------
+2.display : wrap
+	it will not compress child, it will fit childs acording to the parent width other will be shifterd to down.
+
+output 
+	Item1 Item2 
+	Item3 Item4 
+	Item5
+---------------------Flex direction---------------------
+flex-direction : row;    <--------- same as Display flex 
+flex-direction : column  <--------- child will be in vertical formate
+output
+	Item1 
+	Item2
+	Item3
+	Item4
+	Item5
+flex-direction : column-reverse;
+output
+	Item5
+	Item4
+	Item3
+	Item2
+	Item1 
+---------------------justify-contain vs align-items-----------------
+Both property works when parent has Display : flex property and flex-direction
+justify-contain work on horizontal axis
+align-items work on vertical axis
+
+.FlexExampleNew{
+	width : 1320px;
+	margin : auto;
+	display : flex;
+	gap : 20px   <--------  gap between column 
+	height : 500px;
+	justify-contain : flex-start/flex-end/center/space-between/space-around         <---  if flex-direction : row ? move child on row : move child on column;
+	}
+	
+	
+.FlexExampleNew{
+	width : 1320px;
+	margin : auto;
+	display : flex;
+	height : 500px;
+	align-items : flex-start/flex-end/center/space-between/stretch                  <---flex-direction : row ? move child on column: move child on row;
+	}
+---------------------Pseudo classes and pseudo element---------------------
+we can use any tag but now we take Example of p tag 
+p{
+	font-size : 40px;
+	color : red;			<---- apply to all p tag 
+}
+
+.main p : first-child{
+	color: blue;			<---- apply to first chile of p tag in main class
+}
+
+.main p: last-child{
+	color : red			<---- apply to last chile of p tag in main class
+}
+
+#If we want to apply property to nth no of child 
+.main p: nth-child(2)
+{
+	color : green;
+}
+
+.main>p{ 					<------ '>' it point to direct child of main 
+	font-size: 40px;
+	color : red;
+}
+-----------------------hover-------------------------
+.Box{
+	width : 300px;
+	height : 300px;
+	background : red;
+	transition :2s;     <---- transition will happen after 2sec when we hover
+}
+
+.Box : hover{					<---- hover will change the property when we hover
+	background : green;
+	}
+	
+---------------------Google Font---------------------
+*Google Font work only when your internate is connected.
+*Google Font is a free font provider 
+its 3rd party font we can use
+steps 
+	-got to google Fonts webside 
+	-serch font family   (inspect any site and check font family)
+	-get font
+	-get embeded code
+	-copy link tag and paste on our web page in head tag and use
+	
+.box{
+	font-family : "Inter", sans-serif;        <------- Google Font
+	font-weight : 600;						<------- check from site and add based on choise
+}
+
+---------------------Font awesome icon----------------
+we use CDN so we dont need to download icon.
+CDN : Content delevery network
+it will give us 3rd party Icon library
+Steps:
+	- goto Font awesome icon cdn site
+	- we get library path
+	- and add in Head tag by using link tag
+	- Goto Font Awesome webside
+		Icon
+			serch Icon 
+				click and copy HTML code (ex: <i class="fa-brands fa-facebook-messenger"></i>)  <---- i tag get only space which is required for icon link span
+
+This icon will work as text so we can add css to Icon 
+ex
+.main i{
+	color : blue;
+	font-size: 30px;
+	transition : 0.5s;
+}				
+.main i : hover{
+	color : red;
+	
+}

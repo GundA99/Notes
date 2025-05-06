@@ -64,6 +64,9 @@ DIfference is we Add new Functionality in this project Called As Switch
 			we Can Splite fund into another Fund 
 			means if we have 100rs we can splite into another 2 or more funds  <- this is new 
         2. in WMS we add equity also 
+		3. Reporting model
+		4. Suitability model
+		5. play and learn model
 		so that we use milistream for getting live Data it give us Equity data, Fund, saving plan data also.			
 we Creating one type of template or skeleton. where we can keep same backend we change only UI based in Tennent,
 bcz every application has comman Functionality if we see in india we use Grow, Upstocks, shearkhan they have same functionalities like Creating Portfolio, Buy or sell Fund, Add Saving Plan, update Saving plans 
@@ -94,6 +97,7 @@ Configuration   - Saving and getting Configuration (backendConnectedSystem{Pro},
 Order    - Order, Cancel, all orders
 Tenancy
 Reporting
+Playandlearn
 ---------------------------------------------------------------------------------------------------------
 cdac journy
 
@@ -164,9 +168,10 @@ i am overthinker person i think over on any issue bcz i want everything will be 
 introduction
 first of all thank you for giving me this opportunity to introduce my self my name is Akash a Gund i am basically from Solapur Maharastra, recently i Completed my post graduate diploma in Advance Computing from IACSD Pune with 73 percentage.currently i am doing internship in ikione technology from last 4 month as a Backend Developer where i working on Dotnet Technology in wealth domain that's all about me.
 ------------------------------------------------------------------------------------------------------------------------
-About Ikione
+About 
 Ikione is a product based compony,actually its child compony of tietovery which is placed on finland.
 Compony working on 3 domain wealth, Insurance, and health. 
+
 f. t. f. g. m. t. o. t. i. m
 my name is Akash A. Gund, and I am from Solapur, Maharashtra. I have completed my Post Graduate Diploma in Advanced Computing from CDAC, IACSD Pune in 2024, with a 73% score.
 I have nearly 9 months of experience as a Backend Developer at Ikione Systems Pvt. Ltd., where I have working under wealth domain. 
@@ -180,9 +185,3 @@ HTML, CSS, JavaScript, and Angular Framwork
 Additionally, I have good knowledge of Windows IIS Deployment and have basic knowledge of Azure Devops.
 thats all about me thank you.
 ---------------------------------------------------------------------------------------------------------
-Major Difference Between Sql Server and PostGreSql
-SQL Server-----vs--------PostgreSQL
-
-1.Relational database management system ----   Object-relational database management system
-2.Commercial product from Microsoft  ------  Open source (completely free) 
-3.Primarily designed for Windows, but recent versions also support Linux. ------ can run on various operating systems including Windows, Linux, and macOS.

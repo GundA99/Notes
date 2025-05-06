@@ -1,0 +1,955 @@
+1.difference between var and let
+2.What is difference between put and patch
+3.command for convert typeScript into javascript
+4.difference between typeScript and javascript
+5.What is Entity framwork
+6.Routing in C#
+7.State management system
+8.Client side vs server 
+9.httpResponce
+10.Design patterns
+-----------------------------------------1.difference between var and let------------------------------------------
+1. Scope
+var: Has function scope (or global scope if declared outside a function). This means it is accessible throughout the function it was declared in, even before the declaration (due to hoisting).	
+let: Has block scope. This means it is only accessible within the block (like within loops, if statements, etc.) where it was declared.
+Example:
+if (true) {
+  var x = 5;
+  let y = 10;
+}
+
+console.log(x); // 5 (because `var` is function scoped)
+console.log(y); // ReferenceError: y is not defined (because `let` is block scoped)
+
+2 Re-declaration
+var: You can re-declare a variable within the same scope using var without any issues.
+let: You cannot re-declare a variable in the same scope with let. If you try, it will result in a SyntaxError.
+Example:
+var x = 5;
+var x = 10; // No error, re-declaration is allowed
+
+let y = 5;
+let y = 10; // SyntaxError: Identifier 'y' has already been declared
+
+*****************************************2.What is difference between put and patch************************************
+1. Full vs. Partial Update
+PUT: A PUT request is used to update a resource entirely. When you send a PUT request, the entire resource is replaced with the new data you provide. If a field is missing from the request, it will be overwritten (or removed) in the resource.
+PATCH: A PATCH request is used to update a resource partially. Instead of replacing the entire resource, you only send the fields that need to be updated. It’s more efficient when you only need to modify a small part of the resource.
+
+-If you need to replace a resource entirely, use PUT.
+-If you only need to update specific parts of a resource, use PATCH.
+
+Put:
+if we have object like
+{
+  "id": 1,
+  "username": "johndoe",
+  "email": "john@example.com",
+  "bio": "Updated Bio!",
+  "age": 31
+}
+If any field is missing in the request body, it'll be removed or defaulted (e.g., null for strings).
+
+Patch:
+
+Patch used for update partially, if we update single filed remain filed will be same. 
+✔️ This uses Microsoft.AspNetCore.JsonPatch, which you need to install:
+dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson
+
+And in Program.cs or Startup.cs:
+builder.Services.AddControllers().AddNewtonsoftJson(); // Required for PATCH support
+
+
+***************************************3.command for convert typeScript into javascript********************************
+for compile
+tsc example.ts
+Watch for changes and automatically recompile:
+tsc --watch
+If you have a hello.ts file:
+Running tsc hello.ts will generate hello.js
+
+***************************************4.difference between typeScript and javascript***************************************
+1. Typing System
+JavaScript: JavaScript is dynamically typed. This means variables can change types at runtime and don't require explicit type declarations. 
+For example:
+let message = "Hello";
+message = 42; // No error, as types can change at runtime
+
+TypeScript: TypeScript is statically typed (optionally). It allows you to define types explicitly, and these types are checked during compile-time, which helps catch errors early.
+
+let message: string = "Hello";
+message = 42; // Type error: Type 'number' is not assignable to type 'string'
+
+2. Compilation
+- JavaScript: JavaScript is an interpreted language. It runs directly in the browser or on Node.js without needing any compilation.
+- TypeScript: TypeScript is a superset of JavaScript. It requires a compilation step to convert TypeScript code into standard JavaScript. This is done using the TypeScript compiler (tsc), which checks the types and compiles the TypeScript code into plain JavaScript that can run in any JavaScript environment.
+
+4. Features
+JavaScript: JavaScript supports ES6 features (like arrow functions, async/await, modules, etc.) and older features. The language is constantly evolving, but it doesn’t natively support things like interfaces, generics, or advanced type features.
+TypeScript: TypeScript supports all JavaScript features (including ES6 and beyond) and adds its own features, such as:
+Interfaces: TypeScript allows defining strict contract shapes for objects, helping with better code structure and maintainability.
+Generics: You can create reusable components with type parameters.
+Enums: TypeScript supports enum types, which are not available in vanilla JavaScript.
+Type Aliases and Custom Types: Create complex types and use them throughout your code.
+
+****************************************************5.What is Entity framwork*****************************************************************
+Defination:
+- Entity Framework (EF) is an Object-Relational Mapper (ORM) developed by Microsoft that enables developers to work with relational databases using .NET objects. 
+ Essentially, EF allows you to interact with your database using high-level object-oriented code instead of raw SQL queries, which makes data access easier and more intuitive.
+
+1.Object-Relational Mapping (ORM):  automatically maps the objects in your application to the tables in your database. 
+
+2.LINQ Support: Entity Framework supports Language Integrated Query (LINQ), which allows you to write queries in C# instead of SQL, and EF translates them to the appropriate SQL queries for your database.
+
+****************************************************6.Routing in C#****************************************************
+- Routing is used to handle incoming HTTP requests based on the URL and maps them to a controller action or endpoint.
+- the routing is a mechanism in ASP.NET Core application which is inspect the incoming requests(i.e URL) and then mapped that request to the controller and their action methods.
+
+in startup.cs file
+            app.UseRouting();   <---- configure routing;
+
+
+Ex: http://localhost/home/index/100
+home: controller
+index: action method
+100: id parameter value
+
+public class HomeControler: Controller
+{
+	public ViewResult Index()
+	{
+	  return View();
+	}
+}
+--------------------------------------
+#what is attribute routing in ASP.NET Core?
+-Attribute based routing is the ability to manupulate the behavior of URL by route attribute
+Ex: http://localhost/home/NewIndex
+
+[Route("NewIndex")]				<---- we use route attribute
+public IActionResult Index()
+{
+	return View();
+}
+
+****************************************************7.State management system****************************************************
+state management in asp.net core has various techniques used to store user data across different requests. since HTTP is stateless, each request is new for server, it does not remember previous request.
+#state management techniques:
+1. Session State
+Description: Session state allows you to store data for a user across multiple HTTP requests. Data is stored on the server and is associated with a unique session ID, which is typically stored in a cookie on the client.
+EX:
+public class HomeController : Controller
+{
+    public IActionResult Index()
+    {
+        // Set session value
+        HttpContext.Session.SetString("UserName", "JohnDoe");
+
+        return View();
+    }
+
+    public IActionResult GetSessionValue()
+    {
+        // Get session value
+        var userName = HttpContext.Session.GetString("UserName");
+        return Content(userName);
+    }
+}
+Configuration: To enable session state, you need to add session services and configure it in
+
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDistributedMemoryCache(); // For in-memory session storage
+    services.AddSession(options =>
+    {
+        options.IdleTimeout = TimeSpan.FromMinutes(30); // Session timeout
+    });
+}
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    app.UseSession();
+}
+----------------------------------------------------------------------------
+2. Cookies
+Description: Cookies are small pieces of data stored on the client-side (browser). They can be used to persist user preferences, authentication tokens, or any other small pieces of data.
+Types:
+1.Persistent Cookies: These cookies have an expiration date, and they are stored on the client machine until the expiration date is reached.
+2.Session Cookies: These cookies are temporary and are deleted when the browser is closed.
+
+public IActionResult SetCookie()
+{
+    Response.Cookies.Append("UserPreference", "DarkMode", new CookieOptions
+    {
+        Expires = DateTimeOffset.UtcNow.AddDays(1) // Persistent cookie
+    });
+    return View();
+}
+
+public IActionResult GetCookie()
+{
+    var userPreference = Request.Cookies["UserPreference"];
+    return Content(userPreference ?? "No preference set");
+}
+-------------------------------------------------------------------------
+3. Query Strings
+Description: Query strings are data passed in the URL in key-value pairs (e.g., /Home/Index?id=123). While not ideal for sensitive or large data, they are a simple way to transfer small pieces of data between requests.
+public IActionResult Index(int? id)
+{
+    var userId = id ?? 0;
+    return Content($"User ID: {userId}");
+}
+---------------------------------------------------------------------------
+4. TempData
+Description: TempData is used to store data that is only needed for the next request. It is typically used to pass data between controller actions, often used for displaying success/error messages.
+Storage: TempData is stored in session but is cleared after it is read once.
+
+public IActionResult SetTempData()
+{
+    TempData["Message"] = "Data saved successfully!";
+    return RedirectToAction("ShowTempData");
+}
+
+public IActionResult ShowTempData()
+{
+    var message = TempData["Message"];
+    return Content(message?.ToString() ?? "No message");
+}
+---------------------------------------------------------------------------
+5. ViewData and ViewBag
+Description: ViewData and ViewBag are used to pass data from the controller to the view. ViewData is a dictionary, while ViewBag is a dynamic object. These are typically used to send data to the view for rendering purposes.
+public IActionResult Index()
+{
+    ViewData["Message"] = "Hello from ViewData";
+    ViewBag.Message = "Hello from ViewBag";
+    return View();
+}
+-------------------------------------------------------------------------
+Summary of Techniques:
+Session State: Stores data for the duration of the user’s session.
+
+Cookies: Stores small pieces of data on the client-side.
+
+Query Strings: Transmits data via the URL.
+
+TempData: Stores data for the duration of a single request.
+
+ViewData/ViewBag: Pass data from the controller to the view.
+
+*********************************************8.Client side vs server side **********************************
+Client-Side:
+Definition: Client-side refers to operations that are performed on the user's machine, typically within the browser. This can include things like rendering HTML, running JavaScript,
+
+Server-Side
+Definition: Server-side refers to operations that are performed on the web server, where the application logic runs, and where requests from the client are processed.
+
+***********************************************9.httpResponce*********************************************
+The HttpResponse object is a powerful part of the ASP.NET Core framework that allows you to control the response sent back to the client.
+It handles everything from status codes and headers to cookies, redirections, and writing the response body. 
+
+1.Status Code: The HttpResponse.StatusCode property is used to set the HTTP status code that will be sent to the client.
+// Set the status code to 200 (OK)
+HttpContext.Response.StatusCode = 200;
+
+// Set the status code to 404 (Not Found)
+HttpContext.Response.StatusCode = 404;
+------------------------------------------------------------
+2.Headers:The HttpResponse.Headers property allows you to add or modify HTTP headers in the response.
+// Add a custom header to the response
+HttpContext.Response.Headers["Custom-Header"] = "HeaderValue";
+
+// Set the Content-Type header
+HttpContext.Response.ContentType = "application/json";
+------------------------------------------------------------
+2.Cookies: You can use the HttpResponse.Cookies property to set cookies in the response. Cookies are stored on the client side 
+// Set a cookie in the response
+HttpContext.Response.Cookies.Append("UserName", "JohnDoe", new CookieOptions
+{
+    Expires = DateTimeOffset.UtcNow.AddDays(7) // Expire in 7 days
+});
+--------------------------------------------------------------
+public async Task<IActionResult> Index()
+{
+    // Set the status code
+    HttpContext.Response.StatusCode = 200;
+
+    // Add custom headers
+    HttpContext.Response.Headers["Custom-Header"] = "HeaderValue";
+    HttpContext.Response.ContentType = "application/json";
+
+    // Set a cookie
+    HttpContext.Response.Cookies.Append("UserName", "JohnDoe");
+
+    // Write some content to the response body
+    await HttpContext.Response.WriteAsync("{ \"message\": \"Hello World!\" }");
+
+    return new EmptyResult(); // No additional content
+}
+
+Explanation of what happens in this action:
+
+Status Code: The status code is set to 200 (OK), indicating the request has been processed successfully.
+
+Custom Headers: A custom header called Custom-Header with the value HeaderValue is added to the response.
+
+Content-Type: The content type of the response is set to application/json, indicating that the response body will contain JSON data.
+
+Cookie: A cookie named UserName with the value JohnDoe is set in the client's browser.
+
+Response Body: The response body will contain a JSON string: {"message": "Hello World!"}.
+
+Return Type: An EmptyResult is returned, but since the response body and status code are already set, this result won't affect the response that the client receives. Essentially, it indicates no further processing is required.
+
+********************************************************10.Design patterns**************************************************************************************************
+Design pattern are general reusable solution for common problems in software solution.
+Threr are 3 types of Design patterns:
+1.Creational design pattern
+2.Structural design pattern
+3.Behavioral design pattern
+
+1.Creational design pattern:
+Creational design patterns are design pattern that deals with object creation mechanisms.
+for ex: Singleton, Factory method, Abstract factory and builder are creational design patterns.
+
+2.Structural design pattern
+Structural design pattern is used to manage the structure of classes and interfaces as well to manage the relationship between the classes
+for ex: Adapter, Bride etc.
+
+3.Behavioral design pattern
+this type deals with the communication between classes and objects.
+for ex: Command interpreter
+
+**********************************************Creational design pattern:*******************************
+1. Singleton design pattern
+2.Factory design pattern
+3.Lazy Initialization
+
+1. Singleton design pattern
+- its a creational design pattern becouse it deals with object creation mechanism.
+- a singleton is a class that only allows a single instance of itself to be created.
+- this pattern is used when we need to ensure that only one object of a particular class need to be created.
+- The Singleton Design Pattern is a simple but effective way to ensure that a class has only one instance throughout the entire application, providing a controlled and global access point to that instance. 
+It is useful when managing resources like database connections or configuration settings.
+Steps for create singleton class:
+1.Create a sealed class so no one can inherit from this class.
+2.Create private constructor so that no one can create object of this singleton class.
+3.Declare a static instance of this class
+4.Create a method which will check where the instance is null, if yes then it will create the new instance and if no then it will return the same instance.
+
+public sealed class Singleton                   <----- 1
+{
+	private static Singleton instance;			<----- 3
+	
+	private Singleton(){}						<----- 2
+	
+	public static Singleton getInstance()		<----- 4
+	{
+		if(instance == null)
+		{
+			return new Singleton();
+		}
+		return instance;
+	}
+	
+}
+
+public static void main(string[] args)
+{
+	Singleton s1 = Singleton.getInstance();
+}
+
+
+##why sealed keyword is requird
+we can create nested class and the by using nested class we can create multiple object of singleton class which violate the principle of singleton pattern
+
+public sealed class Singleton                   
+{
+	private static Singleton instance;			
+	
+	private Singleton(){}						
+	
+	public static Singleton getInstance()	
+	{
+		if(instance == null)
+		{
+			return new Singleton();
+		}
+		return instance;
+	}
+	
+	public class DerivedSingleton: Singleton
+	{
+	
+	}	
+}
+
+
+public static main()
+{
+	Singleton s1 = Singleton.getInstance();       <---- 1 instace created 
+	Singleton s2 = Singleton.getInstance();       <---- same instace refer to the s2
+	
+	
+	Singleton.DerivedSingleton derivedObj = new Singleton.DerivedSingleton(); <---- at this movement 2nd instance will create which violate principle of singleton pattern.
+}
+
+
+##How to make singleton pattern thread safe
+Thread safe singleton pattern can be implemented by using the Lock mechanism. so that multiple threads cannot create multiple instance of same class.
+
+public sealed class singleton
+{
+	private static Singleton instace = null;
+	private static readonly object obj = new object();
+	 
+	private singleton(){}
+	
+	public static Singleton getInstance()
+	{
+		private lock(obj)
+		{
+			if(instance == null)
+			{
+				instace = new Singleton();
+			}
+			return instace;
+		}
+	}
+}
+#Connection with AddSingleton<IEmployee, Employee>();
+-The AddSingleton method in ASP.NET Core's Dependency Injection (DI) container registers services with a singleton lifetime. This means that only one instance of the service will be created and shared across the entire application's lifetime.
+-When you register a service as a singleton, you are essentially applying the Singleton Design Pattern to that service. 
+AddSingleton<IEmployeeService, EmployeeService>() ensures that one instance of EmployeeService is created and shared across the entire application.
+
+--------------------------------2.Factory design pattern--------------------------------
+- factory is a creational design pattern which manages object creation. in this pattern an interface is used for creating an object, but let subclass decide which class to instantiate.
+- Factory pattern creates object without exposing the creation logic to the client and refer to newly created object using a common interface.
+
+Ex:
+[Client]--uses-->[Factory]--create-->[Product]
+client uses a factory to create a instance of product.
+--------------------------------3.Lazy Initialization--------------------------------
+- The Lazy Initialization pattern delays the creation of an object until it is actually needed. 
+- This is useful for improving performance, particularly when dealing with expensive operations or resources that may not be required immediately.
+- n C#, lazy loading is often implemented using the Lazy<T> class, which is part of the System namespace. The Lazy<T> class ensures that an object is created only when it is accessed for the first time. This can save memory and processing time by avoiding the initialization of objects that may not be used.
+Example of Lazy Loading in C#:
+using System;
+
+class Program
+{
+    // Define a class for Lazy loading
+    public class ExpensiveObject
+    {
+        public ExpensiveObject()
+        {
+            Console.WriteLine("ExpensiveObject Created");
+        }
+
+        public void DoSomething()
+        {
+            Console.WriteLine("Doing something...");
+        }
+    }
+
+    static void Main()
+    {
+        // Lazy initialization of ExpensiveObject
+        Lazy<ExpensiveObject> lazyExpensiveObject = new Lazy<ExpensiveObject>(() => new ExpensiveObject());
+
+        Console.WriteLine("Before accessing the expensive object");
+
+        // The expensive object is created here (lazy loading)
+        lazyExpensiveObject.Value.DoSomething();
+
+        Console.WriteLine("After accessing the expensive object");
+    }
+}
+
+----------------------------------------Structural Design pattern-----------------------------------------
+1.Dependency Injection (DI) : 
+Pattern Description: 
+- This design pattern allows for decoupling the components of an application. Rather than hard-coding dependencies within a class, they are provided to the class by a DI container.
+- ASP.NET Core has built-in support for DI. The framework allows services (like database context, logging, authentication, etc.) to be injected into classes (controllers, services, etc.) at runtime, enhancing testability and modularity.
+Example: In Startup.cs, you configure services that the framework will inject into your application.
+
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext<MyDbContext>(options => options.UseSqlServer("ConnectionString"));
+    services.AddScoped<IMyService, MyService>();
+}
+#Why DI is considered a Structural Pattern:
+Decoupling Components: DI promotes decoupling between classes by allowing their dependencies (e.g., services, repositories) to be provided externally instead of creating them internally. This allows classes to focus on their primary responsibilities without worrying about how to create or manage their dependencies.
+
+#In ASP.NET Core, DI is commonly implemented using the following techniques:
+Constructor Injection (most common)
+Property Injection
+Method Injection
+----------------------------------------Behavioral Design Pattern---------------------------------------
+1.Repository Pattern 
+- Pattern Description: The Repository pattern abstracts data access logic, allowing for a cleaner separation between the application’s business logic and data access code. It provides a way to manage entities and communicate with the data layer (e.g., database) through a repository class.
+- How It's Used in ASP.NET Core: In an ASP.NET Core application, repositories are often used to encapsulate CRUD (Create, Read, Update, Delete) operations for a specific entity.
+
+Example:
+public interface IProductRepository
+{
+    Task<IEnumerable<Product>> GetAllProductsAsync();
+    Task<Product> GetProductByIdAsync(int id);
+}
+
+public class ProductRepository : IProductRepository
+{
+    private readonly MyDbContext _context;
+
+    public ProductRepository(MyDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<IEnumerable<Product>> GetAllProductsAsync()
+    {
+        return await _context.Products.ToListAsync();
+    }
+}
+
+
+***********************************************************************************************
+#Difference between Abstracting & Encapsulation
+Abstraction:
+		- Abstraction is used for hiding unwanted data and showing issential things.
+		- you can achive abstraction using Interface and Abstract class.
+		- Abstraction solving the problem in design level.
+		- Abstraction let you focus on what the object does instead of how it does it.
+		- Purpose: To reduce complexity and allow the user to interact with the object at a higher level of understanding.
+		-EX : outer look of mobile phone, like it has a display screen and keypad buttons to dial a number. 
+Encapsulation:
+		- Encapsulation means combine code and behavior into one single unit.
+		- you can implement encapsulation using Assess modifiers.(public, protected and private).
+		- Encapsulation solves the problem in implementation level.
+		- Encapsulation means hiding the internal details of how an object does
+		- Purpose:  To protect the object's state from harmful modifications, promoting controlled access to data.
+		-Ex : inner implementation details of a mobile, how keypad button and display screen are connect with each other using circuits. 
+		
+		
+----------------------------how can achive abstraction using abstract class---------------------
+// Abstract class
+abstract class Animal {
+    // Abstract method (no implementation)
+    abstract void sound(); 
+
+    // Concrete method (with implementation)
+    void eat() {
+        System.out.println("This animal is eating.");
+    }
+}
+
+// Concrete class (subclass) that extends the abstract class
+class Dog extends Animal {
+    // Providing implementation for the abstract method
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+
+class Cat extends Animal {
+    // Providing implementation for the abstract method
+    void sound() {
+        System.out.println("Meow");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // You cannot create an object of an abstract class directly
+        // Animal animal = new Animal(); // This will give an error
+
+        // Creating objects of concrete classes
+        Animal dog = new Dog();
+        Animal cat = new Cat();
+
+        // Calling methods on the objects
+        dog.sound();  // Output: Bark
+        dog.eat();    // Output: This animal is eating.
+
+        cat.sound();  // Output: Meow
+        cat.eat();    // Output: This animal is eating.
+    }
+}
+************************************************* Delete and Truncate difference*************************************
+Delete:
+		- is a DML operation
+		- The delete statement is used to remove specific rows from table. you can use a where cluse to filter the rows that need to be delete.
+		- if the table has trigger associated with DELETE they will be fired when you use DELETE.
+		- delete operation can be rollback bcz it's DML operation.
+		- Performance is slower that trucate becouse it delete rows one by one.
+		- does not reset identity column value.
+Truncate:
+		- is a DDL operation
+		- The truncate statment is used to remove all rows from a table.
+		- since truncate is DDL operation, it does not active triggers on the table.
+		- truncate cannot be rollback bcz its DDl operation.
+		- performance is fast becosue it remove all rows at time.
+		- it reset identity column value. 
+		
+
+************************************************How we decide go with abstract class or interfaces. *************************
+1.Purpose:
+- Use an Interface when you need to define a contract (a set of methods) that classes must implement but don't necessarily share any implementation.
+- Use an Abstract Class when you need to define a common base class with shared behavior (methods) and possibly shared state (fields), and you want to provide some functionality that can be shared by subclasses.
+
+2.Multiple Inheritance
+- Interfaces allow a class to implement multiple interfaces, which is useful if your class needs to inherit behaviors from multiple sources. This is a form of multiple inheritance.
+- Abstract classes only allow single inheritance. A class can extend one abstract class, but it cannot extend multiple classes.
+
+3. Shared Behavior (Method Implementation)
+- Abstract Class: If you want to provide default behavior (method implementations) that can be inherited by subclasses, an abstract class is appropriate. It allows you to write code in the base class and reuse it in derived classes.
+- Interface: Historically, interfaces cannot provide method implementations (but this has changed in Java 8 and newer with default methods). Interfaces are typically used to define methods that must be implemented, without providing any implementation details.
+
+4. State (Fields/Variables)
+- Abstract Class: An abstract class can have instance variables (fields), which can store state that is shared among its subclasses.
+- interface :  They can only have method signatures (abstract methods) or static final variables (constants).
+
+5. Flexibility
+- Interface: Use interfaces when you need flexibility. A class can implement multiple interfaces, so if your design requires multiple behaviors to be added to a class, interfaces are a better choice.
+- Abstract Class: Use abstract classes when your design is more hierarchical and you're modeling a family of related classes that share a common structure or behavior.
+******************************************************Transient vs scoped ********************************************
+Transient: 
+	Creation: A new instance of the service is created every time it is requested.
+	Use Case: Best for lightweight, stateless services where each request should have a new instance.
+If you register a service as transient, like:
+	services.AddTransient<IMyService, MyService>();
+- Memory Management: Since a new instance is created every time, it might lead to increased memory usage, but it's very appropriate for short-lived operations that don't hold state between requests.
+
+Scoped:
+	Creation: A new instance is created once per HTTP request or per scope. If you have nested scopes (like in background jobs or explicit scopes), a new instance is created for each scope.
+	Use Case: Best for services that should be shared within the same request or scope but should not be shared across requests. 
+If you register a service as scoped, like:
+	services.AddScoped<IMyService, MyService>();
+
+
+public sealed class Scoped                   
+{
+	private Scoped instance;			
+	
+	public Scoped(){}						
+	
+	public Scoped getInstance();
+	{
+		if(instance == null)
+		{
+			return new Scoped();
+		}
+		return instance;
+	}
+	
+}
+-------------------------------------------------------
+
+public class Transient                   
+{	
+	public Transient(){}						
+	
+	public Transient getInstance();
+	{		
+		return new transient();
+	}
+	
+
+***********************************Sealed class and Static class difference**********************************
+Sealed Class:
+	- Purpose: A sealed class is used when you want to prevent other classes from extending (inheriting) your class. 
+			   This can be useful for maintaining control over the behavior of the class and ensuring that it cannot be modified through inheritance.
+			   
+	- A sealed class can be instantiated (we can create object of seald class)
+	- sealed class can contain static and non static member.
+Static Class:
+	- Purpose: A static class is useful when you want to group methods or properties that don't require an instance of the class to be used,
+	- You cannot instantiate a static class. 
+	- can notcontain non static member. 
+	
+*********************************Major Difference Between Sql Server and PostGreSql*********************************
+
+SQL Server-----vs--------PostgreSQL
+
+1.Relational database management system ----   Object-relational database management system
+2.Commercial product from Microsoft  ------  Open source (completely free) 
+3.Primarily designed for Windows, but recent versions also support Linux. ------ can run on various operating systems including Windows, Linux, and macOS.
+******************************************** Why we create db connection as Singleton life cycle******************************
+1.Thread Safety
+In multi-threaded applications, a Singleton ensures that only one thread can access the database connection at any given time, preventing conflicts and data corruption. This makes it easier to avoid issues where multiple threads might try to access or modify the database simultaneously.
+
+2.Centralized Management: 
+With a Singleton, managing the connection (like closing or refreshing it) becomes much easier. You can control connection lifecycle events in a single, well-defined place, improving maintainability and scalability.
+
+***************************************************IActionResult******************************
+IActionResult is an interface used in controller methods to return flexible HTTP responses. Instead of always returning just data (like User object), it lets you return different types of results, such as:
+
+Ok() → HTTP 200
+NotFound() → HTTP 404
+BadRequest() → HTTP 400
+Created() → HTTP 201
+
+1.IActionResult – Flexible, but not strongly typed
+[HttpGet("{id}")]
+public IActionResult GetUser(int id)
+{
+    var user = UserStore.User;
+
+    if (user == null || user.Id != id)
+        return NotFound(); 		// returns 404
+
+    return Ok(user); 			// returns 200 with the user data
+}
+------------------------------------------------------------------
+2. ActionResult<User> – Recommended for most APIs
+[HttpGet("{id}")]
+public ActionResult<User> GetUser(int id)
+{
+    var user = UserStore.User;
+
+    if (user == null || user.Id != id)
+        return NotFound();
+
+    return Ok(user); // or just return user;
+}
+✅ ActionResult<T> allows you to return either the object or an HTTP result.
+-----------------------------------------------------------------
+3️.User – Basic, only returns data (200 OK)
+[HttpGet("{id}")]
+public User GetUser(int id)
+{
+    return UserStore.User; // Always returns 200 OK
+}
+❌ No way to return an error or 404 response.
+###########################################################Coding problems#################################################################
+
+1.give me no of occuerence for each word from hello (count)
+
+ static void Main()
+    {
+        string input = "hello";
+
+        // Use LINQ to group characters by their value and count the occurrences
+        var charCount = input.GroupBy(c => c)
+                             .Select(group => new { Char = group.Key, Count = group.Count() })
+                             .ToList();
+
+        // Display the character counts
+        foreach (var item in charCount)
+        {
+            Console.WriteLine($"{item.Char} : {item.Count}");
+        }
+    }
+******************************************
+##############################################################Database##################################################################
+
+
+***********************************Second highest salary and third highest salary*****************************
+1. second highest sal
+SELECT DISTINCT TOP  1 sal
+  FROM [iacsd0923].[dbo].[emp] where sal NOT IN (SELECT TOP 1 sal FROM [iacsd0923].[dbo].[emp] ORDER BY sal DESC) order by sal desc;
+
+2. third highest sal
+SELECT DISTINCT TOP  1 sal
+  FROM [iacsd0923].[dbo].[emp] where sal NOT IN (SELECT TOP 2 sal FROM [iacsd0923].[dbo].[emp] ORDER BY sal DESC) order by sal desc;
+************************************************ All element not duplicate SQL query****************************************
+SELECT DISTINCT column_name FROM table_name;
+column where you want to remove duplicates.
+----
+If you want to remove duplicates based on multiple columns,
+SELECT DISTINCT column1, column2 FROM table_name;
+
+****************************************In SQL how do you optimize stored procedures****************************************
+1. use SET NOCOUNT ON 
+when we do insert or update query  in sql it will show 1 row affected masseges. no need to see the masseges,bcz it occupay some memory. thats why use SET NOCOUNT ON;
+
+2. use specific column name instead of * to get all record.
+ex: select empName, Department, city from emp;
+
+3. use schema name before object or tablenames.
+if you have more than one schema then it will check on all table from schemas. instead of that use schema name before tableName.
+ex: SELECT EMPId, Name FROM dbo.EmployeeTable;
+
+4. use indexes for search or create undex for commonly used column in where conditions.
+- By default, when you create an index using the CREATE INDEX statement without specifying the type, SQL Server creates a non-clustered index.
+-Indexing in SQL Server (and other database management systems) is a technique used to speed up data retrieval operations. It works similarly to an index in a book, where you can quickly locate the page number associated with a specific topic.
+- Instead of scanning the entire table to find the desired data, SQL Server uses indexes to locate rows more efficiently.
+
+# What is an Index?
+An index is a data structure that SQL Server uses to improve the speed of data retrieval. It stores pointers to the actual data rows in a table, allowing SQL Server to quickly access the data without scanning every row in the table.
+create index idx_dep_emp ON EmployeeTable(Department);
+
+5. use numeric fields to store numeric value instead of character 
+Ex: if i have age column instead of using varchar use TINYINT(range 0 to 255), It uses only 1 byte of storage,
+
+additional info
+VARCHAR(50):
+If the column contains a string of length 10 (e.g., "HelloWorld"), 
+it would use 10 bytes for the string data and 2 bytes for the length tracking, totaling 12 bytes.
+
+6. use varchar or nvarchar instead of char
+becouse
+- char is fixed-lenght data type. this means that sql server reserve exact amount of space defined in the column.
+for example if you define a column as CHAR(50) and store a string of length 10, SQL Server will still allocate 50 bytes for that string
+- VARCHAR is a variable-length data type. This means SQL Server only allocates the exact number of bytes needed to store the data, plus 2 bytes for length tracking.
+for example  if you define a column as VARCHAR(50) and store a string of length 10, SQL Server will only allocate 10 bytes for the string (plus 2 bytes for the length), instead of the full 50 bytes.
+
+7. Minimum use DISTINCT keyword.
+avoid to use DISTINCT keyword becouse it take time for processing instead of that use groupBy 
+Ex: 
+SELECT DISTINCT Department from employeeTable  <----- Don't use
+SELECT Department from employeeTable Group By Department <---- most preferable
+
+8. use Exists instead of count
+when you want to show department which contain at least one employee that time use Exists instead of count
+bcouse :
+count will scan all matching rows to determine the total count, which can be slower if there are a large no of row,
+Exists Checks for the existence of rows that meet a condition. It returns TRUE if the subquery returns at least one row, and FALSE if it returns no rows. It stops processing as soon as a row is found that matches the condition.
+
+SELECT d.DepartmentID, d.DepartmentName
+FROM Departments d
+WHERE (
+    SELECT COUNT(*)						<----- don't use
+    FROM Employees e
+    WHERE e.DepartmentID = d.DepartmentID
+) > 0;
+-----------------------------------------
+SELECT d.DepartmentID, d.DepartmentName
+FROM Departments d
+WHERE EXISTS (						   <---- most preferable
+    SELECT 1
+    FROM Employees e
+    WHERE e.DepartmentID = d.DepartmentID
+);
+************************************Difference between VARCHAR and NVARCHAR***************************************************
+VARCHAR:
+- Stores non-Unicode data, meaning it uses the ASCII character set.
+- Each character takes 1 byte of storage.
+- If the column is defined as VARCHAR(50), it can store up to 50 characters using 50 bytes of storage (plus 2 bytes of overhead for length tracking).
+NVARCHAR:
+- Stores Unicode data, which can represent characters from any language in the world (including Asian, European, and special characters like emojis).
+- Each character takes 2 bytes of storage. 
+- If the column is defined as NVARCHAR(50), it can store up to 50 characters but will use 100 bytes for the data (plus 2 bytes of overhead for length tracking).
+############################################################################################################################
+
+
+
+
+
+---------------------------------------------------------------------------------------------
+L & T   done
+
+->•  Dependacy injection details: -Singleton pattern, Using constructor. Scoped, Transients
+->•  Lazy loading
+->•  How routing work in dotnet
+•  SQL Servers basic, Mongodb basic
+->•  Performance issue in query ( do indexing)-
+•  How you Dockeries your application
+•  Jenkins 
+•  CICD-Pipeline
+* When to use Filters and Middle-ware
+
+
+
+Capgemini 
+
+->•• Difference between Abstracting & Encapsulation
+->•• Authentication and Authorization different
+->•• what is Dependacy injection and their types
+->•• In SQL how do you optimize stored procedures -
+->•• Delete and Truncate difference
+->•• Different Http method commonly
+->•• PUT and PATCH difference
+->•• Second highest salary and third highest salary
+•• How many type Filters? Authorizes authentication
+•• Basic life of angular? Bootstrap function
+•• what are absorber in angular
+•• what is Bootstrap ? 
+•• code question Count occurrences of a character in a repeated string
+
+
+Cybage
+->•• Put and Post different limit
+->•• Add Singleton why we choose
+•• SDLC life cycle
+Sprint planning retrospective meeting, grooming, current roles and responsibilities, how communication happens within team and product owner
+•• How QA process done in your project
+•• Bug raise how do you manage hot fixes, branch merging strategy, and testing for production bugs
+•• How you will dicide which scope we have to pick from dependacy scope
+If we want a service class instance which registered as DI, But the class where we create Di of that service, we creating it manually, in that case DI will not work, how will you get instance. Service provider read
+->•• Why we create db connection as Singleton life cycle
+•• Asynchronous process explain? 
+Why asynchronous is not default in net, what will happen
+•• Parallel processing 
+•• Middleware and filter type explains in details
+middleware is applied globally to all requests, while filters are used to target specific situations
+•• Generic class are you created
+Yes, generic classes are beneficial because they allow for code reuse, type safety, and better performance
+Why not we use post method for update
+•• why we use http client factory not directly http client
+•• Comprehensive methods in API include API testing, caching, load testing, and penetration testing
+•• Encryption logic where you use in dotnet core
+•• Database first approach used but i want to code first approach it is possible or not if there database already exists
+How will you create Entity classes for that, is any tool? 
+•• lambda expression vs lambda function
+•• which case we can go for loop and foreach loop and do while and while
+•• Test cases framework
+What is Mock, multi Assertion, unit test cases basics
+•• Compression method
+••  How to send different types of data in single API response body, is it possible
+••  How to compress response body data size
+
+
+
+Capgemini Round 2
+
+->•• Abstraction and encapsulation difference. 
+->•• How we decide go with abstract class or interfaces. 
+->•• Store processger and Function difference
+->•• All element not duplicate SQL query
+•• Where you apply interface and abstract class in your project. 
+•• One coding question
+•• Find the array not duplicate or unique number from array
+•• What are different way decorators? Angular
+•• Custom modules or angular modules? Angular
+•• How manually change the events? Angular
+
+
+Savient Consultancy
+
+->•• Put and Patch difference
+->•• Scoped and Transient difference. 
+->•• Sealed class and Static class difference
+->•• use of abstract class
+->•• interface and abstract class
+->•• Overloading and overriding difference
+•• Containerize in your project could you explain. 
+•• Middleware concepts
+•• Handler concepts
+•• Http verb
+•• Highlight your technology experience. 
+•• Observable and promise difference
+•• Ngoninit and constructor difference
+•• Router outlet and router links
+•• Life cycle hooks you works 
+•• Ngon changes how it works?
+ 
+
+•• Same declaration of method in interface
+Use
+•• How you handling exception in your project 
+•• what is out keywords
+•• Difference between clustered 
+•• what is Primary key? 
+•• What is cursor? 
+•• Declare int array assign value try to print this value with any loop statements or indexing. 
+•• Print array value use recursive function code c#
+
+G+D
+••what is web api Query            https://youtu.be/BDi0A2HRNRc?si=qQDvVhPvUP8g0mqN
+••write any web api querry and filter 		https://youtu.be/BDi0A2HRNRc?si=qQDvVhPvUP8g0mqN
+->••states (client, server)
+->••httpResponce object
+->••what is coding pattern you are using 
+->••what is singleton pattern
+->••give me name from db where id is 12
+->••how routers work which types of routers we have

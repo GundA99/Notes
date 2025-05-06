@@ -1,5 +1,8 @@
 - Merge Conflict
 - TFVC repository
+https://youtu.be/4BibQ69MD8c?si=nYB6E4fzACLttddj --- info
+https://youtu.be/4DrOA01mrN4?si=GWJHbTwI-i2YTupG --- Course
+--------------------------------------------------------------------------
 AZURE 
 #Software develpment life cycle
 Plan->Code->testing->Build->Deploye->Monitor->Oprate
@@ -17,7 +20,7 @@ Opration Team
 	- Monitor
 	
 
-DevOps Team its combination of Developmemt team and testing team.
+DevOps Team its combination of Developmemt team and Opration team.
 is something where development and Opration work together.
 basically devOps fills the gap between Devlopment and the oprations Team.
 
@@ -35,7 +38,6 @@ lots of tools are available to automate this process.
 any product by providing multiple tools and technology.
 
 -Azure DevOps is a feature or service of Azure.
-
 ------------------------------AZURE DevOps Services----------------------------------
 mainly there are 5 services.
 1.Boards
@@ -143,7 +145,10 @@ Testing is one of the main feature in Development. All the automation/manual tes
 *******************************************************5.Artifacts**************************************************
 is a collection of packages which you getting from the private or public repositories which you can share with your team members.
 and all this articat required for deployment also. Basically in the Artifacts you can store your packages.
-
+Like JAR file in Java,
+nuget in .net
+in modern software development we use Docker
+so we store Docker Image as Artifact
 
 ----------------------------------------Project setting---------------------------------------------------
 -in Project setting we can select the services by allow disallow button. 
@@ -213,4 +218,185 @@ to Create Deployement group-
 3.Select type of target m/c(window/linux)
 4.then script will be created this script we need to hit by pawer shell of other m/c 
 	simple open powershell by administration mode and hit script.
-		
+----------------------------------------------------------------------------------------------------------
+Getting started in the azure Portal
+When we create free Account we will get popular services free for 12 months and 40+ other services free for all time and $200 
+popular 
+	AZURE Virtual machin (Linux/Windows)
+	Azure SQL Database 
+	AZURE Blob storage
+if we click on see all services will see services where we can see Free/monthly amount of the service Type description.
+
+
+--------------------------------------------------------------
+Azure DevOps Step by Step :  https://youtu.be/aonA7Kb7WGE?si=T_38whECADGHyRZU
+why
+when we create software we have Developer and opration team.
+
+Developer do activity like 
+Planing, Execution, Test
+
+then Operation will do 
+UAT, deploment, support
+
+Both are blaming each other if any problem rise.
+for bridg the gap between Developer and Operation team we required DevOps team.
+DevOpes is a Philosophy which say that both of team work together for smooth Delevery.
+if any error occure after deploment Operation team rise to developer temp to fix this in next buid
+
+we use Board in planing phase  
+
+#Agents
+Agent is a software which run inside machine and executes the pipline task.
+
+The output of the pipline is Artifact
+Pipline consist series of Task.
+-by useing Pipline we can automate Testing -> build -> publish -> UAT part
+
+-----------------------Create our own Agent--------------
+1. Goto Project setting
+2. Agent pools -> Add pool ->select Self-hosted -> Enter Name for Agent(MyComputerAgent)
+3. Goto Newly created pool -> New agent-> Download Agent-> Extract zip file (in that file we see config.cmd and run.cmd file)
+4. run the config.cmd then run.cmd file
+	(Simply open CMD end select file and enter)
+	- Enter Server URL : like http://dev.azure.com/DreamOrg
+	- Enter authentication type (PAT(Personal access token)): for thet goto userSetting in azure portal-> create Personal Access token-> Enter name, Select Read and Manage option for Agent pools
+5. Register Agent:
+Enter agent pool : mycomputeragent (Name of Agent pool on Portal)
+Enter agent name () : Press enter
+
+6. Enter work folder : press enter
+7.Enter run agent as service: Y
+8. run.cmd (after this step Agent will live )
+
+9. Edit job ahe add Self hosted Agent name like pool : mycomputeragent 
+	validate and Save 
+	(After this step Pipline job 
+	inside that we can see executing steps like NuGetToolInstaller, NuGetCommand, VSBuild )
+10. Add Task for Publish
+    - goto Edit Yamal file
+	- search Task (Publish build Artifact)
+	- and simply click on Add
+	- Validate and save
+ Task like
+	-task: PublishPipelineArtifact@1
+	inputs:
+	  targatePath : '$(Pipeline.Workspace)'
+	  artifact : 'schoolmanagement.app'
+	  publishLocation: 'pipeline'
+11. After job complete we can see artiface in Artifact section.
+
+
+
+---------------------understanding of Yamal-------------------
+yamal file: is a data serialization formate for storing Configuration information.
+- it helps to communicate data between People and computers.
+
+yamal has name and value structure.
+ITS A space indented.
+yamal uses Hyphens for list.
+**********1****************
+#Yamal
+name : Akash 
+age : 50    
+----------------------
+#Json
+{
+	"name" : "Akash",
+	"age" : 50
+}
+
+************2**************
+customer :
+	name : Akash 
+	age : 50   
+	addresses : 
+		- Mumbai      <--- '-' represents Collection
+		- Solapur
+----------------------
+#Json
+{
+	"customer" : {
+		"name" : "Akash",
+		"age" : 50
+		"addresses" : [
+			"Mumbai",
+			"Solapur"
+			]
+		}
+}
+
+*************3*************
+customer :
+	name : Akash 
+	age : 50   
+	profile : 
+		designation : engineer
+		dept : mechanical
+	addresses : 
+		- Mumbai      <--- '-' represents Collection
+		- Solapur
+----------------------
+#Json
+{
+	"customer" : {
+		"name" : "Akash",
+		"age" : 50,
+		"profile" : {
+			"designation" : "engineer",
+			"dept" : "mechanical"
+		},
+		"addresses" : [
+			"Mumbai",
+			"Solapur"
+			]
+		}
+}
+------------------------------------Azure Yamal File---------------------------
+inside yamal file we have trigger(from master branch), tasks, pool configuration and veriable 
+task is provided by Microsoft we simply add in yamal file from rightside tasks dropdown
+------------------------------------Release Pipeline--------------------------
+release pipeline which actually hook on the build pipeline and  will allow to be deployee on an environment.
+Steps
+1.Create new release Pipeline
+	if option not available 
+		goto Orgnization setting -> under pipeline setting -> Desable creation of classic pipeline.
+2. select Empty job
+3. Add articat 
+	Project name, Source
+
+#We have Schedule option
+	its bydefault Desable but we can enable for trigger realese pipeline
+
+4. add the stages
+	Select Azure App Service deploment
+5. Add Artifact 
+	// We can set setting like Version of articat, source (from where can select articat)
+6. Click on spark symbal 
+	Enable(Continuous deploment trigger) //Create a release every time a new build is available.
+7. click on Tasks
+	Add AZURE free subscription 
+	Add type (Web App on Windows)
+	Add Service name 
+		for that goto Azure portal -> Create a Resource -> web app
+		Create new Resource group(eg: schoolmgm-demo)
+		name : schoolmanagement-app
+		runtime stack : .NET 8 (LTS)
+		region : EAST US 2
+		Review + Create
+
+# Azure DevOpes Web App		
+A Web App in the Azure Portal is a service provided by Azure App Service, which allows you to build, deploy, and manage web applications in a scalable and secure environment. 
+It's a fully managed platform that supports various programming languages such as .NET, Node.js, Python, Java, PHP, and Ruby, enabling you to host websites.
+is nothing but paas service provided by azure.
+we have 4 type of web applications
+1. web app
+2. static web app
+3.web app + database
+4.wordPress on App service
+
+if we want to hit custom command we need to specify this like
+-task Npm@1
+inputs:
+	command: 'custom'
+	customCommand: 'run build'

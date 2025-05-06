@@ -1,0 +1,181 @@
+Dapper
+1.Why we use Dapper,
+
+-  Dapper is a lightweight, high-performance micro-ORM (Object-Relational Mapper) for .NET. 
+-  It’s developed by the folks at Stack Overflow, and it helps you execute SQL queries and map the results to C# objects
+-  Unlike full ORMs like Entity Framework, Dapper focuses on raw SQL and fast performance.
+
+✅ Why Use Dapper?
+Super fast compared to Entity Framework
+Easy to use with raw SQL
+Minimal setup
+Supports stored procedures
+Works with all ADO.NET compatible databases (e.g., SQL Server, MySQL, PostgreSQL, SQLite)
+
+#Required NuGet package: 
+- Dapper
+- Microsoft.Data.SqlClient
+
+📄 Basic Example
+using System.Data.SqlClient;
+using Dapper;
+
+public class User
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+
+class Example
+{
+    private string connectionString = "YourConnectionStringHere";
+
+    public List<User> GetUsers()
+    {
+        using (var connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            var users = connection.Query<User>("SELECT * FROM Users").ToList();
+            return users;
+        }
+    }
+}
+
+✍️ Inserting Data
+string sql = "INSERT INTO Users (Name) VALUES (@Name)";
+var result = connection.Execute(sql, new { Name = "Alice" });
+
+🔄 Updating Data
+string sql = "UPDATE Users SET Name = @Name WHERE Id = @Id";
+connection.Execute(sql, new { Name = "Bob", Id = 1 });
+
+❌ Deleting Data
+string sql = "DELETE FROM Users WHERE Id = @Id";
+connection.Execute(sql, new { Id = 1 });
+---------------------------------------------------------------------------------------
+setup for dapper
+install nuget package : Dapper
+
+For create Sql Connection : 
+SqlConnection = connection = new SqlConnection("Connection string");
+
+----------------------SELECT data from SINGLE Table-----------------
+SqlConnection connection = new SqlConnection("");
+connection.Open();
+
+//simple query
+IEnumerable<EntityName> result = connection.Query<EntityName>("select * from TableName");
+
+--------------------------------------------
+//Parameterized query
+IEnumerable<EntityName> result = connection.Query<EntityName>("select * from TableName where BillNo = @billNo", new {billNo = 2});
+or
+var querytext = "select * from tableName where BillNo = @billNo";
+var paramobject = new {billNo = 2};
+IEnumerable<EntityName> result = connection.Query<EntityName>(querytext,paramobject);
+--------------------------------------------
+//multiple parameterized querytext
+1. 
+var querytext = "select * from TableName where BillNo in @billNo";
+var paramobject= new{ billNo = new List<int>{1,3}};
+IEnumerable<EntityName> result = connection.Query<EntityName>(querytext, paramobject);
+
+2. nested filter query
+var querytext = "select * from TableName where BillNo in @billNo and ItemCount = @itemCount";
+var paramobject= new{ billNo = new List<int>{1,3}, itenCount = 4};
+IEnumerable<EntityName> result = connection.Query<EntityName>(querytext,paramobject);
+
+connection.Close();
+----------------------------------------Get specific column data------------------------------------------------
+
+Create new Dto for specific column result.
+var result = connection.Query<SpecificColumnDto>("select BillNo, BillAmount, PaidAmount, Balance from TableNames");
+
+// fetch single column data list
+
+List<int> BillNos = connection.Query<int>("select BillNo from TableName").ToList();
+------------------------------------------Work with Store procedures----------------------------------------
+//create store procedure
+create proc SelectBill
+@BillNo int
+as
+begin
+ select *from TabaleName where BillNo = @BillNo
+end
+
+// call store procedure
+var bill = connection.QuerySingle<Bills>("SelectBill", new{BillNo=2}, null,null,(CommandType.StoreProcedure);)
+var party = connection.Query<PartyModel>("GetPartyByUserId",new { userId = id },commandType: CommandType.StoredProcedure).ToList();
+
+------------------------------------QueryFirst---------------------------------
+return first record from table
+
+Bills bill = connection.QueryFirst<Bills>("select *from TabaleName");
+
+Why use QueryFirst?
+- Performance: It's faster when you know only one result matters, because Dapper will stop reading after the first record.
+- Avoids unnecessary processing: It skips mapping extra rows if they exist.
+
+Note:
+1. QueryFirst : it will throws error if not rows found.
+2. QueryFirstOrDefault	 : it will not throw an error.
+3. QuerySingle : it will throw error if there is no row found(also if more than one row).
+4. QuerySingleOrDefault : it will not throw error if no row found but yes if 1< row.
+5. Query : it will not throw error if row not found and it can return multiple rows.
+
+------------------------------Fetch data from more than one table--------------
+var result = connection.QueryMultiple("select * from Bills; select * from Bill_Item");
+
+List<Bills> bills = result.Read<bills>().ToList();
+List<Bills_Items> bill_items = result.Read<Bill_Items>().ToList();
+------------------------------ Fetch perticular row from table ----------------
+var bill = connection.QuerySingleOrDefault<Bills>("select * from bills where BillNo = @No", new {No = 2});
+
+------------------------------ Join -------------------------------------------
+
+var result = connection.Query<Bills,Bill_Items, Bills>("select b.*,Bi.* from bills b inner join bill_items bi on b.BillNo = bi.BillNo", (bill,bill_Item)=>{
+																														bill.items = bill_item;
+																														return bill;
+																													});
+------------------------------ update ------------------------------------------
+
+var result = connection.Execute("update Bills set BillAmount = @ba, PaidAmt = @pa, Balance_Amt = @b where BillNo = @bn", 
+					new {@ba = 200,@pa=100, @b=100, @bn=1});
+					
+####################################################Implemented in Project###################################################################
+Dapper_ORM project
+1.Get all records
+ public List<PartyModel> GetAllParty()
+ {
+     using (var connection = new SqlConnection(connectionString))
+     {
+         connection.Open();
+         var query = "SELECT top 10 * FROM [Onboarding].[Party]";
+         var parties = connection.Query<PartyModel>(query).ToList();
+         return parties;
+     }
+ }
+
+2.Get single record
+ public PartyModel GetPartyByUserId(int id)
+ {
+     using (var connection = new SqlConnection(connectionString))
+     {
+         connection.Open ();
+         var query = "SELECT * from [Onboarding].[Party] where UserId=@id";
+         var party = connection.QuerySingle<PartyModel>(query, new {id = id});
+         return party;
+     }
+ }
+
+3. Get record by using store procedure
+ public List<PartyModel> GetPartyByUserIdUseingSP(int id)
+ {
+     using(var connection = new SqlConnection(connectionString))
+     {
+         connection.Open ();
+         var party = connection.Query<PartyModel>("GetPartyByUserId",new { userId = id },commandType: CommandType.StoredProcedure).ToList();
+         return party;
+     }
+ }
+----------------------------------------------------------------------------------------------------------------

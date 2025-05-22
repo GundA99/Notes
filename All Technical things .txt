@@ -1842,8 +1842,31 @@ B. in IQueryable case request will go to the database and filter the data in dat
 	You want to benefit from server-side query execution for scalability and performance.
 	You need the query to be translated into a specific query language (like SQL).
 	
-	
-	
+
+-------------------------
+- List and all the collection internally inherit IEnumerable interface.
+- IEnumerable interface is used when we want to iterate among our collection classes using a FOREACH loop.
+- iEnumerable internaly uses ienumerator only to iterate the collection via foreach loop.
+- IEnumerable simplifies the use of IEnumerator.
+--------------IEnumerable vs IEnumerator--------------
+
+List<string> employee = new List<string>();
+
+IEnumerable<string> = EmployeeList = employees;
+foreach(string employee in EmployeeList)
+{
+	console.WriteLine(employee);
+}	
+
+we can do same with IEnumerator 
+
+IEnumerator<string> EmployeeList = employee.GetEnumerator();
+while(EmployeeList.MoveNext())
+{
+		console.WriteLine(employee);
+}
+
+
 ******************************************************IEnumerable vs List******************************************************	
 when to use which
 

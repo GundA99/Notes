@@ -1,3 +1,4 @@
+#DOTNET
 1.difference between var and let
 2.What is difference between put and patch
 3.command for convert typeScript into javascript
@@ -8,6 +9,33 @@
 8.Client side vs server 
 9.httpResponce
 10.Design patterns
+11.Difference between Abstracting & Encapsulation
+12.Delete and Truncate difference
+13. How we decide go with abstract class or interfaces. 
+14. Transient vs scoped
+15. Sealed class and Static class difference	
+16. Major Difference Between Sql Server and PostGreSql
+17.IActionResult
+18.SOLID Principle
+19.Agile methodology
+20.Garbage collection
+-----------
+#CODING
+1.give me no of occuerence for each word from hello (count)
+
+-----------
+#DATABASE
+1.In SQL how do you optimize stored procedures
+2.Difference between VARCHAR and NVARCHAR
+3.SQL Command/ Type of DB languge
+4.ACID Property
+5.Store Procedure VS function
+6.Joins, View, Trigger
+7.Normalization
+---------
+#SQL QUERY PROBLEMS
+1. second highest sal
+2. third highest sal
 -----------------------------------------1.difference between var and let------------------------------------------
 1. Scope
 var: Has function scope (or global scope if declared outside a function). This means it is accessible throughout the function it was declared in, even before the declaration (due to hoisting).	
@@ -31,7 +59,7 @@ var x = 10; // No error, re-declaration is allowed
 let y = 5;
 let y = 10; // SyntaxError: Identifier 'y' has already been declared
 
-*****************************************2.What is difference between put and patch************************************
+*****************************************2. What is difference between put and patch************************************
 1. Full vs. Partial Update
 PUT: A PUT request is used to update a resource entirely. When you send a PUT request, the entire resource is replaced with the new data you provide. If a field is missing from the request, it will be overwritten (or removed) in the resource.
 PATCH: A PATCH request is used to update a resource partially. Instead of replacing the entire resource, you only send the fields that need to be updated. It’s more efficient when you only need to modify a small part of the resource.
@@ -301,26 +329,27 @@ Response Body: The response body will contain a JSON string: {"message": "Hello 
 Return Type: An EmptyResult is returned, but since the response body and status code are already set, this result won't affect the response that the client receives. Essentially, it indicates no further processing is required.
 
 ********************************************************10.Design patterns**************************************************************************************************
-Design pattern are general reusable solution for common problems in software solution.
-Threr are 3 types of Design patterns:
+Q. What is design pattern?
+ - A design pattern is a reusable solution to a common problem in software design.Threr are 3 types of Design patterns:
+
 1.Creational design pattern
 2.Structural design pattern
 3.Behavioral design pattern
 
 1.Creational design pattern:
 Creational design patterns are design pattern that deals with object creation mechanisms.
-for ex: Singleton, Factory method, Abstract factory and builder are creational design patterns.
+for ex: Singleton design patterns.
 
 2.Structural design pattern
 Structural design pattern is used to manage the structure of classes and interfaces as well to manage the relationship between the classes
-for ex: Adapter, Bride etc.
+for ex: Dependency Injection(DI)
 
 3.Behavioral design pattern
 this type deals with the communication between classes and objects.
-for ex: Command interpreter
+for ex: Iterator,  Unit of work , Repository Pattern 
 
 **********************************************Creational design pattern:*******************************
-1. Singleton design pattern
+1.Singleton design pattern
 2.Factory design pattern
 3.Lazy Initialization
 
@@ -406,16 +435,23 @@ public sealed class singleton
 	
 	public static Singleton getInstance()
 	{
-		private lock(obj)
+		if(instance == null)			---- use double check to avoid locking. bcz lock unessesory hold the resource multiple time. 
 		{
-			if(instance == null)
+			private lock(obj)
 			{
-				instace = new Singleton();
+				if(instance == null)
+				{
+					instace = new Singleton();
+				}
 			}
-			return instace;
 		}
+		  return instance;
 	}
 }
+
+how can add Thread sefty:
+	by using lock object we can make thread sefty. 
+
 #Connection with AddSingleton<IEmployee, Employee>();
 -The AddSingleton method in ASP.NET Core's Dependency Injection (DI) container registers services with a singleton lifetime. This means that only one instance of the service will be created and shared across the entire application's lifetime.
 -When you register a service as a singleton, you are essentially applying the Singleton Design Pattern to that service. 
@@ -486,8 +522,8 @@ Property Injection
 Method Injection
 ----------------------------------------Behavioral Design Pattern---------------------------------------
 1.Repository Pattern 
-- Pattern Description: The Repository pattern abstracts data access logic, allowing for a cleaner separation between the application’s business logic and data access code. It provides a way to manage entities and communicate with the data layer (e.g., database) through a repository class.
-- How It's Used in ASP.NET Core: In an ASP.NET Core application, repositories are often used to encapsulate CRUD (Create, Read, Update, Delete) operations for a specific entity.
+    - Repository Pattern help to abstract and centralize the data access logic in an application. 
+	- it provides a layer of separation between the application's business logic and data access code, making the code more modular, maintainable, and testable.
 
 Example:
 public interface IProductRepository
@@ -510,10 +546,16 @@ public class ProductRepository : IProductRepository
         return await _context.Products.ToListAsync();
     }
 }
+2. iterator pattern :- helps iterate over elements of an aggregate object sequentially without exposing the underlying representation of the object.
+						when you use a foreach loop in C#, you are indirectly using the Iterator design pattern.
+						
+3. Unit of work :- This pattern helps to manage transactions and changes made to objects.
+				
+	Note: ABP Framework, which has its own built-in support for the Unit of Work (UoW) pattern, designed to simplify transaction management, especially in multi-tenant and domain-driven design applications.
+	📌 Key Benefits in ABP: no need to manually commit/rollback.
 
 
-***********************************************************************************************
-#Difference between Abstracting & Encapsulation
+***************************11.Difference between Abstracting & Encapsulation*************************************************
 Abstraction:
 		- Abstraction is used for hiding unwanted data and showing issential things.
 		- you can achive abstraction using Interface and Abstract class.
@@ -574,7 +616,7 @@ public class Main {
         cat.eat();    // Output: This animal is eating.
     }
 }
-************************************************* Delete and Truncate difference*************************************
+*************************************************12.Delete and Truncate difference*************************************
 Delete:
 		- is a DML operation
 		- The delete statement is used to remove specific rows from table. you can use a where cluse to filter the rows that need to be delete.
@@ -591,7 +633,7 @@ Truncate:
 		- it reset identity column value. 
 		
 
-************************************************How we decide go with abstract class or interfaces. *************************
+************************************************13. How we decide go with abstract class or interfaces. *************************
 1.Purpose:
 - Use an Interface when you need to define a contract (a set of methods) that classes must implement but don't necessarily share any implementation.
 - Use an Abstract Class when you need to define a common base class with shared behavior (methods) and possibly shared state (fields), and you want to provide some functionality that can be shared by subclasses.
@@ -611,7 +653,7 @@ Truncate:
 5. Flexibility
 - Interface: Use interfaces when you need flexibility. A class can implement multiple interfaces, so if your design requires multiple behaviors to be added to a class, interfaces are a better choice.
 - Abstract Class: Use abstract classes when your design is more hierarchical and you're modeling a family of related classes that share a common structure or behavior.
-******************************************************Transient vs scoped ********************************************
+******************************************************14. Transient vs scoped ********************************************
 Transient: 
 	Creation: A new instance of the service is created every time it is requested.
 	Use Case: Best for lightweight, stateless services where each request should have a new instance.
@@ -652,9 +694,8 @@ public class Transient
 	{		
 		return new transient();
 	}
-	
 
-***********************************Sealed class and Static class difference**********************************
+***********************************15.Sealed class and Static class difference**********************************
 Sealed Class:
 	- Purpose: A sealed class is used when you want to prevent other classes from extending (inheriting) your class. 
 			   This can be useful for maintaining control over the behavior of the class and ensuring that it cannot be modified through inheritance.
@@ -665,8 +706,8 @@ Static Class:
 	- Purpose: A static class is useful when you want to group methods or properties that don't require an instance of the class to be used,
 	- You cannot instantiate a static class. 
 	- can notcontain non static member. 
-	
-*********************************Major Difference Between Sql Server and PostGreSql*********************************
+
+*********************************16. Major Difference Between Sql Server and PostGreSql*********************************
 
 SQL Server-----vs--------PostgreSQL
 
@@ -679,8 +720,9 @@ In multi-threaded applications, a Singleton ensures that only one thread can acc
 
 2.Centralized Management: 
 With a Singleton, managing the connection (like closing or refreshing it) becomes much easier. You can control connection lifecycle events in a single, well-defined place, improving maintainability and scalability.
+	
 
-***************************************************IActionResult******************************
+***************************************************17.IActionResult******************************
 IActionResult is an interface used in controller methods to return flexible HTTP responses. Instead of always returning just data (like User object), it lets you return different types of results, such as:
 
 Ok() → HTTP 200
@@ -720,6 +762,200 @@ public User GetUser(int id)
     return UserStore.User; // Always returns 200 OK
 }
 ❌ No way to return an error or 404 response.
+
+****************************************18.SOLID Principle***********************************************************************
+
+The SOLID principles are a set of five principles in object-oriented programming to make software designs more understandable,
+flexible, and maintainable. Each letter in "SOLID" stands for a different principle:
+
+1) Single Responsibility Principle (SRP):
+A class should have only one  job or responsibility. 
+This principle helps in keeping classes focused and easier to maintain.
+ForEx: 
+public class Employee
+{
+	public int ID {get; set;}
+	public string name{get; set;}
+	
+	CalculateSalary(Employee e){...}        ❌<-------------this method should not be here 
+}
+
+public class SalaryCalculate
+{
+	public double CalculateSalary(Employee e){...}
+}
+
+2) OCP(open close principle)
+Open for extension Closed for modification Principle.
+rather than modifying the existing class inherit and create a new class.
+
+forEx:
+public class SalaryCalculateForManager : SalaryCalculate
+{
+	public override double CalculateSalary(Employee e)
+	{	
+		return 2000;
+	}
+}
+Existing flow will not affect if we want to add changes we inherit this class and create new class.
+
+3) Liskov Substitution Principle (LSP):
+
+Objects of a superclass should be replaceable with objects of its subclasses without affecting the correctness of the program. 
+This principle ensures that inheritance is used correctly.
+
+public abstract class Bird
+{
+    public abstract void Fly();
+}
+
+public class Sparrow : Bird
+{
+    public override void Fly()
+    {
+        Console.WriteLine("Sparrow is flying.");
+    }
+}
+
+public class Penguin : Bird
+{
+    public override void Fly()
+    {
+        throw new NotImplementedException("Penguins can't fly!");
+    }
+}
+
+public void MakeBirdMove(Bird bird)
+{
+    bird.Move();
+}
+
+Bird sparrow = new Sparrow();
+Bird penguin = new Penguin();
+
+MakeBirdMove(sparrow);  // Output: Sparrow is flying.
+MakeBirdMove(penguin);  // Output: Penguin is swimming.
+
+4) Interface Segregation Principle (ISP):
+-means any code should not be forced to use methods which it does not need.
+
+-This principle advocates for the creation of specific, smaller interfaces instead of one large interface, 
+which helps in keeping dependencies minimal and specific to the client's needs.
+
+5) Dependency Inversion Principle (DIP):
+
+High-level modules/classes should not depend on low-level modules/classes directly. But should access it via abstractions (e.g., interfaces). 
+
+This principle promotes loose coupling between software modules, making the system more maintainable and allowing for easier substitution of components.
+
+public class HomeController  	<--- high level module
+{
+	InternalEmpoyee e = new InternalEmpoyee();   <---  low-level module
+}
+
+instead of above 
+
+public Interface IEmployee
+{}
+public class internalEmployee : IEmployee
+{
+
+    public void Work()
+    {
+        Console.WriteLine("Internal employee is working.");
+    }
+
+}
+
+public class ExternalEmployee : IEmployee
+{
+	public void Work()
+	    {
+	        Console.WriteLine("Internal employee is working.");
+	    }
+}
+public class HomeController
+{
+	private readonly _iemployee;
+	public HomeControler(IEmployee e)
+	{
+		_iemployee = e;
+	}
+	
+	public void ManageEmployee()
+    {
+        _employee.Work();
+    }
+
+}
+
+
+public static void Main(string[] args)
+{
+    IEmployee internalEmployee = new InternalEmployee();
+    HomeController homeControllerInternal = new HomeController(internalEmployee);
+    homeControllerInternal.ManageEmployee();  // Output: Internal employee is working.
+
+    IEmployee externalEmployee = new ExternalEmployee();
+    HomeController homeControllerExternal = new HomeController(externalEmployee);
+    homeControllerExternal.ManageEmployee();  // Output: External employee is working.
+}
+
+
+*********************************************************19.Agile methodology****************************************************
+Agile methodology is an iterative approach to project management and software development that emphasizes flexibility, collaboration, and customer feedback.
+Here are some key concepts:
+-Iterative Development: Projects are broken down into small, manageable sprints, typically lasting 1-4 weeks. Each iteration results in a working product increment.
+-Collaboration: Agile promotes strong communication among team members and stakeholders. Daily stand-up meetings help keep everyone aligned and address any blockers.
+-Customer Involvement: Continuous customer feedback is integral. Stakeholders review each increment to ensure the product meets their needs and can suggest changes.
+-Adaptive Planning: Plans can evolve based on feedback and changing requirements. This allows teams to be more responsive to new information.
+-Cross-Functional Teams: Agile teams are typically composed of members with various skills, enabling them to take ownership of different aspects of the project.
+-Focus on Deliverables: The aim is to deliver a usable product quickly, allowing teams to gather feedback sooner rather than later.
+****************************************************20.Garbage collection***********************************
+static void Main()
+{
+	static void Call()
+	{
+		SomeClass x = new SomeClass();
+	}									<--- X object scope
+}
+
+
+Toatl memory = manageable + unmanaged memory
+
+object is create in heap memory and reference will be in stack, when object will out of scope reference will remove from stack memory. then GC remove object from heap. 
+1.can we see how GC work
+-> yes by using Build->performance profiler in Visual studio, and by using performance monitor in window.
+
+2.Does GC clean primitive types?
+-> No, they are allocated on stck and stck removes them as soon as the veriable goes out of scope.
+
+3.Managed code vs unmanaged code?
+- The code that run under the envirnment of CLR is called as managed code.
+- All code which is compiled and conver into IL code is called as managed code.
+- Managed code are those which are pure .NET object and these object are controller by .NET CLR.
+- the code which does not run under the CLR called as Unmanaged code.
+- unmanaged resource are those which are not controlled by .NET CLR runtime like File handle, connection objects and so on.
+
+4.GC can clean unmanaged resource.
+-> no, it clean only object which control under CLR
+
+5. Generation
+-> Generation are logical buckets which have objects and every bucket defines how much old the object are.
+GC0 : Short lived objects. local objects. 
+GC1 : intermediate lived object.
+GC2 : long lived objects. Ex static objects.
+
+6. why Generation
+-> for improve performance
+
+7. What is a memory leak ?
+-> Memory leak is a situation where the memory consumed by the application is not returned back to the operating system, even when the application exits.
+
+8. Can .Net application have memory leak issue even we have GC?
+-> Yes, its still possible to hvae memory leaks because GC only clean managed object.
+	if unmanaged memory is not claimed properly we can have memory leakss.
+
 ###########################################################Coding problems#################################################################
 
 1.give me no of occuerence for each word from hello (count)
@@ -739,26 +975,10 @@ public User GetUser(int id)
             Console.WriteLine($"{item.Char} : {item.Count}");
         }
     }
-******************************************
+
 ##############################################################Database##################################################################
 
-
-***********************************Second highest salary and third highest salary*****************************
-1. second highest sal
-SELECT DISTINCT TOP  1 sal
-  FROM [iacsd0923].[dbo].[emp] where sal NOT IN (SELECT TOP 1 sal FROM [iacsd0923].[dbo].[emp] ORDER BY sal DESC) order by sal desc;
-
-2. third highest sal
-SELECT DISTINCT TOP  1 sal
-  FROM [iacsd0923].[dbo].[emp] where sal NOT IN (SELECT TOP 2 sal FROM [iacsd0923].[dbo].[emp] ORDER BY sal DESC) order by sal desc;
-************************************************ All element not duplicate SQL query****************************************
-SELECT DISTINCT column_name FROM table_name;
-column where you want to remove duplicates.
-----
-If you want to remove duplicates based on multiple columns,
-SELECT DISTINCT column1, column2 FROM table_name;
-
-****************************************In SQL how do you optimize stored procedures****************************************
+****************************************1.In SQL how do you optimize stored procedures****************************************
 1. use SET NOCOUNT ON 
 when we do insert or update query  in sql it will show 1 row affected masseges. no need to see the masseges,bcz it occupay some memory. thats why use SET NOCOUNT ON;
 
@@ -820,7 +1040,8 @@ WHERE EXISTS (						   <---- most preferable
     FROM Employees e
     WHERE e.DepartmentID = d.DepartmentID
 );
-************************************Difference between VARCHAR and NVARCHAR***************************************************
+
+************************************2.Difference between VARCHAR and NVARCHAR***************************************************
 VARCHAR:
 - Stores non-Unicode data, meaning it uses the ASCII character set.
 - Each character takes 1 byte of storage.
@@ -829,10 +1050,86 @@ NVARCHAR:
 - Stores Unicode data, which can represent characters from any language in the world (including Asian, European, and special characters like emojis).
 - Each character takes 2 bytes of storage. 
 - If the column is defined as NVARCHAR(50), it can store up to 50 characters but will use 100 bytes for the data (plus 2 bytes of overhead for length tracking).
-############################################################################################################################
+
+SQL VS SQL server : SQL is Query languge, while SQL Server is a DataBase managment System.
+					SQL is Query languge for working with a relational DB while SQL server is software that perform SQL query.
+
+DataBase: A Db is a structured collection of Data that is organized and Stored in a way that allows for efficient retrival, manipulation 
 
 
+***********************************3.SQL Command/ Type of DB languge******************************************************
+DB languge are used to read, update, and Store Data in DB. There are several languges can be used for this porpose
+1. Data defination languge(DDL) : Used to define DB Schema 
+								  Ex. Create,Drop,Truncate, Alter
+2. Data Manupulation languge(DML) : Used to Manupulat Data for ex. Insert, update, Delete, Select
+3. Data Control languge(DCl) : DCl mainly Dels with rigths and permissions and other Controls Ex. Grant and revoke.
+4. Transaction Control languge(TCL): TCL Dels with transaction within DB, EX. Commit, Rollback, Savepoint
 
+************************************4.ACID Property*************************************************************************
+
+ACID is stands for Atomicity, Consistency, Isolation and Durability
+Atomicity:- Every Transaction Should be execute as a single unit means all the step should happen or none should happen there is no partial execution.
+Consistency:- Onec the transaction is executed It should move from one Consistent state to another.
+Isolation:- Transaction Should be Executed in isolation from other transaction. 
+			Ex. when a transaction is happing then the changes are visible to only person who performing the tradition till it getting executed				
+				The Changes will be visible to all user when transaction is Completed
+Durability:- After succesfully complete the trasaction changes in the DB is persist				
+
+***************************************5.Store Procedure VS function*********************************************************
+1. SP Can return 0, single or multiple value, function Can return single value Which is Mandatoy.
+2. SP Can have Input and Output parameter , function have only Input parameter.
+3. We can Call Function from SP, But not fuction call SP.
+4. we cant use SP in select, where or Having statment, but function use.
+
+#Type of Functions
+1.Single Row Function : sqrt(10),abs(10),round(12.34), Ceil(234.2), floor(2.133)
+2. Aggregate Function : sum, min, max,count,avg.
+
+****************************************6.Joins, View, Trigger****************************************************
+#Inner Join : inner Join return only the row from both table where they are match based on join condition.
+#Outer join : Outer Join return all row from one table and matching row from other table Based on join condition.
+#Left Join : return All Row from left table and matching row from rigth table.
+
+#View: 	View in SQL are Consider as a virtual table. A view also Contain rows and Columns It is used to give Limited access to the table to hide Complex Query
+		It Provide Security for hiding Table Name.
+		- it simplified Querying
+		- Data security
+		- Code
+#Trigger: trigger are spacial procedure which gets executed automatically when user performs some action this is used for maintian the logs
+- Trigger timing = After : It will Execute use Action First then Execute Trigger 
+				   Before: it will Execute Trigger First then Action
+		
+- Query : Create trigger triggerName before insert on tableName for each row
+			begin
+				insert into tableLogs values(...);
+			end;
+				   
+**********************************************7.Normalization**************************************************************
+- Normalization is a process of Organizing the Data in Database to avoid data redundancy, insertion,updation,deletion anomly
+- Normalization Divide larger table into the smaller table and links Them using relationship
+#1st NF : The relation will be 1NF if it contain an atomic Value. means table Cannot hold multiple value.
+			Ex. EmpName | PhoneNo <- phoneNo Cannot be Multiple
+#2nd NF : a relation must be in 1stNF and relation should not any partial dependency.
+			Ex. TecherId | TecherAge | Subject => TecherId | TecherAge & TecherId | Subject
+
+#3rd NF : The relation will be in 3NF if is in 2NF and not contain any transitive partial dependency   
+			EX. EMPID | Name | ZIP | STATE | CITY =>  EMPID | Name | ZIP  &  ZIP | STATE | CITY 
+
+###################################################SQL Query Problems#########################################################################
+***********************************Second highest salary and third highest salary*****************************
+1. second highest sal
+SELECT DISTINCT TOP  1 sal
+  FROM [iacsd0923].[dbo].[emp] where sal NOT IN (SELECT TOP 1 sal FROM [iacsd0923].[dbo].[emp] ORDER BY sal DESC) order by sal desc;
+
+2. third highest sal
+SELECT DISTINCT TOP  1 sal
+  FROM [iacsd0923].[dbo].[emp] where sal NOT IN (SELECT TOP 2 sal FROM [iacsd0923].[dbo].[emp] ORDER BY sal DESC) order by sal desc;
+************************************************ All element not duplicate SQL query****************************************
+SELECT DISTINCT column_name FROM table_name;
+column where you want to remove duplicates.
+----
+If you want to remove duplicates based on multiple columns,
+SELECT DISTINCT column1, column2 FROM table_name;
 
 
 ---------------------------------------------------------------------------------------------

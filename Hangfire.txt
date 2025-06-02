@@ -1,12 +1,12 @@
+https://youtu.be/lsP5ZjcFtMM?si=pfF4l3wR4c8t9z46_
 #Hangfire
-https://youtu.be/lsP5ZjcFtMM?si=pfF4l3wR4c89z46_
 Hangfire is an open-source framework that allows you to run background jobs in .NET applications—without needing a separate Windows service or cron job.
 is an open-source and well-documented task scheduler for ASP.NET Core.
 its multi-threaded, easily scalable, and offers a variety of job types.
 
  Steps
  1. Install hangfire package 
-	in that package we have Hangfire.AspNetCore and Hangfire.SqlServer
+	- Hangfire
  
  2. Install System.Data.SqlClient
 	to enable hangfire to access the database
@@ -18,15 +18,16 @@ its multi-threaded, easily scalable, and offers a variety of job types.
 	},
 	
  4. Configuer Program.cs file
-	builder.Services.AddHangfire(config=>
+	
+	builder.Services.AddHangfire((sp,config) =>
 	{
-		Config.UseSimpleAssemblyNameTypeSerializer()
-		.UseRecommendedSerializerSettings()
-		.UseSqlServerStorage(builder.Configuration.GetConnectionString(SqlCon));
+		var connectionString = sp.GetRequiredService<IConfiguration>().GetConnectionString("sqlCon");
+		config.UseSqlServerStorage(connectionString);
 	});
+
 	builder.Services.AddHangfireServer();
 	
-	app.useHangfireDashboard();               				<---- to enable hangfire Dashboard
+	app.UseHangfireDashboard();               				<---- to enable hangfire Dashboard
 	-----------Customize Dashboard------------
 	app.useHangfireDashboard("/test/job-dashboard", new DashboardOptions
 	{
@@ -42,55 +43,11 @@ its multi-threaded, easily scalable, and offers a variety of job types.
 			}
 		}
 	});
- 5. Start the project and visit hangfire dashboard by using localhost:5001/hangfire/servers
+ 5. Start the project and visit hangfire dashboard by using path https://localhost:7239/hangfire remove swagger/index.html and add hangfire
 	there we can see Servers which are running.
 
 ---------------------Create services folder------------------------
--create new interface IJobService
 
-public interface IJobTestService
-{
-	void FireAndForgetjob();
-	void ReccuringJob();
-	void DelayedJob();
-	void Continuationjob();
-}
-
--Create New class and inherite interface
-
-public JobTestService : IJobTestService
-{
-	private readonly ILogger _logger;
-	
-	public JobTestService(ILogger<JobTestService> logger)
-	{
-		_logger = logger;
-	}
-	
-	public void ContinuationJob()
-	{
-		_logger.LogInformation("hello from a continuation job!");
-	}
-	
-	public void DelayedJob()
-	{
-		_logger.LogInformation("hello from a Delayed job!");
-	}
-	
-	public void FireAndForgetjob()
-	{
-		_logger.LogInformation("hello from a Fire And Forget job!");
-	}
-	
-	public void ReccuringJob()
-	{
-		_logger.LogInformation("hello from a Fire And Forget job!");
-	}
-}
----------------------------------------------------------------
--Add Dependancy
-builder.Services.AddScoped<IJobTestService, JobTestService>();
----------------------------------------------------------------
 1. Fire and Forget job
 	This type of jobs server Exicute as soon as can.
 
@@ -141,7 +98,56 @@ public class JobTestController: ControllerBase
 #########################################################################################################################
 Job types 
 Fire And Forget job
-Delayed jobs
+Delayed jobs (Schedule)
 Recurring jobs
 Continuation job
 
+
+builder.Services.AddHangfire((sp,config) =>
+{
+    var connectionString = sp.GetRequiredService<IConfiguration>().GetConnectionString("sqlCon");
+    config.UseSqlServerStorage(connectionString);
+});
+
+builder.Services.AddHangfireServer();
+
+app.UseHangfireDashboard();
+--------------------------------------------------------------------------------------------------------
+#Fire And Forget job 
+ [HttpPost("CreatebackgroundJob")]
+ public ActionResult CreatebackgroundJob()
+ {
+     BackgroundJob.Enqueue(() => Console.WriteLine("Background Job Triggerd"));
+     return Ok();
+ }
+ 
+#Schedule job
+ [HttpPost("CreateScheduledJob")]
+ public ActionResult CreateScheduledJob()
+ {
+	var scheduleDateTime = DateTime.UtcNow.AddSeconds(5);
+	var dateTimeOffset = new DateTimeOffset(scheduleDateTime);
+	BackgroundJob.Schedule(() => Console.WriteLine("Scheduled job triggerd"), dateTimeOffset);
+	return Ok();
+ }
+ 
+#ContinuationJob
+ [HttpPost("CreateContinuationJob")]
+ public ActionResult CreateContinuationJob()
+ {
+     var scheduleDateTime = DateTime.UtcNow.AddSeconds(5);
+     var dateTimeOffset = new DateTimeOffset(scheduleDateTime);
+     var jobId = BackgroundJob.Schedule(() => Console.WriteLine("Scheduled job 2 triggerd"), dateTimeOffset);
+     var job2Id = BackgroundJob.ContinueWith<TestJob>(jobId,x=> x.WriteLog("Continuation Job 1 triggered"));
+     var job3Id = BackgroundJob.ContinueWith<TestJob>(jobId, x => x.WriteLog("Continuation Job 2 triggered"));
+     var job4Id = BackgroundJob.ContinueWith<TestJob>(jobId, x => x.WriteLog("Continuation Job 3 triggered"));
+     return Ok();
+ }
+
+#Reccuring Job
+ [HttpPost("CreateRecurringJob")]
+ public ActionResult CreateRecurringJob()
+ {
+    RecurringJob.AddOrUpdate<TestJob>("RecurringJob1", x => x.WriteLog("Recurring Job Triggered"), "*/5 * * * * *");
+    return Ok();
+ }

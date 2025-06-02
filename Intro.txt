@@ -1,4 +1,57 @@
-*****************************************************************intro*************************************************************************
+https://youtu.be/AtTgcbLOqMM?si=85ymIccT8Uu6e0Ho
+Q1. Explain your Project Architecture?
+-> it's a 4-layer architecture with front end in Angular, middle Layer is Web api, data asscess layer uses EF and Db in SQL Server.
+   in project we have implemented best practices and design patterns like repository/ unit of work/ Factory/ iterator pattern and so on.
+
+Q2. Architecture style vs Architecture Pattern vs Design pattern?
+-> An architecture style represents a set of principle or guidelines that shap the overall structure and organization of a software system. EX:- REST.
+	an architecture pattern provides general structure/layers for designing software system. EX: MVC Layered Architecture so on.
+   An Design pattern is solution for recurring problems in software design. and it has a very clear context. EX. Factory pattern.
+   
+Q3. What is design pattern?
+A design pattern is a reusable solution to a common problem in software design.
+for ex:
+Repository pattern, UOW, Factory, iterator pattern.
+1.Repository pattern :- help to abstract and centralize the data access logic in an application. 
+	it provides a layer of separation between the application's business logic and data access code, making the code more modular, maintainable, and testable.
+	
+2. iterator pattern :- helps iterate over elements of an aggregate object sequentially without exposing the underlying representation of the object.
+						when you use a foreach loop in C#, you are indirectly using the Iterator design pattern.
+						
+3. Unit of work :- This pattern helps to manage transactions and changes made to objects.
+				
+	Note: ABP Framework, which has its own built-in support for the Unit of Work (UoW) pattern, designed to simplify transaction management, especially in multi-tenant and domain-driven design applications.
+📌 Key Benefits in ABP: no need to manually commit/rollback.
+4. Dependacy injection  :- 
+
+
+Q. how did you implement thread safety in singleton?
+->	lock keyword help to implement thread safety.
+it will allow only one thread to execute the section of code
+	if(countries == null)
+	{
+		lock(lockobject)
+		{	
+			if(countries == null)
+			{
+				initializeCountries();
+			}
+		}
+	}
+	return countries;
+	
+for ex if we have 2 thread one thread is enter in 1st check it will getting countries from db while another thead can also enter and return how much contries retrive from db where 1st thread still retrive data from db.
+Q. what is double null check
+-> 	1st check we use for avoid to execution lock unnessesorly. if country is null then only it will go into lock step. we can say it is performace check
+	2nd lock for lazy loading
+
+Q. MVC Architecture pattern
+- in MVC architecture we divide the project in to three layer: controller, view, model.
+- 	Controller: Takes user input, loads model and passes to the view.
+	Model: This section has business logic.
+	View: This section handles the look and feel, positioning and alignment etc.
+- In MVC the fist hit comes to the controller, controller then load the model and attaches it to the view. Controller acts like a mediator between view and model.
+
 -------------------------------------------------------Project-----------------------------------------------------------
 1]
 HR Portal
@@ -54,7 +107,7 @@ HBNO is for HandlesBanken bank It's one of the toppest bank in finland.
 ------------------------------------------------------------------------------------------------							
 
 reacently i got another project to handle	
-2]
+3]
 WM_Standared
 Is a Product of Ikione under wealth domain
 its a Tenent based project,
@@ -97,7 +150,11 @@ Configuration   - Saving and getting Configuration (backendConnectedSystem{Pro},
 Order    - Order, Cancel, all orders
 Tenancy
 Reporting
-Playandlearn
+
+---------------------------------------------
+4]PortfolioX 
+---------------------------------------------
+ 
 ---------------------------------------------------------------------------------------------------------
 cdac journy
 

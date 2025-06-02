@@ -1,4 +1,56 @@
-
+REST
+#interface: 
+#abstract Class:
+#when to use interface and abstract class
+#Session:
+#Cookies:
+#lifecycle of states:
+#OOPs Concepts
+#Method Overloading VS Method Overriding
+#Type of Inheritance
+#Constructor
+#Casting
+#Boxing and unboxing
+#real example of Boxing and unboxing
+#Using Statment
+#Difference betweeen ToBase64String and FromBase64String
+#Synchronization
+#Why interface can not have The constructor?
+#Why Abstract Class have a Constructor?
+#C# vs .Net
+#Common languge Runtime(CLR)
+#intermediate languge(IL)
+#Common languge specification(CLS)
+# Common languge specification(CLS)
+# Common Type System(CTS)
+#Diff between .NET Framework and .NET Core 
+#Explain Microsoft Intermediate Language
+#Why GC important?
+#Managed code vs unmanaged code?
+#Value Type and reference Type
+#Array vs ArrayList
+#Delegates:
+#LINQ:
+#Startup.cs
+#Program.cs
+#LunchSetting.json:-
+#Appsetting.json:
+#Thread vs Process : 
+#authentication and authorization.
+#Async and Await
+#Finally and Finalize
+#Key Features of the ABP Framework
+#Dependence injection and types
+#Docker
+----------------Db------------------
+#SQL VS SQL server
+#SQL Command/ Type of DB languge
+#ACID Property
+#Store Procedure VS function
+#Joins, View, Trigger
+#Normalization
+#DevOps, AWS, Git
+#REACT
 ------------------------------------------------------------Basic & OOPs---------------------------------------------------------------------
 
 #REST (Representational State Transfer): It mean Transfer of representational state of the resource eg. Employee, order, Fund, student between the client and server.
@@ -10,8 +62,39 @@
 - it's a contract, its act like communication between two object. when we are defining i/f we are Defining contract what our inheriting class should do but not how it does.
 - Contain only abstract method, Support multiple inheritance, Bydefault i/f methods are public & abstract, By default i/f Variable Public static and final. 
 
+# 
+
+#Marker Interface :	an i/f that does not contain any methods, fields abstract methods, and any constants is called marker i/f, ex. serializable,Clonable 
+
+#Functional Interface : FI is a interface that has only pure one abstract method, Ex. Comparable.
+
 #abstract Class:
 - Contain both abstract or concreate methods, It does not support multiple inheritance, Except Private we can have any access specifier for method and variable, Can Declare Constructor.
+
+#when to use interface and abstract class
+Interface:
+an interface is a good choise when you know a method has to be there, but it can be implementated Differently by independent derived classes.
+ex: supose we have 2classes PermantEmployee , ContractualEmployee we know both employee has some common functionality like assignManager so we create Interface with AssignManager() method in that case implementation is not clear now, it can be implementated differently in derived classes.
+
+public interface Employee
+{
+	void AssignManager();	
+}
+
+Abstract class: 
+Abstract class is a good choise when you are sure some methods are concreate and must be implementated in the same way in all derived classes.
+ex we have same classes, employee has dresscode which is same for all so we add DressColor method in Abstract class EmployeDress. 
+
+public abstract class EmployeeDress
+{
+	public abstract void DessCode();
+	public void DressColor()
+	{
+		Console.WriteLine("BLUE");
+	}
+}
+	
+Normally we prefer interface becouse it gives us the flexibilityto modify the behavior at later stage.
 
 #Session:
 - A session refers to the state management technique that stores the user data and information on the server-side.
@@ -35,7 +118,8 @@
 #OOPs Concepts
 There are 4 main Pillers of OOPs
 1. Abstraction: Showing Issential things and hiding unnessesory Data is called as abstraction.
-	ex. Light switch and Car
+	ex. Light switch and Car, substring method, replace method from string class.
+	we use abstract class and interface for achive abstraction.
 2. encapsulates: Is a process of wrapping of Code and Behavior in a single unit is called as encapsulation, encapsulation expose only those part which is safe to expose and remaining part keep secured.
 	ex. Bag The Bag contain diff stuffs like pen, pencile, book within it.
 3. Inheritance: Inheritance is a process of acquiring the fetures of others. Ex Child class Acquires the fetures of their parent.
@@ -86,6 +170,13 @@ object y = i;   // boxing
 
 int z = (int)y;  //unboxing
 drowback of Boxing and unboxing is performace reduce due to shift data from heap to stack and stack to heap.
+#where to use boxing and unboxing
+in arrayList can add int, string, double becouse arraylist internall convert this value type into reference type internall it does boxing
+list.Add(123);
+list.Add("Akash")
+
+int no = (int)list[0];   //unboxing
+string no = (string)list[1];
 
 #Association
 Association represents a relationship between two classes where object of one class are connected to object of another class.
@@ -176,7 +267,7 @@ Convert.FromBase64String(string): Decodes a Base64 string back into its original
 
 #Why Abstract Class have a Constructor?
 -The main pourpose of the constructor is to initialize the newly create object. in abstract class we have instance variable, abstract menthod, and non abstract method therefore class have constructor.
--if we dont provide constructor compiler will provide defauld constructor in an abstract class.
+-if we dont provide constructor compiler will provide default constructor in an abstract class.
 		public abstract class Animal
 		{
 			public string Name { get; set; }
@@ -227,7 +318,9 @@ Convert.FromBase64String(string): Decodes a Base64 string back into its original
 -view resolver return the full path to the FC in case there is some data, FC set in the view and send the view back to the client.
 
 *********************************************************DOTNET***************************************************************
+
 #C# vs .Net
+
 C# is a microsoft programing language where .Net is a Framwork
 C# it has those syntaxes,loops, conditions, swithches, 
 .Net framwork has 2 things 
@@ -268,7 +361,9 @@ JIT(Just in time):- Actually convert IL code into Machin understandable language
 MSIL is the Microsoft Intermediate Language, which provides instructions for calling methods, memory handling, storing and initializing values, exception handling, and so on.
 The instructions provided by MSIL are platform-independent and are generated by the language-specific compiler from the source code. JIT compiler compiles the MSIL into machine code based on the requirement.
 
-Why GC important?
+
+
+#Why GC important?
 Garbage collector is a back ground process which run undetermestically and cleans unreferenced Managed objects from memory.
 
 #Managed code vs unmanaged code?
@@ -320,9 +415,6 @@ All this are defined in system namespace.
 - LINQ return result as object.
 -Query = from item in datasource where item.contain(java) select item.
 
-#Marker Interface :	an i/f that does not contain any methods, fields abstract methods, and any constants is called marker i/f, ex. serializable,Clonable 
-
-#Functional Interface : FI is a interface that has only pure one abstract method, Ex. Comparable.
 
 #Reflection: reflection object are used for obtaining type information at runtime.
 
@@ -338,6 +430,7 @@ ConfigureServices:- method configure the SERVICES which are required by the appl
 such as enable MemoryCache() configuration,
 Set dependance injection by using AddSingleton<>
 Configure connection string.
+
 
 Configure :-
 Used to configure middlewares, services, and other essential app-level configurations like routing, authentication, cors etc. 
@@ -392,6 +485,8 @@ Service lifetimes
 -AddScoped:- create single instance for each request. for a different http request there will be a different instance.
 -AddTransient:- this instance is not shared at all. every time a new instance will be created.
 
+#Finally and Finalize
+Finally is used in exception handling. where as Finallize is a method which is automatically called by the garbage collector to dispose the no longer needed object.
 ****************************************************Key Features of the ABP Framework**********************************************
 
 ABP is a open source web application framework to create mobile and web application based on asp .net core it provide infrastructure for interprice level software
@@ -524,6 +619,7 @@ Visual Boards: Kanban uses a board layout where tasks are represented as cards. 
 Continuous Delivery: Unlike traditional methods with fixed-length sprints, Kanban promotes continuous delivery. Teams can prioritize and complete tasks as they are ready.	
 	
 **********************************************************************DB**********************************************************************
+
 SQL VS SQL server : SQL is Query languge, while SQL Server is a DataBase managment System.
 					SQL is Query languge for working with a relational DB while SQL server is software that perform SQL query.
 

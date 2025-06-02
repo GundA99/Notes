@@ -13,6 +13,7 @@ Basic
 ===============================================================================================
 https://youtu.be/kY1oa8YSs-Q?si=SaEPIbw3kyxCRuRw   : Angular tutorial
 https://jsonplaceholder.typicode.com/ : For Dumy Apis
+http://projectapi.gerasim.in : Dumy APis
 ******************************************************IMP Commands*******************************************************
 Download
 Command for create new angular project : ng new my-angular-app

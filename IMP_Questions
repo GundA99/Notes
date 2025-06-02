@@ -1,24 +1,25 @@
 #DOTNET
-1.difference between var and let
-2.What is difference between put and patch
-3.command for convert typeScript into javascript
-4.difference between typeScript and javascript
-5.What is Entity framwork
-6.Routing in C#
-7.State management system
-8.Client side vs server 
-9.httpResponce
-10.Design patterns
-11.Difference between Abstracting & Encapsulation
-12.Delete and Truncate difference
+1. difference between var and let
+2. What is difference between put and patch
+3. command for convert typeScript into javascript
+4. difference between typeScript and javascript
+5. What is Entity framwork
+6. Routing in C#
+7. State management system
+8. Client side vs server 
+9. httpResponce
+10. Design patterns
+11. Difference between Abstracting & Encapsulation
+12. Delete and Truncate difference
 13. How we decide go with abstract class or interfaces. 
 14. Transient vs scoped
 15. Sealed class and Static class difference	
 16. Major Difference Between Sql Server and PostGreSql
-17.IActionResult
-18.SOLID Principle
-19.Agile methodology
-20.Garbage collection
+17. IActionResult
+18. SOLID Principle
+19. Agile methodology
+20. Garbage collection
+21 Difference between Abstract class and interface
 -----------
 #CODING
 1.give me no of occuerence for each word from hello (count)
@@ -122,16 +123,16 @@ Type Aliases and Custom Types: Create complex types and use them throughout your
 
 ****************************************************5.What is Entity framwork*****************************************************************
 Defination:
-- Entity Framework (EF) is an Object-Relational Mapper (ORM) developed by Microsoft that enables developers to work with relational databases using .NET objects. 
- Essentially, EF allows you to interact with your database using high-level object-oriented code instead of raw SQL queries, which makes data access easier and more intuitive.
+- Entity Framework (EF) is open-source Object-Relational Mapper (ORM) developed by Microsoft that enables developers to work with relational databases using .NET objects. 
+- its like wrapper on ADO.Net. EF Minimize the coding effort.
+ Essentially, EF allows you to interact with your database using object code instead of raw SQL queries, which makes data access easier and more intuitive.
 
 1.Object-Relational Mapping (ORM):  automatically maps the objects in your application to the tables in your database. 
 
-2.LINQ Support: Entity Framework supports Language Integrated Query (LINQ), which allows you to write queries in C# instead of SQL, and EF translates them to the appropriate SQL queries for your database.
-
+For ex. we have Student class, Employee class there calsses will be directly matched with database tables.the properties will be table columns.
+ 
 ****************************************************6.Routing in C#****************************************************
 - Routing is used to handle incoming HTTP requests based on the URL and maps them to a controller action or endpoint.
-- the routing is a mechanism in ASP.NET Core application which is inspect the incoming requests(i.e URL) and then mapped that request to the controller and their action methods.
 
 in startup.cs file
             app.UseRouting();   <---- configure routing;
@@ -554,7 +555,6 @@ public class ProductRepository : IProductRepository
 	Note: ABP Framework, which has its own built-in support for the Unit of Work (UoW) pattern, designed to simplify transaction management, especially in multi-tenant and domain-driven design applications.
 	📌 Key Benefits in ABP: no need to manually commit/rollback.
 
-
 ***************************11.Difference between Abstracting & Encapsulation*************************************************
 Abstraction:
 		- Abstraction is used for hiding unwanted data and showing issential things.
@@ -570,6 +570,37 @@ Encapsulation:
 		- Encapsulation means hiding the internal details of how an object does
 		- Purpose:  To protect the object's state from harmful modifications, promoting controlled access to data.
 		-Ex : inner implementation details of a mobile, how keypad button and display screen are connect with each other using circuits. 
+	Abstraction:
+	public abstract class EmployeeSalary
+	{
+		public int CalculateSalary()
+		{
+			return 10*3000;
+		}
+	}
+
+	public class Employee : EmployeeSalary
+	{
+	}
+
+	Main()
+	{
+		Employee e = new Employee();
+		int sal = e.CalculateSalary();   <--- Abstraction  without knowing interanl logic we access method 
+	}
+	---------------
+	public class Employee
+	{
+		private int empExperience;
+		public int EmployeeSalary
+		{
+			get{return empExperience;}
+			set {empExperience = value;}
+		}
+	}
+
+	for getting empExperience we need to call property.
+
 		
 		
 ----------------------------how can achive abstraction using abstract class---------------------
@@ -585,14 +616,14 @@ abstract class Animal {
 }
 
 // Concrete class (subclass) that extends the abstract class
-class Dog extends Animal {
+class Dog : Animal {
     // Providing implementation for the abstract method
     void sound() {
         System.out.println("Bark");
     }
 }
 
-class Cat extends Animal {
+class Cat : Animal {
     // Providing implementation for the abstract method
     void sound() {
         System.out.println("Meow");
@@ -955,6 +986,13 @@ GC2 : long lived objects. Ex static objects.
 8. Can .Net application have memory leak issue even we have GC?
 -> Yes, its still possible to hvae memory leaks because GC only clean managed object.
 	if unmanaged memory is not claimed properly we can have memory leakss.
+
+************************************21 Difference between Abstract class and interface********************************************
+Abstract class vs Interface
+1.Abstract class contain both Declaration and definitoin of method.  vs only Declaration
+2.Abstract class keyword: Abstract  
+3.not support multiple inheritance
+4.can have constructor
 
 ###########################################################Coding problems#################################################################
 

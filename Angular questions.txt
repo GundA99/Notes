@@ -7,8 +7,33 @@ https://youtu.be/96CSYHPKzzg?si=I3nS8XiF8yk4JxYd
 #packege.json vs packege-lock.json files
 ============================================================
 1.What is Angular:
-Angular is a javaScript Binding framework which binds the HTML UI and JavaScript Model. this helps you to reduce your effort on writing those lengthy lines of code for binding.
-ilso it helps you to build single page application by using the concept of routing. it also has lot of other features like HTTP, DI,Input, output becouse of which you do not need other framework.
+2.Difference between AngularJS vs Angular?
+3.What are directives in Angular?
+4.Explain the different types of Angular directives?
+5.Explain the importance of NPM and Node_Modules folter?
+6.Importance of packege.json file
+7.What is TypeScript and why do we need it?
+8.Expain importance of Angular CLI?
+9.Expain the importance of Component and modules?
+10.Expain Importance of decorator in angular?
+11.What are annotation or MetaData?
+12.What is Template in Angular
+13.Explain the four types of Data binding in Angular?
+14.Explain architecture of Angular?
+15.Expain SPA in Angular
+16.How can implement SPA in Angular
+17.How to implement routing in angular
+18.What is lazy loading in angular
+19.How can implement Lazy loading in Angular
+20.define Services?
+21.what is DI
+22.how to implement DI in Angular
+23.what is the benefit of DI?
+24.Difference between Ng serve and Ng build?
+
+1.What is Angular:
+- Angular is a javaScript Binding framework which binds the HTML UI and JavaScript Model. this helps you to reduce your effort on writing those lengthy lines of code for binding.
+ also it helps you to build single page application by using the concept of routing. it also has lot of other features like HTTP, DI,Input, output becouse of which you do not need other framework.
 
 2.Difference between AngularJS vs Angular?
 AngularJS means Angular 1 family
@@ -34,10 +59,11 @@ AngularJS means Angular 1 family
 		- Attribute derective are does not add or remove any value it 
 		- Change the appearance and behaviour of HTML elements.
 		- Change the look and feel of html.
-			ex: [hidden]
+			ex: [{ngModel}],(click),[hidden]
 	3. Component
 		- Directives with templates. its like user control.
 		- its like own UI 
+			ex: <app-root></app-root>
 	
 5. Explain the importance of NPM and Node_Modules folter?
 	Npm helps you to install any javaScript framework in your Computer.
@@ -45,6 +71,7 @@ AngularJS means Angular 1 family
 	after hit command all jquery packege install in Node_modules folter.
 	Node_Modules is nothing but a folter where all javaScript packege install.
 	
+
 6. Importance of packege.json file
 	packege.json is a file where all the references or javaScript frameworks listed down.
 
@@ -92,7 +119,8 @@ AngularJS means Angular 1 family
 		(click)="Func()"
 	4. tow way binding:
 		in that data flow is like view to component and component to view.
-	
+25 Expain the --prod parameter in ng build?
+
 14. Explain architecture of Angular?
 	link: https://youtu.be/-jeoyDJDsSM?si=iTofbupCnVhJyeHy
 	1 first important component in angular is Template. Template is nothing but HTML View.
@@ -144,3 +172,45 @@ AngularJS means Angular 1 family
 	
 25 Expain the --prod parameter in ng build?
 	ng build -prod flag try to compresses your JS file, remove comments, create GUIDs of your JS files and make your application ready for production.
+	
+------------------------------------Full course------------------------------------
+Basic Angular : https://youtu.be/-9VcW7MBDs8?si=LtzApOmi7IW30ETY
+
+# What is Angular
+- Its development platform to uild UI part of application.
+- its component based framework for building scalable web application.
+- a collection of well-integrated libraries that cover a wide variety of features,includding routing, forms management, client-server communication and more.
+
+# WHat is NPM 
+- help to install javaScript packege in your computer.
+	ex: if you want to install JQuery packege we have command like npm install iquery. it will add in node_module folder.
+	
+# JavaScript vs TypeScript
+JavaScript is a daynamic language whose Data type can change at runtime.
+TypeScript makes your javaScript strongly typed.
+
+# Create tsconfig.json file using TS command line.
+=dist file
+once compile TS file will create JS file. this file will create in dist folder.
+ -Command : tsc --init
+ this above command create tsconfig.json file in that file uncommit "outDir":"./dist",
+ and add path for store compiled js files.
+-for allow null in code check "strict":"true" to "false"
+
+
+#component : A Component is reuseable UI logic which can be loaded inside HTML which can be loaded inside browser.
+ - component consist of View + logic
+ 
+#selector is used for call the component.
+
+#Module : Logically grouping components.
+		one module can have multiple components
+			inside component View and logic are connected by templateURL.
+
+#
+<input type="text" [(ngModel)]="someValue"/>   <---- [] data comming from component to Ui and () for send data from UI to component
+
+expression/interopolation : Mixing angular with HTML 
+ <h1>{{someValue}}</h1> 
+ <h1>{{2+2}}</h1>      //4
+ 

@@ -1,6 +1,6 @@
 A] HTML
 B] CSS
-https://youtu.be/B9FvD1L2hAQ?si=GFe9jj00GZjkXH-x
+CSS : https://youtu.be/B9FvD1L2hAQ?si=GFe9jj00GZjkXH-x
 	1.type of CSS we use
 	2. basic property
 	3. Text property

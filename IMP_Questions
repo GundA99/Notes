@@ -8,6 +8,7 @@
 7. State management system
 8. Client side vs server 
 9. httpResponce
+	Status Codes
 10. Design patterns
 11. Difference between Abstracting & Encapsulation
 12. Delete and Truncate difference
@@ -19,7 +20,10 @@
 18. SOLID Principle
 19. Agile methodology
 20. Garbage collection
-21 Difference between Abstract class and interface
+21. Difference between Abstract class and interface
+22. Model binding
+23. Filter in ASP .NET Core
+24. Action Parameters [FormBody], [FormQuery]
 -----------
 #CODING
 1.give me no of occuerence for each word from hello (count)
@@ -328,10 +332,18 @@ Cookie: A cookie named UserName with the value JohnDoe is set in the client's br
 Response Body: The response body will contain a JSON string: {"message": "Hello World!"}.
 
 Return Type: An EmptyResult is returned, but since the response body and status code are already set, this result won't affect the response that the client receives. Essentially, it indicates no further processing is required.
-
-********************************************************10.Design patterns**************************************************************************************************
+---------------------------------------------Status Codes----------------------------------------------
+200 : Success/OK
+204 : No data Found
+400 : Bad request
+401 : unauthorized
+403 : Forbidden
+404 : Not Found
+500 : Internal server error
+504 : Gateway Timeout
+***************************************10.Design patterns******************************************************
 Q. What is design pattern?
- - A design pattern is a reusable solution to a common problem in software design.Threr are 3 types of Design patterns:
+ - A design pattern is a reusable solution to a common problem in software design.There are 3 types of Design patterns:
 
 1.Creational design pattern
 2.Structural design pattern
@@ -339,7 +351,7 @@ Q. What is design pattern?
 
 1.Creational design pattern:
 Creational design patterns are design pattern that deals with object creation mechanisms.
-for ex: Singleton design patterns.
+for ex: Singleton design patterns.,Factory design pattern
 
 2.Structural design pattern
 Structural design pattern is used to manage the structure of classes and interfaces as well to manage the relationship between the classes
@@ -362,7 +374,7 @@ for ex: Iterator,  Unit of work , Repository Pattern
 It is useful when managing resources like database connections or configuration settings.
 Steps for create singleton class:
 1.Create a sealed class so no one can inherit from this class.
-2.Create private constructor so that no one can create object of this singleton class.
+2.Create private constructor so that no one can create object of this singleton class. (no one can inherit this class)
 3.Declare a static instance of this class
 4.Create a method which will check where the instance is null, if yes then it will create the new instance and if no then it will return the same instance.
 
@@ -402,7 +414,8 @@ public sealed class Singleton
 	{
 		if(instance == null)
 		{
-			return new Singleton();
+			instance = new Singleton();
+			return instace;
 		}
 		return instance;
 	}
@@ -675,7 +688,7 @@ Truncate:
 
 3. Shared Behavior (Method Implementation)
 - Abstract Class: If you want to provide default behavior (method implementations) that can be inherited by subclasses, an abstract class is appropriate. It allows you to write code in the base class and reuse it in derived classes.
-- Interface: Historically, interfaces cannot provide method implementations (but this has changed in Java 8 and newer with default methods). Interfaces are typically used to define methods that must be implemented, without providing any implementation details.
+- Interface: Interfaces are typically used to define methods that must be implemented, without providing any implementation details.
 
 4. State (Fields/Variables)
 - Abstract Class: An abstract class can have instance variables (fields), which can store state that is shared among its subclasses.
@@ -684,7 +697,7 @@ Truncate:
 5. Flexibility
 - Interface: Use interfaces when you need flexibility. A class can implement multiple interfaces, so if your design requires multiple behaviors to be added to a class, interfaces are a better choice.
 - Abstract Class: Use abstract classes when your design is more hierarchical and you're modeling a family of related classes that share a common structure or behavior.
-******************************************************14. Transient vs scoped ********************************************
+******************************************************14. Transient vs scoped lifetime ********************************************
 Transient: 
 	Creation: A new instance of the service is created every time it is requested.
 	Use Case: Best for lightweight, stateless services where each request should have a new instance.
@@ -692,12 +705,17 @@ If you register a service as transient, like:
 	services.AddTransient<IMyService, MyService>();
 - Memory Management: Since a new instance is created every time, it might lead to increased memory usage, but it's very appropriate for short-lived operations that don't hold state between requests.
 
+Example:
+If a controller calls the service twice during one HTTP request, it gets two different instances.
+---------------------------
 Scoped:
 	Creation: A new instance is created once per HTTP request or per scope. If you have nested scopes (like in background jobs or explicit scopes), a new instance is created for each scope.
 	Use Case: Best for services that should be shared within the same request or scope but should not be shared across requests. 
 If you register a service as scoped, like:
 	services.AddScoped<IMyService, MyService>();
 
+Example:
+If a controller calls the service twice during the same HTTP request, it gets the same instance both times.
 
 public sealed class Scoped                   
 {
@@ -725,10 +743,10 @@ public class Transient
 	{		
 		return new transient();
 	}
-
+}
 ***********************************15.Sealed class and Static class difference**********************************
 Sealed Class:
-	- Purpose: A sealed class is used when you want to prevent other classes from extending (inheriting) your class. 
+	- Purpose: A sealed class is used when you want to prevent other classes from inheriting your class. 
 			   This can be useful for maintaining control over the behavior of the class and ensuring that it cannot be modified through inheritance.
 			   
 	- A sealed class can be instantiated (we can create object of seald class)
@@ -736,7 +754,7 @@ Sealed Class:
 Static Class:
 	- Purpose: A static class is useful when you want to group methods or properties that don't require an instance of the class to be used,
 	- You cannot instantiate a static class. 
-	- can notcontain non static member. 
+	- can not contain non static member. 
 
 *********************************16. Major Difference Between Sql Server and PostGreSql*********************************
 
@@ -752,7 +770,6 @@ In multi-threaded applications, a Singleton ensures that only one thread can acc
 2.Centralized Management: 
 With a Singleton, managing the connection (like closing or refreshing it) becomes much easier. You can control connection lifecycle events in a single, well-defined place, improving maintainability and scalability.
 	
-
 ***************************************************17.IActionResult******************************
 IActionResult is an interface used in controller methods to return flexible HTTP responses. Instead of always returning just data (like User object), it lets you return different types of results, such as:
 
@@ -794,6 +811,13 @@ public User GetUser(int id)
 }
 ❌ No way to return an error or 404 response.
 
+-----------------------------IActionResult vs ActionResult---------------------------
+IActionResult:
+IActionResult is a interface representing different HTTP results like View(), NotFound(), Redirect(). It allows flexibility to return various result types.
+Perfect for MVC controllers where you render views or perform redirections.
+
+ActionResult:
+ActionResult<T> is a generic wrapper that combines a return type like student with an HTTP status code. best suited for APIs where you return data and status in one.
 ****************************************18.SOLID Principle***********************************************************************
 
 The SOLID principles are a set of five principles in object-oriented programming to make software designs more understandable,
@@ -837,12 +861,12 @@ This principle ensures that inheritance is used correctly.
 
 public abstract class Bird
 {
-    public abstract void Fly();
+    public abstract void Move();
 }
 
 public class Sparrow : Bird
 {
-    public override void Fly()
+    public override void Move()
     {
         Console.WriteLine("Sparrow is flying.");
     }
@@ -850,9 +874,9 @@ public class Sparrow : Bird
 
 public class Penguin : Bird
 {
-    public override void Fly()
+    public override void Move()
     {
-        throw new NotImplementedException("Penguins can't fly!");
+        throw new NotImplementedException("Penguin is swimming");
     }
 }
 
@@ -907,7 +931,7 @@ public class ExternalEmployee : IEmployee
 }
 public class HomeController
 {
-	private readonly _iemployee;
+	private readonly IEmployee _iemployee;
 	public HomeControler(IEmployee e)
 	{
 		_iemployee = e;
@@ -952,7 +976,7 @@ static void Main()
 }
 
 
-Toatl memory = manageable + unmanaged memory
+Total memory = manageable + unmanaged memory
 
 object is create in heap memory and reference will be in stack, when object will out of scope reference will remove from stack memory. then GC remove object from heap. 
 1.can we see how GC work
@@ -994,7 +1018,273 @@ Abstract class vs Interface
 3.not support multiple inheritance
 4.can have constructor
 
-###########################################################Coding problems#################################################################
+*************************************22. Model binding*******************************
+Model binding is a concept commonly used in web development frameworks to automatically map data from HTTP requests (such as form data, query strings, route data, or JSON payloads) to the parameters of a method, typically in a controller.
+
+Request : Name=John&Email=john@example.com&Age=30
+public class User
+{
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public int Age { get; set; }
+}
+
+[HttpPost]
+public IActionResult CreateUser(User user)
+{
+    // Model binding automatically populated the 'user' object
+    // from the incoming form or JSON data.
+    // Now you can use the 'user' object directly.
+    return Ok(user);
+}
+
+---------difference between GET and POST--------------
+GET request — data is sent as URL query parameters, like your example:
+http://localhost/api/employee?Name=akash&location=Pune
+
+POST request — data is usually sent in the request body, not in the URL.
+http://localhost/api/employee
+
+header 
+Content-Type: application/json
+
+body
+{
+  "Name": "akash",
+  "location": "Pune"
+}
+
+*************************************23. Filter and Middlewares in ASP .NET Core****************************
+Filters in ASP .NET Core MVC
+https://youtu.be/dot1mWiXVjg?si=LsKqHgDAecYy6AUf
+https://youtu.be/zAG8VnOFxGA?si=iYlYuKIFpZnnu5eK
+---#Defination:	
+filter is set of code which execute before or after any action method, basically Filter run within the ASP.NET Core action invocation pipline,
+
+#Use: Once we create any filter we can use this for multiple action method by using []. to use can avoid having repeat code.
+
+---#Request structure---
+request-> Middleware->Filter->Controller
+
+Request
+	|
+Other Middleware
+	|
+Routing Middleware
+	|
+Action Selection
+	|
+    |
+-----------------------------------------------
+|MVC Action invocation Pipline(Filter Pipline) |
+-----------------------------------------------
+
+---#Difference between Middleware and Filter---
+1.Middleware execute on request pipline where as Filter execute on filter pipline(Action Invocation pipline)
+2.Middleware apply the rule to every request, including the api calls. Filter only need the rule for specific controller or actions
+
+---#Types of Filters and order---
+1.Authorization filters
+2.Resource Filter (Call after auth filter and after Result filter)
+3.Action Filter
+4.Exception Filter (Execute if error occure)
+5.Result Filter (Call before and after result)
+
+---------------------------Authorization Filter-------------------------
+Authorization filter:- this filter will run before other filter to determine whether a user is authorized to access a resource
+Ex:- if we have some api which only access by admin that time we use this filter
+[Authrize(Role="Admin")]
+
+senario 2
+only pro subscription customer can access resource
+Create custom filter
+
+public class ProSubscriptionFilter: IAuthorizationFilter
+{
+	public ProSubscriptionFilter(ApplicationDbContext dbContext)
+	{
+		_dbContext = dbContext;
+	}
+	
+	public OnAuthorization()
+	{
+		//check use is pro from db
+	}
+}
+
+then this filter we use on pro plan controller
+
+[ProSubscriptionFilter] / [ServiceFilter(typeof(ProSubscriptionFilter))]
+public class ProController: Controller
+{
+}
+------------------Resource Filter Implementation----------
+need to inherit IResourceFilter and those methos OnResourceExecuted and OnresourceExecuting
+---------
+public class ResourceFilter : Attribute, IResourceFilter
+{
+	private readonly IMemoryCache _cache;
+	public ResourceFilter(IMemoryCache cache)
+	{
+		_cache = cache;
+	}
+	public void OnresourceExecuting(ResourceExcutingContext context)
+	{
+		//return data from cache
+		Console.Writeline("ResourceFilter OnResourceExecuting method");
+	}
+	
+	public void OnResourceExecuted(ResourceExcutedContext context)
+	{
+		//set data into cache for specific time(5min)
+		Console.Writeline("ResourceFilter OnResourceExecuted method");
+	}
+}
+
+problem.cs
+builder.Services.AddMemoryCache() //enable in-memory caching
+builder.Service.AddScoped<ResourceFilter>(); // register the filter 
+
+
+this will load data from Cache which reduce db calls and improve performace.
+-------------------------------Action Filter----------------------------
+Action Filter: Action filter execute before and after Action Execute
+#Action Filter Implementation
+
+public class CutomActionFilter: Attribute, IActionFilter
+{
+	public void OnActionExecuting(ActionExecutingContext context)
+	{
+		Console.Writeline("CustomActionFilter OnActionExecuting method")
+	}
+	public void OnActionExecuted(ActionExecutedContext)
+	{
+		Console.Writeline("CustomActionFilter OnActionExecuted method");
+	}
+}
+-------------------------------Exception Filter----------------------
+Exception Filter:- will run when an unhandled exception occures
+
+public class CustomExceptionFilter : IExceptionFilter
+{
+	public void OnException(ExceptionContext context)
+	{
+		switch(context.Exception)
+		{
+		 case ArgumentNullException
+			throw ex with proper msg
+			break;
+		 case UnauthorizedAccessException
+			throw ex with proper msg
+			break;
+			.
+			.
+			.
+		}
+	}
+}
+register filter in program.cs file
+builder.service.AddControllersWithViews(option=>
+{
+	option.Filter.Add<CustomExceptionFilter>(); 
+})
+
+---------------------Result Filter------------------------
+#Result Filter:- filter run immediately before and after the execution of an action result. by using this filter we can check time taken by Action by using stopwatch to check performace.
+
+use: when we have 2 method whose perpose is same so by using this filter we can check the performace.
+
+-----------------------------------------------
+[Route("Index")]
+[ResourceFilter]            <------resource Filter used as attribute it will load data from cache and get updated data in specific time(5min)
+[CutomActionFilter]        <----- Action Filter 
+public ViewResult Index()
+{
+	//Logic
+}
+
+output : 
+ResourceFilter OnResourceExecuting method
+CustomActionFilter OnActionExecuting method
+//logic
+CustomActionFilter OnActionExecuted method
+ResourceFilter OnResourceExecuted method
+-------------------------------------------------------
+
+-------#Build-in filters---------
+1.ResponceCache Filter, 
+2.Authorize
+
+---responceCache filter implementation---
+in statup.cs
+builder.service.AddResposeCaching()
+app.UseResponseCachong()
+-------------------
+Authontication filter
+builder.service.AddAuthentication();
+app.UseAuthentication()						<--- we do this for use Filter as a Attribute([Authorize],[ResponceCache])					
+
+-----------------
+in class
+[HttpGet]
+[Authorize]
+[ResponceCache(Duration=60)]		<--- save the api responce it 1 min
+public async Task<IActionResult>Get()
+{
+	return Ok();
+}
+----------------------------------------------Middleware-----------------------------------
+What is Middleware in ASP.NET Core?
+https://youtu.be/UIkV-sLdEuE?si=jX_OH0b81iRLaCMB
+middleware is a powerful feture in asp .net core that allow as to control request and respose globally.
+-> we have configure method in statup file and as we see we calling serveral component like
+app.UseStaticFiles()
+app.UseRouting()
+app.useAuthorization()
+app.UseCors
+app.UseSwagger();    
+all this is nothing but the middlewares only
+
+Defination: A middleware a component that is executed on every Requiest in the ASP.NET Core application.
+
+whenerver any requst come that request pass through all the middleware and then it will go to the controller
+
+Order
+app.UseHttpRedirection()-> app.UseStaticFiles()->app.UseRouting()-> app.UseSession->app.UseAuthentication()-> app.UseAuthorization();
+
+Middleware work before the request reaches the controller
+*************************************************24.Action Parameters*********************************
+Action Parameters
+
+1. [FromBody]
+- Binds data from the request body.
+- Typically used for complex objects sent as JSON or XML.
+- Only one per action allowed
+
+[HttpPost]
+public IActionResult Create([FromBody] Product product)
+
+POST /api/products
+Content-Type: application/json
+
+{
+  "Id": 1,
+  "Name": "Apple"
+}
+----------------------------------------------------------
+2. [FromQuery]
+- Binds simple or complex data from the query string.
+- Used for filtering, paging, sorting, or any data sent via URL parameters.
+- Multiple allowed
+
+[HttpGet]
+public IActionResult GetProducts([FromQuery] string category, [FromQuery] int page = 1)
+
+GET /api/products?category=fruit&page=2
+----------------------------------------------------------
+3.FromHeader : it will return header information
+
+##################################Coding problems#########################################################
 
 1.give me no of occuerence for each word from hello (count)
 
@@ -1013,9 +1303,27 @@ Abstract class vs Interface
             Console.WriteLine($"{item.Char} : {item.Count}");
         }
     }
-
-##############################################################Database##################################################################
-
+	
+---------------------------or-------------------------------
+string s = "AkAsh";
+var disc = new Dictionary<char, int>();
+for (int i = 0;i< s.Length;i++)
+{
+    if (disc.ContainsKey(s[i]))
+    {
+        disc[s[i]]++;
+    }
+    else
+    {
+        disc.Add(s[i], 1);
+    }
+}
+foreach (var item in disc)
+{
+    Console.WriteLine(item.Key + " : "+item.Value);
+}
+AKASH
+##############################################################Database#################################################################
 ****************************************1.In SQL how do you optimize stored procedures****************************************
 1. use SET NOCOUNT ON 
 when we do insert or update query  in sql it will show 1 row affected masseges. no need to see the masseges,bcz it occupay some memory. thats why use SET NOCOUNT ON;
@@ -1106,13 +1414,21 @@ DB languge are used to read, update, and Store Data in DB. There are several lan
 ************************************4.ACID Property*************************************************************************
 
 ACID is stands for Atomicity, Consistency, Isolation and Durability
-Atomicity:- Every Transaction Should be execute as a single unit means all the step should happen or none should happen there is no partial execution.
-Consistency:- Onec the transaction is executed It should move from one Consistent state to another.
-Isolation:- Transaction Should be Executed in isolation from other transaction. 
-			Ex. when a transaction is happing then the changes are visible to only person who performing the tradition till it getting executed				
-				The Changes will be visible to all user when transaction is Completed
-Durability:- After succesfully complete the trasaction changes in the DB is persist				
-
+1.Atomicity:- Every Transaction Should be execute as a single unit means all the step should happen or none should happen there is no partial execution.
+Ex: Imagine you're transfer 100rs from your account to friend's account so in that we have 2 steps
+	1. Deduct 100rs from your account.
+	2. Add 100rs to your friends account.
+	if step 1 is succeeds but step 2 is fails, and money is deducted from your account but not added to your friends account that's incorrect.
+or 	if step 2 is succeeds but step 1 is fails means money not duducted from your account but aaded in friends account that's also incorrect.
+so atomicity say transaction trated as one single unit both steps should happen or not any step happen.
+------------------
+2.Consistency:- Onec the transaction is executed It should move from one Consistent state to another.
+	ex: you have 500rs in your account and you trying to withdrow 800rs which is wrong it violates the rule. so consistancy will not allow this transaction. 
+------------------
+3.Isolation:- Isolation means that concurrent transactions done without interfere with each other.
+	ex: If Two people try to book the movie ticket at the same time within that only one transaction will succesfully book seat other will waiting or fail. so no double booking occurs.			
+4.Durability:- After succesfully complete the trasaction changes in the DB is persist				
+	ex: Imagine you are order some item from e-commerce webside you enter peyment details and click on Order button. the details of the transaction, Items are saved permanently in database. even if the power goes or the server crashes or serveryour oder data remain safe.
 ***************************************5.Store Procedure VS function*********************************************************
 1. SP Can return 0, single or multiple value, function Can return single value Which is Mandatoy.
 2. SP Can have Input and Output parameter , function have only Input parameter.

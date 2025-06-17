@@ -1,0 +1,623 @@
+1. HTML
+2. CSS
+CSS : https://youtu.be/B9FvD1L2hAQ?si=GFe9jj00GZjkXH-x
+	1.type of CSS we use
+	2. basic property
+	3. Text property
+	4. Box property 
+	5. background-image
+	6. shadow
+	7. Universal selector
+	8. Flexbox property
+3. Bootstrap
+***********************************************1.HTML***************************************************
+
+index.html <- starting point for web side
+we start building a website by creating a file named index.html. is a special filename which is present when the website root address is typed.
+
+lorem30 <- it will create random 30 words(Dumy data)
+-Head and Body tags are childrenz of HTML tag.
+
+HTML Element : Start Tag + Element + End Tag (<h1> Hello world </h1>).
+Comment : <!-- This is Comment -->  (Shortcut ctrl + /)
+
+#Anchor tag : is used to add links to an existing content inside an HTML page
+	<a href="https://google.com"><clickMe</a>
+
+# <pre> tag:	
+<pre>Data</pre> : Pre tag used when we want to print data as it is (it will take all spaces from data).
+
+# Span is an example of inline element it will take nessasory spaces
+# Div is an example of Block level element it will take complete space
+
+**********CSS*********************
+1.type of CSS we use 
+inline, embeded, and External
+
+#inline:
+<h1 style="Background-color:red ">Akash Gund<h1> 
+----------------------------------------------------
+#Embeded:
+<head>
+	<style>
+		h1{
+		Background-color = red;
+		}
+	</style>
+</head>
+<body>
+	<h1>Akash</h1>
+</body>
+----------------------------------------------------
+External: Create External Css file and import this file into html file 
+
+<head>
+	<link ref="stylesheet" href="style.css"><link>
+<head>
+<body>
+	<h1>Akash</h1>
+<body>
+------------------------------2.CSS Properties----------------------
+margin-top 10px  --- margin from Top
+margin-left 10px  --- margin from left
+margin : 10%    --- Outside space
+padding : 10%   --- inside space
+height : 100px      
+width : 100px      
+display : flex  --- Showing contain in horizontal
+background-color --- inside color of tag
+color             --- Text Color
+background : transparent  <----- remove botton border
+ 
+BORDERS
+border-style: solid, dotted;
+border-width: 3px;          -- size
+border-redius: 30px;        -- Cornner will be rounded
+border : none           --- remove border
+Text
+text-align: center;         --- Showing text at center (vertically center)
+font-family: 'Lucida Sans'   --- Font style
+font-weight : 600;           --- Thickneess if Font
+justify-contain : center     --- Show Contaon in center (horizontally center)
+
+Card
+Position : absolute   --- Does not Depend of parent
+top:50%;
+left:50%;
+transform: translate(-50,-50);
+height:300px;
+width:230px;
+border: 1px solid salmon
+rotate: -8deg;
+object-fit: cover;     -- it will fit object 
+overflow: hidden   --- Fit image in Card
+
+# Z-Index
+when we have multiple card and want to arrange one upone another we use Z-Index
+*************************************************CSS**************************************************************
+PX == fix unit
+1em == 16px   (its depends on parent if in parent div if we define font size : 10px then in child 1em == 10px);
+
+Q. default font size?
+-> 16px
+
+#Layout
+width: 1000px;
+hight: 540px;
+background-color : red;
+float: left;
+
+-----------------------3.Text property---------------------
+color : red
+font-size:italic;
+
+#text-align: center/right/left/justify
+	justify   ---- when we want paregraph in center(start and end of each line position same)
+#text-decoration : underline/line-through
+		line-through ----- cut text/line on text 
+* line line css override the property of class
+#text-transform : uppercase/lowercase/ capitalize;
+			capitalize ---- every word 1st letter capital
+#word-spacing: 25px    ----- space between words
+#letter-spacing : 5px   ----- letter space
+----------------------Fornt family--------------
+#font-family: arial    ---- font style
+
+-----------------------4. Box property ---------------------
+
+border requrd 3 parameter : size, type, color
+size : 5px
+type : solid/dotted/dashed
+---------------------Margin--------------
+it will impact on size
+outside space
+margin-left/right/top/bottom : 20px
+---------------------padding--------------
+inside spaces
+used for move containt
+-padding : 20px  ---- all side impact
+-padding : 20px 30px 40px 30px  (Top R B L)
+-padding : 20px 30px (top&Bottom,  left&right)
+-padding-left/right/top/bottom
+
+--------------------------5.background-image -----------------
+
+we can do with background also
+background-image: url('path.....')  <---- url in inbuild function
+background-repeat : no-repeat/repeat-x/repeat-y/repeat(default)
+	no-repeat --- 1 time only
+	repeat-x  --- repeat from left to right
+	repeat-y  --- repeat from top to bottom
+background-position: top center/right center/ bottom center
+background-size: cover   <---- it will cover complete background  **this property work when we use it next to the background-image property**
+background-size: 80% 20%  <---- width 80% hight 20%
+we can use background also
+background :url('....') fixed;   <---- background Image will be fix
+---or---
+background-attachment: fixed;   <---- background Image will be fix
+
+-------------------------------------- 6.Shadow -------------------
+
+Text shadow and Box shadow
+#text-shadow: x-offset y-offset blur color
+	blur --- how much area will spred
+1  - right & bottom (positive)
+-1 - left & top
+text-shadow : 10px 5px 5px blue; ---- shadow to right and bottom
+
+text-shadow : 10px 0px 5px blue, 0px 0px 5px red   <----- multiple shadow
+
+text-shadow : 10px -5px 5px blue; ---- shadow to left and top
+
+#Box-shadow
+box-shadow : x-offset y-offset blue alldirection color
+ 
+box-shadow : 0px 0px 10px 2px #ccc  <--- all redection showdow
+	2px --- from 2px to 10px shadow will spred 
+
+box-shadow : inset 0px 0px 10px 2px red  <------ inside shadow
+
+---------------------------------7.Universal selector-----------------
+*{} its universal selector used whent we want to apply css to all tags
+
+*{
+	margin : 0px;
+	padding : 0px;
+	font-family : sans-serif;
+}
+---------------------------------8.Flexbox property-----------------
+there are two type of flexbox 
+	child and parent
+	
+1.
+display : flex  <--- all the child will be in row 
+it does't matter what is the parent width it will compress child width acording to the parent but it will not allow to shift down all child will be in same line.
+ex:
+	.flexExample{
+		width: 1320px; 		<--------
+		margin:auto;
+		display : flex;
+		}
+		
+	.flexItems{
+		background : purple;
+		color : white;
+		text-align: center;
+		margin:10px
+		width : 500px;        <---- 
+		}
+
+<div class="flexExample">
+	<div class="flexItems">Item1</div>
+	<div class="flexItems">Item2</div>
+	<div class="flexItems">Item3</div>
+	<div class="flexItems">Item4</div>
+	<div class="flexItems">Item5</div>
+</div>
+
+output  
+	Item1 Item2 Item3 Item4 Item5
+---------------------
+2.display : wrap
+	it will not compress child, it will fit childs acording to the parent width other will be shifterd to down.
+
+output 
+	Item1 Item2 
+	Item3 Item4 
+	Item5
+---------------------Flex direction---------------------
+flex-direction : row;    <--------- same as Display flex 
+flex-direction : column  <--------- child will be in vertical formate
+output
+	Item1 
+	Item2
+	Item3
+	Item4
+	Item5
+flex-direction : column-reverse;
+output
+	Item5
+	Item4
+	Item3
+	Item2
+	Item1 
+---------------------justify-contain vs align-items-----------------
+Both property works when parent has Display : flex property and flex-direction
+justify-contain work on horizontal axis
+align-items work on vertical axis
+
+.FlexExampleNew{
+	width : 1320px;
+	margin : auto;
+	display : flex;
+	gap : 20px   <--------  gap between column 
+	height : 500px;
+	justify-contain : flex-start/flex-end/center/space-between/space-around         <---  if flex-direction : row ? move child on row : move child on column;
+	}
+	
+	
+.FlexExampleNew{
+	width : 1320px;
+	margin : auto;
+	display : flex;
+	height : 500px;
+	align-items : flex-start/flex-end/center/space-between/stretch                  <---flex-direction : row ? move child on column: move child on row;
+	}
+---------------------Pseudo classes and pseudo element---------------------
+we can use any tag but now we take Example of p tag 
+p{
+	font-size : 40px;
+	color : red;			<---- apply to all p tag 
+}
+
+.main p : first-child{
+	color: blue;			<---- apply to first chile of p tag in main class
+}
+
+.main p: last-child{
+	color : red			<---- apply to last chile of p tag in main class
+}
+
+#If we want to apply property to nth no of child 
+.main p: nth-child(2)
+{
+	color : green;
+}
+
+.main>p{ 					<------ '>' it point to direct child of main 
+	font-size: 40px;
+	color : red;
+}
+-----------------------hover-------------------------
+.Box{
+	width : 300px;
+	height : 300px;
+	background : red;
+	transition :2s;     <---- transition will happen after 2sec when we hover
+}
+
+.Box : hover{					<---- hover will change the property when we hover
+	background : green;
+	}
+	
+---------------------Google Font---------------------
+*Google Font work only when your internate is connected.
+*Google Font is a free font provider 
+its 3rd party font we can use
+steps 
+	-got to google Fonts webside 
+	-serch font family   (inspect any site and check font family)
+	-get font
+	-get embeded code
+	-copy link tag and paste on our web page in head tag and use
+	
+.box{
+	font-family : "Inter", sans-serif;        <------- Google Font
+	font-weight : 600;						<------- check from site and add based on choise
+}
+
+---------------------Font awesome icon----------------
+we use CDN so we dont need to download icon.
+CDN : Content delevery network
+it will give us 3rd party Icon library
+Steps:
+	- goto Font awesome icon cdn site
+	- we get library path
+	- and add in Head tag by using link tag
+	- Goto Font Awesome webside
+		Icon
+			serch Icon 
+				click and copy HTML code (ex: <i class="fa-brands fa-facebook-messenger"></i>)  <---- i tag get only space which is required for icon link span
+
+This icon will work as text so we can add css to Icon 
+ex
+.main i{
+	color : blue;
+	font-size: 30px;
+	transition : 0.5s;
+}				
+.main i : hover{
+	color : red;
+	
+}
+*****************************************3.bootstarp****************************************************************
+Bootstrap
+required : 1css, 2 js CDN
+Bootstrap is a css library where as PrimeNg is component library.
+--------------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/media.css">
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+--------------------------------------------------------------------------------------
+#Media queries
+it work on total 6 screen
+  Infix	  Breakpoint           Dimensions				use
+1. XXL  : extra extra large    1400px -> unlimited      laptop
+2. XL	: extra large		   1200px -> 1399px			laptop
+3. LG 	: large				   992px  -> 1199px			laptop
+4. MD	: Mediam device		   768	  -> 991px			tab
+5. SM   : small device         576	  -> 767px			tab
+6. XS	: extra small		   opx	  -> 575px     		Mobile
+
+----------------------------------------------------------------------------------------
+#Container
+For middle part we use container
+					   xs	  sm       md     lg     xl        xxl
+1. .container    <--- 100%   540px   720px   960px  1140px   1320px
+2. .container-fluid   100%   100%    100%    100%   100%     100%
+
+**************************************Grids*********************************************
+#row class : row class have flex property so that all colunm will be in horizontal
+For use col need to use row class
+
+classes:
+xxl : col-xxl-1 to col-xxl-12
+xl  : col-xl-1  to col-xl-12
+lg  : col-lg-1  to col-lg-12
+md  : col-md-1  to col-md-12
+sm  : col-sm-1  to col-sm-12
+xs  : col-1     to col-12
+
+col-lg-3 this will work on xl as well as xxl
+
+#Auto column layout : layout handle by row 
+situation: we have 5 card to show so we cant divide it into 12 col in this case we use Auto column.
+<section class="container-fluid">
+	<div class="container">
+		<div class="row">
+			<div class "col-12">						<-- this will take 12 col
+			<h1>Heading</h1>
+			</div>
+		</div>
+		<div class="row row-cols-lg-5 row-cols-sm-2 gx-0 ">		<---- this indicate 5 column should be in lg screen and 2 column in sm and md screen
+			<div class="col">								<-- Auto colunm property, it will adjust in 5 image in 12 col
+				<div>
+					Image
+					number
+				</div>
+			</div>
+			<div class="col">
+				<div>
+					Image
+					number
+				</div>
+			</div>
+			<div class="col">
+				<div>
+					Image
+					number
+				</div>
+			</div>
+			<div class="col">
+				<div>
+					Image
+					number
+				</div>
+			</div>
+			<div class="col">
+				<div>
+					Image
+					number
+				</div>
+			</div>
+	</div>
+</section>
+----------------------------------------------------------------------------------------
+#Gutter class (work for high and width in row class)
+work same like above difference is remove default padding.
+
+gx-0 <-   padding will be zero for x axis, used in above code
+gx-1 <-  2px padding from left and right
+gx-2 <-  4px .....
+gx-3 <-  8px .....
+gx-4 <-  12px.....
+gx-5 <-  24px.....
+
+gy-2 <- padding 4px between verticle column
+----------------------------------------------------------------------------------------
+#Margine 
+m  : all direction margin
+mt : Top
+mb : bottom
+ms : left
+me : right
+my : Top & bottom
+mx : left & right
+mx-auto : left & right auto
+Above everyone have 6 classes like
+m-0    0px
+m-1	   4px 	== 0.25rem
+m-2    8px  == 0.50rem
+m-3    16px == 1rem
+m-4	   24px ==  1.5rem
+m-5    48px ==  3rem
+
+screen oriented margin
+m-lg-5 <-- in laptop sceeen take 48px margin
+mt-sm-2 <-- in sm,md will take 8px margin from top 
+so and so far
+
+#Padding
+p
+px
+py
+pt
+pb
+ps
+pe
+same like margin
+------------------------------------------------------------------------
+#Image classes
+img-fluid 
+
+<div class="container">
+	<div class="row">
+		<div class"col-sm-6">
+			<img srv="image path..." class="img-fluid">
+		</div>
+		<div class"col-sm-6">
+		    Paragraph
+		</div>
+	</div>
+</div>
+
+#if we want to show col 8 in center use justify-content-center
+<div class="row justify-content-center">
+	<div class="col-8">data</div>
+</div>
+
+we can use justify-containt in below way
+justify-content-center
+justify-content-start
+justify-content-end
+justify-content-between
+justify-content-around
+justify-content-evenly
+-sceeen oriented
+justify-content-lg-center
+justify-content-sm-start
+.
+.
+.
+
+#if we have 2 column and one hight is more than another so by using align-item-center we can show 1st col high center respective to other
+<div class="row align-item-center">
+	<div class="col-6">data</div>
+	<div class="col-6">data</div>
+</div>
+align-item-center
+align-item-start
+align-item-end
+align-item-baseline
+align-item-stretch
+-sceeen oriented
+align-item-lg-center
+.
+.
+.
+#align-self : used in col div 
+<div class=" col-lg-6 align-self-center">
+align-self-start
+align-self-end
+align-self-baseline
+align-self-strtch
+
+------------------------------------------------------------------------
+Text classes:
+text-center : used for all screen 
+text-start/end
+text-lg-center : in laptop and above screen show center
+
+Text Wrapping:
+text-wrap  used for cut big line into verticle wrap in give space
+
+Uppercase & lowercase
+text-uppercase
+text-lowercase
+text-capitalize : 1st letter is capital
+
+Font side:
+fs-1
+<p class="fs-1">Big text like h1</p>
+fs-2
+.
+.fs-6 : low size
+
+Font weight
+classes:
+fw-bold
+fw-bolder
+fw-semibold
+fw-medium
+fw-normal
+fw-light
+
+Line hight
+<p class="lh-1">No gap between line</p>
+lh-sm : normal hight
+lh-base : little bet gap between lines
+lh-lg : more gap between lines
+
+Text color
+text-primary : light blue
+text-primary-emphasis :dark gray
+text-secondary  : light gray
+text-danger : red
+text-success : green
+
+background color:
+bg-worning
+bg-secondary
+bg-primary
+bg-danger
+bg-success
+---------------------------------------------Project--------------------------------------
+#Modal
+
+create model first
+<div class="modal fade" id="bookDemo">
+<>All page<>
+</div.
+
+call modal 
+<button data-bs-toggle="modal" data-bs-target="#bookDemo">
+
+#Slider
+use carousel class 
+refer doc
+
+******************************************************************************
+#What is Bootstrap? what are other 5 responsive design framework?
+-> bootstrap is popular open-source front-end framework which provide responsive and mobile-first CSS.
+
+#why mobile user?
+->now mobile user are bigger then desktop use
+
+#Bootstrap, Foundation, Bulma, semantic UI, materialize these are frameworks used for responsivness bootstrap is popular one
+
+#What are the Advantage of boostrap
+-> 
+- rapid development :- it provide wide range of ready to use component like button, navbar,forms, modal and more this save developer time and efforts in writing code from scratch.
+- responsive design :- bootstrap is build with a mobile first approch meaning it prioritizes designing for small screens first and then scales up for large screens. this ensure websites with boostrap is responsive for every device.
+- Cross browser comatibility :- bootstrap provide a consistance set of style and component across differant browser, which helps in reducing cross-browser comatibility issues.
+
+#Explain the grid system in bootstrap? 
+Grid system is 12-column layout and is designed to adapt to various screen sizes.
+
+#Explain the difference between container and container-fluid?
+->
+- Container class centered the content and add padding to the sides, ensuring that the content remains within a specified width.
+- Container-fluid class provides a full-width layout, with the content extending to the edges of the screen.

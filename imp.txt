@@ -53,11 +53,15 @@ REST
 #REACT
 ------------------------------------------------------------Basic & OOPs---------------------------------------------------------------------
 
-#REST (Representational State Transfer): It mean Transfer of representational state of the resource eg. Employee, order, Fund, student between the client and server.
-										 it uses HTTP methods such as get, post, put, delete.
-										
-#REST API: is Software architecture style which define set of rule created for web services.
+#What is Web API 
+- API stands for Application programing interface, is a set of rules that define how application can connect to and communicate with each other.
 
+#What is REST
+rest is a set of rule or we can say guidlines to create API
+
+#What is REST API
+the api which follow rules of REST 
+										
 #interface: 
 - it's a contract, its act like communication between two object. when we are defining i/f we are Defining contract what our inheriting class should do but not how it does.
 - Contain only abstract method, Support multiple inheritance, Bydefault i/f methods are public & abstract, By default i/f Variable Public static and final. 

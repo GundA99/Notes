@@ -17,6 +17,8 @@ http://projectapi.gerasim.in : Dumy APis
 ******************************************************IMP Commands*******************************************************
 Download
 Command for create new angular project : ng new my-angular-app
+Command for bootstrap 				: npm i bootstrap
+Command for font-awesone            : npm i font-awesone
 Node js, Angular CLI
 Command for check Node version 		: Node -v
 Command for install Angular CLI 	: npm install -g @angular/cli

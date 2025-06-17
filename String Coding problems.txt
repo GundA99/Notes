@@ -1,0 +1,135 @@
+1.String Palendrom
+2.Revers string
+********************************************String Palendrom**************************
+
+ static int IsPalindrome(string s) {
+        int left = 0;
+        int right = s.Length - 1;
+
+        while (left < right) {
+                     
+            if (s[left] != s[right])
+                return 0;
+            left++;
+            right--;
+        }
+        return 1;
+    }
+	
+	
+-----------------------------------
+string = "A man, a plan, a canal: Panama"
+
+public class Solution {
+    public bool IsPalindrome(string s) {
+      s = s.Replace(" ", "").Replace(",", "").Replace(":", "").ToLower();      or  s = Regex.Replace(s, "[^a-zA-Z]", "").ToLower();
+     int left = 0;
+     int right = s.Length-1;
+     while(left< right)
+     {
+        if(s[left]!=s[right])
+        {
+            return false;
+        }
+        left++;
+        right--;
+     }
+     return true;       
+    }
+}
+*********************************************2.Revers string*************************
+
+	string str = "Akash";
+	StringBuilder res = new StringBuilder();
+	for(int i = str.length()-1; i>=0; i--)
+	{
+		res.Append(str[i]);
+	}
+	console.writeline(res.tostring());
+
+---------------------------------------------------
+	string str = "Akash Audumbar Gund";
+	string [] stra = str.Split(" ");
+	for (int i = stra.Length-1; i>=0; i--)
+	{
+	   Console.WriteLine(stra[i]);
+	}
+******************************************3 longest Sub string***********************
+int lengthOfLogestSubSTrinag(string a)
+{
+    int left = 0, right = 0;
+    int maxlength = 0;
+    HashSet<Char> set = new HashSet<char>();
+    while (left < a.Length)
+    {
+        if(!set.Contains(a[right]))
+        {
+            set.Add(a[right]);
+            right++;
+            maxlength = Math.Max(maxlength, right - left);
+        }
+        else
+        {
+            set.Remove(a[left]);
+            left++;
+        }
+    }
+    return maxlength;
+}
+*********************************************4 Is Subsequence *****************************
+Example 1:
+Input: s = "abc", t = "ahbgdc"
+Output: true
+
+Example 2:
+Input: s = "axc", t = "ahbgdc"
+Output: false
+
+code:
+ public bool IsSubsequence(string s, string t)
+    {
+        int left = 0;
+        for (int i = 0; i < s.Length; i++)
+        {
+            bool a = false;
+            for (int j = left; j < t.Length; j++)
+            {
+                if (s[i] == t[j])
+                {
+                    left++;
+                    a = true;
+                    break;
+                }
+                left++;
+            }
+            if (a == false)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+********************************************* Count no of occurence in string ******************************************
+string s = "AkAsh";
+var disc = new Dictionary<char, int>();
+for (int i = 0;i< s.Length;i++)
+{
+    if (disc.ContainsKey(s[i]))
+    {
+        disc[s[i]]++;
+    }
+    else
+    {
+        disc.Add(s[i], 1);
+    }
+}
+foreach (var item in disc)
+{
+    Console.WriteLine(item.Key + " : "+item.Value);
+}
+
+output : 
+A : 2
+k : 1 
+s : 1 
+h : 1

@@ -1,0 +1,12 @@
+C:\Akash\Study Projects\DBMigrator\DBMigratorBLogic\bin\Debug\net8.0\DBMigratorBLogic.deps.json
+C:\Akash\Study Projects\DBMigrator\DBMigratorBLogic\bin\Debug\net8.0\DBMigratorBLogic.dll
+C:\Akash\Study Projects\DBMigrator\DBMigratorBLogic\bin\Debug\net8.0\DBMigratorBLogic.pdb
+C:\Akash\Study Projects\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.csproj.AssemblyReference.cache
+C:\Akash\Study Projects\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Akash\Study Projects\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.AssemblyInfoInputs.cache
+C:\Akash\Study Projects\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.AssemblyInfo.cs
+C:\Akash\Study Projects\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.csproj.CoreCompileInputs.cache
+C:\Akash\Study Projects\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.dll
+C:\Akash\Study Projects\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\refint\DBMigratorBLogic.dll
+C:\Akash\Study Projects\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.pdb
+C:\Akash\Study Projects\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\ref\DBMigratorBLogic.dll

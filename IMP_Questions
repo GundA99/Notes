@@ -1322,7 +1322,7 @@ foreach (var item in disc)
 {
     Console.WriteLine(item.Key + " : "+item.Value);
 }
-AKASH
+
 ##############################################################Database#################################################################
 ****************************************1.In SQL how do you optimize stored procedures****************************************
 1. use SET NOCOUNT ON 
@@ -1335,7 +1335,7 @@ ex: select empName, Department, city from emp;
 if you have more than one schema then it will check on all table from schemas. instead of that use schema name before tableName.
 ex: SELECT EMPId, Name FROM dbo.EmployeeTable;
 
-4. use indexes for search or create undex for commonly used column in where conditions.
+4. use indexes for search or create index for commonly used column in where conditions.
 - By default, when you create an index using the CREATE INDEX statement without specifying the type, SQL Server creates a non-clustered index.
 -Indexing in SQL Server (and other database management systems) is a technique used to speed up data retrieval operations. It works similarly to an index in a book, where you can quickly locate the page number associated with a specific topic.
 - Instead of scanning the entire table to find the desired data, SQL Server uses indexes to locate rows more efficiently.
@@ -1468,8 +1468,9 @@ so atomicity say transaction trated as one single unit both steps should happen 
 
 #3rd NF : The relation will be in 3NF if is in 2NF and not contain any transitive partial dependency   
 			EX. EMPID | Name | ZIP | STATE | CITY =>  EMPID | Name | ZIP  &  ZIP | STATE | CITY 
+			
+###################################################SQL Query Problems#######################################################
 
-###################################################SQL Query Problems#########################################################################
 ***********************************Second highest salary and third highest salary*****************************
 1. second highest sal
 SELECT DISTINCT TOP  1 sal

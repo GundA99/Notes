@@ -1,0 +1,80 @@
+[
+  {
+    "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
+    "Method": "CopyStoreProcedure",
+    "RelativePath": "api/MigratorAppService/CopyStoreProcedure",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
+    "Method": "Login",
+    "RelativePath": "api/MigratorAppService/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "authentication",
+        "Type": "DBMigrator.DBMigrator.Dto.Authentication",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
+    "Method": "MigrateDataOnly",
+    "RelativePath": "api/MigratorAppService/MigrateDataOnly",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
+    "Method": "MigrateForeignKeys",
+    "RelativePath": "api/MigratorAppService/MigrateForeignKeys",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
+    "Method": "MigrateSchemaAndTables",
+    "RelativePath": "api/MigratorAppService/MigrateSchemaAndTables",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

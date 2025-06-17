@@ -590,7 +590,7 @@ bg-success
 create model first
 <div class="modal fade" id="bookDemo">
 <>All page<>
-</div.
+</div>
 
 call modal 
 <button data-bs-toggle="modal" data-bs-target="#bookDemo">

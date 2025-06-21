@@ -542,7 +542,7 @@ Application.Shared : - All the DTO's will be mapped using Abp Auto Mapper. We ne
 Core :   - In this layer the database entities and setting are defined. Moreover Dbmigration and seeding is also connected with this layer to start with.
 		 - All the common setting and constants are also the part of this layer.
 
-Core.Shared: - This layer is sherd with domain layer.
+Core.Shared: - This layer is shaerd with domain layer.
 			 - All the localization stuff, Error Codes or any global configuration are reside in this layer.
 EntityFramworkCore : - without this layer we need to configure db seperatly,
 					 - This layer is used for Entity frame work configuration and implementation.
@@ -689,7 +689,6 @@ app.MapControllers();             //Maps attribute-routed controllers. without t
 app.Run();                        //Starts the application.
 
 ---------------------------------------------------------------------v2-------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------
 #File structure
 Program.cs file:-
 - is the entry point of application via main() method.
@@ -780,7 +779,6 @@ Create Statup.cs files
 	-Configure
 		HTTP Pipline related
 		
-AKASH
 *****************************************************************9******************************************************************************************
 *********************************************************NUnit Testing*************************************************************************************
 #NUnit Testing
@@ -1469,7 +1467,6 @@ DEMO
 	SELECT DBO.fn_GetFullName(1)                <--- return single value
 	SELECT DBO.fn_GetFullName(1) as FullName from [dbo].[Email]        <--- return complete table with additional column FullName
 	
-	
 ------------------------------------------------------------View-----------------------------------------------------
 Create :
 	CREATE VIEW vw_Person
@@ -2103,7 +2100,6 @@ locationObj.Increment = (Func<int>)(() =>
     locationObj.MainLocation.number++;
     return locationObj.MainLocation.number;
 });
-
 
 var myname = locationObj.Name;      <------ get value
 locationObj.Increment();            <------ call method

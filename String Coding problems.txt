@@ -1,6 +1,6 @@
 1.String Palendrom
 2.Revers string
-********************************************String Palendrom**************************
+********************************************1.String Palendrom**************************
 
  static int IsPalindrome(string s) {
         int left = 0;
@@ -38,6 +38,7 @@ public class Solution {
     }
 }
 *********************************************2.Revers string*************************
+using System.Text;   <--- stringBuilder 
 
 	string str = "Akash";
 	StringBuilder res = new StringBuilder();
@@ -54,7 +55,7 @@ public class Solution {
 	{
 	   Console.WriteLine(stra[i]);
 	}
-******************************************3 longest Sub string***********************
+******************************************3.longest Sub string***********************
 int lengthOfLogestSubSTrinag(string a)
 {
     int left = 0, right = 0;
@@ -76,7 +77,7 @@ int lengthOfLogestSubSTrinag(string a)
     }
     return maxlength;
 }
-*********************************************4 Is Subsequence *****************************
+*********************************************4.Is Subsequence *****************************
 Example 1:
 Input: s = "abc", t = "ahbgdc"
 Output: true
@@ -108,8 +109,25 @@ code:
             }
         }
         return true;
+    
+	
+	
+public bool IsSubsequence(string s, string t)
+{
+    int i = 0, j = 0;
+    while (i < s.Length && j < t.Length)
+    {
+        if (s[i] == t[j])
+        {
+            i++;
+        }
+        j++;
     }
-********************************************* Count no of occurence in string ******************************************
+    return i == s.Length;
+}
+*********************************************5. Count no of occurence in string ******************************************
+using System.Collections.Generic;   <----need for Dictionary
+
 string s = "AkAsh";
 var disc = new Dictionary<char, int>();
 for (int i = 0;i< s.Length;i++)
@@ -133,3 +151,167 @@ A : 2
 k : 1 
 s : 1 
 h : 1
+**************************************3. Count the number of vowels in a string********************************
+ string input ="ahbgoc";
+        HashSet<char> set = new HashSet<char>{'a','e','i','o','u'};
+        int counter = 0;
+        for(int i = 0; i<input.Length-1; i++)
+        {
+            if(set.Contains(input[i]))
+            {
+                counter++;
+            }
+        }
+        Console.WriteLine(counter);
+		
+******************************************Factorial series********************
+  public static int Factorial(int n)
+    {
+        if(n<=1)
+        return 1;
+        return n*Factorial(n-1);
+    }
+---------------------------------------
+	   int fact = 1;
+       for(int i = 1; i<=5; i++)
+       {
+           fact*=i;
+       }
+       Console.WriteLine(fact);
+	   
+*****************************7. Print prime numbers from 1 to N********************
+
+public static void Main(string[] args)
+    {
+        bool isPrime = true;
+        for(int i = 2; i<150; i++)
+        {
+            isPrime = true;
+            for(int j =2; j<i; j++)
+            {
+                if(i%j==0)
+                {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if(isPrime)
+            Console.WriteLine(i);
+        }
+    }
+**********************Check Armstrong number*****************
+public static void Main(string[] args)
+    {
+        int num = 153, num1 = 153;
+        int digit = num.ToString().Length;      
+        num1 = num;
+        int count = 0;
+        while(num1>0)
+        {
+            int rem = num1%10;
+            count += (int)Math.Pow(rem, digit);
+            num1/=10;
+        }
+        Console.WriteLine(num==count);
+    }
+****************************Reverse number*******************
+    int num1 = 123;
+	int num2 = 0;
+	while(num1>0)
+	{
+		int rem = num1%10;
+		num2 = num2*10+rem; 
+		num1/=10;
+	}
+	Console.WriteLine(num2);
+
+*********************Sort Array*************
+ public static void Main(string[] args)
+    {
+       int [] arry = {6,2,3,5,2};
+       for(int i = 0; i< arry.Length-1; i++)
+        {
+            for(int j = i+1; j<arry.Length; j++)
+            {
+                if(arry[i]<arry[j])
+                {
+                    int temp = arry[i];
+                    arry[i] = arry[j];
+                    arry[j] = temp;
+                }
+            }
+        }
+        for(int i = 0; i<arry.Length; i++)
+        {
+            Console.Write(arry[i]+" ");
+        }
+        
+    }
+********************remove duplicate from array***********
+ public static void Main(string[] args)
+    {
+       int [] arry = {6,2,3,5,2,3,5,6};
+       int [] temp = new int[arry.Length];
+       int index = 0;
+       for(int i = 0; i< arry.Length; i++)
+        {
+            bool exists = false;
+           for(int j = 0; j<index; j++)
+           {
+               if(temp[j] == arry[i])
+               {
+                   exists = true;
+                   break;
+               }
+           }
+           if(!exists)
+           temp[index++] = arry[i];
+        }
+           for(int k = 0; k<index;k++)
+           {
+            Console.Write(temp[k]+" ");
+           }
+    }
+***********************Second highst No************
+public static void Main(string[] args)
+    {
+       int [] arry = {6,2,3,5,2,3,5,6};
+       int First = 0;
+       int second = 0;
+      for(int i = 0; i<arry.Length; i++)
+      {
+          if(First<arry[i])
+          {
+              second = First;
+              First = arry[i];
+          }
+          else if(arry[i]> second && arry[i]!=First)
+          {
+              second = arry[i];
+          }
+      }
+      Console.Write(second);
+    }
+######################################################Javascript########################################################
+
+********************************Reverse string******************************************
+function reverseStr(str) {
+ let rev = "";
+ for (let i = str.length - 1; i >= 0; i--) rev += str[i];
+ return rev;
+}
+*****************************Check if a string is a palindrome**************************
+let str ="AKA";
+let rigth = str.length-1;
+let left = 0;
+let flag = true;
+while(left<rigth)
+{
+    if(str[left]!=str[rigth])
+    flag=false;
+    left++;
+    rigth--;
+}
+
+console.log(flag);
+*****************************************

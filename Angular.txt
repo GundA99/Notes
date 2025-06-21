@@ -11,6 +11,7 @@ Basic
 10. PrimeNG 
 
 ===============================================================================================
+Basic Angular : https://youtu.be/-9VcW7MBDs8?si=LtzApOmi7IW30ETY  : Full course
 https://youtu.be/kY1oa8YSs-Q?si=SaEPIbw3kyxCRuRw   : Angular tutorial
 https://jsonplaceholder.typicode.com/ : For Dumy Apis
 http://projectapi.gerasim.in : Dumy APis
@@ -195,7 +196,7 @@ Bootstrap
             ]
 **************************************************Pass Image***********************************************************************
 			
-			 <div>
+			    <div>
                     <label for="image">Choose an image</label>
                     <input type="file"
                     id="image"

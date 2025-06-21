@@ -8,7 +8,7 @@ AZURE
 Plan->Code->testing->Build->Deploye->Monitor->Oprate
 
 BA and Customer comunication
-	-plan (starting of every thing we have a plan) 
+	- plan (starting of every thing we have a plan) 
 	
 Developmemt & testing Team
 	- Code (once plan is ready we write a code.)

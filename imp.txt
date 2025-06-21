@@ -54,19 +54,19 @@ REST
 ------------------------------------------------------------Basic & OOPs---------------------------------------------------------------------
 
 #What is Web API 
+- Web API(Application programing interface) provides interaction between software applications.
 - API stands for Application programing interface, is a set of rules that define how application can connect to and communicate with each other.
 
 #What is REST
-rest is a set of rule or we can say guidlines to create API
+- REST stands for REpresentation state transfer. it is a set of guidlines which helps in creating a system where application can easily communicate with each other.
 
+guidlines like: sepration pf Client sever, uniform interface - identify resource by URL 
 #What is REST API
 the api which follow rules of REST 
 										
 #interface: 
 - it's a contract, its act like communication between two object. when we are defining i/f we are Defining contract what our inheriting class should do but not how it does.
 - Contain only abstract method, Support multiple inheritance, Bydefault i/f methods are public & abstract, By default i/f Variable Public static and final. 
-
-# 
 
 #Marker Interface :	an i/f that does not contain any methods, fields abstract methods, and any constants is called marker i/f, ex. serializable,Clonable 
 
@@ -140,7 +140,7 @@ There are 4 main Pillers of OOPs
 #Method Overriding: if we have methods with same name and signature in super class and subclass then we say subclass method is overriden by superclass.
 	                use- if we want same method with different behaviour in super and sub class then we go with overriding.
 
-#Method Overloading VS Method Overriding
+#Method Overloading VS Method Overriding 
 1.Method overloading Occurs with in same class, but Method Overriding ouccurs between 2 class.
 2.In method overloading inheritance is not involved, but in Method Overriding inheritace is involved.
 3.In method overloading return type is not to be same, but in Method Overriding need to be same.
@@ -430,14 +430,16 @@ All this are defined in system namespace.
 The Startup.cs file is used to configure the application's services and request pipeline.
  It contains methods like ConfigureServices and Configure 
  
-ConfigureServices:- method configure the SERVICES which are required by the application
+ConfigureServices:- ConfigureServices method called before the Configure method to configure apps services
+
 such as enable MemoryCache() configuration,
 Set dependance injection by using AddSingleton<>
 Configure connection string.
 
 
 Configure :-
-Used to configure middlewares, services, and other essential app-level configurations like routing, authentication, cors etc. 
+Configure method specifies how the app responds to the http request and response. it is used to set request pipline by defining series of middleware.
+
 In newer versions of ASP.NET Core (6 and above), the Startup.cs file is often replaced by configuration inside Program.cs.
 --------------------------------------------------------------
 #Program.cs
@@ -513,8 +515,7 @@ Dependency Injection: It uses built-in dependency injection, promoting a loosely
 
 it is A design pattern to reduce coupling between classes
 - Instad of dependant object manage their dependancy .net framwork will automatically create object and make it available to Dependant object directly at runtime.
-- This will lead to loose cupling approach.
-- Since dependant object no longer manageing the dependancy this approch is called as IOC.
+- it is a design pattern that allow us to develop loosely coupled code.
 --------------------------------------------------------------------------------------------------------------------------------
 #Types of Injection:
 
@@ -659,8 +660,8 @@ Durability:- After succesfully complete the trasaction changes in the DB is pers
 2. Aggregate Function : sum, min, max,count,avg.
 
 
-AKASH
------------------------------------------------------Joins, View, Trigger------------------------------------------------------------------------
+
+----------------------------------Joins, View, Trigger------------------------------------------------------------------------
 #Inner Join : inner Join return only the row from both table where they are match based on join condition.
 #Outer join : Outer Join return all row from one table and matching row from other table Based on join condition.
 #Left Join : return All Row from left table and matching row from rigth table.

@@ -1,0 +1,1011 @@
+Angular
+HTML
+Bootstrap
+JavaScript
+#################################################Angular#################################################
+PrimeNG
+https://youtu.be/96CSYHPKzzg?si=I3nS8XiF8yk4JxYd
+============================================================
+# ng new projectName --routing ?
+#--legacy-peer-deps 
+#packege.json vs packege-lock.json files
+#Difference between npm and Node
+============================================================
+https://youtu.be/-jeoyDJDsSM?si=RaPc13xQx3RMxA5V - Questpond Interviwe Q
+1.What is Angular:
+2.Difference between AngularJS vs Angular?
+3.What are directives in Angular?
+4.Explain the different types of Angular directives?
+5.Explain the importance of NPM and Node_Modules folter?
+6.Importance of packege.json file
+7.What is TypeScript and why do we need it?
+8.Expain importance of Angular CLI? ------------- 
+9.Expain the importance of Component and modules?
+10.Expain Importance of decorator in angular?
+11.What are annotation or MetaData?
+12.What is Template in Angular
+13.Explain the four types of Data binding in Angular?
+14.Explain architecture of Angular?
+15.Expain SPA in Angular
+16.How can implement SPA in Angular
+17.How to implement routing in angular
+18.What is lazy loading in angular
+19.How can implement Lazy loading in Angular
+20.define Services?
+21.what is DI
+22.how to implement DI in Angular
+23.what is the benefit of DI?
+24.Difference between Ng serve and Ng build?
+25 Expain the --prod parameter in ng build?
+26 what is Package.json 	
+27  tsconfig.json vs angular.json vs packege.json
+28 What is NPM 
+29 JavaScript vs TypeScript
+30 Create tsconfig.json file using TS command line.
+31 What is component, selector, Module
+
+--------------------------------------------------------------------
+1.What is Angular: Developed by google.
+- Angular is a javaScript UI/Binding framework which binds the HTML UI and JavaScript Model. this helps you to reduce your effort on writing those lengthy lines of code for binding.
+ also it helps you to build single page application by using the concept of routing. it also has lot of other features like HTTP, DI, Input, output becouse of which you do not need other framework.
+- Build on typescript 
+- Its development platform to build UI part of application.
+- its component based framework for building scalable web application.
+- a collection of well-integrated libraries that cover a wide variety of features,includding routing, forms management, client-server communication and more.
+
+--------------------------------------------------------------------
+2.Difference between AngularJS vs Angular?
+AngularJS means Angular 1 family
+
+						AngularJs 		Angular
+						(1.x)			(2,4,5,6,7,8,9)
+1.Language				JavaScript	-	TypeScript
+2.Architecture			Controller	-	Component based
+3.Mobile compliant			no		-	Yes
+4.Lazy loading				no		-	Yes
+
+- in AngularJS it use JavaScript where as Angular use typescript
+- we don't have CLI in AngularJS but we have CLI in Angular
+
+
+--------------------------------------------------------------------
+3.What are directives in Angular?
+-directives are used to attach your Behaviour to HTML Dom.
+-Directives are nothing but Angular syntexes which we write inside HTML to change the behaviour of HTML Dom.
+	for ex: ngModel, hidden, value
+
+--------------------------------------------------------------------
+4.Explain the different types of Angular directives?
+-There are three type of Directives in angular. (S A C)
+	1. Structural
+		- Structural Directives change the structure of the Dom. 
+		- Change the DOM layout by adding and removing elements.
+			ex:<tr *ngFor="let temp of SalesModel">
+	2. Attribute
+		- Attribute derective are does not add or remove any value it 
+		- Change the appearance and behaviour of HTML elements.
+		- Change the look and feel of html.
+			ex: [{ngModel}],(click),[hidden]
+	3. Component
+		- Directives with templates. its like user control.
+		- its like own UI 
+			ex: <app-root></app-root>
+
+--------------------------------------------------------------------	
+5. Explain the importance of NPM and Node_Modules folter?
+	Npm helps you to install any javaScript framework in your Computer.
+	for example if you want to install jQuery simple go and use npm install jquery command. 
+	after hit command all jquery packege install in Node_modules folter.
+	Node_Modules is nothing but a folter where all javaScript packege install.
+	
+
+--------------------------------------------------------------------
+6. Importance of packege.json file
+	packege.json is a file where all the references or javaScript frameworks listed down.
+
+--------------------------------------------------------------------
+7. What is TypeScript and why do we need it?
+	- as name says TypeScript It Add Type to JavaScript. so TypeScript is a super set of JavaScript.
+	- we write code in TypeScript but at the end of the day it will convert into JavaScript.
+	- as its strongly typed we will have less errors and becouse we can do OOp with javaScript our productivity and quality also increases.
+
+--------------------------------------------------------------------
+8.Expain importance of Angular CLI?
+	Angular CLI is a command line interface by which we can create initial Angular project template. so rather than starting from scratch we have some boiler plate code it will give a readymate template.
+	hence it can improve productivity   
+
+--------------------------------------------------------------------
+9.Expain the importance of Component and modules?
+	Component has used to bind module and views while  module groups a component
+
+--------------------------------------------------------------------
+10. Expain Importance of decorator in angular?
+	Decorator says what exactly have a class
+	ex: @ngModule(), @component
+	-Decorator define what kind of class is it. For ex if you decorate @Component then it says its an angular component, if you put @NgModule it become a angular Module.
+	@Component({
+		selector: "app-root",
+		templateUrl : "./....."
+	})
+	export class SaleClass{....}
+	
+	@NgModule({
+	})
+	export class SalesModel{...}
+
+
+11.What are annotation or MetaData?
+	ans same as above
+in ts there is no concept of component, component is consept of angular.
+ts has class only and on class we use 
+@Component({
+	selector: 'app-root',
+	templateUrl: './app.component.html'      <--- connect to the html
+	styleUrls:'./app.component.css'          <--- connect to the css
+	})
+	which is called as decorator which make ts class as a component.
+	so the class is combination of all the css, js and html. which is called as component.
+	
+ 
+--------------------------------------------------------------------
+12. What is Template in Angular
+	Template is an HTMl view of angular in which we can write directives.
+	there are two ways of defining Template one is inline and other is a seprate HTML file.
+		-inline Template:
+			@Component({
+				template:<b>test</b>
+				})	
+		- define seprate file and add Url
+			@Component({
+				templateUrl:'./custApp.Component.html'
+				})
+
+--------------------------------------------------------------------
+13. Explain the four types of Data binding in Angular?
+	Data binding in angular define how the view and component communicate with each other.
+	there are four types of binding 
+	1. Expresion/interpolation Data Binding {{}} used
+		data flow from component to the view and mix with html.
+		Ex: {{custObject.CustId}}
+	2. Property binding: Data flows from component to view [] used
+		[ngModel]="CustomerObj.Name"
+	3. event binding:
+		when we want to send event from the view to the component.
+		(click)="Func()"
+	4. tow way binding: [()] used
+		in that data flow is like view to component and component to view.
+		ex: [(ngModel)]="CustomerObj.Name"
+
+<input type="text" [(ngModel)]="someValue"/>   <---- [] data comming from component to Ui and () for send data from UI to component
+
+expression/interopolation : Mixing angular with HTML 
+ <h1>{{someValue}}</h1> 
+ <h1>{{2+2}}</h1>      //4
+ 
+
+--------------------------------------------------------------------
+
+14. Explain architecture of Angular?  Digram(Personal\Notes\Angular architecture)
+	link: https://youtu.be/-jeoyDJDsSM?si=iTofbupCnVhJyeHy
+	1 first important component in angular is Template. Template is nothing but HTML View.
+				|<---- Template talks with component(By {{}}, [] )
+	2 Component	
+				|<-----Group of component logically say modules
+	3 Modules			
+	4 Component and template communicate to each other by data binding 
+	5 Directives : Change the HTML DOM behaviour
+	6 for command module we create service
+		helps to share common logic across the project.
+	7 DI: DI helps to inject instance across constructor
+
+--------------------------------------------------------------------
+15 Expain SPA in Angular
+	Single page Application
+	SPA is a concept where we load UI once and then we don't load again and agin.
+	for ex: if we have a site in that we have header, footer, side menu thus section are loaded only once. and needed UI load on demand.
+ 
+--------------------------------------------------------------------
+16 How can implement SPA in Angular
+	to implement SPA in Angular we need to use something called Angular routing.
+		#what is routing
+		routing is a simple collection which has two things URL and When this URL is called which component to load
+		so routing helps you to define the navigation for your angular application so if you want to move from one screen to other screen and 
+		you want to respect SPA thet means not loading and refreshing the whole UI routing is needed.
+
+--------------------------------------------------------------------
+17 How to implement routing in angular
+	1st step we need to define set of collection and we need to defile which path has connect to which component loaded.
+	then in our HTML file define something called as router-outlet. router outlet is a place where our component will load
+	in HTML we use <a [RouterLink]=['home']> and in ts we use this.router.navigate(['/home'])
+
+--------------------------------------------------------------------
+18 What is lazy loading in angular
+	lazy loading means on demand loading. loading only the necessary HTML, CSS and JavaScript files so that we have better performance.
+	When i click on button and then if some thing load then we can say its lazy loading.
+
+--------------------------------------------------------------------
+19 How can implement Lazy loading in Angular
+	1st things to do is divide project into different module
+	then use loadChildren keyword in route collection
+	ex: {path :'Customer', loadChildren: '.../CustApp/CustApp.Module'}
+
+--------------------------------------------------------------------
+20 define Services?
+	services helps you to share common logic across Angular project.
+
+--------------------------------------------------------------------
+21 what is DI
+	Dependancy injection is an application design pattern where rather than creating object instance from within the component, Angular inject it via the constructor.
+
+--------------------------------------------------------------------
+22 how to implement DI in Angular
+	for inject DI in Angular we need to use Providers attribute which belongs to the NgModule decorator in that we provide what we want to inject and by useing constructor
+
+--------------------------------------------------------------------
+23 what is the benefit of DI?
+	Dependancy injection helps to decouple class dependencies, so that when you add new Dependancies you do not have change everywhere.
+
+--------------------------------------------------------------------
+24 Difference between Ng serve and Ng build?
+	ng serve build angular application in memory we can say RAM. ng build build application on hard disk. so when you want to go for production "Ng build" command is used 
+
+--------------------------------------------------------------------	
+25 Expain the --prod parameter in ng build?
+	ng build -prod flag try to compresses your JS file, remove comments, create GUIDs of your JS files and make your application ready for production.
+
+--------------------------------------------------------------------
+26 what is Package.json 	
+	it contains dependencies of angular module.
+
+--------------------------------------------------------------------
+27  tsconfig.json vs angular.json vs packege.json
+	all the typescript related configuration is done in tsconfig file
+	all the angular related configuration is done in angular.json.
+	all the packege related configuration is done in packege.json.
+	
+--------------------------------------------------------------------
+28 What is NPM 
+- help to install javaScript packege in your computer.
+	ex: if you want to install JQuery packege we have command like npm install iquery. it will add in node_module folder.
+	
+--------------------------------------------------------------------
+
+29 JavaScript vs TypeScript
+JavaScript is a daynamic language whose Data type can change at runtime.
+TypeScript makes your javaScript strongly typed.
+
+--------------------------------------------------------------------
+
+30 Create tsconfig.json file using TS command line.
+=dist file
+once compile TS file will create JS file. this file will create in dist folder.
+ -Command : tsc --init
+ this above command create tsconfig.json file in that file uncommit "outDir":"./dist",
+ and add path for store compiled js files.
+-for allow null in code check "strict":"true" to "false"
+
+--------------------------------------------------------------------
+
+31 What is component, selector, Module
+#component : A Component is reuseable UI logic which can be loaded inside HTML which can be loaded inside browser.
+ - component consist of View + logic
+ 
+#selector is used for call the component.
+
+#Module : Logically grouping components.
+		  one module can have multiple components
+			inside component View and logic are connected by templateURL.
+
+------------------------------------------------------------------------
+
+
+######################################################### HTML #######################################
+1. What is HTML Differences between HTML & HTML% ? Advantage of HTML5?
+2.What is the role of DOCTYPE in HTML?
+3.Differences between Head and Body in HTML? Where to place JS link reference?
+4.What is a Tital tag in HTML? what are the advantage
+5.What are HTML Element ? Differences between Element and tag?
+6.What are the roles and uses of the Div element in HTML?
+7.Div vs span
+8.Empty(self-closing) Element?
+9.What is Semantic element? div is semantic element?
+10.Can HTML tags be written in Uppercase?
+11.What are HTML Attributes? What are the Types of HTML attributes?
+
+
+*******************************************************************************
+Q1. What is HTML Differences between HTML & HTML% ? Advantage of HTML5?
+->
+HTML stands Hyper Text Markup Language. is the standard markup languge used to create web pages.
+
+Markup language meaning a language which define the structure of a document using elements like headings, paragraphs, links, lists, and more.
+
+HTML is not a programing languge its a markup languge.
+
+#Advantage of HTML5 Over the old 
+- intruduce New Semantic Elements: <header>, <nav>, <article>,<section>, <aside>,<footer>
+
+- intruduce form with input type : <input type="date">,<intput type="email">
+
+- support Audio and video by <audio>,<video> tag
+- Simpler in coding then HTML
+
+--------------------------------------------------------------------
+2.What is the role of DOCTYPE in HTML?
+-> DOCTYPE declaration specifies the version of HTML.
+<!DOCTYPE html>   <----
+<html>
+<head></head>
+<body></body>
+</html>
+
+- why Define? Becouse DOCTYPE tells the browser which version of HTML it is and how to interpret the code.
+
+#What if you remove <!DOCTYPE html> from your HTML?
+-> then browser can still render the page, but they will not be able to validate the version of HTML, therefore it may lead to some compatibility issues with SEO or debugging
+--------------------------------------------------------------------
+3.Differences between Head and Body in HTML? Where to place JS link reference?
+-> The <head> element is where you place meta-information(information about the document).
+	For Ex you have a book in front page we see Author of the book tital of the book and index this is all the info about the book.,
+	similarly in the head element of the html title represent the title of web page, we can place JS stylesheet, css references.
+	
+	like in book contain inside it same as in html we have body. where we palce actual content of your HTML web page.
+	for ex. <div>, <h1>, <p>, <img>, <a> are normally kept under body element.
+	
+	when the webside load first head will load then body will load
+#Where to place JS link reference?
+	Head will load before the body, therefore, if you are manipulating HTML elements in your JS function, then place the js link at the end of the body section becouse until then all the elements will be loaded else, place it inside the head tag.
+	
+--------------------------------------------------------------------
+4.What is a Tital tag in HTML? what are the advantage
+	-> The <title> tag in HTML is used to define the title of a web page.
+	Advantage: 
+	- is used for window tital.
+	- Search engine use the tital as the main heading for search results.
+		ex: when you type something in google serch box and press serch then first google will find and match your input text with all the titles of the website wep page availabe with google.
+	- Bookmarks: tital tag is used as the default name for the bookmark.
+--------------------------------------------------------------------
+5.What are HTML Element ? Differences between Element and tag?
+-> Element consist of a start tag , content and end tag.
+   tag is a specific part of an element that denotes the beginning or end of that element.
+<p> interview happy</p>     <---Html Element
+<p></p>   <-- open&close Tag   
+
+--------------------------------------------------------------------
+6.What are the roles and uses of the Div element in HTML?
+->  The <div>(division) element in HTML is a container that is used to group and structure the content on a webpage.
+#Top uses:
+1.Grouping and structuring Content:
+	it allows you to group together related elements.
+2.Styling and Layout:
+	it used to apply comman styles or css to grouped element.
+--------------------------------------------------------------------
+7.Div vs span
+-> The Div element in HTML is a container that is used to group and structure the content on a webpage.
+	the span element in html is an inline container used to apply styles or scripting to a specific section of text or content.
+	<div>
+		<h1>Heading</h1>
+		<p> Interview <span style="color: blue">Happy</span></p>
+	</div>
+--------------------------------------------------------------------
+8.Empty(self-closing) Element?
+-> An empty element in HTML is an element that doesn't need content between opening and closing tags.
+ ex :- <br>, <hr>, <img>, <input> <link>
+--------------------------------------------------------------------
+9.What is Semantic element? div is semantic element?
+-> Semantic element is HTML are elements that provide meaning to the content they contain.
+for ex header as name say it contain header, footer
+
+Div is not a semantic element, becouse div is a general-purpose structure element. it does't give any mening to the content.
+semantic elements: 
+progress - Display the progress of a task
+nav - Contain navigation links for a webpage.
+--------------------------------------------------------------------
+10.Can HTML tags be written in Uppercase?
+Yes, but it not recommended as per standards.
+--------------------------------------------------------------------
+11.What are HTML Attributes? What are the Types of HTML attributes?
+-> HTML attributes provide additional information about HTML elements.
+like id, name, class href
+
+#Type of attributes
+1.Common/Global Attributes
+-> Ex. class, id, style, data they are comman and applicable for all the element
+2. Specific Attributes
+-> Ex href, src, alt, width, height, type, value, name these are specific to the element
+
+--------------------------------------------------------------------
+id : attribute used to uniquely identify an element on a page 
+
+******************************************************************
+###########################################################CSS ###########################################################
+1. What is z-index property in CSS ? 
+-> - z-index property in css used to control the stacking order of positioned element.
+   - Element with a higher z-index value will be displayed on the top of elements with a lower z-index value
+   - if two elements have the same z-index, the one that come later in the HTML source will appear on top.
+   
+2. What is the difference between position: relative / absolute/ fixed
+-> - default value of position is relative.
+   - absolute : it has absolute place on the browser irrespect of surrounding position
+   - fixed :- its similar to absolute but difference is when we scroll page still it showing at same place.
+
+3. What is display:flex in CSS?
+-> - it turns an element into a container that structure and align its child elements in a better way. it enables a flexbox layout for the container.
+   - justify-content property aligns flex items along the main axis of the flex container. it controls the spacing between and around items.
+   
+###########################################################Bootstrap#######################################################
+1.What is Bootstrap? what are other 5 responsive design framework?
+-> bootstrap is popular open-source front-end framework which provide responsive and mobile-first CSS.
+
+2.why mobile user?
+->now mobile user are bigger then desktop use
+
+3.Bootstrap, Foundation, Bulma, semantic UI, materialize these are frameworks used for responsivness bootstrap is popular one
+
+4.What are the Advantage of boostrap
+-> 
+- rapid development :- it provide wide range of ready to use component like button, navbar,forms, modal and more this save developer time and efforts in writing code from scratch.
+- responsive design :- bootstrap is build with a mobile first approch meaning it prioritizes designing for small screens first and then scales up for large screens. this ensure websites with boostrap is responsive for every device.
+- Cross browser comatibility :- bootstrap provide a consistance set of style and component across differant browser, which helps in reducing cross-browser comatibility issues.
+
+5.Explain the grid system in bootstrap? 
+Grid system is 12-column layout and is designed to adapt to various screen sizes.
+
+6.Explain the difference between container and container-fluid?
+->
+- Container class centered the content and add padding to the sides, ensuring that the content remains within a specified width.
+- Container-fluid class provides a full-width layout, with the content extending to the edges of the screen.
+
+
+*****************************************************************************************************
+###############################################JavaScript############################################### #
+https://youtu.be/Zb4dPi7CANU?si=Y81KmVGtSPt99qzq :	Questpond
+https://youtu.be/AUTO7ALJk2U?si=F4kfwRt13veuRw8G : interview happy
+
+1.Why do we call JS as Dyanamic language ?
+-> - javaScript is a dynamic languge means data types of the variable can change during the runtime.
+	ex: var x = 0;
+		x = "akash"; x=true;
+   - javaScript determines data types depending on the value assigned.
+----------------------------------------------------------------------
+2. How to determine data type in javaScript? what is typeOf operator?
+-> use typeOf function
+	ex: var x = 100;
+		var whatIsDT = typeOf(x);   // number
+		x = "akash"
+		whatIsDT = typeOf(x)   //string
+	
+	#TypeOf operator:
+		- typeOf operator is used to determine the type of each variable.
+		- Real application use -> typeOf operator can be used to validate the data received from external sources(api).
+----------------------------------------------------------------------
+3. What are different datatypes in javaScript?
+-> in js we have 8 datatypes
+	Primitive:	
+		- string, number, null, undefined, true, 100, Symbol()
+		- Primitive data type can hold only single value
+		- Primitive data type are immutable, meaning their values, once assigned, cannot be change.
+		
+	Non Primitive:
+		- non primitive data types can hold multiple value.
+		- They are mutable and their values can be changed.
+	
+	object : Object()
+	
+	
+--------------------------------------------------------------------
+4. Explan undefined datatypes?
+-> undefined means the variable has been declared but no value is assigned to it.
+	Ex: var x = "Akash";   //string
+		var z;  		//undefined
+--------------------------------------------------------------------		
+5. what is Null ?
+-> null indicates intentional absence of data. null indicates its not zero, its not empty its just absence of data.
+	it is nither empty or nither zero its null only.
+--------------------------------------------------------------------		
+6. Difference between Null and undefined?
+-> undefined : 
+		- when a variable is declared but has not been assigned a value. it is automatically initialized with undefined.
+		- Undefined can be used when you don't have the value right now, but will get it after some logic or operation.
+		EX:
+			let undefinedVariable;
+			console.log(undefinedVariable)   // undefined
+   Null : 
+	   - null variable are intentionally assigned the null value.
+	   - null can be used, when you are sure you do not have any value for the particular variable.
+	   Ex:
+			let nullVariable = null;
+			console.log(nullVariable)      //null
+   
+-------------------------------------------------------------------- 
+7. JavaScript hosting
+-> its a mechanism where variable and function declaration are moved to the top of the scope.
+   Ex:-
+   console.log(y); <-- when pointer is here showing undefined 
+   var y = 10;		<-- when pointer is execute this line above line y will be 10.
+--------------------------------------------------------------------
+8.WHat is Global variable?
+-> Global variable are accessible through out the webpage or the document.
+--------------------------------------------------------------------
+9. what happen when we define variable without var?
+-> without var variable become Global.
+	Ex: function fun1()
+	{
+		y = 100;		// global variabl
+	}
+	console.log(y) 		//100
+--------------------------------------------------------------------
+10. What is Use Strict? How to force developer to use var Keyword?
+->  when we define "use strict" it strictly check variable used var or not if not it will throw an Exception.	
+	Ex:-
+		"use strict";
+		var x = 10;
+		function func()
+		{
+			y =100;				<--- showing error here.
+			console.log(x);
+		}
+		func();
+--------------------------------------------------------------------		
+11. What is Closures?
+-> Closures are functions inside function and it makes a normal function statful.
+<script>
+	function SimpleFunction()
+	{
+		var x = 0
+		x++;
+	}
+	function ClosureFunction()
+	{
+		var x =0;
+		function Increment()
+		{
+			x++;
+		}
+		return {
+		Increment
+		}
+	}
+	
+	SimpleFunction();		// x will be 1
+	SimpleFunction();		// x will be 1
+	
+	var ref = ClosureFunction();
+	ref.Increment();	// x will be 1
+	ref.Increment(); 	// x will be 2	
+</script>
+--------------------------------------------------------------------
+12. Why do we need Closure?
+-> it create self contain state or self contain module solve global variable problem.
+ 
+function ClosureFunction()
+{
+	var x;
+	function Increment(){x++;}	
+	function GetXValue(){ return x; }
+	function Init(){ x=0; }
+	Init();
+	return {
+		Increment,
+		GetXValue
+	}	
+}
+
+var ref  = ClosureFunction();			all inside functions call  
+ref.Increment();					// Increment function call
+ref.Increment();					// same as above
+alert(ref.GetXValue()) 				// X == 2
+ref.Init();							// throw an error
+--------------------------------------------------------------------
+13. Explain IIFE ?
+-> its an anonymous function which gets immediately invoked.
+
+(function(){
+	var y = 10
+	alert("I an IIFE and I will execute once when page loads")    //alert
+	})();
+	
+	alert(y)  // error
+	  
+- any kind of variable we use in function is a local veriable which not access outside the scope.
+--------------------------------------------------------------------
+14. What are the various ways to create JavaScript objects?
+-> there are 4 types
+	1. Literal:-
+		var pat = {
+					"name": ""
+				   "address": ""
+				  }
+		pat.Admit = function()
+		{
+			alert("I am admitted");
+		}
+	-------------------------------
+	2.Object create
+	var patnew = Object.create(pat);
+	patnew.age = 10;
+	-------------------------------
+	3.ES6 classs.
+	class PatientClass{....}
+	var p = new PatientClass();
+--------------------------------------------------------------------
+
+15. How can we do inheritance in javaScript? 
+-> JavaScript uses object inheritance or prototypical inheritance. inheritance is done using Prototype object.
+	- as compair to other language we have class inheritance here we do object inheritance.
+	- Every JavaScript object has a Prototype object. it's an inbuilt object provided by JavaScript
+	
+	function Employee(){
+		this.Name = "";
+		this.DoWork = function(){
+			alert("Basic work");
+			}
+		this.Attendance = function(){
+			alert("Attendance needed");
+			}
+	}
+	
+	function Manager(){
+		this.Cabin = "";					<---- inherite all property and add new one
+		this.DoWork = function(){			<---- Overried DoWork method in Manager object
+			alert("Manages team");
+		}
+	}
+	
+	var emp = new Employee();
+	Manager.prototype = emp;
+	
+	var man = new Manager();
+	man.Name = "Akash";
+	man.Attendance();
+	man.DoWork();
+--------------------------------------------------------------------
+16. What is Let Keyword?
+-> let help to create immediate block level local scope
+--------------------------------------------------------------------
+17. What is JavaScript? What is the role of javaScript engine?
+-> - JavaScript is a programing language that is used for converting static web pages to interactive and dyanamic web pages.
+   - a javaScript engine is a program present in a web browsers that execute javaScript code(every browser has javaScript engine)
+   
+18. What is Scope in JavaScript?
+-> Scope determine where variable are define and where they can accessed.
+	we have 3 scopes : Global, function, block scope.
+--------------------------------------------------------------------
+20.What are variable? difference between var, let, const ?
+-> var creates a function-scoped variable, let create a block-scoped variable, const can be assigned only once, and its value cannot be changed afterwards.
+--------------------------------------------------------------------
+21. Type coercion 
+-> type coercion is the automatic convertion of value from  one data type to another during certain operations or comparisons.
+	Ex: 
+		let string = "42";
+		let num = 43;		
+		let bool = true;
+		let nullValue = null;
+		
+		console.log(string+num); 		// "4243"
+		console.log(num+ bool) 			// 44  (43 +1)
+		console.log(bool == 1)   		//true
+		console,log(bool + nullValue)   // 1
+		
+	Uses
+		- Type coercion can be used during string and number concatination.
+--------------------------------------------------------------------
+22. == and ===
+-> 	- Loose Equality(==) operator compares two values for equality after performing type coercion.
+	- Strict Equality (===) operator compares two values for equality without performig type coercion.
+	- normally === is preferred in use to get more accurate comparisons.
+--------------------------------------------------------------------
+23. Spread and Rest
+-> 
+#Spread
+	the spread operator(...) is used to expand or spread element from an iterable(such as array, string, or object) into individual elements.
+	
+	const array = [1,2,3];
+	console.log(..array); 		//1,2,3
+	
+	Uses:
+		1.Copying an array:
+			const orignalArray = [1,2,3];
+			const copiedArray = [...orignalArray];
+			console.log(copiedArray);
+		2.Merging Array
+			const array1 = [1,2,3];
+			const array2 = [4,5];
+			const meredArray = [...array1, ...array2];
+			console.log(meredArray)		// 1,2,3,4,5
+		3.passing multiple arguments to a function
+			const number = [1,2,3,4,5];
+			sum(...numbers);
+			
+			function sum(a,b,c,d,e){
+				console.log(a+b+c+d+e)	//15
+			}
+#Rest
+	 - the rest operator is used in function parameters to collect all remaining arguments into an array.
+	 Ex:
+		display(1,2,3,4,5);
+		
+		functoion display(first, second, ...restArguments){
+			console.log(first);
+			console.log(second);
+			console.log(...restArguments)
+		}			
+--------------------------------------------------------------------
+24. Array in js
+#pourpose 	:- methods
+1. Get 		:- indexOf(), find(), filter(), Slice().
+2. Add 		:- push(), concat(), unshift()
+3. Remove 	:- pop(), shift(), splice()
+4. Modify 	:- map(), forEach()
+5. Others	:- join(), length, sort(), revers(), reduce(), some() every()
+
+push 	: - add at last,
+		  - will modify the orignal array itself.
+concat 	: - will create the new array and not modify the original array.
+unshift : add at first 
+pop 	: remove from last
+shift 	: remove from first
+find 	: get the first element that satisfies a condition.
+			const array = [1,2,3,4,5];
+			let c = array.find((num)=> num%2==0);
+			console.log(2);
+filter : get all the array of element that satisfy a condition.
+slice  : - method get a subset of the array from start index to end index(end not included).
+splice	 - method is used to add, remove or replace element in an array.
+		 Ex:
+		 arry.splice(startindex, deleteCount, ...ItemsToAdd); 
+	//Add 'x' and 'y' at index 1
+		 let letters = ['a','b','c'];
+		 letters.splice(1,0,'x','y');
+		 console.log(letters);		//['a','x','y','b','c'];
+	// remove 1 element strting from index 1
+		letters.splice(1,1);
+		console.log(letters);		//['a','y','b','c'];
+	//Replace
+		letters.splice(2,1,'q');
+		console.log(letters)		//['a','y','q','c'];
+
+map	: - is used when you want to modify each element of an array and create a new array with the modified values.
+	let arr1 = [1,2,3];
+	let mapArray = arr1.map((e)=> e * 2);
+	console.log(mapArray)		// [2,4,6]
+
+forEach: - is used when you want to perform some operation on each element of an array without creating a new array.
+	let arr2 = [1,2,3];
+	arr2.forEach((e)=>{
+	   console.log(e* 2);		// 2,4,6	
+	})
+
+#Array Destructuring in js
+
+	const fruits = ['apple', 'banana', 'orange'];
+	// Array Destructuring
+	const[first, second, third] = fruits;
+	console.log(first);			//'apple'
+	console.log(second);		// 'banana'
+	console.log(third);			// 'orange'
+--------------------------------------------------------------------
+25. for..of vs for ..in loop
+#for ..of
+	- for..of loop is used to loop through the value of the object like array, string
+	- it allow you to access each value directly, without having to use an index.
+	let arr =[1,2,3]
+	for(let val of arr)
+	{
+		console.log(val);		// 1 2 3
+	}
+
+#for ..in
+	- for ..in loop is used to loop through the property of an object.
+	- it all you to iterate over the keys of an object and access the values associated by using keys as the index.
+	const person = {
+	   name: "Happy",
+	   role: "Developer"
+	};
+	
+	for (let key in person)
+	{
+		console.log(person[key]);	// Happy Developer
+	}
+--------------------------------------------------------------------
+26. Functions
+	- A function is a reusable block of code that perform a specific task.
+	
+
+# What is Function expression ?
+-> a function expression is a way to define a function by assigning it to a varuable.
+
+const add = function(a,b){return a+b};
+	  console.log(add(5,3)) 	//8
+
+#Callback functions?
+-> A callback function is a function that is passed as an argument to another function.
+	
+	function display(x, y, operation){
+		var result = operation(x, y);
+		console.log(result);
+	}
+	
+	display(10, 5, add);
+	display(10, 5, multiply);
+	display(10, 5, subtract);
+	display(10, 5, divide);
+	
+#Higher-order function?
+-> it take one or more function as arguments(callback function) as display function in above example.
+
+#arguments vs parameters
+-> - Parameter are the placeholders defined in the function declaration. 
+   - arguments are the actual values passed to a function when it is invoked or called.
+  
+--------------------------------------------------------------------
+27.DOM and selector
+	- it's a structural representation of HTML in webpage or Application, It represent entire UI of the web application as a tree data structure. 
+#Selector:- selector in js help to get specific elements from DOM based on IDs, class, names, tag names.
+DOM Selector methods:- getElementById(), getElementByClassName(), getElementsByTagName
+
+--------------------------------------------------------------------
+28. getElementById vs getElementByClassName vs getElementsByTagName
+<Body>
+	<div id ="myDiv" class="myClass">1</div>
+	<div class="myClass">2</div>
+	<p class="myClass">3</p>
+</Body>
+
+#getElementById
+const elementById = document.getElementById("myDiv");
+console.log(elementById.innerHTML); 		// 1
+ 
+#getElementByClassName
+const elements = document.getElementByClassName("myClass");
+
+for(let i = 0; i< elements.length;i++){
+	console.log(elements[i].textContent);	// 1 2 3
+}
+
+#getElementsByTagName
+const elementsTag = document.getElementsByTagName("div");
+
+for(let i = 0; i< elementsTag.length; i++){
+	console.log(elementsTag[i].textContent);	// 1 2
+}
+--------------------------------------------------------------------
+29. querySelector vs querySelectorAll?
+<Body>
+	<div class="myClass">Element 1</div>
+	<div class="myClass">Element 2</div>
+	<div class="myClass">Element 3</div>
+</Body>
+
+var element = document.querySelector('.myClass');
+console.log(element.textContent);			// Element 1
+
+var elements = document.querySelectorAll('.myClass');
+for(let i = 0; i< elements.length; i++){
+console.log(elements.textContent);			// Element 1, Element 2, Element 3
+}
+--------------------------------------------------------------------
+30 Objects
+	- object is real world entity for ex animal, car is an object similirly man is also object. object have property like hier, eyes, skin also an object can have action like eat, sleep, walk,play, study.
+	- now same in js we have object like 
+	let person = {
+		name : "Akash",
+		hobbies: ["Coding", "Traveling", "Cricket"],
+		greet: function(){
+			console.log("Name" + this.name);
+			},
+	}
+	- an object is a data type that allows you to store key-value pairs.
+--------------------------------------------------------------------
+31 How do you clone or copy an object?
+	#Ways to clone or copy an object
+	const orignalobject =
+	{
+		name : 'Happy',
+		age : 35,
+		city : 'Delhi'
+	};
+	
+	1. Spread synta (shallow copy)
+		const clonedObjectSpread = {...orignalobject};
+	2. Object.assign() (shallow copy)
+		const clonedObjectAssign = Object.assign({},orignalobject);
+	3. JSON.parse() & JSON.stringify()  (deep copy)
+		const clonedObjectJson = JSON.parse(JSON.stringify(orignalobject));
+--------------------------------------------------------------------
+32 Deep copy vs shallow copy
+- Shallo copy in nested objects case will modify the parent object property value, if cloned object property value is changed. But deep copy will not modify the parent object property value.
+
+#Shallo copy
+
+const person ={
+	name: 'Happy',
+	age : 27,
+	address:{
+		city:'Delhi',
+		country: 'India'
+		}
+	};
+
+	const shallowCopy = Object.assign({},person);	
+	shallowCopy.address.city = 'Mumbai';
+	console.log(person.address.city); 	// Mumbai
+	console.log(shallowCopy.address.city)	//Mumbai
+	
+Deep copy
+	const deepCopy = JSON.parse(JSON.stringify(person));
+	deepCopy.address.city = 'Banglore';
+	
+	console.log(person.address.city); 	// Delhi
+	console.log(deepCopy.address.city)	//Banglore
+--------------------------------------------------------------------
+33. What is Set Object
+-> the set object is a collection of unique values, meaning that duplicate are not allowed.
+	ex:- 
+		const uniqunumber = new Set();
+		uniqunumber.add(5);
+		uniqunumber.add(10);
+		uniqunumber.add(5);		//Ignore duplicate values
+		console.log(uniqunumber)	// {5,10}
+	//for delete
+		uniqunumber.delete(10);
+	// for size
+		uniqunumber.size
+--------------------------------------------------------------------
+34. What is Map Object in JS?
+-> 
+	- The Map object is a collection of key-value pairs where each key can be any type, and each value can also be of any type.
+	- A Map maintains the order of key-value pairs as they were inserted.
+	ex:- 
+		const personDetails = new Map();
+		personDetails.set("name", "Akash");
+		personDetails.set("age", 30);
+		
+		console.log(personDetails.get("name"));	//akash
+	// for delete
+		personDetails.delete("age");
+		console.log(personDetails.size);
+--------------------------------------------------------------------
+35. What are Events? How are events triggered?
+-> 
+	Event are action that happen in the browser, such as button click,mouse movement or keyboard input.
+	
+	Ex:
+	
+	<button id="myButton">Click me</button>
+	
+	// Get the reference of button in a variable
+		var button = document.getElementById("myButton");
+		
+	// Attach an event handler to the button
+		button.addEventListener("click", handleClick);
+	// Event handler function
+		function handleClick(){
+			alert("button clicked");
+		}
+--------------------------------------------------------------------
+36. type of Events in js
+-> 
+click, mouseover, keydown, keyup, submit, focus, blur, change, load, resize
+--------------------------------------------------------------------
+37. What is Event Delegation in JS?
+-> Event delegation in js is a technique where you attch a single event handler to a parent element to handle events on its child elements.
+Ex:- 
+	<ul id="myList">
+		<li>Item 1</li>
+		<li>Item 2</li>
+		<li>Item 3</li>
+	</ul>
+	
+	var parentList = document.getElementById("myList");
+	parentList.addEventListener("click", handleItemClick);
+	
+	function handleItemClick(event){
+		var target = event.target;
+		console.log("Clicked:",target.textContent);
+	}
+	
+above code will print item according to click on which item.
+	
+******************************************Coding Questions******************************************
+https://youtu.be/O4uuPOHfefg?si=_2_w-li6zFyu6bQ1

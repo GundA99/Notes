@@ -600,24 +600,3 @@ use carousel class
 refer doc
 
 ******************************************************************************
-#What is Bootstrap? what are other 5 responsive design framework?
--> bootstrap is popular open-source front-end framework which provide responsive and mobile-first CSS.
-
-#why mobile user?
-->now mobile user are bigger then desktop use
-
-#Bootstrap, Foundation, Bulma, semantic UI, materialize these are frameworks used for responsivness bootstrap is popular one
-
-#What are the Advantage of boostrap
--> 
-- rapid development :- it provide wide range of ready to use component like button, navbar,forms, modal and more this save developer time and efforts in writing code from scratch.
-- responsive design :- bootstrap is build with a mobile first approch meaning it prioritizes designing for small screens first and then scales up for large screens. this ensure websites with boostrap is responsive for every device.
-- Cross browser comatibility :- bootstrap provide a consistance set of style and component across differant browser, which helps in reducing cross-browser comatibility issues.
-
-#Explain the grid system in bootstrap? 
-Grid system is 12-column layout and is designed to adapt to various screen sizes.
-
-#Explain the difference between container and container-fluid?
-->
-- Container class centered the content and add padding to the sides, ensuring that the content remains within a specified width.
-- Container-fluid class provides a full-width layout, with the content extending to the edges of the screen.

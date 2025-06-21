@@ -232,7 +232,7 @@ Compony working on 3 domain wealth, Insurance, and health.
 f. t. f. g. m. t. o. t. i. m
 my name is Akash A. Gund, and I am from Solapur, Maharashtra. I have completed my Post Graduate Diploma in Advanced Computing from CDAC, IACSD Pune in 2024, with a 73% score.
 I have nearly 9 months of experience as a Backend Developer at Ikione Systems Pvt. Ltd., where I have working under wealth domain. 
-currently im working on two projects one is HandlesBanken which is live project and another is welthmapper which is our comapny product.
+currently im working on two projects one is HandlesBanken which is live project and another is welthmapper whicnh is our comapny product.
 comming to my technical skills I am Good in 
 ASP .NET Core Web API
 SQL Server, PostgreSQL

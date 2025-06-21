@@ -125,7 +125,7 @@ Generics: You can create reusable components with type parameters.
 Enums: TypeScript supports enum types, which are not available in vanilla JavaScript.
 Type Aliases and Custom Types: Create complex types and use them throughout your code.
 
-****************************************************5.What is Entity framwork*****************************************************************
+*********************************************5.What is Entity framwork*****************************************************************
 Defination:
 - Entity Framework (EF) is open-source Object-Relational Mapper (ORM) developed by Microsoft that enables developers to work with relational databases using .NET objects. 
 - its like wrapper on ADO.Net. EF Minimize the coding effort.
@@ -334,6 +334,7 @@ Response Body: The response body will contain a JSON string: {"message": "Hello 
 Return Type: An EmptyResult is returned, but since the response body and status code are already set, this result won't affect the response that the client receives. Essentially, it indicates no further processing is required.
 ---------------------------------------------Status Codes----------------------------------------------
 200 : Success/OK
+201 : Created
 204 : No data Found
 400 : Bad request
 401 : unauthorized
@@ -527,7 +528,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddDbContext<MyDbContext>(options => options.UseSqlServer("ConnectionString"));
     services.AddScoped<IMyService, MyService>();
 }
-#Why DI is considered a Structural Pattern:
+#Why DI is considered a Structu	ral Pattern:
 Decoupling Components: DI promotes decoupling between classes by allowing their dependencies (e.g., services, repositories) to be provided externally instead of creating them internally. This allows classes to focus on their primary responsibilities without worrying about how to create or manage their dependencies.
 
 #In ASP.NET Core, DI is commonly implemented using the following techniques:
@@ -770,7 +771,7 @@ In multi-threaded applications, a Singleton ensures that only one thread can acc
 2.Centralized Management: 
 With a Singleton, managing the connection (like closing or refreshing it) becomes much easier. You can control connection lifecycle events in a single, well-defined place, improving maintainability and scalability.
 	
-***************************************************17.IActionResult******************************
+**********************************************17.IActionResult******************************
 IActionResult is an interface used in controller methods to return flexible HTTP responses. Instead of always returning just data (like User object), it lets you return different types of results, such as:
 
 Ok() → HTTP 200
@@ -824,7 +825,7 @@ The SOLID principles are a set of five principles in object-oriented programming
 flexible, and maintainable. Each letter in "SOLID" stands for a different principle:
 
 1) Single Responsibility Principle (SRP):
-A class should have only one  job or responsibility. 
+A class should have only one job or responsibility. 
 This principle helps in keeping classes focused and easier to maintain.
 ForEx: 
 public class Employee
@@ -1436,7 +1437,7 @@ so atomicity say transaction trated as one single unit both steps should happen 
 4. we cant use SP in select, where or Having statment, but function use.
 
 #Type of Functions
-1.Single Row Function : sqrt(10),abs(10),round(12.34), Ceil(234.2), floor(2.133)
+1. Single Row Function : sqrt(10),abs(10),round(12.34), Ceil(234.2), floor(2.133)
 2. Aggregate Function : sum, min, max,count,avg.
 
 ****************************************6.Joins, View, Trigger****************************************************
@@ -1475,6 +1476,8 @@ so atomicity say transaction trated as one single unit both steps should happen 
 1. second highest sal
 SELECT DISTINCT TOP  1 sal
   FROM [iacsd0923].[dbo].[emp] where sal NOT IN (SELECT TOP 1 sal FROM [iacsd0923].[dbo].[emp] ORDER BY sal DESC) order by sal desc;
+
+select top (1) * from dbo.emp where SAL Not In (select Top 1 SAL FROM DBO.emp ORDER BY SAL desc) order by SAL desc
 
 2. third highest sal
 SELECT DISTINCT TOP  1 sal
@@ -1605,3 +1608,39 @@ G+D
 ->••what is singleton pattern
 ->••give me name from db where id is 12
 ->••how routers work which types of routers we have
+
+
+MG Global
+
+1.why want to switch withing 1 year.
+2.What you learn from CDAC compare Collage life
+3.Why you Do CDAC
+4.On Which Concept from C# you apply for job.
+5.what is Abstract class when to use 
+6.what is Interface when to use
+7.how prevent class from inheriting
+8.how prevent method from overridden
+9.Final keyword use
+10.how secure API
+11.what is Delegate where you use
+12.OAuth
+13.What is RDLC
+14.What is EF
+15.What is Dapper
+16.How do you analyse Dapper is faster 
+17.static why use and other functionality
+18.LINQ
+19.Explain CICD means.
+20.Azure service 
+21.Cloud Providers
+22.What is component
+23.What is services
+24.code snippets find output
+25.Constraint in SQL
+26.Find 2nd highest salary
+27.Where you see yourself in 4 5 year
+28.rate yourself 
+29.how you keep yourself updated
+30.recently facing challenges and how resolve in project
+31.if you have one task on different technology and have tight Deadline how can handle
+ 

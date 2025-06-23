@@ -1,4 +1,4 @@
-#DOTNET
+#DOTNET 📌
 1. difference between var and let
 2. What is difference between put and patch
 3. command for convert typeScript into javascript
@@ -25,11 +25,11 @@
 23. Filter in ASP .NET Core
 24. Action Parameters [FormBody], [FormQuery]
 -----------
-#CODING
+#CODING 📌
 1.give me no of occuerence for each word from hello (count)
 
 -----------
-#DATABASE
+#DATABASE 📌
 1.In SQL how do you optimize stored procedures
 2.Difference between VARCHAR and NVARCHAR
 3.SQL Command/ Type of DB languge
@@ -38,9 +38,17 @@
 6.Joins, View, Trigger
 7.Normalization
 ---------
-#SQL QUERY PROBLEMS
-1. second highest sal
-2. third highest sal
+#SQL QUERY PROBLEMS 📌
+1.Second highest salary and third highest salary
+2. All element not duplicate SQL query
+3. Retrieve duplicate records from a table
+4. Delete duplicate rows from a table while keeping one copy
+5.What are INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN? Give examples.
+6.Find employees who earn more than the average salary in their department.
+7. Find employees who do not belong to any department (use LEFT JOIN).
+8.Query to get employees who joined in the last 30 days.
+9.What is the difference between ROW_NUMBER(), RANK(), and DENSE_RANK()?
+
 -----------------------------------------1.difference between var and let------------------------------------------
 1. Scope
 var: Has function scope (or global scope if declared outside a function). This means it is accessible throughout the function it was declared in, even before the declaration (due to hoisting).	
@@ -1285,7 +1293,7 @@ GET /api/products?category=fruit&page=2
 ----------------------------------------------------------
 3.FromHeader : it will return header information
 
-##################################Coding problems#########################################################
+##################################✅ Coding problems#########################################################
 
 1.give me no of occuerence for each word from hello (count)
 
@@ -1324,7 +1332,7 @@ foreach (var item in disc)
     Console.WriteLine(item.Key + " : "+item.Value);
 }
 
-##############################################################Database#################################################################
+###################################################✅ Database#################################################################
 ****************************************1.In SQL how do you optimize stored procedures****************************************
 1. use SET NOCOUNT ON 
 when we do insert or update query  in sql it will show 1 row affected masseges. no need to see the masseges,bcz it occupay some memory. thats why use SET NOCOUNT ON;
@@ -1470,10 +1478,26 @@ so atomicity say transaction trated as one single unit both steps should happen 
 #3rd NF : The relation will be in 3NF if is in 2NF and not contain any transitive partial dependency   
 			EX. EMPID | Name | ZIP | STATE | CITY =>  EMPID | Name | ZIP  &  ZIP | STATE | CITY 
 			
-###################################################SQL Query Problems#######################################################
+##################################################✅ SQL Query Problems#######################################################
+1.Second highest salary and third highest salary
+2. All element not duplicate SQL query
+3. Retrieve duplicate records from a table
+4. Delete duplicate rows from a table while keeping one copy
+5.What are INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN? Give examples.
+6.Find employees who earn more than the average salary in their department.
+7. Find employees who do not belong to any department (use LEFT JOIN).
+8.Query to get employees who joined in the last 30 days.
+9.What is the difference between ROW_NUMBER(), RANK(), and DENSE_RANK()?
 
-***********************************Second highest salary and third highest salary*****************************
+------------------------------------------------------------------------------------------
+1.Second highest salary and third highest salary
+
 1. second highest sal
+
+SELECT MAX(Salary) 
+FROM Employees 
+WHERE Salary < (SELECT MAX(Salary) FROM Employees);
+
 SELECT DISTINCT TOP  1 sal
   FROM [iacsd0923].[dbo].[emp] where sal NOT IN (SELECT TOP 1 sal FROM [iacsd0923].[dbo].[emp] ORDER BY sal DESC) order by sal desc;
 
@@ -1482,13 +1506,93 @@ select top (1) * from dbo.emp where SAL Not In (select Top 1 SAL FROM DBO.emp OR
 2. third highest sal
 SELECT DISTINCT TOP  1 sal
   FROM [iacsd0923].[dbo].[emp] where sal NOT IN (SELECT TOP 2 sal FROM [iacsd0923].[dbo].[emp] ORDER BY sal DESC) order by sal desc;
-************************************************ All element not duplicate SQL query****************************************
+------------------------------------------------------------------------------------------
+2. All element not duplicate SQL query
 SELECT DISTINCT column_name FROM table_name;
 column where you want to remove duplicates.
 ----
 If you want to remove duplicates based on multiple columns,
 SELECT DISTINCT column1, column2 FROM table_name;
 
+------------------------------------------------------------------------------------------
+3. Retrieve duplicate records from a table
+SELECT column_name, COUNT(*) 
+FROM table_name 
+GROUP BY column_name 
+HAVING COUNT(*) > 1;
+
+------------------------------------------------------------------------------------------
+4. Delete duplicate rows from a table while keeping one copy
+
+DELETE e1 from EmpTable e1, EmpTable e2 
+WHERE e1.empName = e2.empName and e1.empId > e2.empId;
+
+------------------------------------------------------------------------------------------
+5.What are INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN? Give examples.
+Write a query to fetch employee details with the department name. (Assume Employees and Departments tables)
+
+#INNER JOIN
+
+	SELECT E.Name, D.DepartmentName
+	FROM Employees E
+	INNER JOIN Departments D
+	ON E.DepartmentID = D.DepartmentID;
+	
+#LEFT Join
+	SELECT E.Name, D.DepartmentName
+	FROM Employees E
+	LEFT JOIN Departments D
+    ON E.DepartmentID = D.DepartmentID;
+------------------------------------------------------------------------------------------
+6.Find employees who earn more than the average salary in their department.
+	SELECT E.Name, E.Salary, E.DepartmentID
+	FROM Employees E
+	WHERE E.Salary > (
+    SELECT AVG(Salary)
+    FROM Employees
+    WHERE DepartmentID = E.DepartmentID
+	);
+------------------------------------------------------------------------------------------
+7. Find employees who do not belong to any department (use LEFT JOIN).
+	SELECT E.EmployeeID, E.Name, E.DepartmentID
+	FROM Employees E
+	LEFT JOIN Departments D
+    ON E.DepartmentID = D.DepartmentID
+	WHERE D.DepartmentID IS NULL;
+------------------------------------------------------------------------------------------
+8.Query to get employees who joined in the last 30 days.
+	SELECT EmployeeID, Name, JoinDate
+	FROM Employees
+	WHERE JoinDate >= DATEADD(DAY, -30, GETDATE());
+#employees who joined in the last 15 year.
+	SELECT * from emp where HIREDATE > DATEADD(YEAR,-15,GETDATE());
+------------------------------------------------------------------------------------------
+9.What is the difference between ROW_NUMBER(), RANK(), and DENSE_RANK()?
+-> ROW_NUMBER(), RANK(), and DENSE_RANK() are all ranking functions in SQL Server
+#ROW_NUMBER():
+	- Assigns a unique sequential number to each row.
+	- No duplicates — even if rows have the same values in the ranking column.
+	- Gaps don't matter because the number is always incremented by 1.
+
+	SELECT Name, Salary,
+    ROW_NUMBER() OVER (ORDER BY Salary DESC) AS RowNum
+	FROM Employees;
+	
+#RANK()
+	- Assigns same rank to ties, but skips the next ranks.
+	- So, if two employees tie at rank 1, the next rank will be 3.
+	
+	SELECT Name, Salary,
+    RANK() OVER (ORDER BY Salary DESC) AS RankNum
+	FROM Employees;
+	
+DENSE_RANK()
+	- Also assigns same rank to ties, but doesn’t skip the next rank.
+	- If two employees tie at rank 1, the next rank will be 2.
+	
+	SELECT Name, Salary,
+    DENSE_RANK() OVER (ORDER BY Salary DESC) AS DenseRankNum
+	FROM Employees;
 
 ---------------------------------------------------------------------------------------------
 L & T   done

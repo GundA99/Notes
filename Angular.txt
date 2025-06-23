@@ -368,22 +368,22 @@ TypeScript
 	a = "akash"        not valid
 -----------------------------------------install typeScript-------------------------------------
 use command : sudo npm i typescript -g (it will install typeScript compiler)
----------------------------------------------------array and Tuple---------------------------------------------
+---------------------------------------------------array and Tuple------------------------------
 let arr = [1,2,3,4,5,6, "Akash"];  <--- array
 let arr:[string, number] = ["Akash",1234]   <----Tuple      (Accept only fixed type)
 
-------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 Any 
 let a; <---- By default Type is any
 
 let a:number;      <----- Allow only number
 
-------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 Type inference means ts automatically check type for ex :-
 let a = 12; 		<----- Type Inference
 let a: number;      <----- annotation
 let a: number | boolean | string;  <-- it can contain any of the type
------------------------------------------------Interface-------------------------------------------
+-----------------------------------------------Interface----------------------------------------
 interface User{
 	name: string,
 	email: string,
@@ -403,7 +403,7 @@ type value = string | number | null;
 
 let a : value = 10;      (value == string | number | null;)
 
---------------------------------------------Classes and Object--------------------------------------------------
+--------------------------------------------Classes and Object----------------------------------
 Classes and Object
 
 class Device{
@@ -437,7 +437,7 @@ class Device{
 	-object Creation
 	let b1 = new BottleMaker("Milton",1200,"yellow","metal");
 	
---------------------------------------------Readonly and nullable--------------------------------------------------------------------------------------	
+------------------------------------------Readonly and nullable------------------------------------	
 		class BottleMaker{
 		constructor(public readonly brand?: string, public price: number,public color:string, public material:string)
 		
@@ -459,11 +459,11 @@ class Device{
 		 return Math.random();
 		 }
 	}
----------------------------------------------Function-----------------------------------------------
+---------------------------------------------Function---------------------------------------------
 function abcd: returnType{
 	return value;
 }
----------------------------------------------Rest/spread oprater---------------------------------------------
+---------------------------------------------Rest/spread oprater----------------------------------
 function sum(...arr : number[]){
 	console.log(arr);
 }
@@ -476,7 +476,7 @@ sum("Akash","Pranay","Vaibhav","anil");
 ----------------------------------
 var arr = [1,2,34,5,6,];
 var arr2 = [...arr];   //copy of arr;
----------------------------------------------type guards(typeof)--------------------------------
+---------------------------------------------type guards(typeof)----------------------------------
 function abcd(arg:string | number){
 	if(typeof arg ==="number"){
 		return "number";
@@ -485,7 +485,7 @@ function abcd(arg:string | number){
 		return "string";
 	}
 }
-********************************************************7.angular/Material*************************************************
+************************************************7.angular/Material*********************************
 https://youtu.be/kCaeIpvzEiM?si=6ze98FeAtfyokkbz --- Project
 Command for add angular Material : ng add @angular/material
 
@@ -520,7 +520,7 @@ Form in Angular Material
         </mat-card-actions>
     </mat-card-content>
 </mat-card>
----------------------------------------------1.mat-expansion-panel-------------------------------------------
+---------------------------------------------1.mat-expansion-panel---------------------------------
 <mat-accordion multi="true">      						<---accordion 
     <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -651,3 +651,40 @@ then mock data will available on 3000 port
 Package -> install-> 
 Package.json : Defination will be in it
 Node module : Actual Package will  be in Node module
+
+
+######################################################################################
+----------------------------Data binding-----------------------------------
+****1 way binding****
+#Send data from ts to HTML
+1. Interpolation using {{}}
+	Ex:-
+	<div class="{{myClass}}"></div>
+	<input type="text" value="{{courseName}}">
+	<h4>{{HedingName}}</h4>
+	
+2. Property binding
+   bind property using []
+   Ex:
+	<div [class]="myClass"></div>
+	<input type="text" [value]="courseName">
+
+#Send Data from HTML to Ts (event binding)
+	<button class"btn btn-primary" (click)="showAlert("Angular 18")">Show Welcome</button>
+
+****2 way binding****
+#use ngModule
+for that we need to import FormModule
+<input type="text" [(ngModule)]="courseName"/>
+
+**** Signal ****
+New concept from Angular 17	
+--in ts file--
+firstName = signal("Akash Gund");
+
+--in HTML--
+<h2>{{firstName()}}</h2>		//Akash Gund
+
+---------------------
+for change the value of signal variable
+this.firstName.set("sachin tendulkar");

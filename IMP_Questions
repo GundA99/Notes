@@ -39,15 +39,15 @@
 7.Normalization
 ---------
 #SQL QUERY PROBLEMS 📌
-1.Second highest salary and third highest salary
+1. Second highest salary and third highest salary
 2. All element not duplicate SQL query
 3. Retrieve duplicate records from a table
 4. Delete duplicate rows from a table while keeping one copy
-5.What are INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN? Give examples.
-6.Find employees who earn more than the average salary in their department.
+5. What are INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN? Give examples.
+6. Find employees who earn more than the average salary in their department.
 7. Find employees who do not belong to any department (use LEFT JOIN).
-8.Query to get employees who joined in the last 30 days.
-9.What is the difference between ROW_NUMBER(), RANK(), and DENSE_RANK()?
+8. Query to get employees who joined in the last 30 days.
+9. What is the difference between ROW_NUMBER(), RANK(), and DENSE_RANK()?
 
 -----------------------------------------1.difference between var and let------------------------------------------
 1. Scope
@@ -1593,8 +1593,33 @@ DENSE_RANK()
 	SELECT Name, Salary,
     DENSE_RANK() OVER (ORDER BY Salary DESC) AS DenseRankNum
 	FROM Employees;
+--------------------------------------------
+10. Database constraint
+	1.NOT NULL
+	2.UNIQUE
+	3.PRIMARY Key
+	4.FOREIGN KEY 
+		CREATE TABLE Orders (
+			OrderId INT NOT NULL,
+			OrderNumber INT NOT NULL,
+			PersonId INT,
+			PRIMARY KEY (OrderId),
+			FOREIGN KEY (PersonId) REFERENCES Persons(PersonID)
+		);
+	5.CHECK
+		CREATE TABLE Persons(
+			ID int NOT NULL,
+			FirstName varchar(255),
+			Age int CHECK(Age>=18)
+			);
+	6.DEFAULT
+		CREATE TABLE Persons(
+			ID int NOT NULL,
+			LastName varchar(10) NOT NULL,
+			City varchar(10) DEFAULT 'PUNE'
+			);
 
----------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
 L & T   done
 
 ->•  Dependacy injection details: -Singleton pattern, Using constructor. Scoped, Transients

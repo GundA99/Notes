@@ -17,7 +17,7 @@ Difference jira taiga
 14. IHttpContextAccessor
 15. New Features in .NET 8
 16. Web.config file in ASP .NET and Apache Guacamole, Windows IIS Deployment 
-17. How to Use Joins
+17. Joins
 18. Rest Call
 19. Swagger Documentation
 20. Store Procedure

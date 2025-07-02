@@ -76,3 +76,16 @@ public IActionResult PrintReport()
      return dt;
  }
 ----------------------------------------------------------------------------------------
+#To Add Customize color use below Expression in fill.
+
+=Choose(RowNumber("AssetVsLiability"),
+   "#280071","#26d07c", "#53565a","#f9423a",
+    "#b1b5ce", "#eacbbb", "#6e6259"
+)
+
+
+#if we want to pass custome color to specific field 
+=Fields!Color.Value
+
+#if we want to pass color as parameter
+Parameters!ChartColorParam.Value

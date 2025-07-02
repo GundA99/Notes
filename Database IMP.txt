@@ -19,7 +19,7 @@ It a set of sql statement those can be save as single Unit at Database side
 	create proc sp_GetEmployeeData
 	as
 	begin
-	select b.firstName, b.MiddleName, a.JobTitle, a.BirthDate from [HR].[Employee] a inner join [Person].[Person] b
+	select b.firstName, b.MiddleName, a.JobTitle, a.BirthDate from [kHR].[Employee] a inner join [Person].[Person] b
 	on a.Id = b.Id;
 	end
  
@@ -286,7 +286,14 @@ DEMO
 	SELECT DBO.fn_GetFullName(1)                <--- return single value
 	SELECT DBO.fn_GetFullName(1) as FullName from [dbo].[Email]        <--- return complete table with additional column FullName
 	
-	
+For Complete Row	
+	CREATE FUNCTION fucName(@Id INT)
+	RETURNS TABLE
+	AS
+	RETURN (
+		SELECT * FROM emp WHERE id = @Id
+	);
+
 ******************************************************View********************************************************
 Create :
 	CREATE VIEW vw_Person
@@ -435,3 +442,344 @@ end;
 
 declare @d int = 10;
 exec GetdataWithPar @d;
+#######################################################################
+#Print customerName and Quntity from cutomer, order and orderDetails table
+
+SELECT c.CustomerName, SUM(od.Quantity) AS Quantity
+FROM Customers c
+INNER JOIN Orders o ON c.CustId = o.CustId
+INNER JOIN OrderDetails od ON od.OrderId = o.OrderId
+GROUP BY c.CustomerName
+ORDER BY Quantity DESC;			--always us alias name for sort
+
+
+A. Simple SQL Queries
+
+# Write a query to list all employees with their department names order by deptNo desc.
+->	select e.ename, e.DEPTNO as dept, d.DNAME from emp e inner join dept d ON e.DEPTNO = d.DEPTNO
+	order by e.DEPTNO desc;
+
+
+#Find the names of employees who earn more than $50,000.
+->	select ename, sal from emp where SAL>500;
+
+#List all employees who joined after 1981.
+->	SELECT [EMPNO]
+      ,[ENAME]
+      ,[JOB]
+      ,[MGR]
+      ,[HIREDATE]
+      ,[SAL]
+      ,[COMM]
+      ,[DEPTNO]
+  FROM [iacsd0923].[dbo].[emp] where HIREDATE > '1981-01-01';
+
+#Show employee details who work in the "RESEARCH" department.
+-> select ename, DEPTNO from emp where DEPTNO = (select DEPTNO from dept where DNAME = 'RESEARCH');
+
+#Display the highest-paid employee from each department.
+-> select e.ename, e.sal, e.DEPTNO from emp e where SAL = (select max(SAL) from emp where DEPTNO = e.DEPTNO) ;
+
+B. Joins
+#List employees with their corresponding salary grade.
+->	SELECT e.ENAME,      
+		   e.SAL,        
+		   s.grade
+	  FROM emp e join salgrade s 
+	  ON e.SAL between s.LOSAL and s.HISAL
+	  order by s.grade
+
+#Show all departments with the number of employees in each.
+-> SELECt d.DNAME, count(d.DEPTNO) from dept d inner join emp e on e.DEPTNO=d.DEPTNO group by d.DNAME,d.DEPTNO
+
+List departments that have no employees.
+	SELECT 
+		d.deptno,
+		d.dname
+	FROM 
+		dept d
+	LEFT JOIN 
+		emp e ON d.deptno = e.deptno		<---- till here we get all dept and if emp not assig showing ename null. filter this by null.
+	where e.ENAME Is null
+
+C. Aggregations
+#What is the average salary of employees per department?
+-> SELECT deptno, avg(sal) as 'Average salary' 
+	FROM emp GROUP BY DEPTNO
+
+#Which department has the highest total salary payout?
+-> SELECT Top(1)deptno, sum(sal) as 'Average salary' 
+	FROM emp GROUP BY DEPTNO;
+
+#Count the number of employees in each salary grade.
+-> SELECT s.GRADE, count(*) as 'No of employee' FROM emp e join salgrade s on e.SAL between s.LOSAL and s.HISAL group by s.GRADE;
+
+Find the grade with the most employees.
+-> SELECT Top(1) s.GRADE, count(*) as 'No of employee' 
+	FROM emp e join salgrade s on e.SAL between s.LOSAL and s.HISAL 
+	group by s.GRADE
+	order by 'No of employee' desc;
+
+D. Subqueries and Advanced
+#Find employees whose salary is above the department's average salary.
+->	SELECT e.ename, e.sal, e.deptno
+	FROM emp e 
+	WHERE sal > (
+    SELECT AVG(sal) 
+    FROM emp c 
+    WHERE c.deptno = e.deptno
+);
+
+#Retrieve departments where all employees are in grade 4 or higher.
+->	SELECT d.deptno, d.dname
+	FROM dept d
+	JOIN emp e ON d.deptno = e.deptno
+	JOIN salgrade s ON e.sal BETWEEN s.losal AND s.hisal
+	GROUP BY d.deptno, d.dname
+	HAVING MIN(s.grade) >= 1;
+
+#Find employees who are in the highest salary grade.
+->  SELECT e.ename, e.sal, s.grade
+	FROM emp e
+	JOIN salgrade s ON e.sal BETWEEN s.losal AND s.hisal
+	WHERE s.grade = (
+    SELECT MAX(grade) FROM salgrade
+);
+
+#Write a query to list departments with more than 5 employees.
+-> SELECT 
+    d.deptno,
+    d.dname,
+    COUNT(e.empno) AS num_employees
+	FROM 
+		dept d
+	JOIN 
+		emp e ON d.deptno = e.deptno
+	GROUP BY 
+		d.deptno, d.dname
+	HAVING 
+		COUNT(e.empno) > 5;
+
+
+E. Data Modeling / Theoretical
+Why do we separate salary grades into a separate table?
+
+How would you ensure referential integrity between these tables?
+
+If a department is deleted, what should happen to the employees?
+
+How would you handle an employee who doesn't belong to any department?
+
+How would you update an employee’s grade if their salary changes?
+--------------------------------------------
+Create Table
+CREATE TABLE TableName(
+	tital varchar(10),
+	year varchar(10)
+	);
+	
+IF NOT EXISTS (
+    SELECT * FROM INFORMATION_SCHEMA.TABLES 
+    WHERE TABLE_NAME = 'TableName' AND TABLE_SCHEMA = 'dbo'
+)
+BEGIN
+    CREATE TABLE TableName (
+        tital VARCHAR(10),
+        year VARCHAR(10)
+    );
+END
+--------------------------------------------
+#Add new column
+	ALTER TABLE TableName
+	ADD ColumnName DataType;
+
+#Drop a column
+	ALTER TABLE Employees
+	DROP COLUMN age;
+--------------------------------------------
+#Update
+  UPDATE emp
+  SET ENAME = 'AKASH'
+  where EMPNO = 7369;
+--------------------------------------------
+#Alter Table
+	ALTER TABLE Employees
+	ALTER COLUMN age BIGINT NOT NULL;
+--------------------------------------------
+#CONCATINATION
+SELECT CONCAT(firstName, ' ', lastName) as Name from emp;
+
+--------------------------------------------
+#Index
+CREATE INDEX idx_Employee_Name_Department
+ON Employees (Name, Department);
+--------------------------------------------
+#View
+CREATE VIEW DeptView AS
+SELECT ename, sal
+FROM empTable
+WHERE deptNo = 10;
+--------------------------------------------
+#TRIGGER
+CREATE TRIGGER TriggerName 
+{BEFORE/ AFTER} {INSERT/UPDATE/DELETE}
+ON TableName FOR EACH ROW
+TRIGGERBODY
+
+CREATE TRIGGER trg_Audit_Update
+ON Employees
+AFTER UPDATE
+AS
+BEGIN
+    INSERT INTO EmployeeAudit (EmployeeID, ChangedDate)
+    SELECT EmployeeID, GETDATE()
+    FROM inserted;
+END;
+--------------------------------------------
+#PROCEDURE
+CREATE PROCEDURE ProcedureName
+AS
+Begin
+	SELECT * FROM EMP;
+end;
+
+
+CREATE PROCEDURE ProcedureName @id INT
+AS
+BEGIN
+    SELECT * FROM EMP WHERE id = @id;
+END;
+----------------------------------------------
+#Find duplicate records in a table
+->	SELECT job, count(*) FROM emp
+	GROUP BY job 
+	HAVING count(*)>2
+	
+#Find employee without department
+->	SELECT e.* FROM emp e
+	LEFT JOIN Dept d
+	ON e.deptNo = d.DEPTNO 
+	WHERE e.DEPTNO is null
+
+#Calculate the total revenue per product
+->	SELECT Product_id, sum(quantity * price) as total_revenue
+	FROM Sales
+	GROUP BY Product_id;
+
+#Customers who made purchases but never returned products.
+->	SELECT DISTINCT c.customer_id
+	FROM Customer c
+	JOIN Order o ON c.customer_id = 
+	o.customer_id
+	WHERE c.customer_id NOT IN (
+	SELECT customer_id FROM Returns
+	);
+
+#Show the count of orders per customer.
+-> 	SELECT customer_id, COUNT(*) AS order_count
+	FROM Orders
+	GROUP BY customer_id;
+
+#Retrieve all employees who joined in 2021
+->	SELECT *
+	FROM emp
+	WHERE YEAR(HIREDATE) = 2021;
+
+#Calculate the average order value per customer
+->	SELECT customer_id, AVG(total_amount) AS
+	avg_order_value 
+	FROM Orders 
+	GROUP BY customer_id;
+
+#Get the latest order placed by each cutomer.
+->  SELECT customer_id, MAX(order_date) AS latest_order_date
+	FROM Orders
+	GROUP BY customer_id;
+
+#Find products that were never sold
+-> 	SELECT p.product_id
+	FROM Products p
+	LEFT JOIN Sales s
+	ON p.product_id = s.product_id
+	WHERE s.product_id IS NULL;
+	
+#Identity the most selling product.
+-> 	SELECT TOP (1) product_id, SUM(quantity) AS total_qty
+	FROM Sales
+	GROUP BY product_id
+	ORDER BY total_qty DESC;
+
+#Get the total revenue and the number of order per region
+-> 	SELECT region
+	SUM(total_amount) AS total_revenue,
+	Count(*) AS order_count
+	FROM Orders
+	GROUP BY region;
+
+#Count how many customers placed more that 5 orders.
+->	SELECT COUNT(*) AS customer_count
+	FROM(
+		SELECT customer_id 
+		FROM Orders 
+		GROUP BY customer_id
+		HAVING COUNT(*)>5
+		)
+		AS subquery;
+	
+#Retrieve customers with orders above the average order value.
+-> 	SELECT *
+	FROM Orders
+	WHERE total_amount >
+	(SELECT AVG(total_amount) 
+		FROM Orders);
+
+#Find all employees hired on weekends.
+-> 	SELECT *
+	FROM Employees
+	WHERE DATENAME(WEEKDAY, hire_date)
+	IN('Saturday','Sunday');
+
+#Get monthly sales revenue and order count.
+-> 	SELECT FORMAT(date,'yyyy-MM') AS month,
+	SUM(amount) AS total_revenue,
+	COUNT(order_id) AS order_count
+	FROM Orders
+	GROUP BY
+	FORMAT(date,'yyyy-MM');
+
+#Rank employees by salary within each department.
+-> 	SELECT empno, SAL, DEPTNO, Rank() OVER (PARTITION BY DEPTNO ORDER BY sal DESC) AS salary_rk 
+	FROM emp;
+
+#Find customers who placed orders every month in 2023
+-> 	SELECT Customer_id
+	FROM Orders
+	WHERE YEAR(order_date)=2023
+	GROUP BY customer_id
+	HAVING COUNT(DISTINCT FORMAT(order_date, 'yyyy-MM'))=12;
+
+#Identity the first and last order date for each customer.
+-> 	SELECT Customer_id, MIN(order_date) AS first_order,
+	MAX(order_date) AS last_order
+	FROM Orders
+	GROUP BY Customer_id;
+
+#Calculate cumulative revenue by day
+->	SELECT order_date,
+	SUM(total_amount) OVER
+	(ORDER BY order_date) AS
+	cumulative_revenue
+	FROM Orders;
+
+#Identity top-performing departments by average salary.
+-> 	SELECT deptNo, AVG(sal) as avg_salary
+	FROM  emp
+	GROUP BY deptno
+	ORDER BY avg_salary DESC;
+
+#Retrieve the maximun salary difference within each department.
+->	SELECT deptNo, MAX(SAL) - MIN(SAL) AS salary_diff
+	FROM EmployeeAudit
+	GROUP BY deptNo 
+
+32-->

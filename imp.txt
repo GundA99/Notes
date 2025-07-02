@@ -21,8 +21,8 @@ REST
 #Common languge Runtime(CLR)
 #intermediate languge(IL)
 #Common languge specification(CLS)
-# Common languge specification(CLS)
-# Common Type System(CTS)
+#Common languge specification(CLS)
+#Common Type System(CTS)
 #Diff between .NET Framework and .NET Core 
 #Explain Microsoft Intermediate Language
 #Why GC important?
@@ -51,7 +51,7 @@ REST
 #Normalization
 #DevOps, AWS, Git
 #REACT
-------------------------------------------------------------Basic & OOPs---------------------------------------------------------------------
+-----------------------------------------------Basic & OOPs-----------------------------------------------------------
 
 #What is Web API 
 - Web API(Application programing interface) provides interaction between software applications.

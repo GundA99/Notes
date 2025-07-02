@@ -9,7 +9,7 @@ Basic
 8.Shawdow
 9.Progress Bar
 10. PrimeNG 
-
+#ANGULAR TOUTORIA 
 ===============================================================================================
 Basic Angular : https://youtu.be/-9VcW7MBDs8?si=LtzApOmi7IW30ETY  : Full course
 https://youtu.be/kY1oa8YSs-Q?si=SaEPIbw3kyxCRuRw   : Angular tutorial
@@ -653,8 +653,19 @@ Package.json : Defination will be in it
 Node module : Actual Package will  be in Node module
 
 
-######################################################################################
-----------------------------Data binding-----------------------------------
+################################################# ANGULAR TOUTORIA ########################################################
+1. Data binding
+2. Control flow statment
+3. Pipe
+4. Template Form
+5. Reactive form
+6. API intigration
+7. Input - Output
+8. Component Life Cycle
+9. ng-template directive
+10 view child
+11 Change Detection
+-------------------------------------------1. Data binding-----------------------------------
 ****1 way binding****
 #Send data from ts to HTML
 1. Interpolation using {{}}
@@ -669,7 +680,8 @@ Node module : Actual Package will  be in Node module
 	<div [class]="myClass"></div>
 	<input type="text" [value]="courseName">
 
-#Send Data from HTML to Ts (event binding)
+3.event binding
+-Send Data from HTML to Ts 
 	<button class"btn btn-primary" (click)="showAlert("Angular 18")">Show Welcome</button>
 
 ****2 way binding****
@@ -688,3 +700,587 @@ firstName = signal("Akash Gund");
 ---------------------
 for change the value of signal variable
 this.firstName.set("sachin tendulkar");
+
+----------------------------------2. Control flow statment---------------------------
+
+Q why we use control 
+# @if, @else if @else
+
+	@if(div1Visiable == true){
+		<div class="p-3 bg-warning">
+			<h4>Div-1</h4>
+		</div>
+	}
+	@else if(div2Visiable == true)
+	{
+		<div class="p-3 bg-success">
+	}
+	@else{
+		<div class="p-3 bg-success">
+	} 
+	
+#for
+	<UI>
+		@for(item of cityArrya; track $index)
+		{
+			<li>{{item}}</li>
+		}
+	</UI>
+----------------------------------3.Pipe----------------------------------
+pipe is basically use to formate the data in HTML. its used in HTML template 
+
+Pipe is have in Angular not in React
+
+we have 2 pipe Default & custom
+Default : UpperCasePipe, LowerCasePipe, TitleCasePipe, DatePipe
+
+
+Ex:
+in ts
+
+import:[UpperCasePipe, LowerCasePipe, TitleCasePipe, DatePipe]
+
+firstName : string = "Angular";
+firstName1 : string = "angular is frontend language";
+currentData : Date = new Date();
+
+in HTML
+<div>
+	Orignal value - {{firstName}}				//angular
+	<br>
+	after pipe - {{firstName | uppercase}}		//ANGULAR
+	<br>
+	after pipe - {{firstName | uppercase}}		//angular
+	<br>
+	after pipe - {{firstName | titlecase}}		//Angular Is Frontend Language
+	<br>
+	after pipe - {{currentData}}		//Wed Jun 05 2025 17:17:31 GMT +0530 (Indian Standard Time)
+	<br>
+	after pipe - {{currentData|date}}		//Jun 05 2025 <--- only date we get
+	<br>
+	after pipe - {{currentData|date:'dd-mm-yy'}}		//05-08-25 <--- only date we get
+<div>
+------------------------------Json pipe-------------------------------------------
+Q. how do you print the object ? 
+-> by using Pipe.
+import:[JsonPipe]
+
+JsonPipe : it convert object into string formate.
+
+student : any  = {
+	name:'Chetan',
+	city:'Pune',
+	empid:'323'
+};
+
+<div>
+	<div>
+		Orignal value - {{student}}				//[object Object]
+		<br/>
+		after Pipe - {{student |json  }}		//{"name" : "Chetan", "city":"Pune", "empId":323}
+		<br/>
+	</div>
+</div>
+------------------------------------------------------------------------------------------
+import{ interval, map, Observable} from 'rxjs';
+
+import:[AsyncPipe]
+
+
+currentTime : Observable<Date> = new Observable<Date>;
+
+constructor(){
+	this.currentTime = interval(100).pipe(map()=> new Date()));
+	}
+	
+	
+<div>	
+	Orignal value - {{currentTime}}				// [object Object]
+	<br/>
+	after Value - {{currentTime |async }}		// time chnaging after 1 second 	
+	<br/>
+	after Value - {{currentTime |async | date:'hh:mm:ss'}}		Multiple pipes	
+<div>
+------------------------------------------------------------------------------------------
+Custome Pipe
+Q. Default Fanction in pipe :- transform
+for create pipe : ng g p na
+-.ts
+
+@Pipe({
+	name:'na',
+})
+export class NaPipe implements Pipetransform
+{
+
+	transform(value : unknown, ...args : unknown[]): unknown
+	{
+	
+		if(value !== null && value !== undefined && value !== '')
+		{
+			return value;
+		}
+		else
+		{
+			return 'NA'
+		}
+	
+	}		
+}
+
+-Component ts
+import:[NaPipe]
+
+student : any  = {
+	name:'Chetan',
+	city:'Pune',
+	empid:'323',
+	state: ''
+};
+-HTML
+
+<div>
+	after pipe - {{student.state}}			// showing empty
+	after pipe - {{student.state | na}}		// NA
+<div>
+-------------------------------------4. Template Form-----------------------------------------------------
+Template form	
+	ngModel
+
+steps :
+1. Cretae an object where we have all fields.
+2. bind properties to all input element by ngModel
+3. on click submit we get form object
+
+-.ts
+import : [FormsModule]
+
+studentObj : any = {
+	firstName:'',
+	lastName:'',
+	userName:'',
+	city:'',
+	state:'',
+	zipCode;'',
+	isAcceptTerms:false
+	}
+	
+-.HTML
+Note: when we work with form, Name attribute is mandatory
+<div>
+	<form>
+		<div>
+			<label >First name</label>
+			<input name="firstName" [(ngModel)]="studentObj.firstName" type="text">
+		</div>
+		<div>
+			<label >last name</label>
+			<input name="lastName" [(ngModel)]="studentObj.lastName"type="text">
+		</div>
+		<div>
+			<label >Username</label>
+			<input name="username" [(ngModel)]="studentObj.username" type="text">
+		</div> 
+		<div>
+			<label >City</label>
+			<input name="city" [(ngModel)]="studentObj.city" type="text">
+		</div>
+		<div>
+			<label >state</label>
+			<select[(ngModel)]="studentObj.state">
+				<option>Maharastra</option>
+				<option>Goa</option>
+				<option>panjab</option>
+				<option>Hariana</option>
+			</select>
+		</div>
+		<div>
+			<button>Reset form</button>
+			<button type="button" (click)="OnSubmit()">Submit</button>
+		</div>
+	</form>
+</div.
+---------------------------------------------------
+form validation
+	<div>
+		<label >First name</label>
+		<input name="firstName" #fName="ngModel" [(ngModel)]="studentObj.firstName" type="text" required minlength="3">
+		<div class="text-danger">
+		@if(fName.touched || fName.dirty && fName.error?.[required]){
+			<span>This is Required</span>
+		}@else if(fName.error?.[minlength]){
+			<span>Min 3 Char Required</span>
+			}
+		</div>
+	</div>
+	
+#FName : we define variable in html and assign ngModel value to that.
+.touched : use for check user touch or not.
+----------------------------------------------------
+we can add validation to form by using ngForm and property binding [disabled]="form.invalid".
+
+<form #form="ngForm">
+		<div>
+			<label >First name</label>
+			<input name="firstName" [(ngModel)]="studentObj.firstName" type="text">
+		</div>
+		<button class="btn btn-primary" [disabled]="form.invalid" type="button" (click)="onSubmit()">Submit</button>
+<form>
+- button will be disable until all required fields fill.
+------------------------------------------5. Reactive form------------------
+Note : for normal form we use ngModule
+-for reactive form import ReactiveFormsModule
+- create form controls in form group 
+.ts
+imports:[ReactiveFormsModule]
+
+export class ReactiveComponent{
+	studentForm : FormGroup = new FormGroup({
+		firstName : new FormControl("",[Validators.requird, Validators.minlength(4)]),		<--- validation
+		lastName : new FormControl(""),
+		userName : new FormControl("defaultValue@123",[Validators.email]),
+		city : new FormControl(""),
+		state : new FormControl(""),
+		zipCode : new FormControl(""),
+		isAcceptTerms : new FormControl(""),
+	});
+}
+
+HTML
+<div>
+	<form>
+		<div [formGroup]="studentForm">
+			<label >First name</label>
+			<input name="firstName" formControlName="firstName" type="text">
+			<div class="text-danger">
+			@if(studentForm.controls['firstName'].touched && studentForm.controls['firstName'].errors?.['requird']){					<----error text 
+				<span>This is requird</span>
+			}
+			@else if(studentForm.control.['firstName'].touched && studentForm.control.['firstName'].error?.['minlength'])
+			{
+				<span>Min char 4 required</span>				
+			}
+			</div>
+		</div>
+		<div>
+			<label >last name</label>
+			<input name="lastName" formControlName="lastName" type="text">
+		</div>
+		<div>
+			<label >Username</label>
+			<input name="username" formControlName="username" type="text">
+		</div> 
+		<div>
+			<label >City</label>
+			<input name="city" formControlName="city" type="text">
+		</div>
+		<div>
+			<label >state</label>
+			<select formControlName="state">
+				<option>Maharastra</option>
+				<option>Goa</option>
+				<option>panjab</option>
+				<option>Hariana</option>
+			</select>
+		</div>
+		<div>
+			<button>Reset form</button>
+			<button type="button" [disabled]="studentForm.invalid" (click)="OnSubmit()">Submit</button>
+		</div>
+	</form>
+</div>
+
+.ts
+To get form value
+
+onSubmit(){
+	const studentObj = this.studentForm.value;
+	console.log(studentObj); 			<--- all value show
+}
+
+--------------------------------6. API intigration----------------------------
+- 1. in app.config.ts add HttpClient provider.
+	export const appConfig: ApplicationConfig= {
+		providers : [provideHttpClient()]	<---
+	}
+	
+  2. in component create object by Div-1
+	constructor(private http ; HttpClient){
+		
+	}
+  3. create method
+	getAllUser()
+	{
+		this.http.get("url").subscribe((result : any)=>{
+			this.userList = result;
+		})
+	}
+	
+#Post API
+	onSave()
+	{
+		http.Post("Url",this.deptObj).subscribe((result : any)=>{
+			if(result.result)
+			{
+				alert("successfully added");
+			}else{
+				alert(result.message)
+			}
+		})
+	}
+#Delete API
+	onDelete(id:number)
+	{
+		http.delete("url?deptNo="+id).subscribe((res :any)=>{
+			if(res.result)
+			{
+				alert("Department deleted");
+			}
+		})
+	}
+--------------------------------7. Input - Output--------------------------------
+used for parent chiled communication
+#Input
+---Alert Component(parent component)---
+.ts
+@Component({
+	selector:'app-alert'
+})
+alertComponent{
+	@Input() message : string = '';
+	@Input() alertType : string ='';
+}
+
+
+.html
+<div class="alert" [ngClass]="{'alert-success : alertType=='Success','alert-worning : alertType=='worning',}">
+	<string>{{alertType}}</strong>{{message}}
+</div>
+
+---Child Component---
+.html
+
+<app-alert [message]="Hello pappa" [alertType]="success"></app-alert >
+---------------
+#Output
+
+@Component({
+	selector: 'app-my-button',
+	
+})
+export class MyButtonComponenet{
+	@Input () btnText : string = '';
+	@Input () btnClass : string = '';
+	
+	@Output () onBtnClick = new EventEmitter<any>();
+	
+	onClick(){
+		//this.onBtnClick.emit();		without return value
+		this.onBtnClick.emit("hi from child") ;	
+	}
+}
+
+.html
+<button [class]="btnClass">{{btnText}}</button>
+
+-----------
+Child component
+
+.html
+<app-my-button [btnClass]="btn btn-success" [btnText]="Save record"><app-my-button>			<--- button will show
+
+<app-my-button (onBtnClick)="DeleteReport(item.id)" [btnClass]="btn btn-danger" [btnText]="Delete record"><app-my-button>			<--- button will show
+
+<app-my-button (onBtnClick)="getData($event)" [btnClass]="btn btn-success" [btnText]="Save Record"></app-my-button>
+
+
+getData(data :any)
+{
+	console.log(data);	// hi from child
+}
+
+------------------------------------------8. Component Life Cycle----------------------------
+Constructor is not a part of life cycle is javaScript method used to initializ class.
+- normally constructor used for initializ variable
+
+constructor will call first before all life cycle events.
+Life cycle event:- ngOnInit, ngDoCheck, AfterViewInit, AfterViewChecked, AfterContentInit,AfterContentChecked, OnDestroy 
+most of the time we use :- ngOnInit, AfterViewInit,OnDestroy.
+.ts
+export class LifeCycleEventComponent implements OnInit, DoCheck,AfterViewInit, AfterViewChecked, AfterContentInit,AfterContentChecked, OnDestroy {
+
+	firstName; string;
+	
+	constructor(){
+		this.firstName = "";
+		console.log("constructor");
+	}
+	
+	ngOnInit():void{
+		console.log("ngOnInit");
+	}
+	
+	ngDoCheck():void{
+		console.log("ngDoCheck");
+	}
+	
+	ngAfterContentInit:void{
+		console.log("ngAfterContentInit");
+	}
+	
+	ngAfterContentChecked:void{
+		console.log("ngAfterContentChecked");
+	}
+	
+	ngAfterViewInit():void{
+		console.log("ngAfterViewInit");
+	}
+	
+	ngAfterViewChecked():void{
+		console.log("ngAfterViewChecked");
+	}
+	ngOnDestroy():{
+		console.log("ngOnDestroy");
+	}
+
+-After page rendered
+constructor
+ngOnInit
+ngDoCheck
+ngAfterContentInit
+ngAfterContentChecked
+ngAfterViewInit
+ngAfterViewChecked
+
+-when we go to next page
+ngOnDestroy
+
+------------------
+WHen to use 
+ngOnInit :- when we want to have some code after component load we can add here ex: normally used for API calls
+ngDoCheck :- Any change detect event call.
+ngAfterContentInit, ngAfterContentChecked :- if we used any external source of video/image that time this event used.
+ngAfterViewInit :- After complete view initializ that time this event called.
+ngOnDestroy :- when go from one page to another this event call.
+
+----------------------------------------9. ng-template directive--------------------
+ng-template is used for define reusable code.
+.ts
+isUserLoggedIn: bool = true;
+LoggerUserName :string = "Akash"
+
+
+.html
+<ng-template #notLogged>
+	<div>
+		<span>User Not logged In</span>
+	</div>
+</ng-template>
+
+<div class="bg-primary p-3" *ngIf="isUserLoggedIn; else notLogged">
+	{{LoggerUserName}}
+</div>
+------------------------------------10 view child----------------------------------------
+need to know deep
+
+------------------------------------11 Change Detection ----------------------------------------
+🧠 What is Change Detection?
+-> Change Detection is the process through which Angular updates the DOM when application state changes. It checks for changes in data-bound properties and updates the view accordingly.
+
+🔧 Change Detection Strategies
+1. Default
+- Angular checks all components in the component tree for changes.
+- It is more automatic but less performant in large applications.
+
+2. OnPush
+@Component({
+  selector: 'app-example',
+  templateUrl: './example.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+
+#Angular will check this component only when:
+
+- An @Input() property changes.
+- An event originates from this component (e.g., button click).
+- Observable emits a new value (if handled properly).
+- Change detection is manually triggered.
+⚠️ Note: OnPush helps in performance optimization by reducing unnecessary checks.
+
+📌 Triggering Change Detection
+✅ Automatically (with Default strategy)
+✅ Manually (with OnPush or in optimized cases)
+	Using ChangeDetectorRef:
+	
+	export class MyComponent {
+	cRef = inject(ChangeDetectorRef);
+
+	  ngOnInit(): void {
+		this.http.get('url').subscribe((res: any) => {
+		  this.userList = res;
+		  this.cRef.detectChanges();  // 🛠️ Manually trigger change detection
+		});
+	  }
+	  
+🆕 Angular 18 Signals (Reactive primitives)
+ 🔔 Signals are reactive state holders (like a mini-observable)
+ 
+	import { signal } from '@angular/core';
+	userList = signal<any[]>([]);
+
+	ngOnInit(): void {
+	  this.http.get('url').subscribe((res: any) => {
+		this.userList.set(res);  // ✅ Signals automatically trigger reactivity
+	  });
+	}
+✅ Signals integrate seamlessly with OnPush and eliminate the need for ChangeDetectorRef in many cases.
+
+🔄 Change Detection Cycle
+- It gets triggered by:
+- Events (clicks, inputs, etc.)
+- Async operations (Promises, Observables)
+- Manual triggers (e.g., detectChanges())
+
+🧩 KeyValueDiffers & IterableDiffers
+#KeyValueDiffers
+- Used to detect changes in an object (like a dictionary or map).
+#IterableDiffers
+- Used to detect changes in iterable data (like arrays or lists).
+-----------------------------------------------Project folder template ----------------------------
+app	
+	Core
+		Constant => api Constant | validation Message | reg Exp 
+		Models   => class | interface
+		Services => utility | Module Services
+		Enums
+		Guards 	 => canActive | canDeactive
+		Interceptors => tokenInterceptor | errorInterceptor
+		
+	shared 
+		pipes (custom)
+		directives (custome)
+		reusable component
+	pages
+		Components(with routes)
+	Environments
+		dev
+		prod
+		
+-------------------------------How to start project------------------------------------
+
+new project
+
+
+Command for create new angular project : ng new my-angular-app
+Command for bootstrap 				: npm i bootstrap
+Command for font-awesone            : npm i font-awesome
+
+
+----angular.json----
+  "styles": [
+              "src/styles.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/font-awesome/css/font-awesome.min.css"
+            ],
+--------------------
+Run project on custome port : ng s --port 4209

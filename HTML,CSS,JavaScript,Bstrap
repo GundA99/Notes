@@ -10,6 +10,7 @@ CSS : https://youtu.be/B9FvD1L2hAQ?si=GFe9jj00GZjkXH-x
 	7. Universal selector
 	8. Flexbox property
 3. Bootstrap
+4. Javascript
 ***********************************************1.HTML***************************************************
 
 index.html <- starting point for web side
@@ -30,7 +31,113 @@ Comment : <!-- This is Comment -->  (Shortcut ctrl + /)
 # Span is an example of inline element it will take nessasory spaces
 # Div is an example of Block level element it will take complete space
 
-**********CSS*********************
+----------------------------------------List----------------------------------
+#Order list: type = A,a,i,I
+	<ol>
+		<li> HTML</li>
+		<li> CSS</li>
+		<li> JS</li>
+	</ol>
+output:
+	1 HTML
+	2 CSS
+	3 JS
+------------------------
+	<ol type="A">			a: small, I/i roman
+		<li> HTML</li>
+		<li> CSS</li>
+		<li> JS</li>
+	</ol>
+output:
+	A HTML
+	B CSS
+	C JS	
+---------------------------------------------
+#Unorder List
+	<ul type="circle">			// square, dics			
+		<li> HTML</li>
+		<li> CSS</li>
+		<li> JS</li>
+	</ul>
+---------------------------------------------Table------------------------------------
+
+colspan, rowspan
+
+<table border="1" align="center" >
+	<tr align="center">
+		<th colspan="7">May, 2024</th>
+	</tr>
+	<tr align="center">
+		<th>Sunday</th>
+		<th>Monday</th>
+		<th>tuesday</th>
+		<th>Thursday</th>
+	</tr>
+	<tr align="center">
+		<td>21</td>
+		<td>22</td>
+		<td>23</td>
+		<td>45</td>
+	</tr>
+	
+</table>
+-----------------------------------form-------------------------------------
+<legend>Enquiry Form</legend>
+<form method="" action="">
+	<h2>Enquiry Form</h2>
+	
+	<lable>Name</lable>
+	<input type="text" pattern="[a-zA-Z ]{3,40}" name="uname"></br>
+	
+	<lable>Email</lable>
+	<input type="email" name="uemail"></br>
+	
+	<lable>Phone</lable>
+	<input type="tel" pattern="[0-9]{10}" name="uphone"></br>
+
+	<lable>Gender</lable>
+	<input type="radio" value="Male" name="gender"/ Male>
+	<input type="radio" value="Female" name="gender"/ Female>
+	
+	<lable>Country</lable>
+	<select>
+		<option value="">Select country...</option>
+		<option value="India">India</option>
+		<option value="England">England</option>
+		<option value="Finland">Finland</option>
+	</select>
+	
+	<label>Course</label>
+	<select>
+		<optgroup lable="Frontend">
+			<option>HTML</option>
+			<option>CSS</option>
+			<option>Javascript</option>
+		</optgroup>
+		<optgroup lable="Backend">
+			<option>.NET</option>
+			<option>JAVA</option>
+			<option>MySQL</option>
+		</optgroup>
+	</select>
+	
+	<lable>Comment</lable>
+	<textarea></textarea>	
+	
+	<button type="submit">SAVE</button>
+	<button type="submit">GO</button>
+	
+---------------
+
+<input type="number" min="1" max="10">
+<input type="date"/> Date
+<input type="color">
+----------------buttons----------
+<button type="reset">
+--------------HTML5--------------
+comes with sementic tag : header, footer,section
+
+**********************************CSS*********************
 1.type of CSS we use 
 inline, embeded, and External
 
@@ -178,7 +285,7 @@ box-shadow : 0px 0px 10px 2px #ccc  <--- all redection showdow
 box-shadow : inset 0px 0px 10px 2px red  <------ inside shadow
 
 ---------------------------------7.Universal selector-----------------
-*{} its universal selector used whent we want to apply css to all tags
+*{} its universal selector used when we want to apply css to all tags
 
 *{
 	margin : 0px;
@@ -600,3 +707,143 @@ use carousel class
 refer doc
 
 ******************************************************************************
+#####################################################Javascript###################################################
+https://youtu.be/Kdz9J5vC4_o?si=9hX3iT0uofuNVy2-
+Javascript:- is an client-side, event-based, object-oriented scripting languge
+- javascript can dynamically modify an html page
+
+#internal javascript
+javascript can be inserted into documents by using the SCRIPT tag.
+<script type="text">
+	// js code goes here
+</script>
+
+#external javascript
+<script src="muscript.js"></script>
+
+Important function of Javascript
+1.alert
+	alert("Welcome to Javascript");
+2.confirm
+	confirm("Welcome to Javascript");	<--- it return true/false
+3. document.write()
+	used for write directly to the HTML document.
+	<script type="text">
+		document.write("WsCube Tech");			<----- this will print on page
+	</script>
+4. prompt(msg,defaultText): 	<-----Creates an dialogue for user input.
+	<script type="text">
+		prompt("Hello","wscube");
+	</script>
+
+---------------------------Javascript DOM Function---------------------
+document.getElementById()
+document.getElementsByClassName()
+innerHTML()
+
+#document.getElementById()
+<body>
+    <div id="main">
+        Welcome to wc
+    </div>
+	<div id="main1">
+        <h1>
+            Welcome to wc
+        </h1>
+    </div>
+</body>
+<script>
+    var x = document.getElementById("main");
+    console.log(x);										//<div id="main">Welcome to wc</div>
+	var y = document.getElementById("main").innerHTML;  // Welcome to wc
+	var z = document.getElementById("main1").innerHTML;	// <h1>Welcome to wc</h1>
+    console.log(z);
+</script>
+--------------------------------------------
+<body>
+    <div id="main">
+        Welcome to wc
+    </div>
+</body>
+<script>
+    document.getElementById("main").innerHTML = <h1>Welcome To Pune</h1>;  <-- this will replace whatever we write in main id with <- this text
+</script>
+
+--------------------------------------------
+#document.getElementsByClassName()
+
+<body>
+    <div class="main">
+        Welcome to WsCube Tech
+    </div>
+    <div class="main">
+        Welcome to WsCube Tech
+    </div>
+    
+</body>
+<script>
+    var x = document.getElementsByClassName("main");
+    console.log(x); 									<--- showing list of classes and inside showing all elements, styles, id
+	var y = document.getElementsByClassName("main")[0].innerHTML  <--- showing 0th index class text
+	
+	document.getElementsByClassName("main").[0].innerHTML = "Hellow word" 	write text for first class element
+
+</script>
+-------------------------------Function-------------------
+<body>
+    <input type="text" id="name" value="name">
+    <button onclick="Greet()">Greet</button>
+</body>
+<script>
+    function Greet()
+    {
+        var x = document.getElementById("name").value;			<--- it will show value
+        alert("Hello " + x);
+    }
+</script>
+--------------------------------------------------------------
+#Prompt
+<script>
+    var s = prompt("Enter your name", "");
+    document.getElementById("name").innerHTML = "Hello " + s;
+</script>
+
+------------------------------Array in Javascript----------------------
+Declaration of an array in js
+Method1:
+	var house = [];			<--- declaring
+	var house = ["1BHK", "2BHK","3BHK"];	initializing while declaring	
+	
+	house[0] = "1BHK";
+	house[1] = "2BHK";
+	house[2] = "3BHK";
+Method2;
+	var house = new array();
+	var house = new Array(10, 20,30);
+	var house = ["1BHK", 3000, "2BHK"]  <--- store number as well string.
+	
+Example
+	var cars = [];
+	cars = ["car1","car2","car3"];
+	document.write(cars[1]);		//car2;
+	document.write(cars[5]);		//undefined
+	
+	
+------------------------------loops------------------------------
+for(var count = 0; count<5; count++)
+{
+	document.write(count+ "Welcome <br>");
+}
+----------------
+var count = 0;
+while(count<5)
+{
+	document.write(count+ " Welcome </br>");
+	count++;
+}
+--------------
+<script>
+    var cars = ["Saab", "Volvo", "BMW"];
+    cars.forEach((x, index)=> document.write(index+" "+x + "<br>"));
+</script>
+

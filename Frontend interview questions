@@ -1,3 +1,5 @@
+AsyncPipe:defination
+Observable
 ✅ Angular 
 ✅ HTML
 ✅ Bootstrap
@@ -17,7 +19,7 @@ https://youtu.be/-jeoyDJDsSM?si=RaPc13xQx3RMxA5V - Questpond Interviwe Q
 2.Difference between AngularJS vs Angular?
 3.What are directives in Angular?
 4.Explain the different types of Angular directives?
-5. Decorators
+5.Decorators
 6.Explain the importance of NPM and Node_Modules folter?
 7.What is TypeScript and why do we need it?
 8.Expain importance of Angular CLI?  
@@ -52,7 +54,6 @@ https://youtu.be/-jeoyDJDsSM?si=RaPc13xQx3RMxA5V - Questpond Interviwe Q
 - Build on typescript 
 - Its development platform to build UI part of application.
 - its component based framework for building scalable web application.
-- a collection of well-integrated libraries that cover a wide variety of features,includding routing, forms management, client-server communication and more.
 
 --------------------------------------------------------------------
 2.Difference between AngularJS vs Angular?
@@ -83,21 +84,28 @@ AngularJS means Angular 1 family
 		- Change the DOM layout by adding and removing elements.
 			ex:<tr *ngFor="let temp of SalesModel">
 			<div *ngIf="isLoggedIn">Welcome!</div>		// it will remove element from a DOM if isLoggedIn is false.
-
+	  Note : At a time only one Structural Directive can you.
 	2. Attribute
 		- Attribute derective are does not add or remove any value it 
 		- Change the appearance and behaviour of HTML elements.
 		- Change the look and feel of html.
 			ex: [{ngClass}] -- change the css class
 				<div class='p-3' [ngClass]="isDivActive == true ? 'bg-success : bg-warning'">  </div>
-				
+				------------------------------------
 				[ngStyle]  -- add style to the element 
 				<td [ngStyle]="{'background-color':stud.isActive ? 'yellow': 'red'}">
-				
+				------------------------------------
 				<div class="progress">
 					<div class="progress-bar" [ngStyle]="{'width':stud.totalMarks+'%'}"><stud.totalMarks>
 				</div>
+				------------------------------------
+				customeStye: any{
+					'color':''white,
+					'backgroud-color':'red'
+				}
 				
+				<div [ngStyle]="customeStye"> Div test </div>
+				------------------------------------
 	3. Component
 		- Directives with templates. its like user control.
 		- its like own UI 
@@ -254,7 +262,9 @@ expression/interopolation : Mixing angular with HTML
 17 How to implement routing in angular
 	1st step we need to define set of collection and we need to defile which path has connect to which component loaded.
 	then in our HTML file define something called as router-outlet. router outlet is a place where our component will load
-	in HTML we use <a [RouterLink]=['home']> and in ts we use this.router.navigate(['/home'])
+	
+	in HTML we use <a [RouterLink]=['home']> and 
+	in ts we use this.router.navigate(['/home']), this.router.navigateByUrl("home");
 
 --------------------------------------------------------------------
 18 What is lazy loading in angular
@@ -295,9 +305,8 @@ expression/interopolation : Mixing angular with HTML
 26.
 --------------------------------------------------------------------
 27  tsconfig.json vs angular.json vs packege.json
-
 #package.json:-
-	   -  Managing versioning and dependencies of packages
+	   - Managing versioning and dependencies of packages
 	   - It's a JSON file located at the root of your project that manages:
 		Project metadata : Stores project name, version, description, and license
 		Dependencies : Lists packages your project needs to run.
@@ -349,7 +358,7 @@ once compile TS file will create JS file. this file will create in dist folder.
 ------------------------------------------------------------------------
 
 
-#########################################################✅ HTML #######################################
+##############################################✅ HTML #######################################
 1.What is HTML Differences between HTML & HTML% ? Advantage of HTML5?
 2.What is the role of DOCTYPE in HTML?
 3.Differences between Head and Body in HTML? Where to place JS link reference?
@@ -411,7 +420,7 @@ HTML is not a programing languge its a markup languge.
 	Advantage: 
 	- is used for window tital.
 	- Search engine use the tital as the main heading for search results.
-		ex: when you type something in google serch box and press serch then first google will find and match your input text with all the titles of the website wep page availabe with google.
+		ex: when you type something in google serch box and press search then first google will find and match your input text with all the titles of the website wep page availabe with google.
 	- Bookmarks: tital tag is used as the default name for the bookmark.
 --------------------------------------------------------------------
 5.What are HTML Element ? Differences between Element and tag?
@@ -724,7 +733,7 @@ ref.Init();							// throw an error
 -> var creates a function-scoped variable, let create a block-scoped variable, const can be assigned only once, and its value cannot be changed afterwards.
 --------------------------------------------------------------------
 21. Type coercion 
--> type coercion is the automatic convertion of value from  one data type to another during certain operations or comparisons.
+-> type coercion is the automatic convertion of value from one data type to another during certain operations or comparisons.
 	Ex: 
 		let string = "42";
 		let num = 43;		
@@ -1110,7 +1119,8 @@ for(let i of str)
 {
     unique.add(i);
 }
-console.log(unique);
+let sortedArray = [...unique];
+console.log(sortedArray);
 -----------------------------------------------
 5.longest word from sentence
  
@@ -1145,6 +1155,10 @@ for(let char of str.toLowerCase())
 {
     if(vowels.indexOf(char)!==-1)
     {
+        count++;
+    }
+	---or---
+	if (vowels.includes(char)) {
         count++;
     }
 }

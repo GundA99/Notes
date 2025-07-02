@@ -15,6 +15,7 @@ https://youtu.be/96CSYHPKzzg?si=I3nS8XiF8yk4JxYd
 #Difference between npm and Node
 ============================================================
 https://youtu.be/-jeoyDJDsSM?si=RaPc13xQx3RMxA5V - Questpond Interviwe Q
+https://youtu.be/4KBVkQ7b6yk?si=h77xZ6GrAPYFssBx - Happy
 1.What is Angular:
 2.Difference between AngularJS vs Angular?
 3.What are directives in Angular?
@@ -54,6 +55,14 @@ https://youtu.be/-jeoyDJDsSM?si=RaPc13xQx3RMxA5V - Questpond Interviwe Q
 - Build on typescript 
 - Its development platform to build UI part of application.
 - its component based framework for building scalable web application.
+- Angular is a component based framework for building structured, scalable and single page web applications for client side
+single page application ex: Youtube
+--------------------------------------------------------------------
+What are angular advantages?
+-> - its simple to build single page appilication
+- its opps friendly so we can create class and interface
+- its a cross platform and open source
+- reusable code(services)
 
 --------------------------------------------------------------------
 2.Difference between AngularJS vs Angular?
@@ -68,10 +77,12 @@ AngularJS means Angular 1 family
 5.CLI						no		-	Yes
 - in AngularJS it use JavaScript where as Angular use typescript
 - we don't have CLI in AngularJS but we have CLI in Angular
-
-
+-History Old AngularJs build on JavaScript but afterword its comes with typescript thats why anguleJS will be Angular only they remove js from angular.
+-AngularJS does not use Dependancy injection. Angular uses.
+- Angular is much faster than AngularJS bcz of databinding technic and component bsaed architecture
 --------------------------------------------------------------------
 3.What are directives in Angular?
+- Directive are classes that add additional behavior to elements in your angular application.
 -directives are used to attach your Behaviour to HTML Dom.
 -Directives are nothing but Angular syntexes which we write inside HTML to change the behaviour of HTML Dom.
 	for ex: ngModel, hidden, value
@@ -82,8 +93,10 @@ AngularJS means Angular 1 family
 	1. Structural
 		- Structural Directives change the structure of the Dom. 
 		- Change the DOM layout by adding and removing elements.
+			ex:<*ngSwitch>
 			ex:<tr *ngFor="let temp of SalesModel">
-			<div *ngIf="isLoggedIn">Welcome!</div>		// it will remove element from a DOM if isLoggedIn is false.
+			<div *ngIf="isLoggedIn">Welcome!</div>		// it 
+			will remove element from a DOM if isLoggedIn is false.
 	  Note : At a time only one Structural Directive can you.
 	2. Attribute
 		- Attribute derective are does not add or remove any value it 
@@ -92,7 +105,7 @@ AngularJS means Angular 1 family
 			ex: [{ngClass}] -- change the css class
 				<div class='p-3' [ngClass]="isDivActive == true ? 'bg-success : bg-warning'">  </div>
 				------------------------------------
-				[ngStyle]  -- add style to the element 
+				[ngStyle]  -- add style to the element dyanamically
 				<td [ngStyle]="{'background-color':stud.isActive ? 'yellow': 'red'}">
 				------------------------------------
 				<div class="progress">
@@ -107,13 +120,27 @@ AngularJS means Angular 1 family
 				<div [ngStyle]="customeStye"> Div test </div>
 				------------------------------------
 	3. Component
+		- Component directive are directive with its own template.
 		- Directives with templates. its like user control.
 		- its like own UI 
 			ex: <app-root></app-root>, 	<app-user-profile></app-user-profile>
 
+#Difference between Component, Attribute, and structural directives?
+->  Component Directive
+		- Component directive is responsible for showing the first whole view. it is most used one.
+		- Starts with @sign
+	Structural Directive
+		- is responsible for adding and delegating html elements in the view.
+		- Starts with * sign
+	Attribute Directive
+		- Attribute directive is responsible for changing the appearance of view by adding or removing styles/csss classes of the html elements
+		- set inside square brackets.
 ----------------------   
 5 Decorators
-Purpose: Used to add metadata to classes, methods, properties, or parameters.
+-> 
+Purpose: Used to store metadata about a classes, methods, properties.
+- All decorators are represented with @ symbol
+MetaData:- is data that provides information about other data.
 Example: @Component, @Injectable, @Directive, @Input.
 Functionality: Configures how a class or member behaves at runtime.
 	EX:- 
@@ -143,9 +170,7 @@ Parameter Decorator:-
 	http = inject(HttpClient); 		<--- by using inject decorator we can add DI, its work same as we add DI in contructor. 
 Note :- @Directive Decorator is used for cretae custom Directive
 
-What are annotation or MetaData?
-	ans same as above
-	
+
 in ts there is no concept of component, component is consept of angular.
 ts has class only and on class we use 
 @Component({
@@ -156,12 +181,20 @@ ts has class only and on class we use
 	which is called as decorator which make ts class as a component.
 	so the class is combination of all the css, js and html. which is called as component.
 	
+Type of Decorators:
+Class decorator : @NgModule, @Component, @injectable, @Directive, @Pipe.
+Property Decorator : @Input, @Output, @ContentChild, @ContentChildren,@ViewChildren, @ViewChild, @Hostbinding.
+Method Decorator: @HostListner.
+Parameter Decorator : @Inject, @Self, @Host, @optional.
 --------------------------------------------------------------------	
 6. Explain the importance of NPM and Node_Modules folter?
+	- NPM is a online repository from where you can get thousandss of free libraries which can be used in your angular project.	
+	
 	Npm helps you to install any javaScript framework in your Computer.
 	for example if you want to install jQuery simple go and use npm install jquery command. 
 	after hit command all jquery packege install in Node_modules folter.
 	Node_Modules is nothing but a folter where all javaScript packege install.
+	- The node_module folder is used to save all downloaded packages from npm in your computer.
 	
 --------------------------------------------------------------------
 7. What is TypeScript and why do we need it?
@@ -178,15 +211,27 @@ ts has class only and on class we use
 	- Creating components, services, directives, etc.
 	- Running a development server with live reload.	: ng serve	
 	- Building your app for production.					: ng build	
+
+
 --------------------------------------------------------------------
 9.Expain the importance of Component and modules?
 #What is a Component?
 	- A component controls a part of the UI and includes: Template(HTML), Logic(ts file), style(css)
+	- contains CSS, HTML, SPEC, TS file
+		CSS: file used for keeping the css code of the component.
+		HTML: used for modifying the html template of the component.
+		SPEC : is used for write unit tests for your component.
+		TS: is the file which link all the other component files.
 #What is a Module?
+	-Module is a place where you can group the components, directives, pipes, and services, which are related to the application.
 	- A module is a container for a group of related components, directives, pipes, and services. Every Angular app has at least one module: AppModule.
 	Component has used to bind module and views while  module groups a component
+	
 --------------------------------------------------------------------
-10. 
+10.  What is selector and template?
+->  Selector:- A selector is used to identify each component uniquely into the component tree.
+	Template is a HTML view of an Angular component.
+	
 --------------------------------------------------------------------
 12. What is Template in Angular
 	Template is an HTMl view of angular in which we can write directives.
@@ -203,16 +248,23 @@ ts has class only and on class we use
 --------------------------------------------------------------------
 13. Explain the four types of Data binding in Angular?
 	Data binding in angular define how the view and component communicate with each other.
+	- Data binding is the way to communicate between your typescript code of your component and your html view.
 	there are four types of binding 
-	1. Expresion/interpolation Data Binding {{}} used
+	1. Expresion/string interpolation Data Binding {{}} used
+		- String interpolation is a one-way data-binding technique that is used to transfer the data from a TypeScript code to an HTML template.
+		- string interpolation can work on string type only not number or any other type.
+		- it is represented inside{{data}} double curly braces.
 		data flow from component to the view and mix with html.
 		Ex: {{custObject.CustId}}
 	2. Property binding: Data flows from component to view [] used
+		- property binding is a supersent of interpolation. it can do whatever interpolation can do. in addition, it can set an element property to a non-string data value like boolean.
 		[ngModel]="CustomerObj.Name"
 	3. event binding:
+		- Event binding is used to handle the event raised by the user actions like button click.
 		when we want to send event from the view to the component.
 		(click)="Func()"
 	4. tow way binding: [()] used
+		- Two-way data binding in angular will help users to exchange data from the view to component and then component to the view at the same time.
 		in that data flow is like view to component and component to view.
 		ex: [(ngModel)]="CustomerObj.Name"
 
@@ -222,6 +274,11 @@ expression/interopolation : Mixing angular with HTML
  <h1>{{someValue}}</h1> 
  <h1>{{2+2}}</h1>      //4
  
+ 
+Why use string interpolation 
+- simpler that property binding
+	<div>{{title}}</div>
+	<div [innerText]='title'></div>
 
 --------------------------------------------------------------------
 
@@ -302,7 +359,9 @@ expression/interopolation : Mixing angular with HTML
 	ng build -prod flag try to compresses your JS file, remove comments, create GUIDs of your JS files and make your application ready for production.
 
 --------------------------------------------------------------------
-26.
+26. What are Pipes? What are the types of Pipes & Parameterized Pipes?
+-> Pipe are simple function which accept an input value and return a transformed value.
+
 --------------------------------------------------------------------
 27  tsconfig.json vs angular.json vs packege.json
 #package.json:-
@@ -356,7 +415,94 @@ once compile TS file will create JS file. this file will create in dist folder.
 			inside component View and logic are connected by templateURL.
 
 ------------------------------------------------------------------------
+How an Angular app gets loaded and started? What are index.html, app-root, selector and main.ts?
+index.html->main.ts->app.module.ts->App-component.
+-> - When client send first request then its first hit index.html page.
+	Angular is used to create Single page applications. index.html file is that single page. index.html invoke main.ts file which is the javaScript version of main.ts file
+main.ts:- file is like the entry point of web-app. it compiles the web-app and bootstraps the AppModule to run in the browser.
 
+App module:  file will then bootstrap the appcomponent
+App-component : App-component or app-root component is the html which you will see finally. 
+------------------------------------------------------------------------
+Q.What is a Bootstrap module and Bootstrapped component?
+-> When the angular web application will start then the first module launched is the bootstrapped module and same is true for the bootstrapped component also
+
+Q. Explain Services with Example
+-> - A service is a typescript class and a reusable code which can be used in multiple components.
+ - Service can be implemented with the help of Dependancy injection.
+ 
+ 
+Q.What is Provider in Angular?
+-> A provider is an object declared inside decorator which inform Angular that a particular service is available for injecting inside the components. 
+ 
+Q. What are lifecycle hooks in Angular?
+-> A component from creation to destruction goes through several stage and these stages are the life cycle hooks.
+
+	ngonChanges: it called when input property changes.
+	ngOninit : called when the component is created., this called only once
+	------------following called for children component---
+	ngAfterContentInit:	
+	ngAfterContenChecked: 
+	ngAfterViewInit:
+	ngAfterViewChecked:
+	--------------
+	ngOnDestroy
+
+#What is constructor
+->  - the constructor is a method in a typeScript class that automatically gets called when the class is being instantiated.
+	- Constructor always run before any angular hook and it is not part of lifecycle hooks.
+	- Constructor is widely used to inject dependencies(services) into the component class.
+#What are Asynchronous operation
+-> Observables are used to perform asynchronous operations and handle asynchronous data.
+
+#What is difference between Promise and Observable?
+-> Observable:
+		- Emit multiple values over a period of time. also called streaming of data.
+		- Are lazy: they are not executed until we subscribe to them using the subscribe method.
+		
+	Promise:
+		- Emit a single value at a time.
+		- Are not lazy: execute immediately after creation.
+		
+#What is Rxjs
+-> Rxjs is a javaScript library, that allow us to work with asynchronous data stream with the help of observables.
+	- Observable intruduced by RxJS library. observables is not a part of Angular
+
+#How to Implement Observable?
+-> Observable are used to stream data to multiple components
+	its a 3 step process:
+		1.Import Observable from RxJS Library.
+		2.Create Observable & Emit Data.
+		3.Finally subscribe the data in code.
+		
+	---------Observable----------
+	myObservable = new Observable(observer =>{
+		console.log("Observable start"));
+		observer.next("a");
+		observer.next("b");
+		observer.next("c");
+		});
+		
+	ngOninit():void{
+	this.myObservable.subscribe((val => {		<----- when we subscribe then and then only observable called. if we not subscribe "Observable start" will not print
+		console.log(val);
+		)});
+		
+	-----------Promise------------
+	isPromis = new Promise<string>((resolve,reject)=>{
+		console.log("Promise start");
+	}
+	
+	without subscriber promise will print
+Q. What is the role of HttpClient in Angular?
+->  - HttpClient is a build-in service class available in angular.
+	- Userd to perform HTTP request
+
+Q.TypeScript vs JavaScript
+1. TypeScript is a strongly typed language.
+2. TypeScript is a superset of javaScript.
+3. it has Object oriented features.
+4. Detect error at compile time.
 
 ##############################################✅ HTML #######################################
 1.What is HTML Differences between HTML & HTML% ? Advantage of HTML5?
@@ -871,7 +1017,7 @@ forEach: - is used when you want to perform some operation on each element of an
 	
 
 # What is Function expression ?
--> a function expression is a way to define a function by assigning it to a varuable.
+-> a function expression is a way to define a function by assigning it to a variable.
 
 const add = function(a,b){return a+b};
 	  console.log(add(5,3)) 	//8

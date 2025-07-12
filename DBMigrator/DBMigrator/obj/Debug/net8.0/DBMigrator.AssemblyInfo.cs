@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DBMigrator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+801f03199747dd5eaf8af83ea99ef0c7ea1da077")]
 [assembly: System.Reflection.AssemblyProductAttribute("DBMigrator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DBMigrator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

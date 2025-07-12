@@ -1,26 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Akash\\Study Projects\\DBMigrator\\",
+  "WorkspaceRootPath": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E94FB69B-4D4C-4F60-B380-FC2D5D875766}|DBMigratorBLogic\\DBMigratorBLogic.csproj|c:\\akash\\study projects\\dbmigrator\\dbmigratorblogic\\dbmigrator\\migratorblogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E94FB69B-4D4C-4F60-B380-FC2D5D875766}|DBMigratorBLogic\\DBMigratorBLogic.csproj|solutionrelative:dbmigratorblogic\\dbmigrator\\migratorblogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B5896A34-AE2F-40D0-86CB-EC7D9549A065}|DBMigrator\\DBMigrator.csproj|c:\\akash\\study projects\\dbmigrator\\dbmigrator\\dbmigrator\\migratorappservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B5896A34-AE2F-40D0-86CB-EC7D9549A065}|DBMigrator\\DBMigrator.csproj|c:\\users\\xxgundfa\\onedrive - tietoevry\\desktop\\personal\\notes\\dbmigrator\\dbmigrator\\dbmigrator\\migratorappservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B5896A34-AE2F-40D0-86CB-EC7D9549A065}|DBMigrator\\DBMigrator.csproj|solutionrelative:dbmigrator\\dbmigrator\\migratorappservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E94FB69B-4D4C-4F60-B380-FC2D5D875766}|DBMigratorBLogic\\DBMigratorBLogic.csproj|c:\\akash\\study projects\\dbmigrator\\dbmigratorblogic\\dbmigrator\\dto\\authentication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E94FB69B-4D4C-4F60-B380-FC2D5D875766}|DBMigratorBLogic\\DBMigratorBLogic.csproj|c:\\users\\xxgundfa\\onedrive - tietoevry\\desktop\\personal\\notes\\dbmigrator\\dbmigratorblogic\\dbmigrator\\migratorblogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E94FB69B-4D4C-4F60-B380-FC2D5D875766}|DBMigratorBLogic\\DBMigratorBLogic.csproj|solutionrelative:dbmigratorblogic\\dbmigrator\\migratorblogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E94FB69B-4D4C-4F60-B380-FC2D5D875766}|DBMigratorBLogic\\DBMigratorBLogic.csproj|c:\\users\\xxgundfa\\onedrive - tietoevry\\desktop\\personal\\notes\\dbmigrator\\dbmigratorblogic\\dbmigrator\\dto\\authentication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E94FB69B-4D4C-4F60-B380-FC2D5D875766}|DBMigratorBLogic\\DBMigratorBLogic.csproj|solutionrelative:dbmigratorblogic\\dbmigrator\\dto\\authentication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B5896A34-AE2F-40D0-86CB-EC7D9549A065}|DBMigrator\\DBMigrator.csproj|c:\\akash\\study projects\\dbmigrator\\dbmigrator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B5896A34-AE2F-40D0-86CB-EC7D9549A065}|DBMigrator\\DBMigrator.csproj|c:\\users\\xxgundfa\\onedrive - tietoevry\\desktop\\personal\\notes\\dbmigrator\\dbmigrator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B5896A34-AE2F-40D0-86CB-EC7D9549A065}|DBMigrator\\DBMigrator.csproj|solutionrelative:dbmigrator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E94FB69B-4D4C-4F60-B380-FC2D5D875766}|DBMigratorBLogic\\DBMigratorBLogic.csproj|c:\\akash\\study projects\\dbmigrator\\dbmigratorblogic\\dbmigrator\\imigratorblogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E94FB69B-4D4C-4F60-B380-FC2D5D875766}|DBMigratorBLogic\\DBMigratorBLogic.csproj|c:\\users\\xxgundfa\\onedrive - tietoevry\\desktop\\personal\\notes\\dbmigrator\\dbmigratorblogic\\dbmigrator\\imigratorblogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E94FB69B-4D4C-4F60-B380-FC2D5D875766}|DBMigratorBLogic\\DBMigratorBLogic.csproj|solutionrelative:dbmigratorblogic\\dbmigrator\\imigratorblogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\xxgundfa\\AppData\\Local\\Temp\\.vsdbgsrc\\c59cd13cc66cc84c639242a88596b67d4789bc2e47c2df6328c2528c41cd9389\\ControllerActionInvoker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,25 +38,49 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MigratorBLogic.cs",
-              "DocumentMoniker": "C:\\Akash\\Study Projects\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
-              "RelativeDocumentMoniker": "DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
-              "ToolTip": "C:\\Akash\\Study Projects\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
-              "RelativeToolTip": "DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAUwBIAAACiAAAAAAAAAA==",
+              "Title": "MigratorAppService.cs",
+              "DocumentMoniker": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigrator\\DBMigrator\\MigratorAppService.cs",
+              "RelativeDocumentMoniker": "DBMigrator\\DBMigrator\\MigratorAppService.cs",
+              "ToolTip": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigrator\\DBMigrator\\MigratorAppService.cs",
+              "RelativeToolTip": "DBMigrator\\DBMigrator\\MigratorAppService.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAiwEYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T06:59:19.751Z",
+              "WhenOpened": "2025-05-22T09:46:05.758Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ControllerActionInvoker.cs",
+              "DocumentMoniker": "C:\\Users\\xxgundfa\\AppData\\Local\\Temp\\.vsdbgsrc\\c59cd13cc66cc84c639242a88596b67d4789bc2e47c2df6328c2528c41cd9389\\ControllerActionInvoker.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\c59cd13cc66cc84c639242a88596b67d4789bc2e47c2df6328c2528c41cd9389\\ControllerActionInvoker.cs",
+              "ToolTip": "C:\\Users\\xxgundfa\\AppData\\Local\\Temp\\.vsdbgsrc\\c59cd13cc66cc84c639242a88596b67d4789bc2e47c2df6328c2528c41cd9389\\ControllerActionInvoker.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\c59cd13cc66cc84c639242a88596b67d4789bc2e47c2df6328c2528c41cd9389\\ControllerActionInvoker.cs",
+              "ViewState": "AgIAAGABAAAAAAAAAAAhwG4BAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-09T17:36:44.88Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MigratorBLogic.cs",
+              "DocumentMoniker": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
+              "RelativeDocumentMoniker": "DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
+              "ToolTip": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
+              "RelativeToolTip": "DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAIA4wEQCAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T06:59:19.751Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Authentication.cs",
-              "DocumentMoniker": "C:\\Akash\\Study Projects\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\Dto\\Authentication.cs",
+              "DocumentMoniker": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\Dto\\Authentication.cs",
               "RelativeDocumentMoniker": "DBMigratorBLogic\\DBMigrator\\Dto\\Authentication.cs",
-              "ToolTip": "C:\\Akash\\Study Projects\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\Dto\\Authentication.cs",
+              "ToolTip": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\Dto\\Authentication.cs",
               "RelativeToolTip": "DBMigratorBLogic\\DBMigrator\\Dto\\Authentication.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-17T09:40:49.609Z"
             },
@@ -61,36 +88,23 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Akash\\Study Projects\\DBMigrator\\DBMigrator\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigrator\\Program.cs",
               "RelativeDocumentMoniker": "DBMigrator\\Program.cs",
-              "ToolTip": "C:\\Akash\\Study Projects\\DBMigrator\\DBMigrator\\Program.cs",
+              "ToolTip": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigrator\\Program.cs",
               "RelativeToolTip": "DBMigrator\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAIBJwA8AAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-17T09:31:35.72Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MigratorAppService.cs",
-              "DocumentMoniker": "C:\\Akash\\Study Projects\\DBMigrator\\DBMigrator\\DBMigrator\\MigratorAppService.cs",
-              "RelativeDocumentMoniker": "DBMigrator\\DBMigrator\\MigratorAppService.cs",
-              "ToolTip": "C:\\Akash\\Study Projects\\DBMigrator\\DBMigrator\\DBMigrator\\MigratorAppService.cs",
-              "RelativeToolTip": "DBMigrator\\DBMigrator\\MigratorAppService.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAkwCYAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T09:46:05.758Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
               "Title": "IMigratorBLogic.cs",
-              "DocumentMoniker": "C:\\Akash\\Study Projects\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\IMigratorBLogic.cs",
+              "DocumentMoniker": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\IMigratorBLogic.cs",
               "RelativeDocumentMoniker": "DBMigratorBLogic\\DBMigrator\\IMigratorBLogic.cs",
-              "ToolTip": "C:\\Akash\\Study Projects\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\IMigratorBLogic.cs",
+              "ToolTip": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\IMigratorBLogic.cs",
               "RelativeToolTip": "DBMigratorBLogic\\DBMigrator\\IMigratorBLogic.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAawBIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAwwBQAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-22T09:42:47.125Z"
             }

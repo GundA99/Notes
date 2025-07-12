@@ -37,6 +37,8 @@
 5.Store Procedure VS function
 6.Joins, View, Trigger
 7.Normalization
+8.What is the use of temp tables and table variable
+
 ---------
 #SQL QUERY PROBLEMS 📌
 1. Second highest salary and third highest salary
@@ -1478,6 +1480,36 @@ so atomicity say transaction trated as one single unit both steps should happen 
 #3rd NF : The relation will be in 3NF if is in 2NF and not contain any transitive partial dependency   
 			EX. EMPID | Name | ZIP | STATE | CITY =>  EMPID | Name | ZIP  &  ZIP | STATE | CITY 
 			
+****************************8.What is the use of temp tables and table variable**********************************************
+#TEMPORARY TABLES (#TempTable):-
+	Use: 	- To store temporary data during a session or connection. 
+			- Often used for intermediate result sets, large datasets, or complex joins.
+			- Stored in tempdb
+	EX:-
+	CREATE TABLE #TempTable (
+	  Id INT,
+	  Name VARCHAR(50)
+	)
+
+	INSERT INTO #TempTable VALUES (1, 'Alice'), (2, 'Bob')
+
+	SELECT * FROM #TempTable
+
+#TABLE VARIABLES (@TableVar):-
+	 Use: - To hold small sets of data temporarily within a batch or stored procedure.
+		  - Good for lightweight, quick operations.
+		  - Lives only within the scope where it's declared
+	 Ex:- 
+	 DECLARE @TableVar TABLE (
+	  Id INT,
+	  Name VARCHAR(50)
+	)
+
+	INSERT INTO @TableVar VALUES (1, 'Alice'), (2, 'Bob')
+
+	SELECT * FROM @TableVar
+
+	 
 ##################################################✅ SQL Query Problems#######################################################
 1.Second highest salary and third highest salary
 2. All element not duplicate SQL query
@@ -1773,3 +1805,104 @@ MG Global
 30.recently facing challenges and how resolve in project
 31.if you have one task on different technology and have tight Deadline how can handle
  
+TSKsystem
+string "78,56,78,89,90$79,89,87,78,89$12,45,67,78,12$56,67,78,89,75";
+, represent marks of student
+$ represent student
+Greads 75< A
+		50<B
+		35<C
+		0< D
+		
+Count Greads and return max gread;
+#Code
+    public char CheckMaxGrade(string str)
+    {
+        string str = "78,56,78,89,90$79,89,87,78,89$12,45,67,78,12$56,67,78,89,75";
+        Dictionary<char, int> dic = new Dictionary<char, int>();
+
+        string[] students = str.Split('$');
+
+        for (int i = 0; i < students.Length; i++)
+        {
+            string[] marks = students[i].Split(',');
+            int total = 0;
+
+            for (int j = 0; j < marks.Length; j++)
+            {
+                total += Convert.ToInt32(marks[j]);
+            }
+
+            char grade = CheckGrade(total);
+
+            if (dic.ContainsKey(grade))
+            {
+                dic[grade]++;
+            }
+            else
+            {
+                dic.Add(grade, 1);
+            }
+        }
+
+        // Determine grade with highest count
+        int max = 0;
+        char result = 'D';
+
+        foreach (var item in dic)
+        {
+            if (item.Value > max || (item.Value == max && item.Key > result))
+            {
+                max = item.Value;
+                result = item.Key;
+            }
+        }
+
+		return result
+    }
+
+    public static char CheckGrade(int total)
+    {
+        double percentage = (total * 100.0) / 500;
+        percentage = Math.Round(percentage);
+
+        if (percentage >= 75)
+        {
+            return 'A';
+        }
+        else if (percentage >= 50)
+        {
+            return 'B';
+        }
+        else if (percentage >= 35)
+        {
+            return 'C';
+        }
+        else
+        {
+            return 'D';
+        }
+    }
+}
+
+
+----------------------------------------------
+Inheritance
+---------------------------------------------
+
+SELECT TOP(1) 
+    d.FullName AS FirstName, 
+    SUM(b.Profit) AS TotalProfit,
+    MAX(m.lastRelese) AS ReleaseYear
+FROM 
+    Directors d
+JOIN 
+    Movie m ON d.DirectorId = m.DirectorId
+JOIN 
+    boxOffice b ON m.MovieID = b.MovieID
+WHERE 
+    d.Country = 'India'
+GROUP BY 
+    d.FullName 
+ORDER BY 
+    TotalProfit DESC;

@@ -2,12 +2,16 @@
 {
     public class Authentication
     {
-        public string? SqlServerName { get; set; }
-        public string? SqlUserName { get; set; }
-        public string? SqlPassword { get; set; }
-        public string? ngServerName { get; set; }
-        public string? ngSqlUserId { get; set; }
-        public string? ngSqlPassword { get; set; }
-        public string? ngPort { get; set; }
+        public string? SqlServerName { get; set; }   
+        public string? ngServerName { get; set; }   
     }
+
+    public class MigrationRequest
+    {
+        public string SqlConnection { get; set; }
+        public string PgConnection { get; set; }
+        public string DbName { get; set; }
+        public List<string>? SchemaList { get; set; }
+    }
+
 }

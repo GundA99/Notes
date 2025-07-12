@@ -1,0 +1,92 @@
+Added dynamic country and sector allocation graphs in the Advisory Agreement (RDLC).
+Added donut chart for asset overview in the RDLC template.(RDLC)
+Added Model overview chart in RDLC template.(RDLC)
+Added TWR Graph in RDLC Template.(RDLC)
+Added dynamic Risk Profile, Time Horizon, and Expectation data in the Advisory Agreement (RDLC).
+Added hardcoded Forecast Investment chart in the Advisory Agreement (RDLC).
+Added Journal data in the Advisory Agreement (RDLC)
+Forecast investment chart showing dynamic data in the Advisory Agreement(RDLC).
+Added AssetVsLiability chart in Advisory Aggreement (RDLC).
+Added Customer Allocations(dyanamic) in the Advisory Agreement(RDLC) 
+Changes made in the generateReport API: added thousand separators to all values. (RDLC)
+Added header list and data for individual customer history in the Suitability module. (suitability)
+Fixed percentage issue for panel-based questionnaires. (suitability)
+Expectation and Time horizon Heading removed from pannel (suitability)
+Added header list and data in the GetRepresentativesByCorporateId API for showing suitability history.(suitability)
+Changes made in the Suitability Profile API: added new header list and data for Fund, Equity, MyProfile, Interest Bearing, and Derivatives(suitability)
+add wrapper call for get AssetVsLiability data in Advisory service
+Worked on the thank you page in Products and Target Questionnaire: removed default text and republish again.(suitability)
+Create Questionnair for personal data, Basic KYC, investment experience, transaction information, beneficial details, Risk profile and products & targets (suitability)
+
+
+
+*****HBNO*****
+#gift plan handling
+****WMStandard****
+#server side ag grid
+#suitability module 
+ Questionnaire microservices
+ CustomerTestManagement microservices (make suitability things dyanamic)
+ all form replce with servejs without affect flow
+#play and learn module 
+#report module
+- all apis  
+- RDLC
+#Transaction note(RDLC template) for Equity demo
+#Advisory RDLC report creation 
+Outsider Asset and liability CRUD
+outside,inside AssetVsLiability Graphs
+*****PortfolioX*****
+#Api documentation for magna code (237 files, 15920 lines of code)
+summurize all common api from i1logic and PortfolioXCore package for understand what is different from them
+Analysis of PX
+Create plan for microservices
+Booking service
+Instrument service
+Party service
+Probroker implementation for dubai demo
+#Batch Process model
+#Instrument Group model implement
+DB Migrator Tool by using Dapper
+Report module (RDLC)
+------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+Instrument Group Task
+
+1. Use this API to list all Instrument Groups: 
+api/InstrumentGroup/GetInstrumentGroups                                     Y(Paging) Call empty     	Done
+
+2. api/Settings/GetDatabaseFieldList?module=Total&mainTable=Instruments 	N
+re is a New Instrument Group: 
+api/InstrumentGroup/CreateInstrumentGroup 									Y							Done
+InstrumentGroupId should be empty.
+
+6. Call this API is there is an Edit of Instrument Group: 												
+api/InstrumentGroup/UpdateInstrumentGroup with the Instrument Group object to save.  Y					Done
+InstrumentGroupId should have a value. 
+
+OK
+7,8. Save the filter by calling this API: 
+Api/InstrumentGroup/CreateInstrumentGroupFilter (no InstrumentGroupID provided) or    Y					Done
+api/InstrumentGroup/UpdateInstrumentGroupFilter (InstrumentGroupID provided) 			Y				Done
+
+
+
+GetInstrumentGroups 
+CreateInstrumentGroup
+UpdateInstrumentGroup
+CreateInstrumentGroupFilter
+UpdateInstrumentGroupFilter
+
+GetDatabaseFieldList	-- 	GetInstrumentGroupFieldListDD
+GetFilterOperators     --     GetInstrumentGroupFilterOperatorsDD
+GetFilterValues    -- GetInstrumentGroupAdvanceValueDD
+

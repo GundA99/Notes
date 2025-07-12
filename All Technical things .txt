@@ -1574,6 +1574,19 @@ builder.Services.AddCors(o =>
 
 app.UseCors("myCorsPolicy");
 
+
+//For allow all 
+builder.Services.AddCors(o =>
+{
+    o.AddPolicy("myCorsPolicy", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+
 *************************************************************23********************************************************************
 ****************************************************** Mail Functionality *************************************************************
   

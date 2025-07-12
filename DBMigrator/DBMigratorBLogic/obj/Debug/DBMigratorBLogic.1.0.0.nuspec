@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>DBMigratorBLogic</id>
+    <version>1.0.0</version>
+    <authors>DBMigratorBLogic</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="801f03199747dd5eaf8af83ea99ef0c7ea1da077" />
+    <dependencies>
+      <group targetFramework="net8.0">
+        <dependency id="Dapper" version="2.1.66" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Data.SqlClient" version="6.0.2" exclude="Build,Analyzers" />
+        <dependency id="Npgsql" version="9.0.3" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\bin\Debug\net8.0\DBMigratorBLogic.dll" target="lib\net8.0\DBMigratorBLogic.dll" />
+  </files>
+</package>

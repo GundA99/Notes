@@ -1,5 +1,7 @@
 AsyncPipe:defination
 Observable
+How can you show/hide a column in a grid layout based on employee role?
+What is the use of temp tables and table variable
 ✅ Angular 
 ✅ HTML
 ✅ Bootstrap
@@ -25,7 +27,7 @@ https://youtu.be/4KBVkQ7b6yk?si=h77xZ6GrAPYFssBx - Happy
 7.What is TypeScript and why do we need it?
 8.Expain importance of Angular CLI?  
 9.Expain the importance of Component and modules?
-10
+10 What is the use of ngOninit()?
 11
 12.What is Template in Angular
 13.Explain the four types of Data binding in Angular?
@@ -227,8 +229,16 @@ Parameter Decorator : @Inject, @Self, @Host, @optional.
 	- A module is a container for a group of related components, directives, pipes, and services. Every Angular app has at least one module: AppModule.
 	Component has used to bind module and views while  module groups a component
 	
+10. What is the use of ngOninit()?
+-> It is part of the Angular lifecycle that allows you to run custom logic when a component is initialized.
+	Purpose of ngOnInit(): 
+		- Perform component initialization logic
+		- Fetch data from a service (e.g., make HTTP requests)
+		- Set up any required properties or state
+		- Subscribe to observables
+		- Initialize default values
 --------------------------------------------------------------------
-10.  What is selector and template?
+11.  What is selector and template?
 ->  Selector:- A selector is used to identify each component uniquely into the component tree.
 	Template is a HTML view of an Angular component.
 	
@@ -503,7 +513,45 @@ Q.TypeScript vs JavaScript
 2. TypeScript is a superset of javaScript.
 3. it has Object oriented features.
 4. Detect error at compile time.
+Q Explain FormBuilder and FormGroup in Angular
+->  Angular, FormBuilder and FormGroup are part of Reactive Forms, which is a powerful approach for building and managing forms.
+	🔧 FormGroup:- FormGroup is a class that tracks the value and state of a group of FormControl instances, It represents an entire form.
+		Ex:- 
+		import { FormGroup, FormControl } from '@angular/forms';
 
+		this.myForm = new FormGroup({
+		  name: new FormControl(''),
+		  email: new FormControl(''),
+		});
+	
+	🏗️ FormBuilder:- FormBuilder is a helper service that makes it easier and shorter to create FormGroup and FormControl instances, It reduces boilerplate code.
+	Ex:- 
+	#Without FormBuilder:
+		this.myForm = new FormGroup({
+		  name: new FormControl(''),
+		  email: new FormControl(''),
+		});
+		
+	#With FormBuilder:
+		import { FormBuilder } from '@angular/forms';
+
+		constructor(private fb: FormBuilder) {}
+
+		ngOnInit() {
+		  this.myForm = this.fb.group({
+			name: [''],
+			email: [''],
+		  });
+		}
+	Summary 
+		FormGroup :- 
+			Type - class
+			Purpose - Manage group of form control
+			used for- structuring the form
+		FormBuilder
+			Type - Service
+			purpose- Simplifies creation of form groups
+			used for - Reducing form creation code.
 ##############################################✅ HTML #######################################
 1.What is HTML Differences between HTML & HTML% ? Advantage of HTML5?
 2.What is the role of DOCTYPE in HTML?

@@ -1739,11 +1739,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Akash\\Study Projects\\DBMigrator\\DBMigratorBLogic\\DBMigratorBLogic.csproj",
+      "projectUniqueName": "C:\\Akash\\Study-Projects\\DBMigrator\\DBMigratorBLogic\\DBMigratorBLogic.csproj",
       "projectName": "DBMigratorBLogic",
-      "projectPath": "C:\\Akash\\Study Projects\\DBMigrator\\DBMigratorBLogic\\DBMigratorBLogic.csproj",
+      "projectPath": "C:\\Akash\\Study-Projects\\DBMigrator\\DBMigratorBLogic\\DBMigratorBLogic.csproj",
       "packagesPath": "C:\\Users\\xxgundfa\\.nuget\\packages\\",
-      "outputPath": "C:\\Akash\\Study Projects\\DBMigrator\\DBMigratorBLogic\\obj\\",
+      "outputPath": "C:\\Akash\\Study-Projects\\DBMigrator\\DBMigratorBLogic\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1814,7 +1814,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.411/PortableRuntimeIdentifierGraph.json"
       }
     }
   },

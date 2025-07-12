@@ -1,22 +1,6 @@
 [
   {
     "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
-    "Method": "CopyStoreProcedure",
-    "RelativePath": "api/MigratorAppService/CopyStoreProcedure",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
     "Method": "Login",
     "RelativePath": "api/MigratorAppService/Login",
     "HttpMethod": "POST",
@@ -31,7 +15,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "System.Collections.Generic.Dictionary\u00602[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -43,38 +27,130 @@
   },
   {
     "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
+    "Method": "MigrateDataOnlyFromPostgreToSqlServer",
+    "RelativePath": "api/MigratorAppService/MigrateDataOnlyFromPostgreToSqlServer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "schemaList",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
     "Method": "MigrateDataOnly",
-    "RelativePath": "api/MigratorAppService/MigrateDataOnly",
+    "RelativePath": "api/MigratorAppService/MigrateDataOnlyFromSqlServerToPostgre",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "schemaList",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
+    "Method": "MigrateDataOnlyUI",
+    "RelativePath": "api/MigratorAppService/MigrateDataOnlySQLToPgUI",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DBMigrator.DBMigrator.Dto.MigrationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
+    "Method": "MigrateForeignKeysFromPostgreToSqlServer",
+    "RelativePath": "api/MigratorAppService/MigrateForeignKeysFromPostgreToSqlServer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "schemaList",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
     "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
     "Method": "MigrateForeignKeys",
-    "RelativePath": "api/MigratorAppService/MigrateForeignKeys",
+    "RelativePath": "api/MigratorAppService/MigrateForeignKeysServerToPostgre",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
+        "Name": "schemaList",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
       }
-    ]
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
+    "Method": "MigrateSchemaAndTablesFromPostgreToSqlServer",
+    "RelativePath": "api/MigratorAppService/MigrateSchemaAndTablesPostgreToSqlServer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "schemaList",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
     "Method": "MigrateSchemaAndTables",
-    "RelativePath": "api/MigratorAppService/MigrateSchemaAndTables",
+    "RelativePath": "api/MigratorAppService/MigrateSchemaAndTablesServerToPostgre",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "schemaList",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DBMigrator.DBMigrator.MigratorAppService",
+    "Method": "MigrateSchemaAndTablesUI",
+    "RelativePath": "api/MigratorAppService/MigrateSchemaAndTablesUI",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DBMigrator.DBMigrator.Dto.MigrationRequest",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]

@@ -9,10 +9,17 @@ namespace DBMigratorBLogic.Migrator
 {
     public interface IMigratorBLogic
     {
-        public void MigrateDataOnly();
-        public void MigrateSchemaAndTables();
+        public void MigrateDataOnly(List<string>? schemaList);
+        public void MigrateSchemaAndTables(List<string>? schemaList);
         public void CopyStoredProcedures();
-        public void MigrateForeignKeys();
-        public List<string> Login(Authentication ?authentication );
+        public void MigrateForeignKeys(List<string>? schemaList);
+        public Dictionary<string, List<string>> Login(Authentication authentication);
+        public void MigrateSchemaAndTablesFromPostgreToSqlServer(List<string>? schemaList);
+        public void MigrateDataOnlyFromPostgreToSqlServer(List<string>? schemaList);
+        public void MigrateForeignKeysFromPostgreToSqlServer(List<string>? schemaList);
+        public void MigrateSchemaAndTablesUI(string sqlBaseConnectionString, string pgBaseConnectionString, string SqldbName, List<string>? schemaList);
+        public void MigrateDataOnlyUI(string sqlBaseConnectionString, string pgBaseConnectionString, string SqldbName, List<string>? schemaList);
+
+
     }
 }

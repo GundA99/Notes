@@ -849,6 +849,7 @@ namespace DBMigratorBLogic.Migrator
                 case "uniqueidentifier":
                     return "UUID";
                 case "varbinary":
+                case "image":  // Add support for image
                     return "BYTEA";
                 case "float":
                     return "DOUBLE PRECISION";
@@ -857,6 +858,9 @@ namespace DBMigratorBLogic.Migrator
                 case "varchar":
                 case "nvarchar":
                     return maxLength.HasValue && maxLength.Value > 0 ? $"VARCHAR({maxLength.Value})" : "TEXT";
+                case "text":
+                case "ntext":
+                    return "TEXT";
                 case "datetime":
                 case "smalldatetime":
                 case "datetime2":
@@ -865,11 +869,22 @@ namespace DBMigratorBLogic.Migrator
                 case "numeric":
                     return "NUMERIC";
                 case "date":
-                    return "DATE"; // Add support for 'date' type
+                    return "DATE";
+                case "time":
+                    return "TIME";
+                case "real":
+                    return "REAL";
+                case "binary":
+                    return "BYTEA";
+                case "timestamp":
+                    return "BYTEA";
+                case "xml":
+                    return "XML";
                 default:
                     throw new NotSupportedException($"SQL Server type '{sqlServerType}' is not supported.");
             }
         }
+
         public string ConvertTsqlToPgsql(string tsql)
         {
             // More robust handling needed

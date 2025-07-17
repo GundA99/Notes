@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B5896A34-AE2F-40D0-86CB-EC7D9549A065}|DBMigrator\\DBMigrator.csproj|c:\\users\\xxgundfa\\onedrive - tietoevry\\desktop\\personal\\notes\\dbmigrator\\dbmigrator\\dbmigrator\\migratorappservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B5896A34-AE2F-40D0-86CB-EC7D9549A065}|DBMigrator\\DBMigrator.csproj|solutionrelative:dbmigrator\\dbmigrator\\migratorappservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E94FB69B-4D4C-4F60-B380-FC2D5D875766}|DBMigratorBLogic\\DBMigratorBLogic.csproj|c:\\users\\xxgundfa\\onedrive - tietoevry\\desktop\\personal\\notes\\dbmigrator\\dbmigratorblogic\\dbmigrator\\migratorblogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E94FB69B-4D4C-4F60-B380-FC2D5D875766}|DBMigratorBLogic\\DBMigratorBLogic.csproj|solutionrelative:dbmigratorblogic\\dbmigrator\\migratorblogic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B5896A34-AE2F-40D0-86CB-EC7D9549A065}|DBMigrator\\DBMigrator.csproj|c:\\users\\xxgundfa\\onedrive - tietoevry\\desktop\\personal\\notes\\dbmigrator\\dbmigrator\\dbmigrator\\migratorappservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B5896A34-AE2F-40D0-86CB-EC7D9549A065}|DBMigrator\\DBMigrator.csproj|solutionrelative:dbmigrator\\dbmigrator\\migratorappservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E94FB69B-4D4C-4F60-B380-FC2D5D875766}|DBMigratorBLogic\\DBMigratorBLogic.csproj|c:\\users\\xxgundfa\\onedrive - tietoevry\\desktop\\personal\\notes\\dbmigrator\\dbmigratorblogic\\dbmigrator\\dto\\authentication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -33,20 +33,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MigratorAppService.cs",
               "DocumentMoniker": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigrator\\DBMigrator\\MigratorAppService.cs",
               "RelativeDocumentMoniker": "DBMigrator\\DBMigrator\\MigratorAppService.cs",
               "ToolTip": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigrator\\DBMigrator\\MigratorAppService.cs",
               "RelativeToolTip": "DBMigrator\\DBMigrator\\MigratorAppService.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAiwEYAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAwwB4AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-22T09:46:05.758Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-22T09:46:05.758Z"
             },
             {
               "$type": "Document",
@@ -62,15 +61,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MigratorBLogic.cs",
               "DocumentMoniker": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
               "RelativeDocumentMoniker": "DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
               "ToolTip": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
               "RelativeToolTip": "DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
-              "ViewState": "AgIAAHYAAAAAAAAAAIA4wEQCAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAD4DAAAAAAAAAAAmwGYDAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T06:59:19.751Z"
+              "WhenOpened": "2025-06-17T06:59:19.751Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

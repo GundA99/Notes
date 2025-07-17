@@ -60,7 +60,7 @@ REST
 #What is REST
 - REST stands for REpresentation state transfer. it is a set of guidlines which helps in creating a system where application can easily communicate with each other.
 
-guidlines like: sepration pf Client sever, uniform interface - identify resource by URL 
+guidlines like: sepration of Client sever, uniform interface - identify resource by URL 
 #What is REST API
 the api which follow rules of REST 
 										
@@ -98,7 +98,7 @@ public abstract class EmployeeDress
 	}
 }
 	
-Normally we prefer interface becouse it gives us the flexibilityto modify the behavior at later stage.
+Normally we prefer interface becouse it gives us the flexibility to modify the behavior at later stage.
 
 #Session:
 - A session refers to the state management technique that stores the user data and information on the server-side.
@@ -413,6 +413,8 @@ All this are defined in system namespace.
 		event MyDelegate Myevent;
 	then, invoke the event by using invoke
 		Myevent.invoke("AKASH");
+
+AKASH
 #LINQ:
 -LINQ is a Languge Integrated Query it provide the new way to manipulate the data.
 - we do not need to learn new query languge syntaxes for different sources of data because it provide the standard query syntax for the various data sources.		

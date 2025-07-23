@@ -391,8 +391,8 @@ get the path of the git repo
 -Browse and install the package
 
 
-*******************************************************************5*****************************************************************************
-***********************************************************DB Connection*************************************************************************
+*******************************************5*****************************************************************************
+***************************************DB Connection*************************************************************************
 
 -Command for connect DB
 Scaffold-DbContext "server=DESKTOP-HI1APHJ\SQLEXPRESS; database=Employees; trusted_connection=true; TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
@@ -997,17 +997,17 @@ builder.logging.AddConsole(); <- if we want only Console window
 
 
 **************************************************************13**********************************************************************
-*************************************************Difference between .Net and Asp.Net************************************************************
+*******************************************Difference between .Net and Asp.Net************************************************************
 
 .Net: only work on window.
 
 ASP .Net Core : 
--support cross platform like windows,linux.
--Support microservices architecture
--performance is faster.
--open source 
--Container support,we can build application and run on docker 	
--SP.NET is a part of the .NET framework specifically designed for building web applications and services.
+- support cross platform like windows, linux.
+- upport microservices architecture
+- erformance is faster.
+- open source 
+- Container support, we can build application and run on docker 	
+- SP.NET is a part of the .NET framework specifically designed for building web applications and services.
 In summary, .NET is the overall framework for various types of applications, while ASP.NET is specifically focused on web application development.
 
 Why ASP.Net Core?
@@ -1588,7 +1588,7 @@ builder.Services.AddCors(o =>
 
 
 *************************************************************23********************************************************************
-****************************************************** Mail Functionality *************************************************************
+****************************************************** Mail Functionality *********************************************************
   
   public void SendEmail(string toEmail, string subject, string body)
   {

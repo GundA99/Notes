@@ -78,7 +78,7 @@ the api which follow rules of REST
 #when to use interface and abstract class
 Interface:
 an interface is a good choise when you know a method has to be there, but it can be implementated Differently by independent derived classes.
-ex: supose we have 2classes PermantEmployee , ContractualEmployee we know both employee has some common functionality like assignManager so we create Interface with AssignManager() method in that case implementation is not clear now, it can be implementated differently in derived classes.
+ex: supose we have 2 classes PermantEmployee , ContractualEmployee we know both employee has some common functionality like assignManager so we create Interface with AssignManager() method in that case implementation is not clear now, it can be implementated differently in derived classes.
 
 public interface Employee
 {
@@ -356,7 +356,7 @@ JIT(Just in time):- Actually convert IL code into Machin understandable language
 
 
 #Diff between .NET Framework and .NET Core 
--Instad, developers prefer to use ASP.net MVC and ASP.NET web Api. Those two technologies have been refactored and combined into a new product that runs on .NET Core, named ASP.NET Core.
+-Instead, developers prefer to use ASP.net MVC and ASP.NET web Api. Those two technologies have been refactored and combined into a new product that runs on .NET Core, named ASP.NET Core.
 - Core Work on Cross-platform (Windows,macOS, Linux). Perfomance is better than .net framwork
 - .NET Framework used only on windows.
 - Xamarin is only for mobile apps (Android,Ios,macOS).
@@ -398,7 +398,7 @@ myList.add("akash")  // compiler error
 # Delegates:
 -The Delegates is a reference type Data type, but instade of referencing object it reference methods.
 - A method That is added to the delegate must have same return type and same signature as delegate.
--multicast Delegates: A delegate That points multiple methods is called a multicast delegate.
+- multicast Delegates: A delegate That points multiple methods is called a multicast delegate.
 
 Func: Func is a generic delegate included in System namespace, in that we can pass 0 to 16 parameter and one out parameter is requird.
 Action: Action Delegates can take upto 16 input parameter of different type but it return void type.

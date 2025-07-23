@@ -354,7 +354,7 @@ Return Type: An EmptyResult is returned, but since the response body and status 
 504 : Gateway Timeout
 ***************************************10.Design patterns******************************************************
 Q. What is design pattern?
- - A design pattern is a reusable solution to a common problem in software design.There are 3 types of Design patterns:
+ - A design pattern is a reusable solution to a common problem in software design. There are 3 types of Design patterns:
 
 1.Creational design pattern
 2.Structural design pattern
@@ -671,6 +671,110 @@ public class Main {
         cat.eat();    // Output: This animal is eating.
     }
 }
+
+#Full opps concent snippet
+using System;
+
+namespace OOPConceptsDemo
+{
+    // Abstraction using abstract class
+    public abstract class Animal
+    {
+        // Public property
+        public string Name { get; set; }
+
+        // Protected field (can only be accessed in this class and derived classes)
+        protected int age;
+
+        // Constructor to demonstrate protected field usage
+        protected Animal(string name, int age)
+        {
+            Name = name;
+            this.age = age;
+        }
+
+        // Abstract method (must be implemented in derived class)
+        public abstract void MakeSound();
+
+        // Virtual method (can be overridden)
+        public virtual void Eat()
+        {
+            Console.WriteLine($"{Name} is eating.");
+        }
+
+        // Public method to show encapsulated protected field
+        public void ShowAge()
+        {
+            Console.WriteLine($"{Name} is {age} years old.");
+        }
+    }
+
+    // Inheritance and Polymorphism
+    internal class Dog : Animal
+    {
+        public Dog(string name, int age) : base(name, age) { }
+
+        // Overriding abstract method
+        public override void MakeSound()
+        {
+            Console.WriteLine($"{Name} says: Woof!");
+        }
+
+        // Overriding virtual method
+        public override void Eat()
+        {
+            Console.WriteLine($"{Name} is munching on dog food.");
+        }
+
+        // Static method
+        public static void ShowDogInfo()
+        {
+            Console.WriteLine("Dogs are loyal animals.");
+        }
+
+        // Using protected member from base class
+        public void IncreaseAge()
+        {
+            age++;
+            Console.WriteLine($"{Name} is now {age} years old.");
+        }
+    }
+
+    internal class Cat : Animal
+    {
+        public Cat(string name, int age) : base(name, age) { }
+
+        public override void MakeSound()
+        {
+            Console.WriteLine($"{Name} says: Meow!");
+        }
+    }
+
+    public class Program
+    {
+        public static void Main()
+        {
+            Animal myDog = new Dog("Rex", 5);
+            Animal myCat = new Cat("Whiskers", 3);
+
+            myDog.MakeSound();     // Rex says: Woof!
+            myDog.Eat();           // Rex is munching on dog food.
+            myCat.MakeSound();     // Whiskers says: Meow!
+            myCat.Eat();           // Whiskers is eating.
+
+            myDog.ShowAge();       // Rex is 5 years old.
+            myCat.ShowAge();       // Whiskers is 3 years old.
+
+            Dog.ShowDogInfo();     // Static method
+
+            // Accessing Dog-specific method
+            Dog dogInstance = (Dog)myDog;
+            dogInstance.IncreaseAge(); // Rex is now 6 years old.
+        }
+    }
+}
+
+
 *************************************************12.Delete and Truncate difference*************************************
 Delete:
 		- is a DML operation

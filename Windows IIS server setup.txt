@@ -1,0 +1,38 @@
+Step to deployee appplication on IIS
+1. Create Build
+2. Application Pool Creation
+3. Required changes for Web.Config file
+4. Required changes in appsetting file
+
+-------Application Pool Creation --------
+Open IIS
+	RClick-> Application pools -> Add Application pool
+		-> AddName, No Managed Code(CLR Version)
+	sites ->  RClick-> default Web Side -> Add Application/Virtural Derectory
+		-> AliasName(Alias) -> select appplication pool which create before () -> Add Physical Path of our build
+
+------Required changes for Web.Config file----
+#Add AppsettingsFilePath as environmentVariable in web.config file.
+
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <location path="." inheritInChildApplications="false">
+    <system.webServer>
+      <handlers>
+        <add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModuleV2" resourceType="Unspecified" />
+      </handlers>
+      <aspNetCore processPath="dotnet" arguments=".\wealthmapper.Instrument.dll" stdoutLogEnabled="true" stdoutLogFile=".\logs\stdout" hostingModel="inprocess" >    <---- Make true for generate logs
+		 <environmentVariables>
+         <environmentVariable name="AppsettingsFilePath" value="C:\Ikione Projects\WM_Standard" />					<------- appsetting file path
+		<environmentVariable name="IdentityServerPath" value="http://localhost/WMStandardSDB/UserManagement/" />
+      </environmentVariables>
+	  </aspNetCore>
+    </system.webServer>
+  </location>
+</configuration>
+<!--ProjectGuid: 3A2C0134-E7D4-4A00-90E3-635A9D8C016B-->
+
+----------Required changes in appsetting file------------
+#add AliasName in Prefix
+ex:
+    "PortfolioServerPathPrefix": "portfolioManagement",

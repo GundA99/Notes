@@ -28,9 +28,9 @@ Create Questionnair for personal data, Basic KYC, investment experience, transac
  Questionnaire microservices
  CustomerTestManagement microservices (make suitability things dyanamic)
  all form replce with servejs without affect flow
-#play and learn module 
+#play and learn module
 #report module
-- all apis  
+- all apis
 - RDLC
 #Transaction note(RDLC template) for Equity demo
 #Advisory RDLC report creation 
@@ -50,11 +50,6 @@ Probroker implementation for dubai demo
 DB Migrator Tool by using Dapper
 Report module (RDLC)
 ------------------------------------------------------------------
-
-
-
-
-
 
 
 
@@ -80,7 +75,7 @@ api/InstrumentGroup/UpdateInstrumentGroupFilter (InstrumentGroupID provided) 			
 
 
 
-GetInstrumentGroups 
+GetInstrumentGroups  
 CreateInstrumentGroup
 UpdateInstrumentGroup
 CreateInstrumentGroupFilter

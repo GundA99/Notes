@@ -1284,3 +1284,28 @@ Command for font-awesone            : npm i font-awesome
             ],
 --------------------
 Run project on custome port : ng s --port 4209
+
+
+
+
+
+---------------------------JWT Helper service--------------------
+Note:-- Basically this package creates a interceptor for every Http request and sends Jwt Token in it 
+
+implementation
+npm install @auth0/angular-jwt   <-- for install package
+
+---appConfig file---
+ providers: [
+    importProvidersFrom(
+        JwtModule.forRoot({
+          config:{
+            tokenGetter:()=>{
+              return localStorage.getItem('assessToken');
+            },
+            allowedDomains: ['localhost:7197'],
+          }
+        })
+    )
+  ]
+  basically this will get tocken for localstorage and add in http request

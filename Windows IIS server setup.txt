@@ -36,3 +36,33 @@ Open IIS
 #add AliasName in Prefix
 ex:
     "PortfolioServerPathPrefix": "portfolioManagement",
+
+
+
+
+*****************************UI*************************************
+ng build --configuration production		<---- for create dist file
+create new folder to refere IIS and paste dist containt file there
+Create App Pool same as above
+
+
+index.html
+appsetting.production 
+web.config - for forword , rewite module
+
+1. copy dist file in folder
+2. Copy web 4 config file (not create in dist need to add externally)
+3. index.html - > add domain name 
+	 <base href="WMStandardWeb">      <--- Add pool Name
+4. web.config -> add domain name 
+	 <action type="Rewrite" url="/WMStandardWeb/" />	<--- Add pool Name
+3. Add paths in appConfig and appConfig.Production
+	
+  // Add url end points
+  "onBoardServiceBaseUrl": "http://localhost/OnboardingManagement",
+  "portfolioServiceBaseUrl": "http://localhost/PortfolioManagement",
+  "instrumentServiceBaseUrl": "http://localhost/Instrument",
+  "OrderServiceBaseUrl": "http://localhost/OrderManagement",
+  "portfolioMgmtServiceBaseUrl": "http://localhost/APM/portfolio",
+  "reportServiceBaseUrl": "http://localhost/wmstandardsdb/Report",
+  "appBaseUrl": "http://localhost/WMStandardWeb",					<-- base url

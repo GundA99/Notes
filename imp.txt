@@ -326,7 +326,7 @@ Convert.FromBase64String(string): Decodes a Base64 string back into its original
 #C# vs .Net
 
 C# is a microsoft programing language where .Net is a Framwork
-C# it has those syntaxes,loops, conditions, swithches, 
+C# it has those syntaxes, loops, conditions, swithches, 
 .Net framwork has 2 things 
 	collection of libraries and It has runtime
 		Collection of libraries like list, stack, we can use directly from system.collection class
@@ -414,7 +414,7 @@ All this are defined in system namespace.
 	then, invoke the event by using invoke
 		Myevent.invoke("AKASH");
 
-AKASH
+
 #LINQ:
 -LINQ is a Languge Integrated Query it provide the new way to manipulate the data.
 - we do not need to learn new query languge syntaxes for different sources of data because it provide the standard query syntax for the various data sources.		
@@ -495,7 +495,7 @@ Service lifetimes
 
 #Finally and Finalize
 Finally is used in exception handling. where as Finallize is a method which is automatically called by the garbage collector to dispose the no longer needed object.
-****************************************************Key Features of the ABP Framework**********************************************
+***************************************Key Features of the ABP Framework**********************************************
 
 ABP is a open source web application framework to create mobile and web application based on asp .net core it provide infrastructure for interprice level software
 Command for create solution-
@@ -513,7 +513,7 @@ UI Frameworks: ABP integrates well with various front-end frameworks, such as An
 
 Dependency Injection: It uses built-in dependency injection, promoting a loosely coupled design.
 					
-**************************************************Dependence injection ************************************************************
+**********************************Dependence injection *************************************
 
 it is A design pattern to reduce coupling between classes
 - Instad of dependant object manage their dependancy .net framwork will automatically create object and make it available to Dependant object directly at runtime.
@@ -542,7 +542,7 @@ Internet Information Services is an extensible web server software for the Windo
 IIS Express : lightweight web server Provided by Visual Studio Similar to IIS
 
 IIS Express is a service Provided by visual Studio another services like 
-Visual Studio support Apache, TomCat, Wamp,Xamp, MySQL, Java, Php this are services 
+Visual Studio support Apache, TomCat, Wamp, Xamp, MySQL, Java, Php this are services 
 
 ----------------------------------------------------------Docker---------------------------------------------------------------------
 
@@ -625,7 +625,7 @@ other...in Notebook
 Visual Boards: Kanban uses a board layout where tasks are represented as cards. Columns represent different stages of the workflow (e.g., To Do, In Progress, Done).	
 Continuous Delivery: Unlike traditional methods with fixed-length sprints, Kanban promotes continuous delivery. Teams can prioritize and complete tasks as they are ready.	
 	
-**********************************************************************DB**********************************************************************
+*********************************************DB**********************************************************************
 
 SQL VS SQL server : SQL is Query languge, while SQL Server is a DataBase managment System.
 					SQL is Query languge for working with a relational DB while SQL server is software that perform SQL query.
@@ -633,7 +633,7 @@ SQL VS SQL server : SQL is Query languge, while SQL Server is a DataBase managme
 DataBase: A Db is a structured collection of Data that is organized and Stored in a way that allows for efficient retrival, manipulation 
 
 
---------------------------------------------------SQL Command/ Type of DB languge--------------------------------------------------
+-----------------------------SQL Command/ Type of DB languge--------------------------------------------------
 DB languge are used to read, update, and Store Data in DB. There are several languges can be used for this porpose
 1. Data defination languge(DDL) : Used to define DB Schema 
 								  Ex. Create,Drop,Truncate, Alter
@@ -693,7 +693,7 @@ Durability:- After succesfully complete the trasaction changes in the DB is pers
 #3rd NF : The relation will be in 3NF if is in 2NF and not contain any transitive partial dependency   
 			EX. EMPID | Name | ZIP | STATE | CITY =>  EMPID | Name | ZIP  &  ZIP | STATE | CITY 
 
-*******************************************************DevOps, AWS, Git*****************************************************************
+*********************************************DevOps, AWS, Git***************************************************
 #DevOps:
 	- Devops is a methodology in software development, it Industries used to set of practices and tools to improve Collabration and communication between software Software Development and It Opration team.
 	- The Primary Goal of Devops is to shorten the software lifecycle, Enables continus delivery of High Quality software.

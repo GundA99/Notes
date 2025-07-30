@@ -143,7 +143,7 @@ Defination:
 
 1.Object-Relational Mapping (ORM):  automatically maps the objects in your application to the tables in your database. 
 
-For ex. we have Student class, Employee class there calsses will be directly matched with database tables.the properties will be table columns.
+For ex. we have Student class, Employee class there calsses will be directly matched with database tables. the properties will be table columns.
  
 ****************************************************6.Routing in C#****************************************************
 - Routing is used to handle incoming HTTP requests based on the URL and maps them to a controller action or endpoint.
@@ -642,14 +642,14 @@ abstract class Animal {
 // Concrete class (subclass) that extends the abstract class
 class Dog : Animal {
     // Providing implementation for the abstract method
-    void sound() {
+   public override void sound() {
         System.out.println("Bark");
     }
 }
 
 class Cat : Animal {
     // Providing implementation for the abstract method
-    void sound() {
+   public override void sound() {
         System.out.println("Meow");
     }
 }
@@ -884,7 +884,7 @@ In multi-threaded applications, a Singleton ensures that only one thread can acc
 
 2.Centralized Management: 
 With a Singleton, managing the connection (like closing or refreshing it) becomes much easier. You can control connection lifecycle events in a single, well-defined place, improving maintainability and scalability.
-	
+
 **********************************************17.IActionResult******************************
 IActionResult is an interface used in controller methods to return flexible HTTP responses. Instead of always returning just data (like User object), it lets you return different types of results, such as:
 
@@ -1399,7 +1399,7 @@ GET /api/products?category=fruit&page=2
 ----------------------------------------------------------
 3.FromHeader : it will return header information
 
-##################################✅ Coding problems#########################################################
+##################################✅ Coding problems #######################################################
 
 1.give me no of occuerence for each word from hello (count)
 
@@ -1437,7 +1437,7 @@ foreach (var item in disc)
 {
     Console.WriteLine(item.Key + " : "+item.Value);
 }
-
+AKASH
 ###################################################✅ Database#################################################################
 ****************************************1.In SQL how do you optimize stored procedures****************************************
 1. use SET NOCOUNT ON 

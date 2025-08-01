@@ -1,7 +1,6 @@
 AsyncPipe:defination
 Observable
 How can you show/hide a column in a grid layout based on employee role?
-What is the use of temp tables and table variable
 ✅ Angular 
 ✅ HTML
 ✅ Bootstrap
@@ -140,7 +139,7 @@ AngularJS means Angular 1 family
 ----------------------   
 5 Decorators
 -> 
-Purpose: Used to store metadata about a classes, methods, properties.
+Purpose: Used to store metadata about a classes, properties, Parameter.
 - All decorators are represented with @ symbol
 MetaData:- is data that provides information about other data.
 Example: @Component, @Injectable, @Directive, @Input.
@@ -170,7 +169,7 @@ Property Decorator:-
 	@Output() message : string='';
 Parameter Decorator:-
 	http = inject(HttpClient); 		<--- by using inject decorator we can add DI, its work same as we add DI in contructor. 
-Note :- @Directive Decorator is used for cretae custom Directive
+Note :- @Directive Decorator is used for create custom Directive
 
 
 in ts there is no concept of component, component is consept of angular.
@@ -194,7 +193,7 @@ Parameter Decorator : @Inject, @Self, @Host, @optional.
 	
 	Npm helps you to install any javaScript framework in your Computer.
 	for example if you want to install jQuery simple go and use npm install jquery command. 
-	after hit command all jquery packege install in Node_modules folter.
+	after hit command all jquery packege install in Node_modules folder.
 	Node_Modules is nothing but a folter where all javaScript packege install.
 	- The node_module folder is used to save all downloaded packages from npm in your computer.
 	
@@ -1148,7 +1147,7 @@ console.log(elements.textContent);			// Element 1, Element 2, Element 3
 			},
 	}
 	- an object is a data type that allows you to store key-value pairs.
---------------------------------------------------------------------
+--------------------------------------------------------------------   
 31 How do you clone or copy an object?
 	#Ways to clone or copy an object
 	const orignalobject =
@@ -1452,3 +1451,96 @@ for(let i = 0 ; i<arr1.length-1 ;i++)
 }
 console.log(...arr1);
 -------------------------------------------
+
+
+
+1. if any API is taking lot's of time to give result, so what will you do as a UI developer.
+-> If an API is taking too long, I show a loading indicator to inform the user, set a timeout to handle delays gracefully, and implement retries if needed. I also coordinate with the backend team to optimize the API and improve response time.
+
+---------------------------------------------------------------
+2. If you have to call 3 API's at a time what will you do.
+-> 
+
+✅ Option 1. Use ForkJoin
+#Code
+import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
+import { DataService } from './data.service';
+
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html'
+})
+export class DashboardComponent implements OnInit {
+  constructor(private dataService: DataService) {}
+
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData(): void {
+    forkJoin({
+      user: this.dataService.getUser(),
+      orders: this.dataService.getOrders(),
+      notifications: this.dataService.getNotifications()
+    }).subscribe({
+      next: (results) => {
+        console.log('User:', results.user);
+        console.log('Orders:', results.orders);
+        console.log('Notifications:', results.notifications);
+      },
+      error: (error) => {
+        console.error('One or more API calls failed:', error);
+      }
+    });
+  }
+}
+💡 What is forkJoin?
+	It's from RxJS
+	Waits for all Observables to complete
+	Emits the final result together as an object or array
+-------------
+✅ Option 2: Use merge() for parallel, independent execution
+	- If I want to get API results independently without waiting for all to complete, I either subscribe to each API separately or use merge() from RxJS. This way, each API response is processed as soon as it's available
+	import { merge } from 'rxjs';
+#Code	
+import { Component, OnInit } from '@angular/core';
+import { DataService } from './data.service';
+
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html'
+})
+export class DashboardComponent implements OnInit {
+  constructor(private dataService: DataService) {}
+
+  ngOnInit(): void {
+    merge(
+      this.dataService.getUser(),
+      this.dataService.getOrders(),
+      this.dataService.getNotifications()
+    ).subscribe({
+      next: (response) => {
+        console.log('API Response:', response);
+        // You can check the response shape or type to know which API it is
+      },
+      error: (err) => {
+        console.error('Error from one of the APIs:', err);
+      }
+    });
+  }
+}
+
+************************************************************
+3. How your handling API error.
+4. How you call API and get data from API.
+5. Project discreption.
+6. What is beheavioral subject.
+7. program - create a login page in that page add one input to enter username and one button 
+	on click of that button route to the home page with the username and show the usename in the home page html.
+8. diff between navigate and navigatebyURl.
+9. Sharing data between components.
+
+
+combine leter
+merge

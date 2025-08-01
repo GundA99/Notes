@@ -634,7 +634,6 @@ namespace DBMigratorBLogic.Migrator
             }
         }
         #endregion
-
         public void MigrateSchemaAndTablesUI(string sqlBaseConnectionString, string pgBaseConnectionString, string SqldbName, List<string>? schemaList)
         {         
             var SqlConnectionString = $"{sqlBaseConnectionString};Database={SqldbName};";
@@ -727,7 +726,6 @@ namespace DBMigratorBLogic.Migrator
                 }
             }
         }
-
         public void MigrateDataOnlyUI(string sqlBaseConnectionString, string pgBaseConnectionString, string SqldbName, List<string>? schemaList)
         {
             //var schemaList =new List<string> {"Base","Portfolio"};

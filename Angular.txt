@@ -1306,6 +1306,7 @@ npm install @auth0/angular-jwt   <-- for install package
             allowedDomains: ['localhost:7197'],
           }
         })
-    )
+    ),
+  provideHttpClient(withInterceptorsFromDi())			<--- this code add jwt token in request 
   ]
   basically this will get tocken for localstorage and add in http request

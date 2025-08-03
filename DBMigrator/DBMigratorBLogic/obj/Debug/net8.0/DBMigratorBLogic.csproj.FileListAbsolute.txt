@@ -23,3 +23,16 @@ C:\Akash\Study-Projects\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorB
 C:\Akash\Study-Projects\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\refint\DBMigratorBLogic.dll
 C:\Akash\Study-Projects\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.pdb
 C:\Akash\Study-Projects\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\ref\DBMigratorBLogic.dll
+C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\bin\Debug\net8.0\DBMigratorBLogic.deps.json
+C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\bin\Debug\net8.0\DBMigratorBLogic.dll
+C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\bin\Debug\net8.0\DBMigratorBLogic.pdb
+C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.csproj.AssemblyReference.cache
+C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.AssemblyInfoInputs.cache
+C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.AssemblyInfo.cs
+C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.csproj.CoreCompileInputs.cache
+C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.sourcelink.json
+C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.dll
+C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\refint\DBMigratorBLogic.dll
+C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\DBMigratorBLogic.pdb
+C:\Users\xxgundfa\OneDrive - Tietoevry\Desktop\Personal\Notes\DBMigrator\DBMigratorBLogic\obj\Debug\net8.0\ref\DBMigratorBLogic.dll

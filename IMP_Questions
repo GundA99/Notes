@@ -1399,6 +1399,38 @@ GET /api/products?category=fruit&page=2
 ----------------------------------------------------------
 3.FromHeader : it will return header information
 
+*****************************************25. data coming in json formate how to get and return in json formate***********************
+1. Create Model class
+2. Create a web api controller method
+	public IActionResult PostBook([FromBody] Book book)
+    {
+		    return Ok(new book);
+	}
+3.[FromBody] tells ASP.NET Core to bind the JSON request body to the book parameter.
+4.return Ok(...) automatically returns a JSON response.
+
+******************************26. What is a secret key and why is it required?*************************
+A secret key is a private string used to sign and verify tokens, like JWTs. It makes sure that the data comes from a trusted source and hasn’t been changed.
+It’s required to:
+1. Secure the token
+2. Prevent fake tokens
+Without the secret key, anyone could generate or modify tokens, which would be a big security risk.
+******************************27. Approchs for secure APIs using JWT***************************************
+ 1. Apply Authorization Globally (Best Practice for APIs)
+	Instead of using [Authorize] on each controller or method, you can enforce it for the entire application in Program.cs or Startup.cs.
+	builder.Services.AddControllers(options =>
+	{
+		var policy = new AuthorizationPolicyBuilder()
+			.RequireAuthenticatedUser()
+			.Build();
+		options.Filters.Add(new AuthorizeFilter(policy));
+	});
+	This means all endpoints require a valid JWT, unless explicitly marked with [AllowAnonymous].
+
+	🔓 Use [AllowAnonymous] for public endpoints like /login or /register
+ 2. use [Authorize]
+ it's the recommended and cleanest way to secure specific routes.
+
 ##################################✅ Coding problems #######################################################
 
 1.give me no of occuerence for each word from hello (count)
@@ -1910,7 +1942,7 @@ MG Global
 31.if you have one task on different technology and have tight Deadline how can handle
  
 TSKsystem
-string "78,56,78,89,90$79,89,87,78,89$12,45,67,78,12$56,67,78,89,75";
+1. string "78,56,78,89,90$79,89,87,78,89$12,45,67,78,12$56,67,78,89,75";
 , represent marks of student
 $ represent student
 Greads 75< A
@@ -1991,9 +2023,9 @@ Count Greads and return max gread;
 
 
 ----------------------------------------------
-Inheritance
+2. Inheritance
 ---------------------------------------------
-
+3. Find rick Director of India
 SELECT TOP(1) 
     d.FullName AS FirstName, 
     SUM(b.Profit) AS TotalProfit,
@@ -2010,3 +2042,26 @@ GROUP BY
     d.FullName 
 ORDER BY 
     TotalProfit DESC;
+---------------------------------
+#SWT System
+1.background
+2.what is appsetting.json
+3.if data coming in json formate how to get and return in json formate
+4.jwt secret key means?
+5.how we add jwt authentication
+6.what is deligate
+7.explain middleware
+8.How to secure api
+9.role based authentication
+10.Difference IActionResult and ActionResult
+11.type of cache in .net core
+12.how can secure api where to write logic (controller and any other way?)
+13.what is Cors 
+14.where you can register service
+15.Lazy loading in EF
+16.What is Repository pattern
+17.how to secure transfer from server to client during request 
+18.find 3rd highest amount from table
+19.what is dense rank
+20.difference between clustered non clustered index and how to create 
+

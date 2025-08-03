@@ -322,7 +322,7 @@ Convert.FromBase64String(string): Decodes a Base64 string back into its original
 -view resolver return the full path to the FC in case there is some data, FC set in the view and send the view back to the client.
 
 *********************************************************DOTNET***************************************************************
-
+AKASH
 #C# vs .Net
 
 C# is a microsoft programing language where .Net is a Framwork
@@ -769,19 +769,3 @@ it stands for javascript xml, jsx is a XML-like syntax it allow us to write HTML
 Whereas ASP.NET Core is a collection of libraries that will form a framework for developing web applications. 
 ASP.NET Core libraries can be used on .NET Core as well as on the “Full .NET Framework”.
 #############################################################################################################################
-
-
-Subject: Resignation Letter
-
-Dear Anand sir,
-
-I hope this message finds you well. I am writing to formally resign from my position as Backend Developer at Ikione system.
-
-This decision was not easy and comes after careful consideration of my personal and professional goals. I am truly grateful for the opportunities, support, and experiences I have gained while working with the team.
-
-As of now, I am flexible with my final working day and am happy to assist in ensuring a smooth transition. Please let me know how I can best support during this period.
-
-Thank you once again for the opportunity to be part of the company. I have learned and grown a great deal during my time here.
-
-Warm regards,
-Akash Gund

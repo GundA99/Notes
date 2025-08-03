@@ -80,7 +80,7 @@ AngularJS means Angular 1 family
 - we don't have CLI in AngularJS but we have CLI in Angular
 -History Old AngularJs build on JavaScript but afterword its comes with typescript thats why anguleJS will be Angular only they remove js from angular.
 -AngularJS does not use Dependancy injection. Angular uses.
-- Angular is much faster than AngularJS bcz of databinding technic and component bsaed architecture
+- Angular is much faster than AngularJS bcz of databinding technic and component based architecture
 --------------------------------------------------------------------
 3.What are directives in Angular?
 - Directive are classes that add additional behavior to elements in your angular application.
@@ -147,7 +147,7 @@ Functionality: Configures how a class or member behaves at runtime.
 	EX:- 
 Class Decorator:- 
 	#in component
-		@Component({				<--- Component decorate is treated call as component.
+		@Component({				<--- Component decorate is treated class as component.
 		  selector: 'app-root',
 		  templateUrl: './app.component.html'
 		})

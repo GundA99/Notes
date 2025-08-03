@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DBMigratorBLogic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b48bcecfa9cbd477754faabb8853490f87d57f9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+21a79fcbe904dd76bd114af4fe63f452e8485787")]
 [assembly: System.Reflection.AssemblyProductAttribute("DBMigratorBLogic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DBMigratorBLogic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

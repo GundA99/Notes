@@ -279,7 +279,7 @@ DEMO
 	
 	SELECT @FullName = first_name +' '+last_name from Email
 	where id = @Id
-	return @fullName	
+	return @fullName
 	END	
 	
  Execute Function:

@@ -1544,3 +1544,18 @@ export class DashboardComponent implements OnInit {
 
 combine leter
 merge
+
+1.service structure.
+2.What is Rxjs, why to use it?
+3.What is pipe and explain there structure?
+4.Why we use subscriber at the time of get data from API?
+5.create service and call API in that service and call that service from componet and get the data.
+6.create the @Input and @output variable and communicate between two components.
+7.what is the importance of package.json and angular.json file.
+8.Expain change detection stargies.
+9.To stay updated of new versions or feartures of angular, what you do?
+10.Angular life cycle hooks and explain any 2 of them.
+11.What is DI?
+12.which are the types of data binding?
+13.What is the use of ngOninit()?
+ 

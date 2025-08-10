@@ -29,7 +29,6 @@ Difference jira taiga
 26. Difference between .Net 6,8,9 and CountBy and AggregateBy Method cache library
 27. IQueryable vs IEnumerable
 28. New Microservice creation
-29. ExpandoObject
 **********************************************************************1************************************************************
 **********************************************************JWT Token Authentication*************************************************
 
@@ -603,7 +602,7 @@ using Abp.Domain.Repositories;
 
 
 *************************************************************************7*********************************************************************
-****************************************************************Figma Design Tools************************************************************
+**************************************************Figma Design Tools************************************************************
 
 
 Figma :
@@ -777,8 +776,8 @@ Create Statup.cs files
 	-Configure
 		HTTP Pipline related
 		
-*****************************************************************9******************************************************************************************
-*********************************************************NUnit Testing*************************************************************************************
+******************************************************9******************************************************************************************
+***************************************NUnit Testing**********************************************************
 #NUnit Testing
 NUnit is a popular testing framework for .NET applications that provides a range of features for creating and executing unit tests.
 Basically we use NUnit testing for test class library becouse class library cannot run directly bcz it don't have starting point.
@@ -824,9 +823,8 @@ Assert.AreEqual(expected, actual): Asserts that two values are equal.
 Assert.IsTrue(condition): Asserts that a condition is true.
 Assert.IsFalse(condition): Asserts that a condition is false.
 Assert.Throws<T>(action): Asserts that an action throws a specific exception.
-
-************************************************************************10********************************************************************************
-**************************************************************Environment Variables*********************************************************************
+**********************************************10********************************************************************************
+*******************************Environment Variables*********************************************************************
 #Environment Variables
 
 Environment variables are used to store configuration settings that vary between different environments, such as development, testing, staging, and production. 
@@ -836,8 +834,8 @@ Why use environment variables?
 Separation of concerns: Keep sensitive data, such as database connections or API keys, separate from your code.
 Easy configuration: Update environment variables without modifying code.
 
-************************************************************************11********************************************************************************
-**************************************************************Sql vs PostGreSql*********************************************************************
+***************************************************************11********************************************
+************************************Sql vs PostGreSql*********************************************************************
 
 Major Difference Between Sql Server and PostGreSql
 SQL Server-----vs--------PostgreSQL
@@ -854,8 +852,8 @@ IDENTITY(1,1) == PRIMARY KEY
 uniqueidentifier == UUID 
 tinyint == SMALLINT 
 varbinary == BYTEA
-************************************************************************12**********************************************************************
-**********************************************************************Logger********************************************************************
+******************************************12**********************************************************************
+**************************************Logger********************************************************************
 
 The ILogger interface is designed to provide a simple logging abstraction for .NET applications, 
 allowing developers to log messages from their code in a structured manner. It abstracts away the specific logging implementation, 
@@ -994,15 +992,15 @@ builder.logging.AddDebug();  <- if we want only Debug window
 builder.logging.AddConsole(); <- if we want only Console window
 
 
-**************************************************************13**********************************************************************
-*******************************************Difference between .Net and Asp.Net************************************************************
+*******************************************13**********************************************************************
+*******************Difference between .Net and Asp.Net************************************************************
 
 .Net: only work on window.
 
 ASP .Net Core : 
 - support cross platform like windows, linux.
-- upport microservices architecture
-- erformance is faster.
+- Support microservices architecture
+- performance is faster.
 - open source 
 - Container support, we can build application and run on docker 	
 - SP.NET is a part of the .NET framework specifically designed for building web applications and services.
@@ -1050,8 +1048,8 @@ OpenAPI and Swagger Enhancements
 .NET 8 introduces several features that make it easier to build cloud-native applications, including:
 -Docker support: Enhanced integration with containerized applications, offering improvements in performance, ease of use, and support for the latest Docker features.
 
-********************************************************************16*****************************************************************
-*********************************************************Web.config file in ASP .NET******************************************************
+***********************************************16*****************************************************************
+*********************************Web.config file in ASP .NET******************************************************
 
 #Apache Guacamole
 Apache Guacamole is a remote desktop gateway that allows users to access remote systems and desktops over the web.
@@ -1176,7 +1174,7 @@ SwaggerTag:
 Used to categorize or group operations in the Swagger UI.
 
 ********************************************************************20********************************************************************
-**************************************************************Store Procedure*************************************************************
+******************************Store Procedure*************************************************************
 #Store Procedure
 #Call Store Procedure From Code
 #Write SP where join 2 Table and return
@@ -1559,7 +1557,7 @@ public static class EnvironmentExtensions
 }
 
 ********************************************************************22********************************************************************
-************************************************************** Cors policy *************************************************************
+************************************* Cors policy *************************************************************
 #add configuration in program.cs file to allow only specific url
 
 builder.Services.AddCors(o =>
@@ -1627,7 +1625,7 @@ Key Azure Services and Components:
 	- Virtual Machines (VMs): Allow users to run custom applications or services in the cloud without needing physical hardware.
 	- Azure Storage: Offers scalable and durable storage options like Blob Storage, File Storage, Disk Storage, and Queue Storage  
 
-*********************************************************25.RDLC Report**********************************************************************************
+***********************************************************25.RDLC Report**********************************************************
 RDLC Report
 refer video : https://youtu.be/So-BzxAA7Tw?si=HyGWGgcT6PIp0Bbl
 Required Extention : Microsoft RDLC Report Designer
@@ -1762,7 +1760,7 @@ banana: bananabananabanana
 orange: orange
 ---------------------
 
-**********************New cache library in .Net 9******************************
+**********************************************New cache library in .Net 9******************************
 public class ProductService
 {
     private readonly ICache _cache;
@@ -2072,45 +2070,3 @@ namespace wealthmapper.PlayAndLearn.Module
 --------------------------------------------------------------------------------------------------------------
 
 ****************************************************************************************************************************
-******************************************************29.ExpandoObject*********************************************
-ExpandoObject is a class in C# that enables you to add and remove members (properties and methods) dynamically at runtime. 
-
-#Syntax 
-dynamic createCust = new ExpandoObject();
-
-dynamic Keyword:
-In C#, dynamic is a type that bypasses compile-time type checking. It tells the compiler to delay binding decisions until runtime. 
-This means that createCust can have properties and methods added to it dynamically, and those members can also be accessed dynamically without static type checking.
----------------------------------------------------------------------------------------------------
-Once createCust is initialized with an ExpandoObject, you can dynamically add properties and methods to createCust as needed during runtime. For example:
-createCust.Name = "John";
-createCust.Age = 30;
-createCust.Introduce = new Action(() => Console.WriteLine($"Hello, my name is {createCust.Name}"));
----------------------------------------------------------------------------------------------------
-Dynamic Access:
-Since createCust is declared as dynamic, properties and methods can be accessed without compile-time checking:
-string name = createCust.Name;
-int age = createCust.Age;
-createCust.Introduce();
----------------------------------------------------------------------------------------------------
-
-Another one example
-
-dyanamic locationObj = new ExpandoObject();
-locationObj.MainLocation = new ExpandoObject();     <--------- nested object creation
-locationObj.MainLocation.Name = "Pune";             <--------- set propertie and value
-locationObj.MainLocation.Name = 21;                 <--------- we can change data type
-
-locationObj.MainLocation.number = 50;
-locationObj.Increment = (Action)(() => {locationObj.number++});  <----- Action is a deligate which can take parameter but not return value
-
-we can use func deligate also
-
-locationObj.Increment = (Func<int>)(() =>
-{
-    locationObj.MainLocation.number++;
-    return locationObj.MainLocation.number;
-});
-
-var myname = locationObj.Name;      <------ get value
-locationObj.Increment();            <------ call method

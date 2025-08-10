@@ -1,3 +1,5 @@
+
+Difference between session and cache
 #DOTNET 📌
 1. difference between var and let
 2. What is difference between put and patch
@@ -24,10 +26,10 @@
 22. Model binding
 23. Filter in ASP .NET Core
 24. Action Parameters [FormBody], [FormQuery]
------------
-#CODING 📌
-1.give me no of occuerence for each word from hello (count)
-
+25. data coming in json formate how to get and return in json formate
+26. What is a secret key and why is it required
+27. Approchs for secure APIs using JWT
+29. ExpandoObject
 -----------
 #DATABASE 📌
 1.In SQL how do you optimize stored procedures
@@ -38,7 +40,8 @@
 6.Joins, View, Trigger
 7.Normalization
 8.What is the use of temp tables and table variable
-
+9.difference between clustered and non-clustered indexes
+10.What is Constraint in SQL
 ---------
 #SQL QUERY PROBLEMS 📌
 1. Second highest salary and third highest salary
@@ -538,7 +541,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddDbContext<MyDbContext>(options => options.UseSqlServer("ConnectionString"));
     services.AddScoped<IMyService, MyService>();
 }
-#Why DI is considered a Structu	ral Pattern:
+#Why DI is considered a Structural Pattern:
 Decoupling Components: DI promotes decoupling between classes by allowing their dependencies (e.g., services, repositories) to be provided externally instead of creating them internally. This allows classes to focus on their primary responsibilities without worrying about how to create or manage their dependencies.
 
 #In ASP.NET Core, DI is commonly implemented using the following techniques:
@@ -870,6 +873,23 @@ Static Class:
 	- Purpose: A static class is useful when you want to group methods or properties that don't require an instance of the class to be used,
 	- You cannot instantiate a static class. 
 	- can not contain non static member. 
+#Prevent method from overriding 
+use sealed keyword
+class BaseClass
+{
+    public virtual void Show(){}
+}
+
+class DerivedClass : BaseClass
+{
+    public sealed override void Show(){}	<--- use sealed with override keyword
+}
+
+class SubDerivedClass : DerivedClass
+{
+    // ❌ This will cause a compile-time error
+    // public override void Show() { ... }
+}
 
 *********************************16. Major Difference Between Sql Server and PostGreSql*********************************
 
@@ -878,7 +898,7 @@ SQL Server-----vs--------PostgreSQL
 1.Relational database management system ----   Object-relational database management system
 2.Commercial product from Microsoft  ------  Open source (completely free) 
 3.Primarily designed for Windows, but recent versions also support Linux. ------ can run on various operating systems including Windows, Linux, and macOS.
-******************************************** Why we create db connection as Singleton life cycle******************************
+**************************************** Why we create db connection as Singleton life cycle******************************
 1.Thread Safety
 In multi-threaded applications, a Singleton ensures that only one thread can access the database connection at any given time, preventing conflicts and data corruption. This makes it easier to avoid issues where multiple threads might try to access or modify the database simultaneously.
 
@@ -927,12 +947,30 @@ public User GetUser(int id)
 ❌ No way to return an error or 404 response.
 
 -----------------------------IActionResult vs ActionResult---------------------------
-IActionResult:
-IActionResult is a interface representing different HTTP results like View(), NotFound(), Redirect(). It allows flexibility to return various result types.
-Perfect for MVC controllers where you render views or perform redirections.
+#IActionResult:
+	IActionResult is a interface representing different HTTP results like View(), NotFound(), Redirect(). It allows flexibility to return various result types.
+	used when returning only HTTP responses
+	public IActionResult GetItem(int id)
+	{
+		if (id == 0)
+			return BadRequest();
+		return Ok("Item found");
+	}
 
-ActionResult:
-ActionResult<T> is a generic wrapper that combines a return type like student with an HTTP status code. best suited for APIs where you return data and status in one.
+#ActionResult:
+	- Class that implements IActionResult.
+	- Useful when you want to return both a specific type and HTTP response types (like Ok, NotFound).
+	ActionResult<T> is a generic wrapper that combines a return type like student with an HTTP status code. best suited for APIs where you return data and status in one.
+
+	public ActionResult<Student> GetItem(int id)
+	{
+		if (id == 0)
+			return NotFound();
+
+		return new Student { name = "Akash" };
+	}
+Note :- When we want to return only status codes, we use IActionResult.
+		When we want to return status codes along with data (like a Student object), we use ActionResult<T>.
 ****************************************18.SOLID Principle***********************************************************************
 
 The SOLID principles are a set of five principles in object-oriented programming to make software designs more understandable,
@@ -1277,7 +1315,7 @@ public class CutomActionFilter: Attribute, IActionFilter
 		Console.Writeline("CustomActionFilter OnActionExecuted method");
 	}
 }
--------------------------------Exception Filter----------------------
+-------------------------Exception Filter----------------------
 Exception Filter:- will run when an unhandled exception occures
 
 public class CustomExceptionFilter : IExceptionFilter
@@ -1409,13 +1447,14 @@ GET /api/products?category=fruit&page=2
 3.[FromBody] tells ASP.NET Core to bind the JSON request body to the book parameter.
 4.return Ok(...) automatically returns a JSON response.
 
-******************************26. What is a secret key and why is it required?*************************
+**********************************26. What is a secret key and why is it required?*************************
 A secret key is a private string used to sign and verify tokens, like JWTs. It makes sure that the data comes from a trusted source and hasn’t been changed.
 It’s required to:
 1. Secure the token
 2. Prevent fake tokens
 Without the secret key, anyone could generate or modify tokens, which would be a big security risk.
-******************************27. Approchs for secure APIs using JWT***************************************
+
+********************************27. Approchs for secure APIs using JWT***************************************
  1. Apply Authorization Globally (Best Practice for APIs)
 	Instead of using [Authorize] on each controller or method, you can enforce it for the entire application in Program.cs or Startup.cs.
 	builder.Services.AddControllers(options =>
@@ -1430,46 +1469,71 @@ Without the secret key, anyone could generate or modify tokens, which would be a
 	🔓 Use [AllowAnonymous] for public endpoints like /login or /register
  2. use [Authorize]
  it's the recommended and cleanest way to secure specific routes.
-
-##################################✅ Coding problems #######################################################
-
-1.give me no of occuerence for each word from hello (count)
-
- static void Main()
-    {
-        string input = "hello";
-
-        // Use LINQ to group characters by their value and count the occurrences
-        var charCount = input.GroupBy(c => c)
-                             .Select(group => new { Char = group.Key, Count = group.Count() })
-                             .ToList();
-
-        // Display the character counts
-        foreach (var item in charCount)
-        {
-            Console.WriteLine($"{item.Char} : {item.Count}");
-        }
-    }
+*************************************28. type of cache in .net core****************************************
+- In .NET Core, there are mainly three types of caching mechanisms used to improve performance by reducing the need to repeatedly fetch or compute the same data:
+✅ 1. In-Memory Caching
+	Data Stored in server memory
 	
----------------------------or-------------------------------
-string s = "AkAsh";
-var disc = new Dictionary<char, int>();
-for (int i = 0;i< s.Length;i++)
+	services.AddMemoryCache();
+
+	private readonly IMemoryCache _memoryCache;
+
+	public MyService(IMemoryCache memoryCache)
+	{
+		_memoryCache = memoryCache;
+	}
+
+	public string GetData()
+	{
+		if (!_memoryCache.TryGetValue("myKey", out string cachedValue))
+		{
+			cachedValue = "Some expensive operation result";
+			_memoryCache.Set("myKey", cachedValue, TimeSpan.FromMinutes(5));
+		}
+		return cachedValue;
+	}
+*********************************************29. ExpandoObject*****************************
+ExpandoObject is a class in C# that enables you to add and remove members (properties and methods) dynamically at runtime. 
+
+#Syntax 
+dynamic createCust = new ExpandoObject();
+
+dynamic Keyword:
+In C#, dynamic is a type that bypasses compile-time type checking. It tells the compiler to delay binding decisions until runtime. 
+This means that createCust can have properties and methods added to it dynamically, and those members can also be accessed dynamically without static type checking.
+---------------------------------------------------------------------------------------------------
+Once createCust is initialized with an ExpandoObject, you can dynamically add properties and methods to createCust as needed during runtime. For example:
+createCust.Name = "John";
+createCust.Age = 30;
+createCust.Introduce = new Action(() => Console.WriteLine($"Hello, my name is {createCust.Name}"));
+---------------------------------------------------------------------------------------------------
+Dynamic Access:
+Since createCust is declared as dynamic, properties and methods can be accessed without compile-time checking:
+string name = createCust.Name;
+int age = createCust.Age;
+createCust.Introduce();
+---------------------------------------------------------------------------------------------------
+
+Another one example
+
+dyanamic locationObj = new ExpandoObject();
+locationObj.MainLocation = new ExpandoObject();     <--------- nested object creation
+locationObj.MainLocation.Name = "Pune";             <--------- set propertie and value
+locationObj.MainLocation.Name = 21;                 <--------- we can change data type
+
+locationObj.MainLocation.number = 50;
+locationObj.Increment = (Action)(() => {locationObj.number++});  <----- Action is a deligate which can take parameter but not return value
+
+we can use func deligate also
+
+locationObj.Increment = (Func<int>)(() =>
 {
-    if (disc.ContainsKey(s[i]))
-    {
-        disc[s[i]]++;
-    }
-    else
-    {
-        disc.Add(s[i], 1);
-    }
-}
-foreach (var item in disc)
-{
-    Console.WriteLine(item.Key + " : "+item.Value);
-}
-AKASH
+    locationObj.MainLocation.number++;
+    return locationObj.MainLocation.number;
+});
+
+var myname = locationObj.Name;      <------ get value
+locationObj.Increment();            <------ call method
 ###################################################✅ Database#################################################################
 ****************************************1.In SQL how do you optimize stored procedures****************************************
 1. use SET NOCOUNT ON 
@@ -1580,7 +1644,7 @@ so atomicity say transaction trated as one single unit both steps should happen 
 1. SP Can return 0, single or multiple value, function Can return single value Which is Mandatoy.
 2. SP Can have Input and Output parameter , function have only Input parameter.
 3. We can Call Function from SP, But not fuction call SP.
-4. we cant use SP in select, where or Having statment, but function use.
+4. we can't use SP in select, where or Having statment, but function use.
 
 #Type of Functions
 1. Single Row Function : sqrt(10),abs(10),round(12.34), Ceil(234.2), floor(2.133)
@@ -1644,10 +1708,54 @@ so atomicity say transaction trated as one single unit both steps should happen 
 	INSERT INTO @TableVar VALUES (1, 'Alice'), (2, 'Bob')
 
 	SELECT * FROM @TableVar
-
-	 
+***********************************9.difference between clustered and non-clustered indexes*******************************************
+🔹 1. Clustered Index:
+	✅ Definition: A clustered index determines the physical order of data in a table. The table data is sorted and stored according to the clustered index key.
+	✅ Characteristics: Each table can have only one clustered index because data can only be physically sorted in one order.
+	✅ Example:
+	CREATE TABLE Employees (
+	  EmployeeID INT PRIMARY KEY, -- This becomes the clustered index
+	  Name VARCHAR(100),
+	  Salary INT
+	);
+	- When you define a clustered index on a column, the database engine (like SQL Server, MySQL, PostgreSQL) internally rearranges the rows of the table in the order of that column. 
+	
+	INSERT INTO Students VALUES (102, 'John');
+	INSERT INTO Students VALUES (101, 'Amy');
+	Internally, the table will store them in this order: 101,102
+	- clustered Index is faster then Non-Clustered index.
+	- Ex: Dictionary every page have actuall data
+🔹 2. Non-Clustered Index
+	✅ Definition: A non-clustered index is a separate structure that maintains a sorted list of column values and pointers to the actual rows in the table.
+	✅ Characteristics: A table can have multiple non-clustered indexes.
+	✅ Example:
+	CREATE NONCLUSTERED INDEX idx_Employees_Name
+	ON Employees(Name);
+	
+	Ex:- Think of a non-clustered index like the table of contents in a book.
+	The table of contents lists chapter titles (e.g., “Chapter 1: Introduction”) along with page numbers.
+	The actual content (chapter text) is located elsewhere in the book, on those specific pages.
+	You use the table of contents (index) to quickly find where the real data is.
+	
+	- The non-clustered index stores sorted keys (e.g., BookTitle) and a pointer (row reference) to the actual data row in the table.
+****************************************10.What is Constraint in SQL********************
+SQL constraint are used to specify rule for the data in table
+#Primary Key:- A primary key is a field which can uniquely identify each row in a table.
+#FOREIGN Key:- A foreign key is a field which can uniquely identify each row in an another table.
+#Check:- constraint helps to validate the value of a column to meet a particular condition.
+#UNIQUE:- constraint tells that all the values in the column must be unique.
+#DEFAULT:- constraint specifies a default value for the column when no value is specified by the user.
+****************************************11.Difference between Primary key and unique key********************
+Primary key :- 
+	1. can't accept null values.
+	2. default create clustered index
+	3. only one primary key in a table
+Unique Key :- 
+	1. Unique Key accept only one null value.
+	2. default Non-Clustered index create.
+	3. More than one unique key in a table.
 ##################################################✅ SQL Query Problems#######################################################
-1.Second highest salary and third highest salary
+1. Second highest salary and third highest salary
 2. All element not duplicate SQL query
 3. Retrieve duplicate records from a table
 4. Delete duplicate rows from a table while keeping one copy

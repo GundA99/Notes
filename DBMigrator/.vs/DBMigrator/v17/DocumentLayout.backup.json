@@ -33,8 +33,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MigratorBLogic.cs",
+              "DocumentMoniker": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
+              "RelativeDocumentMoniker": "DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
+              "ToolTip": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
+              "RelativeToolTip": "DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMQDAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T06:59:19.751Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -58,19 +71,6 @@
               "ViewState": "AgIAAGABAAAAAAAAAAAhwG4BAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-09T17:36:44.88Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MigratorBLogic.cs",
-              "DocumentMoniker": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
-              "RelativeDocumentMoniker": "DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
-              "ToolTip": "C:\\Users\\xxgundfa\\OneDrive - Tietoevry\\Desktop\\Personal\\Notes\\DBMigrator\\DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
-              "RelativeToolTip": "DBMigratorBLogic\\DBMigrator\\MigratorBLogic.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMQDAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T06:59:19.751Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
